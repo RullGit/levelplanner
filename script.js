@@ -41,6 +41,38 @@ const INITIAL_DATA = [
     { "id": 36, "name": "Retrieve the Stolen Goods", "level": 2, "xp": 1332 }
 ];
 
+const LEVEL_XP_THRESHOLDS = [
+    { lvl: 1, xp: 0 },
+    { lvl: 2, xp: 8000 },
+    { lvl: 3, xp: 32000 },
+    { lvl: 4, xp: 80000 },
+    { lvl: 5, xp: 144000 },
+    { lvl: 6, xp: 224000 },
+    { lvl: 7, xp: 320000 },
+    { lvl: 8, xp: 450000 },
+    { lvl: 9, xp: 610000 },
+    { lvl: 10, xp: 800000 },
+    { lvl: 11, xp: 1020000 },
+    { lvl: 12, xp: 1260000 },
+    { lvl: 13, xp: 1520000 },
+    { lvl: 14, xp: 1800000 },
+    { lvl: 15, xp: 2100000 },
+    { lvl: 16, xp: 2420000 },
+    { lvl: 17, xp: 2750000 },
+    { lvl: 18, xp: 3090000 },
+    { lvl: 19, xp: 3440000 },
+    { lvl: 20, xp: 3800000 }
+];
+
+function getPlayerLevelForXP(xp) {
+    for (let i = LEVEL_XP_THRESHOLDS.length - 1; i >= 0; i--) {
+        if (xp >= LEVEL_XP_THRESHOLDS[i].xp) {
+            return LEVEL_XP_THRESHOLDS[i].lvl;
+        }
+    }
+    return 1;
+}
+
 // Data structure
 let data = {
     levelplan: [],
@@ -128,7 +160,7 @@ function renderList(listId) {
             const xpValue = Number(item.xp) || 0;
             cumulativeXP += xpValue;
             row.cumulativeXP = cumulativeXP;
-            row.playerLevel = Math.floor(Math.sqrt(cumulativeXP / 100)) + 1;
+            row.playerLevel = getPlayerLevelForXP(cumulativeXP);
 
             if (item.source === 'levelups') {
                 levelupCount += 1;
