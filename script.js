@@ -144,6 +144,7 @@ function renderLists() {
 function renderList(listId) {
     const listElement = document.getElementById(listId);
     const items = data[listId] || [];
+    const hasLevelupItems = items.some(item => item.source === 'levelups');
 
     listElement.innerHTML = '';
 
@@ -157,27 +158,34 @@ function renderList(listId) {
     const rowData = items.map(item => {
         const row = { item, cumulativeXP: '', playerLevel: '', displayName: item.name };
         if (listId === 'levelplan') {
-            const xpValue = Number(item.xp) || 0;
-            cumulativeXP += xpValue;
-            row.cumulativeXP = cumulativeXP;
-            row.playerLevel = getPlayerLevelForXP(cumulativeXP);
-
             if (item.source === 'levelups') {
                 levelupCount += 1;
                 row.displayName = `Take level ${levelupCount}`;
+                row.playerLevelWarning = levelupCount > getPlayerLevelForXP(cumulativeXP);
+            } else {
+                const xpValue = Number(item.xp) || 0;
+                cumulativeXP += xpValue;
+                row.cumulativeXP = cumulativeXP;
+                const calculatedLevel = getPlayerLevelForXP(cumulativeXP);
+                if (hasLevelupItems) {
+                    row.playerLevel = levelupCount;
+                    row.playerLevelWarning = levelupCount <  calculatedLevel - 1;
+                } else {
+                    row.playerLevel = calculatedLevel;
+                }
             }
         }
         return row;
     });
 
     rowData.forEach((row, index) => {
-        const itemElement = createItemElement(row.item, listId, index, row.cumulativeXP, row.playerLevel, row.displayName);
+        const itemElement = createItemElement(row.item, listId, index, row.cumulativeXP, row.playerLevel, row.displayName, row.playerLevelWarning);
         listElement.appendChild(itemElement);
     });
 }
 
 // Create an item element
-function createItemElement(item, listId, index, cumulativeXP, playerLevel, displayName) {
+function createItemElement(item, listId, index, cumulativeXP, playerLevel, displayName, playerLevelWarning) {
     const div = document.createElement('div');
     div.className = 'item';
     div.draggable = true;
@@ -191,6 +199,9 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
     const playerDiv = document.createElement('div');
     playerDiv.className = 'item-player';
     playerDiv.textContent = playerLevel !== '' ? playerLevel : '';
+    if (playerLevelWarning && listId === 'levelplan' && item.source !== 'levelups') {
+        playerDiv.classList.add('warning');
+    }
 
     const spacerDiv = document.createElement('div');
     spacerDiv.className = 'item-spacer';
@@ -206,6 +217,9 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
     const nameDiv = document.createElement('div');
     nameDiv.className = 'item-name';
     nameDiv.textContent = displayName || item.name;
+    if (playerLevelWarning && listId === 'levelplan' && item.source === 'levelups') {
+        nameDiv.classList.add('warning');
+    }
 
     if (listId === 'levelplan') {
         const contentWrapper = document.createElement('div');

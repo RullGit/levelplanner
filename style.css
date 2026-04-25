@@ -344,6 +344,16 @@ h1 {
     color: #2e7d32;
 }
 
+.item-player.warning {
+    color: #e74c3c;
+    font-weight: 700;
+}
+
+.item-name.warning {
+    color: #e74c3c;
+    font-weight: 700;
+}
+
 .item-delete {
     background: transparent;
     border: none;
