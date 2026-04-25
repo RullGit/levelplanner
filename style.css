@@ -349,8 +349,17 @@ h1 {
     font-weight: 700;
 }
 
+.item-player.caution {
+    color: #f1c40f;
+    font-weight: 700;
+}
+
 .item-name.warning {
     color: #e74c3c;
+    font-weight: 700;
+}
+.item-name.caution {
+    color: #f1c40f;
     font-weight: 700;
 }
 

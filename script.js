@@ -158,18 +158,18 @@ function renderList(listId) {
     const rowData = items.map(item => {
         const row = { item, cumulativeXP: '', playerLevel: '', displayName: item.name };
         if (listId === 'levelplan') {
+            const calculatedLevel = getPlayerLevelForXP(cumulativeXP);
             if (item.source === 'levelups') {
                 levelupCount += 1;
                 row.displayName = `Take level ${levelupCount}`;
-                row.playerLevelWarning = levelupCount > getPlayerLevelForXP(cumulativeXP);
+                row.playerLevelWarning = levelupCount > calculatedLevel ? 2 : 0;
             } else {
                 const xpValue = Number(item.xp) || 0;
                 cumulativeXP += xpValue;
                 row.cumulativeXP = cumulativeXP;
-                const calculatedLevel = getPlayerLevelForXP(cumulativeXP);
                 if (hasLevelupItems) {
                     row.playerLevel = levelupCount;
-                    row.playerLevelWarning = levelupCount <  calculatedLevel - 1;
+                    row.playerLevelWarning = levelupCount < calculatedLevel - 1 ? 2 : levelupCount < calculatedLevel ? 1 : 0;
                 } else {
                     row.playerLevel = calculatedLevel;
                 }
@@ -199,8 +199,12 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
     const playerDiv = document.createElement('div');
     playerDiv.className = 'item-player';
     playerDiv.textContent = playerLevel !== '' ? playerLevel : '';
-    if (playerLevelWarning && listId === 'levelplan' && item.source !== 'levelups') {
-        playerDiv.classList.add('warning');
+    if (listId === 'levelplan' && item.source !== 'levelups') {
+        if (playerLevelWarning === 2) {
+            playerDiv.classList.add('warning'); 
+        } else if (playerLevelWarning === 1) {
+            playerDiv.classList.add('caution'); 
+        }
     }
 
     const spacerDiv = document.createElement('div');
@@ -217,8 +221,12 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
     const nameDiv = document.createElement('div');
     nameDiv.className = 'item-name';
     nameDiv.textContent = displayName || item.name;
-    if (playerLevelWarning && listId === 'levelplan' && item.source === 'levelups') {
-        nameDiv.classList.add('warning');
+    if (listId === 'levelplan' && item.source === 'levelups') {
+        if (playerLevelWarning === 2) {
+            nameDiv.classList.add('warning'); 
+        } else if (playerLevelWarning === 1) {
+            nameDiv.classList.add('caution'); 
+        }
     }
 
     if (listId === 'levelplan') {
