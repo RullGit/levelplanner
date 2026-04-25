@@ -3,42 +3,42 @@ const STORAGE_KEY = 'dragDropListsData';
 
 // Initial data from data.json
 const INITIAL_DATA = [
-    { "name": "Information is Key", "level": 2, "xp": 1573 },
-    { "name": "Durk's Got a Secret", "level": 2, "xp": 2751 },
-    { "name": "The Black Loch", "level": 7, "xp": 1652 },
-    { "name": "The Kobold's New Ringleader", "level": 2, "xp": 2882 },
-    { "name": "Storm the Beaches", "level": 7, "xp": 2987 },
-    { "name": "Stealthy Repossession", "level": 2, "xp": 2435 },
-    { "name": "The Sunken Sewer", "level": 3, "xp": 2229 },
-    { "name": "The Grotto", "level": 1, "xp": 172 },
-    { "name": "Hall of the Mark", "level": 1, "xp": 0 },
-    { "name": "Heyton's Rest", "level": 1, "xp": 645 },
-    { "name": "The Cannith Crystal", "level": 1, "xp": 404 },
-    { "name": "The Storehouse's Secret", "level": 1, "xp": 979 },
-    { "name": "The Collaborator", "level": 1, "xp": 1265 },
-    { "name": "Stopping the Shuaquin", "level": 1, "xp": 690 },
-    { "name": "Necromancer's Doom", "level": 1, "xp": 498 },
-    { "name": "Redemption", "level": 1, "xp": 702 },
-    { "name": "Sacrifices", "level": 1, "xp": 662 },
-    { "name": "Violent Delights", "level": 1, "xp": 626 },
-    { "name": "The Hobgoblin Horde", "level": 1, "xp": 676 },
-    { "name": "Watch Your Step", "level": 1, "xp": 804 },
-    { "name": "Obstructing the Orcs", "level": 1, "xp": 922 },
-    { "name": "The Bugbear Bandits", "level": 1, "xp": 861 },
-    { "name": "Treasure Hunt", "level": 1, "xp": 760 },
-    { "name": "Caged Beast", "level": 1, "xp": 924 },
-    { "name": "The Kobold's Den: Clan Gnashtooth", "level": 3, "xp": 1193 },
-    { "name": "The Kobold's Den: Rescuing Arlos", "level": 3, "xp": 2934 },
-    { "name": "Misery's Peak", "level": 2, "xp": 626 },
-    { "name": "Bringing the Light", "level": 2, "xp": 756 },
-    { "name": "Garrison's Missing Pack", "level": 2, "xp": 988 },
-    { "name": "Recovering the Lost Tome", "level": 2, "xp": 997 },
-    { "name": "Walk the Butcher's Path", "level": 2, "xp": 1105 },
-    { "name": "Haverdasher", "level": 2, "xp": 1354 },
-    { "name": "The Smuggler's Warehouse", "level": 2, "xp": 534 },
-    { "name": "Protect Baudry's Interests", "level": 2, "xp": 378 },
-    { "name": "Stop Hazadill's Shipment", "level": 2, "xp": 565 },
-    { "name": "Retrieve the Stolen Goods", "level": 2, "xp": 1332 }
+    { "id": 1, "name": "Information is Key", "level": 2, "xp": 1573 },
+    { "id": 2, "name": "Durk's Got a Secret", "level": 2, "xp": 2751 },
+    { "id": 3, "name": "The Black Loch", "level": 7, "xp": 1652 },
+    { "id": 4, "name": "The Kobold's New Ringleader", "level": 2, "xp": 2882 },
+    { "id": 5, "name": "Storm the Beaches", "level": 7, "xp": 2987 },
+    { "id": 6, "name": "Stealthy Repossession", "level": 2, "xp": 2435 },
+    { "id": 7, "name": "The Sunken Sewer", "level": 3, "xp": 2229 },
+    { "id": 8, "name": "The Grotto", "level": 1, "xp": 172 },
+    { "id": 9, "name": "Hall of the Mark", "level": 1, "xp": 0 },
+    { "id": 10, "name": "Heyton's Rest", "level": 1, "xp": 645 },
+    { "id": 11, "name": "The Cannith Crystal", "level": 1, "xp": 404 },
+    { "id": 12, "name": "The Storehouse's Secret", "level": 1, "xp": 979 },
+    { "id": 13, "name": "The Collaborator", "level": 1, "xp": 1265 },
+    { "id": 14, "name": "Stopping the Shuaquin", "level": 1, "xp": 690 },
+    { "id": 15, "name": "Necromancer's Doom", "level": 1, "xp": 498 },
+    { "id": 16, "name": "Redemption", "level": 1, "xp": 702 },
+    { "id": 17, "name": "Sacrifices", "level": 1, "xp": 662 },
+    { "id": 18, "name": "Violent Delights", "level": 1, "xp": 626 },
+    { "id": 19, "name": "The Hobgoblin Horde", "level": 1, "xp": 676 },
+    { "id": 20, "name": "Watch Your Step", "level": 1, "xp": 804 },
+    { "id": 21, "name": "Obstructing the Orcs", "level": 1, "xp": 922 },
+    { "id": 22, "name": "The Bugbear Bandits", "level": 1, "xp": 861 },
+    { "id": 23, "name": "Treasure Hunt", "level": 1, "xp": 760 },
+    { "id": 24, "name": "Caged Beast", "level": 1, "xp": 924 },
+    { "id": 25, "name": "The Kobold's Den: Clan Gnashtooth", "level": 3, "xp": 1193 },
+    { "id": 26, "name": "The Kobold's Den: Rescuing Arlos", "level": 3, "xp": 2934 },
+    { "id": 27, "name": "Misery's Peak", "level": 2, "xp": 626 },
+    { "id": 28, "name": "Bringing the Light", "level": 2, "xp": 756 },
+    { "id": 29, "name": "Garrison's Missing Pack", "level": 2, "xp": 988 },
+    { "id": 30, "name": "Recovering the Lost Tome", "level": 2, "xp": 997 },
+    { "id": 31, "name": "Walk the Butcher's Path", "level": 2, "xp": 1105 },
+    { "id": 32, "name": "Haverdasher", "level": 2, "xp": 1354 },
+    { "id": 33, "name": "The Smuggler's Warehouse", "level": 2, "xp": 534 },
+    { "id": 34, "name": "Protect Baudry's Interests", "level": 2, "xp": 378 },
+    { "id": 35, "name": "Stop Hazadill's Shipment", "level": 2, "xp": 565 },
+    { "id": 36, "name": "Retrieve the Stolen Goods", "level": 2, "xp": 1332 }
 ];
 
 // Data structure
@@ -84,7 +84,10 @@ function initializeApp() {
 
 // Load initial data (all Quests in quests, Level Plan starts empty in levelplan)
 function loadInitialData() {
-    data.quests = JSON.parse(JSON.stringify(INITIAL_DATA));
+    data.quests = JSON.parse(JSON.stringify(INITIAL_DATA)).map(item => ({
+        ...item,
+        source: 'quests'
+    }));
     data.levelplan = [];
     data.levelups = [{
         name: 'Take Level',
@@ -331,7 +334,7 @@ function handleDrop(e) {
         // Copy from levelups or move from other source lists
         const itemToInsert = draggedListId === 'levelups'
             ? { ...sourceItem, source: 'levelups' }
-            : sourceItem;
+            : { ...sourceItem, source: draggedListId };
 
         if (draggedListId !== 'levelups') {
             data[draggedListId].splice(draggedIndex, 1);
@@ -353,12 +356,21 @@ function handleDrop(e) {
 // Delete (move back to original source list) an item
 function deleteItem(listId, index) {
     const item = data[listId].splice(index, 1)[0];
-    if (item.source === 'quests') {
-        data['quests'].push(item);
+    if (listId === 'levelplan' && item.source !== 'levelups') {
+        insertQuestInOriginalPosition(item);
     }
     saveToStorage();
     renderLists();
     setupDragListeners();
+}
+
+function insertQuestInOriginalPosition(item) {
+    const insertIndex = data.quests.findIndex(q => (q.id || Number.MAX_SAFE_INTEGER) > (item.id || Number.MAX_SAFE_INTEGER));
+    if (insertIndex === -1) {
+        data.quests.push(item);
+    } else {
+        data.quests.splice(insertIndex, 0, item);
+    }
 }
 
 // Reset all data
