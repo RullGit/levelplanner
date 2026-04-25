@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag & Drop List Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Quest Tracker</h1>
+        
+        <div class="lists-container">
+            <div class="list-section">
+                <div class="section-header">
+                    <h2>Level Plan</h2>
+                </div>
+                <div class="list-header">
+                    <div class="col-cumulative">Cum XP</div>
+                    <div class="col-player">Player Lv</div>
+                    <div class="col-spacer"></div>
+                    <div class="col-xp">XP/Min</div>
+                    <div class="col-level">Lvl</div>
+                    <div class="col-name">Quest</div>
+                    <div class="col-delete"></div>
+                </div>
+                <div class="list" id="levelplan" data-list-id="levelplan">
+                    <!-- Items will be populated here -->
+                </div>
+            </div>
+
+            <div class="list-section">
+                <div class="section-header">
+                    <h2>Quests</h2>
+                </div>
+                <div class="list-header">
+                    <div class="col-cumulative">Cum XP</div>
+                    <div class="col-player">Player Lv</div>
+                    <div class="col-spacer"></div>
+                    <div class="col-xp">XP/Min</div>
+                    <div class="col-level">Lvl</div>
+                    <div class="col-name">Quest</div>
+                    <div class="col-delete"></div>
+                </div>
+                <div class="list" id="quests" data-list-id="quests">
+                    <!-- Items will be populated here -->
+                </div>
+            </div>
+        </div>
+
+        <button class="reset-btn" onclick="resetData()">Reset All</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
