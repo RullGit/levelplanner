@@ -148,7 +148,7 @@ h1 {
 .col-xp,
 .col-content,
 .col-cumulative,
-.col-player,
+.col-playerlvl,
 .col-delete {
     padding: 4px 8px;
 }
@@ -166,7 +166,7 @@ h1 {
     text-align: right;
 }
 
-.col-player {
+.col-playerlvl {
     border-right: 1px solid #999;
     text-align: center;
 }
@@ -177,7 +177,7 @@ h1 {
     text-align: right;
 }
 
-.col-player {
+.col-playerlvl {
     border-right: 1px solid #999;
     text-align: center;
 }
