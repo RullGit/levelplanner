@@ -11,17 +11,15 @@
         <h1>Quest Tracker</h1>
         
         <div class="lists-container">
-            <div class="list-section">
+            <div class="list-section levelplan">
                 <div class="section-header">
                     <h2>Level Plan</h2>
                 </div>
                 <div class="list-header">
-                    <div class="col-cumulative">Cum XP</div>
-                    <div class="col-player">Player Lv</div>
+                    <div class="col-cumulative">XP</div>
+                    <div class="col-player">Player Lvl</div>
                     <div class="col-spacer"></div>
-                    <div class="col-xp">XP/Min</div>
-                    <div class="col-level">Lvl</div>
-                    <div class="col-name">Quest</div>
+                    <div class="col-content">XP/Min · Lvl · Quest</div>
                     <div class="col-delete"></div>
                 </div>
                 <div class="list" id="levelplan" data-list-id="levelplan">
@@ -29,20 +27,22 @@
                 </div>
             </div>
 
-            <div class="list-section">
+            <div class="list-section quests">
                 <div class="section-header">
                     <h2>Quests</h2>
                 </div>
                 <div class="list-header">
-                    <div class="col-cumulative">Cum XP</div>
-                    <div class="col-player">Player Lv</div>
-                    <div class="col-spacer"></div>
                     <div class="col-xp">XP/Min</div>
                     <div class="col-level">Lvl</div>
                     <div class="col-name">Quest</div>
-                    <div class="col-delete"></div>
                 </div>
                 <div class="list" id="quests" data-list-id="quests">
+                    <!-- Items will be populated here -->
+                </div>
+            </div>
+
+            <div class="list-section levelups">
+                <div class="list" id="levelups" data-list-id="levelups">
                     <!-- Items will be populated here -->
                 </div>
             </div>

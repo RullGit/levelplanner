@@ -27,14 +27,37 @@ h1 {
 
 .lists-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.4fr 1fr;
     gap: 8px;
     margin-bottom: 12px;
+}
+
+.list-section.levelplan {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.list-section.levelups {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: start;
+}
+
+.list-section.quests {
+    grid-column: 2;
+    grid-row: 1 / span 2;
 }
 
 @media (max-width: 768px) {
     .lists-container {
         grid-template-columns: 1fr;
+    }
+
+    .list-section.levelplan,
+    .list-section.levelups,
+    .list-section.quests {
+        grid-column: auto;
+        grid-row: auto;
     }
 }
 
@@ -42,6 +65,10 @@ h1 {
     display: flex;
     flex-direction: column;
     border: 1px solid #ccc;
+}
+
+.list-section.levelups .list {
+    max-height: 110px;
 }
 
 .section-header {
@@ -66,12 +93,19 @@ h1 {
     color: #333;
 }
 
+#levelplan .list-header,
 .levelplan .list-header {
-    grid-template-columns: 90px 90px 8px 80px 50px 1fr 30px;
+    grid-template-columns: 90px 90px 8px 1fr 30px;
 }
 
+#quests .list-header,
 .quests .list-header {
     grid-template-columns: 80px 50px 1fr 30px;
+}
+
+#levelups .list-header,
+.levelups .list-header {
+    grid-template-columns: 1fr;
 }
 
 .col-xp {
@@ -88,6 +122,7 @@ h1 {
 
 .col-name,
 .col-xp,
+.col-content,
 .col-cumulative,
 .col-player,
 .col-delete {
@@ -143,12 +178,15 @@ h1 {
     border: 2px dashed #4caf50;
     opacity: 0.7;
     border-bottom: 1px solid #e0e0e0;
+    gap: 0;
 }
 
+#levelplan .phantom-item,
 .levelplan .phantom-item {
-    grid-template-columns: 90px 90px 8px 80px 50px 1fr 30px;
+    grid-template-columns: 90px 90px 8px 1fr 30px;
 }
 
+#quests .phantom-item,
 .quests .phantom-item {
     grid-template-columns: 80px 50px 1fr 30px;
 }
@@ -165,12 +203,36 @@ h1 {
     align-items: center;
 }
 
+#levelplan .item,
 .levelplan .item {
-    grid-template-columns: 90px 90px 8px 80px 50px 1fr 30px;
+    grid-template-columns: 90px 90px 8px 1fr 30px;
 }
 
+#quests .item,
 .quests .item {
     grid-template-columns: 80px 50px 1fr 30px;
+    border-radius: 12px;
+    border: 1px solid #dfe3e8;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    margin: 4px 6px;
+}
+
+#levelups .item,
+.levelups .item {
+    grid-template-columns: 1fr;
+    border-radius: 12px;
+    border: 1px solid #dfe3e8;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    margin: 4px 6px;
+}
+
+#levelups .item:hover,
+.levelups .item:hover {
+    background: #f7fbff;
+}
+
+.quests .item:hover {
+    background: #f7fbff;
 }
 
 .item:hover {
@@ -203,6 +265,31 @@ h1 {
     padding: 4px 8px;
     font-size: 0.9em;
     word-break: break-word;
+}
+
+.item-content-wrapper {
+    display: grid;
+    grid-template-columns: 80px 50px 1fr;
+    background: #f7f9fc;
+    border: 1px solid #d8dce3;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-right: 8px;
+}
+
+.item-content-wrapper > div {
+    padding: 6px 10px;
+    font-size: 0.9em;
+}
+
+.item-content-wrapper .item-xp,
+.item-content-wrapper .item-level,
+.item-content-wrapper .item-name {
+    border-right: 1px solid #e1e6ed;
+}
+
+.item-content-wrapper .item-name {
+    border-right: none;
 }
 
 .item-spacer {

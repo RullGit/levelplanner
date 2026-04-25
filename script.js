@@ -44,7 +44,8 @@ const INITIAL_DATA = [
 // Data structure
 let data = {
     levelplan: [],
-    quests: []
+    quests: [],
+    levelups: []
 };
 
 // Initialize the app
@@ -60,6 +61,14 @@ function initializeApp() {
         // If data exists in localStorage, use it
         try {
             data = JSON.parse(stored);
+            data.levelplan = data.levelplan || [];
+            data.quests = data.quests || [];
+            data.levelups = data.levelups || Array.from({ length: 20 }, (_, i) => ({
+                name: `Take level ${i + 1}`,
+                xp: 0,
+                level: '',
+                source: 'levelups'
+            }));
         } catch (e) {
             console.error('Error loading data from storage:', e);
             loadInitialData();
@@ -77,6 +86,12 @@ function initializeApp() {
 function loadInitialData() {
     data.quests = JSON.parse(JSON.stringify(INITIAL_DATA));
     data.levelplan = [];
+    data.levelups = [{
+        name: 'Take Level',
+        xp: 0,
+        level: '',
+        source: 'levelups'
+    }];
     saveToStorage();
 }
 
@@ -89,6 +104,7 @@ function saveToStorage() {
 function renderLists() {
     renderList('levelplan');
     renderList('quests');
+    renderList('levelups');
 }
 function renderList(listId) {
     const listElement = document.getElementById(listId);
@@ -102,24 +118,31 @@ function renderList(listId) {
     }
 
     let cumulativeXP = 0;
+    let levelupCount = 0;
     const rowData = items.map(item => {
-        const row = { item, cumulativeXP: '', playerLevel: '' };
+        const row = { item, cumulativeXP: '', playerLevel: '', displayName: item.name };
         if (listId === 'levelplan') {
-            cumulativeXP += item.xp;
+            const xpValue = Number(item.xp) || 0;
+            cumulativeXP += xpValue;
             row.cumulativeXP = cumulativeXP;
             row.playerLevel = Math.floor(Math.sqrt(cumulativeXP / 100)) + 1;
+
+            if (item.source === 'levelups') {
+                levelupCount += 1;
+                row.displayName = `Take level ${levelupCount}`;
+            }
         }
         return row;
     });
 
     rowData.forEach((row, index) => {
-        const itemElement = createItemElement(row.item, listId, index, row.cumulativeXP, row.playerLevel);
+        const itemElement = createItemElement(row.item, listId, index, row.cumulativeXP, row.playerLevel, row.displayName);
         listElement.appendChild(itemElement);
     });
 }
 
 // Create an item element
-function createItemElement(item, listId, index, cumulativeXP, playerLevel) {
+function createItemElement(item, listId, index, cumulativeXP, playerLevel, displayName) {
     const div = document.createElement('div');
     div.className = 'item';
     div.draggable = true;
@@ -139,24 +162,35 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel) {
 
     const xpDiv = document.createElement('div');
     xpDiv.className = 'item-xp';
-    xpDiv.textContent = item.xp;
+    xpDiv.textContent = item.xp !== undefined ? item.xp : '';
 
     const levelDiv = document.createElement('div');
     levelDiv.className = 'item-level';
-    levelDiv.textContent = item.level;
+    levelDiv.textContent = item.level !== undefined ? item.level : '';
 
     const nameDiv = document.createElement('div');
     nameDiv.className = 'item-name';
-    nameDiv.textContent = item.name;
+    nameDiv.textContent = displayName || item.name;
 
-    div.appendChild(cumDiv);
-    div.appendChild(playerDiv);
-    div.appendChild(spacerDiv);
-    div.appendChild(xpDiv);
-    div.appendChild(levelDiv);
-    div.appendChild(nameDiv);
+    if (listId === 'levelplan') {
+        const contentWrapper = document.createElement('div');
+        contentWrapper.className = 'item-content-wrapper';
+        contentWrapper.appendChild(xpDiv);
+        contentWrapper.appendChild(levelDiv);
+        contentWrapper.appendChild(nameDiv);
 
-    // Only add delete button for levelplan (Level Plan) items
+        div.appendChild(cumDiv);
+        div.appendChild(playerDiv);
+        div.appendChild(spacerDiv);
+        div.appendChild(contentWrapper);
+    } else if (listId === 'levelups') {
+        div.appendChild(nameDiv);
+    } else {
+        div.appendChild(xpDiv);
+        div.appendChild(levelDiv);
+        div.appendChild(nameDiv);
+    }
+
     if (listId === 'levelplan') {
         const deleteBtn = document.createElement('button');
         deleteBtn.className = 'item-delete';
@@ -294,9 +328,16 @@ function handleDrop(e) {
             data[draggedListId].splice(dropIndex, 0, sourceItem);
         }
     } else {
-        // Move to a different list
-        data[draggedListId].splice(draggedIndex, 1);
-        data[targetListId].splice(dropIndex, 0, sourceItem);
+        // Copy from levelups or move from other source lists
+        const itemToInsert = draggedListId === 'levelups'
+            ? { ...sourceItem, source: 'levelups' }
+            : sourceItem;
+
+        if (draggedListId !== 'levelups') {
+            data[draggedListId].splice(draggedIndex, 1);
+        }
+
+        data[targetListId].splice(dropIndex, 0, itemToInsert);
     }
 
     this.classList.remove('drag-over');
@@ -309,11 +350,12 @@ function handleDrop(e) {
     setupDragListeners();
 }
 
-// Delete (move back to quests) an item
+// Delete (move back to original source list) an item
 function deleteItem(listId, index) {
     const item = data[listId].splice(index, 1)[0];
-    // Move back to quests
-    data['quests'].push(item);
+    if (item.source === 'quests') {
+        data['quests'].push(item);
+    }
     saveToStorage();
     renderLists();
     setupDragListeners();
