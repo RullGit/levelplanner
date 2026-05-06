@@ -923,6 +923,35 @@ window.HEROIC_QUESTS_BASE =
     "baseXP": 940,
     "rXP": null
   },
+    {
+    "name": "Yarkuch's War Plans",
+    "requirements": [
+      "First Strike",
+      "The Hobgoblins' Captives"
+    ],
+    "lvl": 4,
+    "patron": "House Phiarlan",
+    "favor": 9,
+    "difficulty": "E",
+    "xp": 4270,
+    "baseXP": 1220,
+    "rXP": null
+  },
+  {
+    "name": "Whisperdoom's Spawn",
+    "requirements": [
+      "First Strike",
+      "The Hobgoblins' Captives",
+      "Yarkuch's War Plans"
+    ],
+    "lvl": 4,
+    "patron": "House Phiarlan",
+    "favor": 9,
+    "difficulty": "E",
+    "xp": 4830,
+    "baseXP": 1380,
+    "rXP": null
+  },
   {
     "name": "An Explosive Situation",
     "requirements": [],
@@ -1023,35 +1052,6 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 381
   },
   {
-    "name": "Yarkuch's War Plans",
-    "requirements": [
-      "First Strike",
-      "The Hobgoblins' Captives"
-    ],
-    "lvl": 4,
-    "patron": "House Phiarlan",
-    "favor": 9,
-    "difficulty": "E",
-    "xp": 4270,
-    "baseXP": 1220,
-    "rXP": null
-  },
-  {
-    "name": "Whisperdoom's Spawn",
-    "requirements": [
-      "First Strike",
-      "The Hobgoblins' Captives",
-      "Yarkuch's War Plans"
-    ],
-    "lvl": 4,
-    "patron": "House Phiarlan",
-    "favor": 9,
-    "difficulty": "E",
-    "xp": 4830,
-    "baseXP": 1380,
-    "rXP": null
-  },
-  {
     "name": "Endgame: The Archbishop's Fate",
     "requirements": [
       "The Friar's Niece",
@@ -1071,14 +1071,25 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 293
   },
   {
-    "name": "The Bookbinder Rescue",
+    "name": "Stand Your Ground",
     "requirements": [],
     "lvl": 4,
     "patron": "The Coin Lords",
     "favor": 6,
     "difficulty": "R",
-    "xp": 4290,
-    "baseXP": 1100,
+    "xp": 4185,
+    "baseXP": 900,
+    "rXP": 310
+  },
+  {
+    "name": "Dirty Laundry",
+    "requirements": [],
+    "lvl": 4,
+    "patron": "The Coin Lords",
+    "favor": 6,
+    "difficulty": "R",
+    "xp": 3510,
+    "baseXP": 900,
     "rXP": 293
   },
   {
@@ -1091,6 +1102,17 @@ window.HEROIC_QUESTS_BASE =
     "xp": 3915,
     "baseXP": 900,
     "rXP": 295
+  },
+    {
+    "name": "The Bookbinder Rescue",
+    "requirements": [],
+    "lvl": 4,
+    "patron": "The Coin Lords",
+    "favor": 6,
+    "difficulty": "R",
+    "xp": 4290,
+    "baseXP": 1100,
+    "rXP": 293
   },
   {
     "name": "Repossession",
@@ -1106,11 +1128,11 @@ window.HEROIC_QUESTS_BASE =
   {
     "name": "Come Out and Slay",
     "requirements": [
-      "Repossession",
+      "Stand Your Ground",
+      "Dirty Laundry",
       "The Stormreaver Fresco",
       "The Bookbinder Rescue",
-      "Dirty Laundry",
-      "Stand Your Ground"
+      "Repossession"
     ],
     "lvl": 4,
     "patron": "The Coin Lords",
@@ -1119,28 +1141,6 @@ window.HEROIC_QUESTS_BASE =
     "xp": 3825,
     "baseXP": 900,
     "rXP": 298
-  },
-  {
-    "name": "Dirty Laundry",
-    "requirements": [],
-    "lvl": 4,
-    "patron": "The Coin Lords",
-    "favor": 6,
-    "difficulty": "R",
-    "xp": 3510,
-    "baseXP": 900,
-    "rXP": 293
-  },
-  {
-    "name": "Stand Your Ground",
-    "requirements": [],
-    "lvl": 4,
-    "patron": "The Coin Lords",
-    "favor": 6,
-    "difficulty": "R",
-    "xp": 4185,
-    "baseXP": 900,
-    "rXP": 310
   },
   {
     "name": "Catastrophe",
@@ -1703,6 +1703,41 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 468
   },
   {
+    "name": "The Troglodytes' Get",
+    "requirements": [],
+    "lvl": 6,
+    "patron": "The Free Agents",
+    "favor": 12,
+    "difficulty": "R",
+    "xp": 10600,
+    "baseXP": 2650,
+    "rXP": 408
+  },
+  {
+    "name": "The Scoundrel's Run",
+    "requirements": [],
+    "lvl": 7,
+    "patron": "The Free Agents",
+    "favor": 12,
+    "difficulty": "R",
+    "xp": 12367,
+    "baseXP": 2980,
+    "rXP": 430
+  },
+  {
+    "name": "Old Grey Garl",
+    "requirements": [
+      "The Troglodytes' Get"
+    ],
+    "lvl": 7,
+    "patron": "The Free Agents",
+    "favor": 15,
+    "difficulty": "R",
+    "xp": 15374,
+    "baseXP": 3796,
+    "rXP": 430
+  },
+  {
     "name": "Toil and Trouble",
     "requirements": [],
     "lvl": 5,
@@ -1712,21 +1747,6 @@ window.HEROIC_QUESTS_BASE =
     "xp": 10375,
     "baseXP": 2500,
     "rXP": 480
-  },
-  {
-    "name": "Return to Delera's Tomb",
-    "requirements": [
-      "The Mystery of Delera's Tomb",
-      "The Missing Party",
-      "Free Delera"
-    ],
-    "lvl": 6,
-    "patron": "House Jorasco",
-    "favor": 9,
-    "difficulty": "R",
-    "xp": 0,
-    "baseXP": 0,
-    "rXP": 401
   },
   {
     "name": "Valak's Mausoleum",
@@ -1885,15 +1905,33 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 408
   },
   {
-    "name": "The Troglodytes' Get",
-    "requirements": [],
-    "lvl": 6,
-    "patron": "The Free Agents",
+    "name": "The Grey Moon's Den: The Trollish Scourge",
+    "requirements": [
+      "The Iron Mines: Freeing Achka",
+      "The Iron Mines: Justice for Grust"
+    ],
+    "lvl": 7,
+    "patron": "House Deneith",
     "favor": 12,
     "difficulty": "R",
-    "xp": 10600,
-    "baseXP": 2650,
-    "rXP": 408
+    "xp": 6160,
+    "baseXP": 1540,
+    "rXP": 426
+  },
+  {
+    "name": "The Grey Moon's Den: Extermination",
+    "requirements": [
+      "The Iron Mines: Freeing Achka",
+      "The Iron Mines: Justice for Grust",
+      "The Grey Moon's Den: The Trollish Scourge"
+    ],
+    "lvl": 7,
+    "patron": "House Deneith",
+    "favor": 12,
+    "difficulty": "R",
+    "xp": 5644,
+    "baseXP": 1360,
+    "rXP": 426
   },
   {
     "name": "The Price of Freedom",
@@ -1976,6 +2014,37 @@ window.HEROIC_QUESTS_BASE =
     "xp": 11058,
     "baseXP": 2404,
     "rXP": 426
+  },
+  {
+    "name": "Return to Delera's Tomb",
+    "requirements": [
+      "The Mystery of Delera's Tomb",
+      "The Missing Party",
+      "Free Delera"
+    ],
+    "lvl": 6,
+    "patron": "House Jorasco",
+    "favor": 9,
+    "difficulty": "R",
+    "xp": 0,
+    "baseXP": 0,
+    "rXP": 401
+  },
+    {
+    "name": "Thrall of the Necromancer",
+    "requirements": [
+      "The Mystery of Delera's Tomb",
+      "The Missing Party",
+      "Free Delera",
+      "Return to Delera's Tomb"
+    ],
+    "lvl": 8,
+    "patron": "House Jorasco",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 16181,
+    "baseXP": 3899,
+    "rXP": 448
   },
   {
     "name": "The Tear of Dhakaan",
@@ -2103,35 +2172,6 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 430
   },
   {
-    "name": "The Grey Moon's Den: The Trollish Scourge",
-    "requirements": [
-      "The Iron Mines: Freeing Achka",
-      "The Iron Mines: Justice for Grust"
-    ],
-    "lvl": 7,
-    "patron": "House Deneith",
-    "favor": 12,
-    "difficulty": "R",
-    "xp": 6160,
-    "baseXP": 1540,
-    "rXP": 426
-  },
-  {
-    "name": "The Grey Moon's Den: Extermination",
-    "requirements": [
-      "The Iron Mines: Freeing Achka",
-      "The Iron Mines: Justice for Grust",
-      "The Grey Moon's Den: The Trollish Scourge"
-    ],
-    "lvl": 7,
-    "patron": "House Deneith",
-    "favor": 12,
-    "difficulty": "R",
-    "xp": 5644,
-    "baseXP": 1360,
-    "rXP": 426
-  },
-  {
     "name": "Captive of the Hidden God",
     "requirements": [],
     "lvl": 7,
@@ -2253,28 +2293,34 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 437
   },
   {
-    "name": "The Scoundrel's Run",
+    "name": "Fall of the Forbidden Temple",
     "requirements": [],
-    "lvl": 7,
-    "patron": "The Free Agents",
-    "favor": 12,
-    "difficulty": "R",
-    "xp": 12367,
-    "baseXP": 2980,
-    "rXP": 430
-  },
-  {
-    "name": "Old Grey Garl",
-    "requirements": [
-      "The Troglodytes' Get"
-    ],
-    "lvl": 7,
-    "patron": "The Free Agents",
+    "lvl": 8,
+    "patron": "The Gatekeepers",
     "favor": 15,
     "difficulty": "R",
-    "xp": 15374,
-    "baseXP": 3796,
-    "rXP": 430
+    "xp": 29495,
+    "baseXP": 6940,
+    "rXP": 463
+  },
+  {
+    "name": "Dread Saga",
+    "isSaga": true,
+    "requirements": [
+      "Captive of the Hidden God",
+      "The Curse and the Captive Crustacean",
+      "The Trouble with Tar Pits",
+      "All Hail the King",
+      "Spiders and Flies",
+      "Trials of the Triceratops",
+      "Wild Thing",
+      "Whispers of Return",
+      "Plundering Pirates' Point",
+      "Bullywugs and Booby Traps",
+      "The Stone Crypt Chronicle",
+      "Fall of the Forbidden Temple"
+    ],
+    "xp": 29000
   },
   {
     "name": "Pirate Saga",
@@ -2330,22 +2376,6 @@ window.HEROIC_QUESTS_BASE =
     "xp": 24986,
     "baseXP": 5420,
     "rXP": 455
-  },
-  {
-    "name": "Thrall of the Necromancer",
-    "requirements": [
-      "The Mystery of Delera's Tomb",
-      "The Missing Party",
-      "Free Delera",
-      "Return to Delera's Tomb"
-    ],
-    "lvl": 8,
-    "patron": "House Jorasco",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 16181,
-    "baseXP": 3899,
-    "rXP": 448
   },
   {
     "name": "The Path to Madness",
@@ -2427,6 +2457,17 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 455
   },
   {
+    "name": "In Need of Supplies",
+    "requirements": [],
+    "lvl": 8,
+    "patron": "House Phiarlan",
+    "favor": 9,
+    "difficulty": "R",
+    "xp": 3440,
+    "baseXP": 860,
+    "rXP": 444
+  },
+  {
     "name": "The Rescue",
     "requirements": [
       "In Need of Supplies"
@@ -2440,15 +2481,157 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 455
   },
   {
-    "name": "In Need of Supplies",
+    "name": "Secure the Area",
+    "requirements": [
+      "In Need of Supplies",
+      "The Rescue"
+    ],
+    "lvl": 10,
+    "patron": "House Phiarlan",
+    "favor": 12,
+    "difficulty": "R",
+    "xp": 9827,
+    "baseXP": 2368,
+    "rXP": 492
+  },
+  {
+    "name": "The Library of Threnal",
     "requirements": [],
-    "lvl": 8,
+    "lvl": 9,
     "patron": "House Phiarlan",
     "favor": 9,
     "difficulty": "R",
-    "xp": 3440,
-    "baseXP": 860,
-    "rXP": 444
+    "xp": 3994,
+    "baseXP": 1006,
+    "rXP": 460
+  },
+  {
+    "name": "Escort the Expedition",
+    "requirements": [
+      "The Library of Threnal"
+    ],
+    "lvl": 10,
+    "patron": "House Phiarlan",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 20596,
+    "baseXP": 4963,
+    "rXP": 484
+  },
+  {
+    "name": "Hold for Reinforcements",
+    "requirements": [
+      "The Library of Threnal",
+      "Escort the Expedition"
+    ],
+    "lvl": 10,
+    "patron": "House Phiarlan",
+    "favor": 9,
+    "difficulty": "R",
+    "xp": 8910,
+    "baseXP": 2200,
+    "rXP": 484
+  },
+  {
+    "name": "The Missing Expedition",
+    "requirements": [
+      "In Need of Supplies",
+      "The Rescue",
+      "Secure the Area",
+      "The Library of Threnal",
+      "Escort the Expedition",
+      "Hold for Reinforcements"
+    ],
+    "lvl": 9,
+    "patron": "House Phiarlan",
+    "favor": 12,
+    "difficulty": "R",
+    "xp": 4104,
+    "baseXP": 1006,
+    "rXP": 468
+  },
+  {
+    "name": "Entering the Gate Chamber",
+    "requirements": [
+      "In Need of Supplies",
+      "The Rescue",
+      "Secure the Area",
+      "The Library of Threnal",
+      "Escort the Expedition",
+      "Hold for Reinforcements",
+      "The Missing Expedition"
+    ],
+    "lvl": 9,
+    "patron": "House Phiarlan",
+    "favor": 15,
+    "difficulty": "R",
+    "xp": 20605,
+    "baseXP": 4989,
+    "rXP": 472
+  },
+  {
+    "name": "The Gate Chamber",
+    "requirements": [
+      "In Need of Supplies",
+      "The Rescue",
+      "Secure the Area",
+      "The Library of Threnal",
+      "Escort the Expedition",
+      "Hold for Reinforcements",
+      "The Missing Expedition",
+      "Entering the Gate Chamber"
+    ],
+    "lvl": 10,
+    "patron": "House Phiarlan",
+    "favor": 9,
+    "difficulty": "R",
+    "xp": 1034,
+    "baseXP": 265,
+    "rXP": 0
+  },
+  {
+    "name": "The Threnal Arena",
+    "requirements": [],
+    "lvl": 9,
+    "patron": "None",
+    "favor": 0,
+    "difficulty": "N",
+    "xp": null,
+    "baseXP": 0,
+    "rXP": null
+  },
+  {
+    "name": "The Giant Lieutenants",
+    "requirements": [],
+    "lvl": 9,
+    "patron": "None",
+    "favor": 0,
+    "difficulty": "R",
+    "xp": 2025,
+    "baseXP": 500,
+    "rXP": 466
+  },
+  {
+    "name": "The Giants' Lair",
+    "requirements": [],
+    "lvl": 9,
+    "patron": "None",
+    "favor": 0,
+    "difficulty": "R",
+    "xp": 1909,
+    "baseXP": 460,
+    "rXP": 474
+  },
+  {
+    "name": "The Giants' Supplies",
+    "requirements": [],
+    "lvl": 10,
+    "patron": "None",
+    "favor": 0,
+    "difficulty": "R",
+    "xp": 2236,
+    "baseXP": 520,
+    "rXP": 504
   },
   {
     "name": "Spies in the House",
@@ -2495,34 +2678,82 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 450
   },
   {
-    "name": "Fall of the Forbidden Temple",
-    "requirements": [],
-    "lvl": 8,
-    "patron": "The Gatekeepers",
-    "favor": 15,
+    "name": "The Fane of the Six: Cleansing the Temple",
+    "requirements": [
+      "The Iron Mines: Freeing Achka",
+      "The Iron Mines: Justice for Grust",
+      "The Grey Moon's Den: The Trollish Scourge",
+      "The Grey Moon's Den: Extermination",
+      "The Temple Outpost: Captives of the Cult",
+      "The Temple Outpost: The Libram of the Six"
+    ],
+    "lvl": 9,
+    "patron": "House Deneith",
+    "favor": 12,
     "difficulty": "R",
-    "xp": 29495,
-    "baseXP": 6940,
-    "rXP": 463
+    "xp": 8560,
+    "baseXP": 2140,
+    "rXP": 462
   },
   {
-    "name": "Dread Saga",
-    "isSaga": true,
+    "name": "The Fane of the Six: Fall of the Prelate",
     "requirements": [
-      "Captive of the Hidden God",
-      "The Curse and the Captive Crustacean",
-      "The Trouble with Tar Pits",
-      "All Hail the King",
-      "Spiders and Flies",
-      "Trials of the Triceratops",
-      "Wild Thing",
-      "Whispers of Return",
-      "Plundering Pirates' Point",
-      "Bullywugs and Booby Traps",
-      "The Stone Crypt Chronicle",
-      "Fall of the Forbidden Temple"
+      "The Iron Mines: Freeing Achka",
+      "The Iron Mines: Justice for Grust",
+      "The Grey Moon's Den: The Trollish Scourge",
+      "The Grey Moon's Den: Extermination",
+      "The Temple Outpost: Captives of the Cult",
+      "The Temple Outpost: The Libram of the Six",
+      "The Fane of the Six: Cleansing the Temple"
     ],
-    "xp": 29000
+    "lvl": 9,
+    "patron": "House Deneith",
+    "favor": 12,
+    "difficulty": "R",
+    "xp": 8814,
+    "baseXP": 2260,
+    "rXP": 454
+  },
+    {
+    "name": "The Sanctum: Quench the Flames",
+    "requirements": [
+      "The Iron Mines: Freeing Achka",
+      "The Iron Mines: Justice for Grust",
+      "The Grey Moon's Den: The Trollish Scourge",
+      "The Grey Moon's Den: Extermination",
+      "The Temple Outpost: Captives of the Cult",
+      "The Temple Outpost: The Libram of the Six",
+      "The Fane of the Six: Cleansing the Temple",
+      "The Fane of the Six: Fall of the Prelate"
+    ],
+    "lvl": 10,
+    "patron": "House Deneith",
+    "favor": 12,
+    "difficulty": "R",
+    "xp": 9080,
+    "baseXP": 2242,
+    "rXP": 484
+  },
+  {
+    "name": "The Sanctum: Church of the Fury",
+    "requirements": [
+      "The Iron Mines: Freeing Achka",
+      "The Iron Mines: Justice for Grust",
+      "The Grey Moon's Den: The Trollish Scourge",
+      "The Grey Moon's Den: Extermination",
+      "The Temple Outpost: Captives of the Cult",
+      "The Temple Outpost: The Libram of the Six",
+      "The Fane of the Six: Cleansing the Temple",
+      "The Fane of the Six: Fall of the Prelate",
+      "The Sanctum: Quench the Flames"
+    ],
+    "lvl": 10,
+    "patron": "House Deneith",
+    "favor": 12,
+    "difficulty": "R",
+    "xp": 8744,
+    "baseXP": 2242,
+    "rXP": 472
   },
   {
     "name": "Tomb of the Shadow Lord",
@@ -2997,124 +3228,6 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 474
   },
   {
-    "name": "The Library of Threnal",
-    "requirements": [],
-    "lvl": 9,
-    "patron": "House Phiarlan",
-    "favor": 9,
-    "difficulty": "R",
-    "xp": 3994,
-    "baseXP": 1006,
-    "rXP": 460
-  },
-  {
-    "name": "The Giant Lieutenants",
-    "requirements": [],
-    "lvl": 9,
-    "patron": "None",
-    "favor": 0,
-    "difficulty": "R",
-    "xp": 2025,
-    "baseXP": 500,
-    "rXP": 466
-  },
-  {
-    "name": "The Giants' Lair",
-    "requirements": [],
-    "lvl": 9,
-    "patron": "None",
-    "favor": 0,
-    "difficulty": "R",
-    "xp": 1909,
-    "baseXP": 460,
-    "rXP": 474
-  },
-  {
-    "name": "The Missing Expedition",
-    "requirements": [
-      "In Need of Supplies",
-      "The Rescue",
-      "Secure the Area",
-      "The Library of Threnal",
-      "Escort the Expedition",
-      "Hold for Reinforcements"
-    ],
-    "lvl": 9,
-    "patron": "House Phiarlan",
-    "favor": 12,
-    "difficulty": "R",
-    "xp": 4104,
-    "baseXP": 1006,
-    "rXP": 468
-  },
-  {
-    "name": "Entering the Gate Chamber",
-    "requirements": [
-      "In Need of Supplies",
-      "The Rescue",
-      "Secure the Area",
-      "The Library of Threnal",
-      "Escort the Expedition",
-      "Hold for Reinforcements",
-      "The Missing Expedition"
-    ],
-    "lvl": 9,
-    "patron": "House Phiarlan",
-    "favor": 15,
-    "difficulty": "R",
-    "xp": 20605,
-    "baseXP": 4989,
-    "rXP": 472
-  },
-  {
-    "name": "The Threnal Arena",
-    "requirements": [],
-    "lvl": 9,
-    "patron": "None",
-    "favor": 0,
-    "difficulty": "N",
-    "xp": null,
-    "baseXP": 0,
-    "rXP": null
-  },
-  {
-    "name": "The Fane of the Six: Cleansing the Temple",
-    "requirements": [
-      "The Iron Mines: Freeing Achka",
-      "The Iron Mines: Justice for Grust",
-      "The Grey Moon's Den: The Trollish Scourge",
-      "The Grey Moon's Den: Extermination",
-      "The Temple Outpost: Captives of the Cult",
-      "The Temple Outpost: The Libram of the Six"
-    ],
-    "lvl": 9,
-    "patron": "House Deneith",
-    "favor": 12,
-    "difficulty": "R",
-    "xp": 8560,
-    "baseXP": 2140,
-    "rXP": 462
-  },
-  {
-    "name": "The Fane of the Six: Fall of the Prelate",
-    "requirements": [
-      "The Iron Mines: Freeing Achka",
-      "The Iron Mines: Justice for Grust",
-      "The Grey Moon's Den: The Trollish Scourge",
-      "The Grey Moon's Den: Extermination",
-      "The Temple Outpost: Captives of the Cult",
-      "The Temple Outpost: The Libram of the Six",
-      "The Fane of the Six: Cleansing the Temple"
-    ],
-    "lvl": 9,
-    "patron": "House Deneith",
-    "favor": 12,
-    "difficulty": "R",
-    "xp": 8814,
-    "baseXP": 2260,
-    "rXP": 454
-  },
-  {
     "name": "The Claw of Vulkoor",
     "requirements": [],
     "lvl": 9,
@@ -3303,119 +3416,6 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 480
   },
   {
-    "name": "Secure the Area",
-    "requirements": [
-      "In Need of Supplies",
-      "The Rescue"
-    ],
-    "lvl": 10,
-    "patron": "House Phiarlan",
-    "favor": 12,
-    "difficulty": "R",
-    "xp": 9827,
-    "baseXP": 2368,
-    "rXP": 492
-  },
-  {
-    "name": "Escort the Expedition",
-    "requirements": [
-      "The Library of Threnal"
-    ],
-    "lvl": 10,
-    "patron": "House Phiarlan",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 20596,
-    "baseXP": 4963,
-    "rXP": 484
-  },
-  {
-    "name": "Hold for Reinforcements",
-    "requirements": [
-      "The Library of Threnal",
-      "Escort the Expedition"
-    ],
-    "lvl": 10,
-    "patron": "House Phiarlan",
-    "favor": 9,
-    "difficulty": "R",
-    "xp": 8910,
-    "baseXP": 2200,
-    "rXP": 484
-  },
-  {
-    "name": "The Gate Chamber",
-    "requirements": [
-      "In Need of Supplies",
-      "The Rescue",
-      "Secure the Area",
-      "The Library of Threnal",
-      "Escort the Expedition",
-      "Hold for Reinforcements",
-      "The Missing Expedition",
-      "Entering the Gate Chamber"
-    ],
-    "lvl": 10,
-    "patron": "House Phiarlan",
-    "favor": 9,
-    "difficulty": "R",
-    "xp": 1034,
-    "baseXP": 265,
-    "rXP": 0
-  },
-  {
-    "name": "The Giants' Supplies",
-    "requirements": [],
-    "lvl": 10,
-    "patron": "None",
-    "favor": 0,
-    "difficulty": "R",
-    "xp": 2236,
-    "baseXP": 520,
-    "rXP": 504
-  },
-  {
-    "name": "The Sanctum: Quench the Flames",
-    "requirements": [
-      "The Iron Mines: Freeing Achka",
-      "The Iron Mines: Justice for Grust",
-      "The Grey Moon's Den: The Trollish Scourge",
-      "The Grey Moon's Den: Extermination",
-      "The Temple Outpost: Captives of the Cult",
-      "The Temple Outpost: The Libram of the Six",
-      "The Fane of the Six: Cleansing the Temple",
-      "The Fane of the Six: Fall of the Prelate"
-    ],
-    "lvl": 10,
-    "patron": "House Deneith",
-    "favor": 12,
-    "difficulty": "R",
-    "xp": 9080,
-    "baseXP": 2242,
-    "rXP": 484
-  },
-  {
-    "name": "The Sanctum: Church of the Fury",
-    "requirements": [
-      "The Iron Mines: Freeing Achka",
-      "The Iron Mines: Justice for Grust",
-      "The Grey Moon's Den: The Trollish Scourge",
-      "The Grey Moon's Den: Extermination",
-      "The Temple Outpost: Captives of the Cult",
-      "The Temple Outpost: The Libram of the Six",
-      "The Fane of the Six: Cleansing the Temple",
-      "The Fane of the Six: Fall of the Prelate",
-      "The Sanctum: Quench the Flames"
-    ],
-    "lvl": 10,
-    "patron": "House Deneith",
-    "favor": 12,
-    "difficulty": "R",
-    "xp": 8744,
-    "baseXP": 2242,
-    "rXP": 472
-  },
-    {
     "name": "Going Rogue",
     "requirements": [],
     "lvl": 10,
@@ -4629,6 +4629,22 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 580
   },
   {
+    "name": "Litany of the Dead",
+    "requirements": [
+      "Inferno of the Damned",
+      "Ghosts of Perdition",
+      "Flesh Maker's Laboratory",
+      "Desecrated Temple of Vol"
+    ],
+    "lvl": 15,
+    "patron": "The Silver Flame",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 30806,
+    "baseXP": 7899,
+    "rXP": 760
+  },
+  {
     "name": "Delirium",
     "requirements": [],
     "lvl": 15,
@@ -4743,6 +4759,88 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 584
   },
   {
+    "name": "Strike Back",
+    "requirements": [],
+    "lvl": 15,
+    "patron": "The Harpers",
+    "favor": 15,
+    "difficulty": "R",
+    "xp": 24676,
+    "baseXP": 6048,
+    "rXP": 578
+  },
+  {
+    "name": "Third Time's a Charm",
+    "requirements": [],
+    "lvl": 15,
+    "patron": "The Harpers",
+    "favor": 15,
+    "difficulty": "R",
+    "xp": 26006,
+    "baseXP": 6048,
+    "rXP": 584
+  },
+  {
+    "name": "Graveyard Shift",
+    "requirements": [],
+    "lvl": 15,
+    "patron": "The Harpers",
+    "favor": 15,
+    "difficulty": "R",
+    "xp": 21302,
+    "baseXP": 5133,
+    "rXP": 584
+  },
+  {
+    "name": "Records of the Past",
+    "requirements": [],
+    "lvl": 15,
+    "patron": "The Harpers",
+    "favor": 15,
+    "difficulty": "R",
+    "xp": 21752,
+    "baseXP": 5438,
+    "rXP": 570
+  },
+  {
+    "name": "Desire in the Dark",
+    "requirements": [
+      "Strike Back",
+      "Third Time's a Charm",
+      "Graveyard Shift",
+      "Records of the Past"
+    ],
+    "lvl": 15,
+    "patron": "The Harpers",
+    "favor": 15,
+    "difficulty": "R",
+    "xp": 24192,
+    "baseXP": 6048,
+    "rXP": 570
+  },
+  {
+    "name": "Creeping Death",
+    "requirements": [],
+    "lvl": 15,
+    "patron": "The Twelve",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 26002,
+    "baseXP": 6118,
+    "rXP": 594
+  },
+  {
+    "name": "To Curse the Sky",
+    "requirements": [],
+    "lvl": 15,
+    "patron": "House Deneith",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 28465,
+    "baseXP": 6859,
+    "rXP": 584
+  },
+    {
     "name": "Lost at Sea",
     "requirements": [],
     "lvl": 15,
@@ -4820,6 +4918,96 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 570
   },
   {
+    "name": "No Refunds",
+    "requirements": [
+      "A Sharn Welcome",
+      "Red Rain",
+      "Best Laid Plans",
+      "The Same Old Song",
+      "Just Business"
+    ],
+    "lvl": 16,
+    "patron": "Sharn City Council",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 23080,
+    "baseXP": 5770,
+    "rXP": 588
+  },
+  {
+    "name": "House of Pain",
+    "requirements": [
+      "A Sharn Welcome",
+      "Red Rain",
+      "Best Laid Plans",
+      "The Same Old Song",
+      "Just Business",
+      "No Refunds"
+    ],
+    "lvl": 16,
+    "patron": "Sharn City Council",
+    "favor": 21,
+    "difficulty": "R",
+    "xp": 24061,
+    "baseXP": 5770,
+    "rXP": 578
+  },
+  {
+    "name": "Blown Deadline",
+    "requirements": [
+      "A Sharn Welcome",
+      "Red Rain",
+      "Best Laid Plans",
+      "The Same Old Song",
+      "Just Business",
+      "No Refunds"
+    ],
+    "lvl": 16,
+    "patron": "Sharn City Council",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 22503,
+    "baseXP": 5770,
+    "rXP": 578
+  },
+  {
+    "name": "Reach for the Sky",
+    "requirements": [
+      "A Sharn Welcome",
+      "Red Rain",
+      "Best Laid Plans",
+      "The Same Old Song",
+      "Just Business",
+      "No Refunds",
+      "House of Pain",
+      "Blown Deadline"
+    ],
+    "lvl": 16,
+    "patron": "Sharn City Council",
+    "favor": 21,
+    "difficulty": "R",
+    "xp": 41308,
+    "baseXP": 9496,
+    "rXP": 603
+  },
+  {
+    "name": "Sharn Saga",
+    "isSaga": true,
+    "requirements": [
+      "Lost at Sea",
+      "A Sharn Welcome",
+      "Red Rain",
+      "Best Laid Plans",
+      "The Same Old Song",
+      "Just Business",
+      "No Refunds",
+      "House of Pain",
+      "Blown Deadline",
+      "Reach for the Sky"
+    ],
+    "xp": 46000
+  },
+    {
     "name": "Ruinous Schemes",
     "requirements": [],
     "lvl": 15,
@@ -4864,102 +5052,63 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 561
   },
   {
-    "name": "Strike Back",
+    "name": "Scavenger Hunt",
     "requirements": [],
-    "lvl": 15,
-    "patron": "The Harpers",
+    "lvl": 16,
+    "patron": "Sharn City Council",
     "favor": 15,
     "difficulty": "R",
-    "xp": 24676,
-    "baseXP": 6048,
+    "xp": 14330,
+    "baseXP": 3412,
+    "rXP": 588
+  },
+  {
+    "name": "The Magma Must Flow",
+    "requirements": [],
+    "lvl": 16,
+    "patron": "Sharn City Council",
+    "favor": 15,
+    "difficulty": "R",
+    "xp": 11341,
+    "baseXP": 2908,
     "rXP": 578
   },
   {
-    "name": "Third Time's a Charm",
+    "name": "Roll Call",
     "requirements": [],
-    "lvl": 15,
-    "patron": "The Harpers",
+    "lvl": 16,
+    "patron": "Sharn City Council",
     "favor": 15,
     "difficulty": "R",
-    "xp": 26006,
-    "baseXP": 6048,
-    "rXP": 584
+    "xp": 13819,
+    "baseXP": 3412,
+    "rXP": 593
   },
   {
-    "name": "Graveyard Shift",
+    "name": "Security Detail",
     "requirements": [],
-    "lvl": 15,
-    "patron": "The Harpers",
+    "lvl": 16,
+    "patron": "Sharn City Council",
     "favor": 15,
     "difficulty": "R",
-    "xp": 21302,
-    "baseXP": 5133,
-    "rXP": 584
+    "xp": 11341,
+    "baseXP": 2908,
+    "rXP": 578
   },
   {
-    "name": "Records of the Past",
-    "requirements": [],
-    "lvl": 15,
-    "patron": "The Harpers",
-    "favor": 15,
-    "difficulty": "R",
-    "xp": 21752,
-    "baseXP": 5438,
-    "rXP": 570
-  },
-  {
-    "name": "Desire in the Dark",
+    "name": "Cogs Saga",
+    "isSaga": true,
     "requirements": [
-      "Strike Back",
-      "Third Time's a Charm",
-      "Graveyard Shift",
-      "Records of the Past"
+      "Ruinous Schemes",
+      "The Wraithcallers",
+      "Smash and Burn",
+      "Thralls of the Fungus Lord",
+      "Scavenger Hunt",
+      "The Magma Must Flow",
+      "Roll Call",
+      "Security Detail"
     ],
-    "lvl": 15,
-    "patron": "The Harpers",
-    "favor": 15,
-    "difficulty": "R",
-    "xp": 24192,
-    "baseXP": 6048,
-    "rXP": 570
-  },
-  {
-    "name": "Litany of the Dead",
-    "requirements": [
-      "Inferno of the Damned",
-      "Ghosts of Perdition",
-      "Flesh Maker's Laboratory",
-      "Desecrated Temple of Vol"
-    ],
-    "lvl": 15,
-    "patron": "The Silver Flame",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 30806,
-    "baseXP": 7899,
-    "rXP": 760
-  },
-  {
-    "name": "Creeping Death",
-    "requirements": [],
-    "lvl": 15,
-    "patron": "The Twelve",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 26002,
-    "baseXP": 6118,
-    "rXP": 594
-  },
-  {
-    "name": "To Curse the Sky",
-    "requirements": [],
-    "lvl": 15,
-    "patron": "House Deneith",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 28465,
-    "baseXP": 6859,
-    "rXP": 584
+    "xp": 46000
   },
   {
     "name": "Army of Eternal Night",
@@ -5086,155 +5235,6 @@ window.HEROIC_QUESTS_BASE =
     "xp": 16780,
     "baseXP": 4535,
     "rXP": null
-  },
-  {
-    "name": "Scavenger Hunt",
-    "requirements": [],
-    "lvl": 16,
-    "patron": "Sharn City Council",
-    "favor": 15,
-    "difficulty": "R",
-    "xp": 14330,
-    "baseXP": 3412,
-    "rXP": 588
-  },
-  {
-    "name": "The Magma Must Flow",
-    "requirements": [],
-    "lvl": 16,
-    "patron": "Sharn City Council",
-    "favor": 15,
-    "difficulty": "R",
-    "xp": 11341,
-    "baseXP": 2908,
-    "rXP": 578
-  },
-  {
-    "name": "Roll Call",
-    "requirements": [],
-    "lvl": 16,
-    "patron": "Sharn City Council",
-    "favor": 15,
-    "difficulty": "R",
-    "xp": 13819,
-    "baseXP": 3412,
-    "rXP": 593
-  },
-  {
-    "name": "Security Detail",
-    "requirements": [],
-    "lvl": 16,
-    "patron": "Sharn City Council",
-    "favor": 15,
-    "difficulty": "R",
-    "xp": 11341,
-    "baseXP": 2908,
-    "rXP": 578
-  },
-  {
-    "name": "Cogs Saga",
-    "isSaga": true,
-    "requirements": [
-      "Ruinous Schemes",
-      "The Wraithcallers",
-      "Smash and Burn",
-      "Thralls of the Fungus Lord",
-      "Scavenger Hunt",
-      "The Magma Must Flow",
-      "Roll Call",
-      "Security Detail"
-    ],
-    "xp": 46000
-  },
-  {
-    "name": "No Refunds",
-    "requirements": [
-      "A Sharn Welcome",
-      "Red Rain",
-      "Best Laid Plans",
-      "The Same Old Song",
-      "Just Business"
-    ],
-    "lvl": 16,
-    "patron": "Sharn City Council",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 23080,
-    "baseXP": 5770,
-    "rXP": 588
-  },
-  {
-    "name": "House of Pain",
-    "requirements": [
-      "A Sharn Welcome",
-      "Red Rain",
-      "Best Laid Plans",
-      "The Same Old Song",
-      "Just Business",
-      "No Refunds"
-    ],
-    "lvl": 16,
-    "patron": "Sharn City Council",
-    "favor": 21,
-    "difficulty": "R",
-    "xp": 24061,
-    "baseXP": 5770,
-    "rXP": 578
-  },
-  {
-    "name": "Blown Deadline",
-    "requirements": [
-      "A Sharn Welcome",
-      "Red Rain",
-      "Best Laid Plans",
-      "The Same Old Song",
-      "Just Business",
-      "No Refunds"
-    ],
-    "lvl": 16,
-    "patron": "Sharn City Council",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 22503,
-    "baseXP": 5770,
-    "rXP": 578
-  },
-  {
-    "name": "Reach for the Sky",
-    "requirements": [
-      "A Sharn Welcome",
-      "Red Rain",
-      "Best Laid Plans",
-      "The Same Old Song",
-      "Just Business",
-      "No Refunds",
-      "House of Pain",
-      "Blown Deadline"
-    ],
-    "lvl": 16,
-    "patron": "Sharn City Council",
-    "favor": 21,
-    "difficulty": "R",
-    "xp": 41308,
-    "baseXP": 9496,
-    "rXP": 603
-  },
-  {
-    "name": "Sharn Saga",
-    "isSaga": true,
-    "requirements": [
-      "Lost at Sea",
-      "A Sharn Welcome",
-      "Red Rain",
-      "Best Laid Plans",
-      "The Same Old Song",
-      "Just Business",
-      "No Refunds",
-      "House of Pain",
-      "Blown Deadline",
-      "Reach for the Sky"
-    ],
-    "xp": 46000
   },
   {
     "name": "The Lords of Dust",
@@ -5718,66 +5718,6 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 629
   },
   {
-    "name": "Finding the Path",
-    "requirements": [],
-    "lvl": 18,
-    "patron": "The Coin Lords",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 17023,
-    "baseXP": 4102,
-    "rXP": 640
-  },
-  {
-    "name": "Dream Conspiracy",
-    "requirements": [],
-    "lvl": 18,
-    "patron": "The Coin Lords",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 17434,
-    "baseXP": 4102,
-    "rXP": 650
-  },
-  {
-    "name": "I Dream of Jeets",
-    "requirements": [
-      "Finding the Path"
-    ],
-    "lvl": 18,
-    "patron": "The Coin Lords",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 23998,
-    "baseXP": 5106,
-    "rXP": 645
-  },
-  {
-    "name": "The Mindsunder",
-    "requirements": [
-      "Finding the Path",
-      "I Dream of Jeets"
-    ],
-    "lvl": 18,
-    "patron": "The Coin Lords",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 17351,
-    "baseXP": 4102,
-    "rXP": 648
-  },
-  {
-    "name": "The Shipwrecked Spy",
-    "requirements": [],
-    "lvl": 18,
-    "patron": "The Coin Lords",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 20915,
-    "baseXP": 4450,
-    "rXP": 640
-  },
-  {
     "name": "Turn the Page",
     "requirements": [],
     "lvl": 18,
@@ -6005,6 +5945,133 @@ window.HEROIC_QUESTS_BASE =
     "xp": 25960,
     "baseXP": 8800,
     "rXP": 337
+  },
+    {
+    "name": "Finding the Path",
+    "requirements": [],
+    "lvl": 18,
+    "patron": "The Coin Lords",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 17023,
+    "baseXP": 4102,
+    "rXP": 640
+  },
+  {
+    "name": "Dream Conspiracy",
+    "requirements": [],
+    "lvl": 18,
+    "patron": "The Coin Lords",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 17434,
+    "baseXP": 4102,
+    "rXP": 650
+  },
+  {
+    "name": "I Dream of Jeets",
+    "requirements": [
+      "Finding the Path"
+    ],
+    "lvl": 18,
+    "patron": "The Coin Lords",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 23998,
+    "baseXP": 5106,
+    "rXP": 645
+  },
+  {
+    "name": "The Mindsunder",
+    "requirements": [
+      "Finding the Path",
+      "I Dream of Jeets"
+    ],
+    "lvl": 18,
+    "patron": "The Coin Lords",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 17351,
+    "baseXP": 4102,
+    "rXP": 648
+  },
+  {
+    "name": "The Shipwrecked Spy",
+    "requirements": [],
+    "lvl": 18,
+    "patron": "The Coin Lords",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 20915,
+    "baseXP": 4450,
+    "rXP": 640
+  },
+  {
+    "name": "Eye of the Titan",
+    "requirements": [],
+    "lvl": 19,
+    "patron": "The Coin Lords",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 18630,
+    "baseXP": 4600,
+    "rXP": 647
+  },
+  {
+    "name": "Reclaiming Memories",
+    "requirements": [
+      "Eye of the Titan"
+    ],
+    "lvl": 19,
+    "patron": "The Coin Lords",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 13086,
+    "baseXP": 3231,
+    "rXP": 647
+  },
+  {
+    "name": "Mining for Ancient Secrets",
+    "requirements": [
+      "Eye of the Titan",
+      "Reclaiming Memories"
+    ],
+    "lvl": 19,
+    "patron": "The Coin Lords",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 12336,
+    "baseXP": 3046,
+    "rXP": 647
+  },
+  {
+    "name": "Raiding the Giants' Vault",
+    "requirements": [
+      "Eye of the Titan",
+      "Reclaiming Memories"
+    ],
+    "lvl": 19,
+    "patron": "The Coin Lords",
+    "favor": 6,
+    "difficulty": "S",
+    "xp": 10148,
+    "baseXP": 3440,
+    "rXP": 498
+  },
+    {
+    "name": "The Dreaming Dark",
+    "requirements": [
+      "Eye of the Titan",
+      "Reclaiming Memories",
+      "Mining for Ancient Secrets"
+    ],
+    "lvl": 20,
+    "patron": "The Coin Lords",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 20744,
+    "baseXP": 5122,
+    "rXP": 666
   },
   {
     "name": "Murder by Night",
@@ -6239,56 +6306,20 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 658
   },
   {
-    "name": "Eye of the Titan",
-    "requirements": [],
-    "lvl": 19,
-    "patron": "The Coin Lords",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 18630,
-    "baseXP": 4600,
-    "rXP": 647
-  },
-  {
-    "name": "Reclaiming Memories",
+    "name": "Tower of Despair",
     "requirements": [
-      "Eye of the Titan"
+      "A New Invasion",
+      "Bastion of Power",
+      "Genesis Point",
+      "Sins of Attrition"
     ],
-    "lvl": 19,
-    "patron": "The Coin Lords",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 13086,
-    "baseXP": 3231,
-    "rXP": 647
-  },
-  {
-    "name": "Mining for Ancient Secrets",
-    "requirements": [
-      "Eye of the Titan",
-      "Reclaiming Memories"
-    ],
-    "lvl": 19,
-    "patron": "The Coin Lords",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 12336,
-    "baseXP": 3046,
-    "rXP": 647
-  },
-  {
-    "name": "Raiding the Giants' Vault",
-    "requirements": [
-      "Eye of the Titan",
-      "Reclaiming Memories"
-    ],
-    "lvl": 19,
-    "patron": "The Coin Lords",
-    "favor": 6,
-    "difficulty": "S",
-    "xp": 10148,
-    "baseXP": 3440,
-    "rXP": 498
+    "lvl": 20,
+    "patron": "The Yugoloth",
+    "favor": 24,
+    "difficulty": "",
+    "xp": null,
+    "baseXP": 12500,
+    "rXP": null
   },
   {
     "name": "The Master Artificer",
@@ -6311,36 +6342,5 @@ window.HEROIC_QUESTS_BASE =
     "xp": null,
     "baseXP": 6816,
     "rXP": null
-  },
-  {
-    "name": "Tower of Despair",
-    "requirements": [
-      "A New Invasion",
-      "Bastion of Power",
-      "Genesis Point",
-      "Sins of Attrition"
-    ],
-    "lvl": 20,
-    "patron": "The Yugoloth",
-    "favor": 24,
-    "difficulty": "",
-    "xp": null,
-    "baseXP": 12500,
-    "rXP": null
-  },
-  {
-    "name": "The Dreaming Dark",
-    "requirements": [
-      "Eye of the Titan",
-      "Reclaiming Memories",
-      "Mining for Ancient Secrets"
-    ],
-    "lvl": 20,
-    "patron": "The Coin Lords",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 20744,
-    "baseXP": 5122,
-    "rXP": 666
-  }
+  } 
 ];
