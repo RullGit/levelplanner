@@ -8,20 +8,95 @@
 </head>
 <body>
     <div class="container">
+        <nav class="menu-bar" aria-label="Main toolbar">
+            <div class="menu-left">
+                <button class="menu-btn" onclick="saveToFile()">Save</button>
+                <button class="menu-btn" onclick="loadFromFile()">Load</button>
+                <button class="menu-btn" onclick="resetData()">New</button>
+                <button class="menu-btn" onclick="openConfig()">Config</button>
+            </div>
+            <div class="menu-center">
+                <div class="mode-switch" role="group" aria-label="Mode">
+                    <span class="mode-label mode-label--left" id="mode-label-heroic">Heroic</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="mode-switch" aria-label="Toggle Heroic / Epic">
+                        <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                    </label>
+                    <span class="mode-label mode-label--right" id="mode-label-epic">Epic</span>
+                </div>
+            </div>
+            <div class="menu-right">
+                <label for="twelve-tokens" id="twelve-tokens-label" class="menu-field-label twelve-tokens-label" style="display:none;">
+                    Twelve Tokens
+                    <input type="checkbox" id="twelve-tokens" name="twelveTokens">
+                </label>
+                <div class="patron-view-pill">
+                    <label for="patron-view" class="menu-field-label">Patron View</label>
+                    <select id="patron-view" name="patronView">
+                        <option value="None">None</option>
+                        <option value="All">All</option>
+                    </select>
+                </div>
+            </div>
+        </nav>
+        <!-- secondary-bar removed; VIP Sagas and Speed moved into the XP box -->
         <div class="lists-container">
             <div class="list-section levelplan">
                 <div class="section-header">
-                    <h2>Level Plan</h2>
+                    <div class="header-title-group">
+                        <h2>Leveling Plan</h2>
+                    </div>
+                    <div class="plan-settings-box">
+                        <div class="small-settings">
+                            <label class="small-field small-field--vip" for="vip-sagas-header">
+                                <span>VIP skip for Sagas</span>
+                                <input type="checkbox" id="vip-sagas-header" name="vip-sagas-header">
+                            </label>
+                        </div>
+                        <div class="xp-mult-main">
+                            <span class="xp-mult-label">XP Multiplier</span>
+                            <div class="vertical-spinner" data-target="xp-multiplier">
+                                <button type="button" class="spin-btn" data-dir="1" aria-label="Increase">＋</button>
+                                <input type="number" id="xp-multiplier" name="xp-multiplier" step="0.05" value="1.15" class="spin-input-compact">
+                                <button type="button" class="spin-btn" data-dir="-1" aria-label="Decrease">−</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="list-header">
-                    <div class="col-cumulative">XP</div>
-                    <div class="col-playerlvl">pLvl</div>
-                    <div class="col-spacer"></div>
-                    <div class="col-content">  XP  ·  qLvl  ·  Quest</div>
-                    <div class="col-delete"></div>
+                    <div class="col-playerlvl">
+                        <span class="col-header-label">Player</span>
+                        <span class="col-header-label">Level</span>
+                    </div>
+                    <div class="col-content">
+                        <div class="lp-col-qlvl">
+                            <span class="col-header-label">Quest</span>
+                            <span class="col-header-label">Lvl</span>
+                        </div>
+                        <div class="lp-col-name"><span class="col-header-label">Questname</span></div>
+                        <div class="lp-col-difficulty"></div>
+                        <div class="lp-col-xpmin"><span class="col-header-label">XP/min</span></div>
+                        <div class="lp-col-favor"><span class="col-header-label">Favor</span></div>
+                        <div class="lp-col-delete"></div>
+                    </div>
+                    <div class="col-cumulative"><span class="col-header-label">XP</span></div>
+                    <div class="col-cumfavor"><span class="col-header-label">Favor</span></div>
                 </div>
                 <div class="list" id="levelplan" data-list-id="levelplan">
                     <!-- Items will be populated here -->
+                </div>
+                <div class="lp-aggregate-footer" id="lp-aggregate-footer">
+                    <div class="col-playerlvl">
+                        <span class="col-header-label" id="footer-player-level"></span>
+                    </div>
+                    <div class="lp-col-qlvl"></div>
+                    <div class="lp-col-name"><span class="col-header-label" id="footer-quest-count"></span></div>
+                    <div class="lp-col-difficulty"><span class="col-header-label" id="footer-total-time"></span></div>
+                    <div class="lp-col-xpmin"><span class="col-header-label" id="footer-xpmin"></span></div>
+                    <div class="lp-col-favor"></div>
+                    <div class="lp-col-delete"><button class="lp-footer-clear" onclick="clearCurrentLevelplan()" data-tip="Clear this leveling plan" aria-label="Clear current leveling plan">&#x21F6;</button></div>
+                    <div class="col-cumulative"><span class="col-header-label" id="footer-total-xp"></span></div>
+                    <div class="col-cumfavor"><span class="col-header-label" id="footer-total-favor"></span></div>
                 </div>
             </div>
 
@@ -30,25 +105,81 @@
                     <h2>Quests</h2>
                 </div>
                 <div class="list-header">
-                    <div class="col-xp">XP</div>
-                    <div class="col-level">Lvl</div>
-                    <div class="col-name">Quest</div>
+                    <div class="col-level col-level--span">
+                        <div class="level-filter-left">
+                            <span class="col-header-label">Lvl</span>
+                            <button id="quests-level-clear" data-tip="Clear filter">&times;</button>
+                        </div>
+                        <div class="vertical-spinner" data-target="quests-level-filter">
+                            <button type="button" class="spin-btn" data-dir="1" aria-label="Increase">＋</button>
+                            <input type="number" id="quests-level-filter" min="1" max="20" step="1" class="spin-input-compact">
+                            <button type="button" class="spin-btn" data-dir="-1" aria-label="Decrease">−</button>
+                        </div>
+                    </div>
+                    <div class="col-name">
+                        <span class="col-header-label">Questname</span>
+                        <div class="quests-filter">
+                            <button id="quests-name-clear" data-tip="Clear filter">&times;</button>
+                            <input type="text" id="quests-name-filter">
+                        </div>
+                    </div>
+                    <div class="col-xpmin">
+                        <span class="col-header-label">XP/min</span>
+                        <div class="quests-filter">
+                            <button id="quests-xpmin-clear" data-tip="Clear filter">&times;</button>
+                            <input type="number" id="quests-xpmin-filter" min="0" step="1">
+                        </div>
+                    </div>
+                    <div class="col-favor">
+                        <span class="col-header-label">Favor</span>
+                        <label class="quests-favor-filter-label" data-tip="Show only this patron's quests">
+                            <input type="checkbox" id="quests-patron-filter">
+                        </label>
+                    </div>
                 </div>
                 <div class="list" id="quests" data-list-id="quests">
                     <!-- Items will be populated here -->
                 </div>
             </div>
 
-            <div class="list-section levelups">
-                <div class="list" id="levelups" data-list-id="levelups">
+            <div class="list-section special">
+                <div class="list" id="special" data-list-id="special">
                     <!-- Items will be populated here -->
                 </div>
             </div>
         </div>
-
-        <button class="reset-btn" onclick="resetData()">Reset All</button>
     </div>
-
+    <div id="config-overlay" class="config-overlay" hidden>
+        <div class="config-panel">
+            <div class="config-panel-header">
+                <div class="config-header-left">
+                    <select id="config-preset" name="config-preset" class="config-preset">
+                        <option value="ukenburger">Ukenburger</option>
+                        <option value="custom" selected>Custom</option>
+                    </select>
+                    <button class="menu-btn" id="config-apply-btn" onclick="applyConfig()" title="Apply the textarea content to the active configuration">Apply</button>
+                </div>
+                <div class="config-header-center">
+                    <div class="mode-switch" role="group" aria-label="Config Mode">
+                        <span class="mode-label mode-label--left" id="config-mode-label-heroic">Heroic</span>
+                        <label class="toggle">
+                            <input type="checkbox" id="config-mode-switch" aria-label="Toggle Heroic / Epic">
+                            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                        </label>
+                        <span class="mode-label mode-label--right" id="config-mode-label-epic">Epic</span>
+                    </div>
+                </div>
+                <button class="menu-btn menu-btn--secondary" id="config-export-btn" onclick="exportConfig()" title="Export textarea to a file — does not change the active configuration">Export Heroic</button>
+                <button class="menu-btn menu-btn--secondary" id="config-import-btn" onclick="importConfig()" title="Import from a file into the textarea — does not change the active configuration">Import Heroic</button>
+                <button class="config-close" onclick="closeConfig()" aria-label="Close config">&times;</button>
+            </div>
+            <div class="config-body" id="config-body"></div>
+        </div>
+    </div>
+    <script src="heroic.js"></script>
+    <script src="epic.js"></script>
+    <script src="heroic_ukenburger_config.js"></script>
+    <script src="epic_ukenburger_config.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,7 +1,28 @@
+@font-face {
+    font-family: 'Roboto Mono';
+    src: url('Roboto_Mono/RobotoMono-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto Mono';
+    src: url('Roboto_Mono/RobotoMono-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 700;
+    font-style: italic;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+:root {
+    --player-header-width: 56px; /* header player column (smaller) */
+    --player-col-width: 62px;
+    --item-qlvl-width: 50px; /* quest lvl column width used by items */
+    --config-field-width: 74px;
 }
 
 html, body {
@@ -38,22 +59,476 @@ h1 {
     grid-template-rows: 1fr auto;
     gap: 8px;
     margin-bottom: 12px;
-    height: calc(100vh - 160px);
+    height: calc(100vh - 90px);
     min-height: 320px;
     min-width: 0;
 }
 
+
+
+/* ---------- Top menu bar ---------- */
+.menu-bar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 14px;
+    margin-bottom: 8px;
+    background: linear-gradient(180deg, #2c3e50 0%, #1f2d3d 100%);
+    color: #f5f7fa;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+}
+
+.menu-left {
+    display: flex;
+    gap: 6px;
+    justify-self: start;
+    align-items: center;
+}
+
+.menu-center {
+    justify-self: center;
+}
+
+.menu-right {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-self: end;
+}
+
+.menu-btn {
+    padding: 6px 14px;
+    background: #3498db;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85em;
+    transition: background 0.15s, transform 0.05s;
+}
+
+.menu-btn:hover {
+    background: #2e86c1;
+}
+
+.menu-btn:active {
+    transform: translateY(1px);
+}
+
+.menu-btn:disabled,
+.menu-btn[disabled] {
+    background: #9aa4ad;
+    color: #eef3f6;
+    cursor: default;
+    opacity: 0.7;
+    border-color: rgba(255,255,255,0.06);
+}
+
+.menu-field-label {
+    font-size: 0.82em;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: #e6ebf2;
+}
+
+.twelve-tokens-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    margin-right: 4px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 999px;
+    padding: 4px 10px;
+}
+
+.patron-view-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 999px;
+    padding: 4px 10px;
+}
+
+.twelve-tokens-label input[type="checkbox"] {
+    cursor: pointer;
+    accent-color: #f39c12;
+    width: 15px;
+    height: 15px;
+}
+
+.patron-view-pill select {
+    padding: 5px 8px;
+    border-radius: 6px;
+    border: 1px solid #5b6b7d;
+    background: #fff;
+    color: #2c3e50;
+    font-size: 0.9em;
+    min-width: 130px;
+}
+
+.menu-right select {
+    padding: 5px 8px;
+    border-radius: 6px;
+    border: 1px solid #5b6b7d;
+    background: #fff;
+    color: #2c3e50;
+    font-size: 0.9em;
+    min-width: 130px;
+}
+
+/* Heroic / Epic toggle switch */
+.mode-switch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 10px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 999px;
+}
+
+.mode-label {
+    font-size: 0.85em;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: #95a5b8;
+    transition: color 0.15s;
+    user-select: none;
+}
+
+.mode-switch.is-heroic .mode-label--left,
+.mode-switch.is-epic .mode-label--right {
+    color: #ffd66b;
+    text-shadow: 0 0 6px rgba(255, 214, 107, 0.35);
+}
+
+.toggle {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-track {
+    position: absolute;
+    inset: 0;
+    background: #4a5b6e;
+    border-radius: 999px;
+    transition: background 0.2s;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.4);
+}
+
+.toggle-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(180deg, #fdfdfd, #d6dde5);
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
+}
+
+.toggle input:checked + .toggle-track {
+    background: #8e44ad;
+}
+
+.toggle input:checked + .toggle-track .toggle-thumb {
+    transform: translateX(22px);
+}
+
+/* ---------- Secondary settings strip ---------- */
+.secondary-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4px 6px 4px;
+    margin-bottom: 4px;
+    gap: 12px;
+}
+
+.secondary-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-left: auto;
+}
+
+.secondary-field {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #6b7280;
+}
+
+.secondary-field--vip {
+    font-size: 0.78em;
+    font-weight: 600;
+}
+
+.secondary-field--speed {
+    font-size: 0.7em;
+    font-weight: 500;
+    color: #8a93a0;
+}
+
+.secondary-field--speed input {
+    width: 40px;
+    padding: 1px 4px;
+    font-size: 0.75em;
+    border: 1px solid #cfd4dc;
+    border-radius: 3px;
+}
+
+.secondary-field--vip input {
+    accent-color: #2980b9;
+}
+
+/* ---------- XP multiplier (prominent, in level plan header) ---------- */
+.plan-settings-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 10px;
+    background: linear-gradient(180deg, rgba(44,62,80,0.6) 0%, rgba(31,45,61,0.6) 100%);
+    border-radius: 0 0 0 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+}
+
+.xp-mult-label {
+    font-family: inherit;
+    font-size: 0.82em;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: #e6ebf2;
+}
+
+.xp-mult-main {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+}
+
+.xp-mult-main input {
+    width: 44px;
+    padding: 3px 6px;
+    font-size: 0.95em;
+    font-weight: 700;
+    border-radius: 5px;
+    background: #e7e7e7;
+}
+
+/* Small stacked settings to the left of the multiplier */
+.small-settings {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-right: 10px;
+}
+
+.small-field {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 6px;
+    align-items: center;
+    background: transparent;
+    color: #6b5b00;
+    font-weight: 700;
+    font-size: 0.82em;
+    width: 140px;
+}
+
+.small-field span {
+    display: inline-block;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.small-field--vip input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #2980b9;
+}
+
+/* Compact three-part spinner: matches provided image (minus | value | plus) */
+.compact-spinner {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #d0d0d0;
+    border-radius: 8px;
+    overflow: hidden;
+    clip-path: inset(0 round 8px);
+    height: 18px;
+    background: #ffffff;
+}
+
+.compact-spinner .spin-btn {
+    width: 16px;
+    height: 100%;
+    border: none;
+    background: #e8e8e8;
+    color: #333333;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: 'Courier New', Courier, monospace;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 0;
+    line-height: 1;
+}
+
+.compact-spinner .spin-btn:hover {
+    background: #d0d0d0;
+}
+
+/* nudge symbols outward without changing button size */
+.compact-spinner .spin-btn:first-child { padding-right: 4px; padding-left: 0; }
+
+/* Cursor tweaks: show hand cursor for clear buttons, patron dropdown, and VIP checkbox */
+#quests-level-clear,
+#quests-name-clear,
+#quests-xpmin-clear,
+.lp-footer-clear,
+#patron-view,
+.patron-view-pill select,
+#vip-sagas-header,
+.small-field--vip input[type="checkbox"],
+#quests-patron-filter,
+.quests-favor-filter-label {
+    cursor: pointer;
+}
+.compact-spinner .spin-btn:last-child  { padding-left: 4px;  padding-right: 0; }
+
+.compact-spinner .spin-input-compact {
+    width: 30px;
+    height: 100%;
+    border: none;
+    text-align: center;
+    font-weight: 700;
+    font-size: 12px;
+    background: #f8f8f8;
+    border-radius: 5px;
+    margin: 0 -5px;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.compact-spinner .spin-input-compact:focus {
+    outline: none;
+}
+
+/* Hide WebKit native spin buttons for compact input */
+.compact-spinner .spin-input-compact::-webkit-outer-spin-button,
+.compact-spinner .spin-input-compact::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Vertical spinner: same look as compact-spinner but stacked column */
+.vertical-spinner {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #d0d0d0;
+    border-radius: 8px;
+    overflow: hidden;
+    clip-path: inset(0 round 8px);
+    width: 34px;
+    background: #ffffff;
+}
+
+.vertical-spinner .spin-btn {
+    height: 16px;
+    width: 100%;
+    border: none;
+    background: #e8e8e8;
+    color: #333333;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: 'Courier New', Courier, monospace;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 0;
+    line-height: 1;
+}
+
+.vertical-spinner .spin-btn:hover {
+    background: #d0d0d0;
+}
+
+/* nudge symbols toward the input without changing button size */
+.vertical-spinner .spin-btn:first-child { padding-bottom: 4px; padding-top: 0; }
+.vertical-spinner .spin-btn:last-child  { padding-top: 4px;    padding-bottom: 0; }
+
+.vertical-spinner .spin-input-compact {
+    width: 100%;
+    height: 16px;
+    border: none;
+    text-align: center;
+    font-weight: 700;
+    font-size: 12px;
+    background: #f8f8f8;
+    border-radius: 5px;
+    margin: -5px 0;
+    padding: 5px 0; /* compensate for negative margin so text stays centred */
+    position: relative;
+    z-index: 1;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.vertical-spinner .spin-input-compact:focus {
+    outline: none;
+}
+
+.vertical-spinner .spin-input-compact::-webkit-outer-spin-button,
+.vertical-spinner .spin-input-compact::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 .list-section.levelplan {
     grid-column: 1;
-    grid-row: 1;
+    grid-row: 1 / span 2;
     display: flex;
     flex-direction: column;
     min-height: 0;
     overflow: hidden;
-}
 
-.list-section.levelups {
-    grid-column: 1;
+}
+.list-section.special {
+    grid-column: 2;
     grid-row: 2;
     display: flex;
     flex-direction: column;
@@ -62,10 +537,14 @@ h1 {
 
 .list-section.quests {
     grid-column: 2;
-    grid-row: 1 / span 2;
+    grid-row: 1;
     display: flex;
     flex-direction: column;
     min-height: 0;
+}
+
+.list-section.levelplan .section-header {
+    min-height: 54px;
 }
 
 @media (max-width: 768px) {
@@ -75,7 +554,7 @@ h1 {
     }
 
     .list-section.levelplan,
-    .list-section.levelups,
+    .list-section.special,
     .list-section.quests {
         grid-column: auto;
         grid-row: auto;
@@ -88,24 +567,130 @@ h1 {
     border: 1px solid #ccc;
 }
 
-.list-section.levelups .list {
+.list-section.special .list {
     flex: 0 0 auto;
     height: auto;
     max-height: none;
     min-height: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    padding: 4px 6px;
+    overflow: hidden;
+    align-items: stretch;
 }
 
 .section-header {
+    position: relative;
     background: #f9f9f9;
     border-bottom: 1px solid #ccc;
     padding: 6px 8px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
 }
 
 .section-header h2 {
     color: #333;
-    font-size: 0.95em;
+    font-size: 1.2em;
     font-weight: 600;
+    letter-spacing: 0.04em;
+    margin: 0;
+    font-family: inherit;
 }
+
+.header-title-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    height: 100%;
+    gap: 3px;
+}
+
+
+.quests-filter {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    width: 100%;
+}
+
+.quests-filter input {
+    width: 0;
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 4px 6px;
+    font-size: 0.9em;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    font-weight: normal;
+    background: #fff;
+    /* hide spinners */
+    -moz-appearance: textfield;
+}
+
+.quests-filter input::-webkit-outer-spin-button,
+.quests-filter input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.quests-filter button {
+    flex: 0 0 auto;
+    padding: 2px 6px;
+    font-size: 0.9em;
+    line-height: 1.5;
+    border: 1px solid #bbb;
+    border-radius: 8px;
+    font-weight: normal;
+}
+
+.quests-filter button:hover {
+    background: #d0d0d0;
+    color: #000;
+}
+
+/* Make various label elements use the same font and color as the "Patron View" label */
+label,
+.col-header-label,
+.small-field span,
+.mode-label,
+.quests-favor-filter-label,
+.xp-mult-label {
+    font-size: 0.82em;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: #e6ebf2;
+}
+
+/* Slightly larger labels for VIP skip and Speed Factor */
+.small-field--vip span,
+.small-field--speed span {
+    font-size: 0.88em;
+}
+
+/* Reinforce toggle and mode-switch styles (placed last to ensure precedence) */
+.mode-switch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 10px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 999px;
+}
+.mode-label { font-size: 0.85em; font-weight: 600; letter-spacing: 0.04em; color: #95a5b8; }
+.mode-switch.is-heroic .mode-label--left,
+.mode-switch.is-epic .mode-label--right { color: #ffd66b; text-shadow: 0 0 6px rgba(255,214,107,0.35); }
+
+.toggle { position: relative; display: inline-block; width: 46px; height: 24px; }
+.toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+.toggle-track { display: block; width: 100%; height: 100%; background: #4a5b6e; border-radius: 999px; position: relative; transition: background .2s; box-shadow: inset 0 1px 3px rgba(0,0,0,0.4); }
+.toggle-thumb { position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; background: linear-gradient(180deg,#fff,#d6dde5); border-radius: 50%; box-shadow: 0 1px 3px rgba(0,0,0,0.3); transition: transform .18s; }
+.toggle input:checked + .toggle-track { background: #8e44ad !important; }
+.toggle input:checked + .toggle-track .toggle-thumb { transform: translateX(22px) !important; }
 
 .list-header {
     display: grid;
@@ -117,35 +702,222 @@ h1 {
     color: #333;
 }
 
+/* Ensure header inner cells use the same padding as item cells for exact alignment */
+.list-header .col-content > div,
+.list-header .col-content > .lp-col-qlvl,
+.list-header .col-content > .lp-col-name,
+.list-header .col-content > .lp-col-difficulty,
+.list-header .col-content > .lp-col-xpmin,
+#quests .list-header .col-level,
+#quests .list-header .col-name,
+#quests .list-header .col-xpmin {
+    padding: 6px 10px;
+}
+
+/* Remove header vertical dividers that would misalign with item rows */
+.list-header .col-content > .lp-col-name { border-right: none; }
+.quests .list-header .col-name { border-right: none; }
+.quests .list-header .col-xpmin { border-right: none; }
+
+#levelplan,
+#quests {
+    overflow-y: scroll;
+}
+
 #levelplan .list-header,
 .levelplan .list-header {
-    grid-template-columns: 90px 90px 8px 1fr 30px;
+    grid-template-columns: var(--player-header-width) 1fr 74px;
+    background: #eef1f6;
+    border: 1px solid #d0d5de;
+    border-radius: 12px 12px 0 0;
+    margin: 4px calc(0px + var(--lp-scrollbar-width, 0px)) 0 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    overflow: hidden;
 }
+
+.levelplan .list-header .col-playerlvl {
+    display: flex;
+    flex-direction: column;
+    padding: 6px 6px;
+    border-right: 1px solid #d0d5de;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+
+.levelplan .list-header .col-cumulative {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 8px;
+    border-right: none;
+    text-align: right;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.levelplan .list-header .col-content {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    background: #d8dce8;
+}
+
+.lp-col-qlvl,
+.lp-col-name,
+.lp-col-difficulty,
+.lp-col-xpmin,
+.lp-col-delete {
+    display: flex;
+    align-items: center;
+    padding: 8px 8px;
+}
+
+.lp-col-qlvl,
+.lp-col-name,
+.lp-col-difficulty,
+.lp-col-delete {
+    border-right: 1px solid #c8cdd9;
+}
+
+.lp-col-qlvl {
+    flex: 0 0 calc(var(--item-qlvl-width));
+    width: calc(var(--item-qlvl-width));
+    min-width: 0;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+}
+
+.lp-col-name {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.lp-col-difficulty {
+    flex: 0 0 auto;
+    min-width: 30px;
+    padding: 8px 4px;
+}
+
+.lp-col-xpmin {
+    flex: 0 0 75px;
+    justify-content: flex-end;
+}
+
+.lp-col-delete {
+    flex: 0 0 30px;
+    padding: 8px 4px;
+    border-right: none;
+}
+
+/* Remove visual dividers between Questname ↔ Difficulty */
+.lp-col-name { border-right: none; }
 
 #quests .list-header,
 .quests .list-header {
-    grid-template-columns: 80px 50px 1fr 30px;
+    grid-template-columns: 30px 40px 1fr 88px;
+    grid-template-areas: "lvl lvl name xpmin";
+    background: #eef1f6;
+    border: 1px solid #d0d5de;
+    border-radius: 12px 12px 0 0;
+    margin: 4px calc(6px + var(--quests-scrollbar-width, 0px)) 0 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    overflow: hidden;
 }
 
-#levelups .list-header,
-.levelups .list-header {
+.quests .list-header .col-level--span {
+    grid-area: lvl;
+}
+
+.quests .list-header .col-level,
+.quests .list-header .col-name,
+.quests .list-header .col-xpmin {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 6px 8px;
+    border-right: 1px solid #d0d5de;
+    text-align: left;
+}
+
+/* level filter: label+clear on left, spinner on right taking full height */
+.quests .list-header .col-level--span {
+    flex-direction: row;
+    gap: 6px;
+}
+
+.level-filter-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2px;
+}
+
+#quests-level-clear {
+    flex: 0 0 auto;
+    padding: 2px 6px;
+    font-size: 0.9em;
+    line-height: 1.5;
+    border: 1px solid #bbb;
+    border-radius: 8px;
+    font-weight: normal;
+}
+
+#quests-level-clear:hover {
+    background: #d0d0d0;
+    color: #000;
+}
+
+.quests .list-header .col-level--span .vertical-spinner {
+    height: 100%;
+    align-self: stretch;
+    width: 24px;
+}
+
+.quests .list-header .col-level--span .vertical-spinner .spin-input-compact {
+    height: 18px;
+    margin: -5px 0;
+    padding: 5px 0;
+}
+
+.quests .list-header .col-xpmin {
+    border-right: none;
+}
+
+.col-header-label {
+    font-size: 0.72em;
+    font-weight: 700;
+    color: #4a5568;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1;
+}
+
+#special .list-header,
+.special .list-header {
     grid-template-columns: 1fr;
 }
 
 .col-xp {
-    padding: 4px 8px;
-    border-right: 1px solid #999;
-    text-align: right;
+    display: none; /* hide visible XP header but keep xp in data */
 }
 
 .col-level {
-    padding: 4px 8px;
+    padding: 2px 4px;
     border-right: 1px solid #999;
     text-align: center;
 }
 
+.col-quickadd {
+    flex-shrink: 0;
+}
+
 .col-name,
 .col-xp,
+.col-xpmin,
 .col-content,
 .col-cumulative,
 .col-playerlvl,
@@ -162,7 +934,6 @@ h1 {
 }
 
 .col-cumulative {
-    border-right: 1px solid #999;
     text-align: right;
 }
 
@@ -172,14 +943,13 @@ h1 {
 }
 
 .col-xp {
+    display: none; /* hide visible XP header but keep xp in data */
+}
+
+.col-xpmin {
     padding: 4px 8px;
     border-right: 1px solid #999;
     text-align: right;
-}
-
-.col-playerlvl {
-    border-right: 1px solid #999;
-    text-align: center;
 }
 
 .col-delete {
@@ -190,16 +960,12 @@ h1 {
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
-    border-bottom: 1px solid #ccc;
     min-height: 0;
     min-width: 0;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-}
-
-.list.drag-over {
 }
 
 .phantom-item {
@@ -213,12 +979,11 @@ h1 {
 
 #levelplan .phantom-item,
 .levelplan .phantom-item {
-    grid-template-columns: 90px 90px 8px 1fr 30px;
+    grid-template-columns: var(--player-col-width) 1fr 74px;
 }
 
-#quests .phantom-item,
 .quests .phantom-item {
-    grid-template-columns: 80px 50px 1fr 30px;
+    grid-template-columns: 30px 40px 1fr 74px;
 }
 
 .item {
@@ -235,38 +1000,133 @@ h1 {
 
 #levelplan .item,
 .levelplan .item {
-    grid-template-columns: 90px 90px 8px 1fr 30px;
+    grid-template-columns: var(--player-col-width) 1fr 74px;
+}
+
+.levelplan .item:hover:not(:has(input:focus)) {
+    background: #f5f5f5;
+}
+
+.levelplan .item .item-spacer {
+    display: none;
 }
 
 #quests .item,
 .quests .item {
-    grid-template-columns: 80px 50px 1fr 30px;
+    grid-template-columns: 30px 40px 1fr 80px;
     border-radius: 12px;
     border: 1px solid #dfe3e8;
     box-shadow: 0 1px 2px rgba(0,0,0,0.04);
     margin: 2px 6px;
 }
 
-#levelups .item,
-.levelups .item {
-    grid-template-columns: 1fr;
+#special .item,
+.special .item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 12px;
     border: 1px solid #dfe3e8;
     box-shadow: 0 1px 2px rgba(0,0,0,0.04);
-    margin: 4px 6px;
+    margin: 4px 0;
+    min-width: 0;
+    text-align: center;
 }
 
-#levelups .item:hover,
-.levelups .item:hover {
+#special .item:hover,
+.special .item:hover {
     background: #f7fbff;
 }
 
-.quests .item:hover {
-    background: #f7fbff;
+/* Take Level template card: the item itself acts as the grid card */
+#special .item--take-level-template,
+.special .item--take-level-template {
+    display: grid;
+    grid-template-columns: var(--item-qlvl-width, 50px) 1fr auto 80px 30px;
+    background: rgba(15, 109, 241, 0.25);
+    border: 1px solid #d8dce3;
+    border-radius: 12px;
+    box-shadow: none;
+    overflow: visible;
+    position: relative;
+    text-align: left;
 }
 
-.item:hover {
-    background: #f5f5f5;
+#special .item--take-level-template:hover,
+.special .item--take-level-template:hover {
+    background: rgba(15, 109, 241, 0.25);
+}
+
+/* special palette custom variant */
+#special .item--take-level-template.is-custom,
+.special .item--take-level-template.is-custom {
+    background: #d7d9c8; /* greyish green/brown */
+    border: 1px solid #c3c6ad;
+}
+
+/* special palette xp pot variant */
+#special .item--take-level-template.is-xp-pot,
+.special .item--take-level-template.is-xp-pot {
+    background: #e4ddf0;
+    border: 1px solid #c5b8d8;
+}
+
+#special .item--take-level-template.is-custom:hover,
+.special .item--take-level-template.is-custom:hover {
+    background: #d7d9c8;
+}
+
+#special .item--take-level-template.is-xp-pot:hover,
+.special .item--take-level-template.is-xp-pot:hover {
+    background: #e4ddf0;
+}
+
+#special .item--take-level-template > :first-child,
+.special .item--take-level-template > :first-child {
+    border-radius: 12px 0 0 12px;
+}
+
+/* Favor ignored when quest already present in heroic levelplan */
+.item-favor.favor-ignored {
+    color: #e74c3c;
+    font-weight: 700;
+}
+
+#special .item--take-level-template > :last-child,
+.special .item--take-level-template > :last-child {
+    border-radius: 0 12px 12px 0;
+    overflow: hidden;
+}
+
+#special .item--take-level-template > div,
+.special .item--take-level-template > div {
+    padding: 6px 10px;
+    font-size: 0.9em;
+    border-right: 1px solid #e1e6ed;
+}
+
+#special .item--take-level-template .item-questname,
+.special .item--take-level-template .item-questname {
+    border-right: none;
+    grid-column: 2 / -1;
+}
+
+#special .item--take-level-template .item-delete,
+.special .item--take-level-template .item-delete {
+    grid-column: 5;
+}
+
+/* Make the special template level cell fill the row and center its content
+   so the vertical divider matches the other cells. */
+#special .item--take-level-template .item-lvl,
+.special .item--take-level-template .item-lvl {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-right: 1px solid #e1e6ed;
+    text-align: center;
 }
 
 .item.dragging {
@@ -283,7 +1143,7 @@ h1 {
     font-size: 0.9em;
 }
 
-.item-level {
+.item-lvl {
     padding: 4px 8px;
     border-right: 1px solid #e0e0e0;
     text-align: center;
@@ -291,7 +1151,17 @@ h1 {
     color: #666;
 }
 
-.item-name {
+.item-lvl.qlvl-lockout {
+    color: #e74c3c;
+    font-weight: 700;
+}
+
+.item-xpmin.xpmin-low {
+    color: #e74c3c;
+    font-weight: 700;
+}
+
+.item-questname {
     padding: 4px 8px;
     font-size: 0.9em;
     word-break: break-word;
@@ -299,12 +1169,28 @@ h1 {
 
 .item-content-wrapper {
     display: grid;
-    grid-template-columns: 80px 50px 1fr;
+    grid-template-columns: var(--item-qlvl-width, 50px) 1fr auto 74px 30px;
     background: #f7f9fc;
     border: 1px solid #d8dce3;
     border-radius: 12px;
+    overflow: visible;
+    margin-right: 2px;
+    position: relative;
+}
+
+/* levelplan Take Level rows should match the special template color */
+.item-content-wrapper.is-take-level {
+    background: #C3DBFC;
+    border-color: #d8dce3;
+}
+
+.item-content-wrapper > :first-child {
+    border-radius: 12px 0 0 12px;
+}
+
+.item-content-wrapper > :last-child {
+    border-radius: 0 12px 12px 0;
     overflow: hidden;
-    margin-right: 8px;
 }
 
 .item-content-wrapper > div {
@@ -313,13 +1199,145 @@ h1 {
 }
 
 .item-content-wrapper .item-xp,
-.item-content-wrapper .item-level,
-.item-content-wrapper .item-name {
+.item-content-wrapper .item-lvl,
+.item-content-wrapper .item-questname{
     border-right: 1px solid #e1e6ed;
 }
 
-.item-content-wrapper .item-name {
+/* Remove internal dividers between questname/difficulty and xpmin/delete */
+.item-content-wrapper .item-questname { border-right: none; }
+.item-content-wrapper .item-xpmin { border-right: none; border-left: 1px solid #e1e6ed; }
+
+.item-content-wrapper > div:last-child,
+.item-content-wrapper > button:last-child {
     border-right: none;
+}
+
+.item-xpmin {
+    padding: 4px 8px;
+    text-align: right;
+    font-weight: 500;
+    font-size: 0.9em;
+}
+
+/* Floating tooltip (JS-managed, position:fixed so it clears overflow:scroll containers) */
+#floating-tooltip {
+    display: none;
+    position: fixed;
+    background: #333;
+    color: #fff;
+    font-size: 0.85em;
+    font-weight: 400;
+    white-space: pre;
+    padding: 2px 6px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.xpmin-asterisk {
+    position: relative;
+    cursor: default;
+    color: #c0392b;
+}
+
+.xpmin-asterisk::after {
+    content: attr(data-plain);
+    position: absolute;
+    bottom: calc(100% + 4px);
+    right: 0;
+    background: #333;
+    color: #fff;
+    font-size: 0.85em;
+    font-style: normal;
+    font-weight: 400;
+    white-space: nowrap;
+    padding: 2px 6px;
+    border-radius: 3px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+}
+
+.xpmin-asterisk:hover::after {
+    opacity: 0;
+}
+
+.xpmin-dependents {
+    position: relative;
+    cursor: default;
+    color: #1e7a3c;
+}
+
+.xpmin-dependents::before {
+    content: attr(data-dependents);
+    position: absolute;
+    bottom: calc(100% + 4px);
+    right: 0;
+    background: #333;
+    color: #fff;
+    font-size: 0.85em;
+    font-style: normal;
+    font-weight: 400;
+    white-space: pre;
+    padding: 2px 6px;
+    border-radius: 3px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    z-index: 10;
+}
+
+.xpmin-dependents:hover::before {
+    opacity: 0;
+}
+
+.unmet-requirements {
+    position: relative;
+    color: #c0392b;
+    font-weight: 700;
+}
+
+.unmet-icon {
+    cursor: default;
+    padding: 0 6px;
+    margin: 0 -6px 0 -4px;
+}
+
+.unmet-requirements::after {
+    content: attr(data-unmet);
+    position: absolute;
+    bottom: calc(100% + 4px);
+    left: 0;
+    background: #333;
+    color: #fff;
+    font-size: 0.85em;
+    font-style: normal;
+    font-weight: 400;
+    white-space: pre;
+    padding: 2px 6px;
+    border-radius: 3px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    z-index: 10;
+}
+
+.unmet-requirements:hover::after {
+    opacity: 0;
+}
+
+/* VIP-saga override: 1 missing requirement is tolerated — italic but not red */
+.unmet-requirements--vip-ok {
+    color: inherit;
+    font-weight: inherit;
+    font-style: italic;
+}
+
+/* hide the xp cell in items but keep xp in the data for calculations */
+.item-xp {
+    display: none;
 }
 
 .item-spacer {
@@ -350,17 +1368,274 @@ h1 {
 }
 
 .item-player.caution {
-    color: #f1c40f;
+    color: #0f6df1;
     font-weight: 700;
 }
 
-.item-name.warning {
+/* slightly narrower player cell padding for levelplan rows */
+.levelplan .item .item-player {
+    padding: 4px 6px 4px 12px;
+}
+
+/* levelup / quest name styles: some name elements use the class 'item-questname' */
+.item-questname.warning {
     color: #e74c3c;
     font-weight: 700;
 }
-.item-name.caution {
-    color: #f1c40f;
+
+.difficulty-marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78em;
+    font-weight: 400;
+    color: #000000;
+    cursor: default;
+    position: relative;
+    overflow: visible;
+}
+
+.difficulty-marker:empty {
+    padding: 0;
+    width: 0;
+    overflow: hidden;
+}
+
+.difficulty-marker:not(:empty) {
+    cursor: pointer;
+}
+
+.difficulty-marker.difficulty-marker--clickable:hover {
+    color: #e74c3c;
+}
+
+.difficulty-marker:not(:empty)::after {
+    content: attr(data-elitexp);
+    position: absolute;
+    bottom: calc(100% + 4px);
+    right: 0;
+    background: var(--elite-tooltip-bg, #333);
+    color: var(--elite-tooltip-color, #fff);
+    font-size: 0.85em;
+    font-weight: 400;
+    white-space: pre;
+    padding: 2px 6px;
+    border-radius: 3px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    z-index: 10;
+}
+
+.difficulty-marker:not(:empty):hover::after {
+    opacity: 0;
+}
+
+.difficulty-marker--static {
+    color: rgba(0, 0, 0, 1);
+    cursor: default;
+}
+
+.difficulty-marker--static:not(:empty) {
+    cursor: default;
+    background: none;
+    border-right: 1px solid #e1e6ed;
+}
+
+.difficulty-marker--static:not(:empty)::after {
+    display: none;
+}
+
+/* Saga marker: shows raw baseXP (not multiplied) in the difficulty spot */
+.difficulty-marker--saga {
+    color: #374151;
+    font-weight: 600;
+    cursor: default;
+}
+.difficulty-marker--saga:not(:empty) {
+    background: none;
+    border-right: 1px solid #e1e6ed;
+    padding: 0 6px;
+}
+
+/* Saga items in the levelplan use the same color as custom XP */
+.item-content-wrapper--saga {
+    grid-template-columns: var(--item-qlvl-width, 50px) 1fr 92px 55px 74px 30px;
+    background: #d7d9c8 !important;
+    color: inherit !important;
+    border-color: #c3c6ad;
+}
+
+.saga-xp-display {
+    padding: 6px 8px;
+    font-size: 0.9em;
+    text-align: right;
+    border-right: 1px solid #e1e6ed;
+    color: #333;
+}
+.item-questname.caution {
+    color: #032094;
     font-weight: 700;
+}
+
+/* ===== Favor column (revealed when a specific patron is selected) ===== */
+
+/* Default: hide all favor cells/headers */
+.lp-col-favor,
+.col-favor,
+.col-cumfavor,
+.item-favor,
+.item-cumfavor {
+    display: none;
+}
+
+.item-favor {
+    padding: 4px 8px;
+    text-align: right;
+    font-weight: 500;
+    font-size: 0.9em;
+    color: #6b4f9c;
+}
+
+.item-cumfavor {
+    padding: 4px 8px;
+    text-align: right;
+    font-size: 0.9em;
+    color: #6b4f9c;
+    font-weight: 600;
+}
+
+.item-content-wrapper .item-favor {
+    border-right: none;
+}
+
+/* When favor view is active, show favor column and widen grids by 44px */
+.lists-container.favor-active .lp-col-favor,
+.lists-container.favor-active .col-favor,
+.lists-container.favor-active .item-favor {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.lists-container.favor-active .col-cumfavor,
+.lists-container.favor-active .item-cumfavor {
+    display: block;
+}
+
+.lists-container.favor-active .col-favor {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 6px 10px;
+    gap: 4px;
+    text-align: right;
+}
+
+.lists-container.favor-active .quests .col-favor {
+    border-left: 1px solid #c8cdd9;
+}
+
+.quests-favor-filter-label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    color: #555;
+    user-select: none;
+}
+
+.quests-favor-filter-label input[type="checkbox"] {
+    cursor: pointer;
+    accent-color: #6b4f9c;
+    width: 24px;
+    height: 24px;
+    /* make checkbox visually larger on high-DPI displays */
+    transform-origin: center;
+    /* ensure a comfortable hit target */
+    margin-left: 6px;
+}
+
+/* Quests list grid: add a 40px favor column on the right */
+.lists-container.favor-active #quests .list-header,
+.lists-container.favor-active .quests .list-header,
+.lists-container.favor-active #quests .phantom-item,
+.lists-container.favor-active .quests .phantom-item {
+    grid-template-columns: 30px 40px 1fr 88px calc(41px + var(--quests-scrollbar-width));
+}
+
+/* Quests list grid: add a 40px favor column on the right */
+.lists-container.favor-active #quests .item,
+.lists-container.favor-active .quests .item {
+    grid-template-columns: 30px 40px 1fr 80px 55px;
+}
+
+.lists-container.favor-active #quests .list-header,
+.lists-container.favor-active .quests .list-header {
+    grid-template-areas: "lvl lvl name xpmin favor";
+}
+
+/* Levelplan item content-wrapper: insert favor column before the delete button */
+.lists-container.favor-active .item-content-wrapper {
+    grid-template-columns: var(--item-qlvl-width, 50px) 1fr auto 74px 40px 30px;
+}
+
+/* Custom XP rows have extra inputs (name, xp, time) instead of a single name + difficulty,
+   so they need their own column definition when the favor column is visible. */
+.lists-container.favor-active .item-content-wrapper--custom {
+    grid-template-columns: var(--item-qlvl-width, 50px) 1fr 24px 92px 55px 74px 40px 30px;
+}
+
+/* Saga rows match custom's column layout (xp + empty spacer + xpmin + favor + delete) */
+.lists-container.favor-active .item-content-wrapper--saga {
+    grid-template-columns: var(--item-qlvl-width, 50px) 1fr 92px 55px 74px 40px 30px;
+}
+
+/* Levelplan list-header uses flex inside col-content; lp-col-favor sits between xpmin and delete */
+.lists-container.favor-active .lp-col-favor {
+    flex: 0 0 69px;
+    padding: 6px 8px;
+    border-right: none;
+    border-left: 1px solid #c8cdd9;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 2px;
+    padding-right: 24px;
+    padding-left: 2px;
+}
+
+/* Hide the header delete cell when the favor column is visible */
+.lists-container.favor-active .levelplan .list-header .lp-col-delete,
+.lists-container.favor-active #levelplan .list-header .lp-col-delete,
+.lists-container.favor-active .lp-aggregate-footer .lp-col-delete {
+    display: none !important;
+}
+
+/* Levelplan: add cumulative-favor column (46px) on the far right */
+.lists-container.favor-active #levelplan .list-header,
+.lists-container.favor-active .levelplan .list-header {
+    grid-template-columns: var(--player-header-width) 1fr 75px 46px;
+}
+
+.lists-container.favor-active #levelplan .item,
+.lists-container.favor-active .levelplan .item,
+.lists-container.favor-active .levelplan .phantom-item {
+    grid-template-columns: var(--player-col-width) 1fr 74px 46px;
+}
+
+.lists-container.favor-active .levelplan .list-header .col-cumfavor {
+    padding: 6px 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 2px;
+    text-align: right;
+    border-left: 1px solid #d0d5de;
 }
 
 .item-delete {
@@ -379,11 +1654,34 @@ h1 {
     color: #e74c3c;
 }
 
+.item-quickadd {
+    background: transparent;
+    border: none;
+    color: #999;
+    padding: 2px 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: color 0.2s;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.item-quickadd:hover {
+    color: #e74c3c;
+}
+
+.action-btns {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+}
+
 .reset-btn {
     display: block;
-    margin: 12px auto 0;
+    margin: 0;
     padding: 8px 20px;
-    background: #e74c3c;
+    background: #2980b9;
     color: white;
     border: none;
     cursor: pointer;
@@ -393,12 +1691,12 @@ h1 {
 }
 
 .reset-btn:hover {
-    background: #c0392b;
+    background: #1f6391;
 }
 
 .cumulative-fields {
     display: grid;
-    grid-template-columns: 80px 50px 1fr 30px;
+    grid-template-columns: 30px 1fr 30px 80px;
     gap: 0;
     background: #f0f8ff;
     border: 1px solid #ccc;
@@ -412,7 +1710,6 @@ h1 {
 
 .cumulative-xp {
     padding: 2px 8px;
-    border-right: 1px solid #ccc;
     text-align: right;
 }
 
@@ -431,4 +1728,532 @@ h1 {
 .cumulative-fields span {
     font-weight: bold;
     color: #2e7d32;
+}
+
+/* Custom item in levelplan */
+.item-content-wrapper--custom {
+    grid-template-columns: var(--item-qlvl-width, 50px) 1fr 24px 92px 55px 74px 30px;
+    background: #d7d9c8; /* greyish green/brown */
+    border: 1px solid #c3c6ad;
+}
+
+/* XP Pot items in levelplan */
+.item-content-wrapper--xp-pot {
+    background: #e4ddf0;
+    border: 1px solid #c5b8d8;
+}
+
+/* Make XP Pot name span across the name and checkbox columns */
+.item-content-wrapper--xp-pot .item-questname {
+    grid-column: 2 / 4;
+}
+
+.custom-field-input {
+    border: none;
+    border-right: 1px solid #e1e6ed;
+    padding: 6px 8px;
+    font-size: 0.9em;
+    background: transparent;
+    outline: none;
+    min-width: 0;
+    width: 100%;
+    font-family: inherit;
+    color: #333;
+    user-select: text;
+    -webkit-user-select: text;
+}
+
+.custom-field-input:focus {
+    background: #f0f4ff;
+}
+
+.custom-xp-input,
+.custom-qtime-input {
+    text-align: right;
+}
+
+.custom-apply-mult-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 24px;
+    height: 24px;
+    min-width: 0;
+    border: 2px solid #999;
+    border-right: 2px solid #999;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    background: white;
+    color: #999;
+    font-size: 1.1em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    user-select: none;
+}
+
+.custom-apply-mult-checkbox:checked {
+    color: #2980b9;
+    border-color: #2980b9;
+}
+
+.custom-apply-mult-checkbox::after {
+    content: '';
+}
+
+.custom-apply-mult-checkbox:checked::after {
+    content: '✕';
+}
+
+.custom-apply-mult-checkbox:hover {
+    color: #2980b9;
+    border-color: #2980b9;
+}
+
+.custom-apply-mult-checkbox:focus-visible {
+    outline: 2px solid #2980b9;
+    outline-offset: -2px;
+}
+
+/* Hide native number input spinners for custom XP/Time inputs without changing size */
+/* Chrome, Edge, Safari */
+.custom-xp-input::-webkit-outer-spin-button,
+.custom-xp-input::-webkit-inner-spin-button,
+.custom-qtime-input::-webkit-outer-spin-button,
+.custom-qtime-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.custom-xp-input,
+.custom-qtime-input {
+    -moz-appearance: textfield;
+}
+
+/* ===== Aggregate footer for the level plan ===== */
+.lp-aggregate-footer {
+    flex-shrink: 0;
+    display: flex;
+    align-items: stretch;
+    background: #eef1f6;
+    border: 1px solid #d0d5de;
+    border-radius: 0 0 12px 12px;
+    margin: 0 calc(0px + var(--lp-scrollbar-width, 0px)) 4px 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    overflow: hidden;
+}
+
+.lp-aggregate-footer .lp-col-qlvl,
+.lp-aggregate-footer .lp-col-name,
+.lp-aggregate-footer .lp-col-difficulty,
+.lp-aggregate-footer .lp-col-xpmin,
+.lp-aggregate-footer .lp-col-favor,
+.lp-aggregate-footer .lp-col-delete {
+    background: #d8dce8;
+}
+
+.lp-aggregate-footer .lp-col-xpmin {
+    padding-right: 12px;
+}
+
+
+.lp-aggregate-footer .col-playerlvl {
+    flex: 0 0 var(--player-header-width);
+    display: flex;
+    flex-direction: column;
+    padding: 6px 6px;
+    border-right: 1px solid #d0d5de;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.lp-aggregate-footer .col-cumulative {
+    flex: 0 0 75px;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 8px;
+    text-align: right;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+/* favor-active: show the cumfavor column */
+.lists-container.favor-active .lp-aggregate-footer .col-cumulative {
+    flex: 0 0 75px;
+}
+
+.lists-container.favor-active .lp-aggregate-footer .col-cumfavor {
+    flex: 0 0 46px;
+    padding: 6px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 2px;
+    border-left: 1px solid #d0d5de;
+}
+
+/* Compact line-height and zero margins for favor labels/amounts */
+.lists-container.favor-active .lp-col-favor .col-header-label,
+.lists-container.favor-active .levelplan .list-header .col-cumfavor .col-header-label,
+.lists-container.favor-active .item-cumfavor,
+.lists-container.favor-active .item-favor {
+    line-height: 1;
+    margin: 0;
+}
+
+/* Make the header/footer numeric line match the per-item favor number styling */
+.list-section.levelplan .list-header .col-cumfavor .col-header-value,
+.lists-container.favor-active #footer-total-favor {
+    color: #6b4f9c;
+    padding-right: 10px;
+}
+
+/* Footer arrow button (clears the levelplan) */
+.lp-footer-clear {
+    background: transparent;
+    border-left: 1px solid #c8cdd9;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+    color: #19140d;
+    font-size: 1.15em;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 39px;
+    margin: 0px 4px 0px 0px;
+    height: 100%;
+    cursor: pointer;
+    padding: 0;
+}
+.lp-footer-clear:hover {
+    color: #e74c3c;
+}
+.lp-footer-clear:active {
+    transform: translateY(1px);
+}
+.lp-footer-clear:focus-visible {
+    outline: 2px solid rgba(231,76,60,0.2);
+    outline-offset: 2px;
+}
+
+/* Reduce vertical padding specifically for the footer delete column so
+   the button doesn't gain extra whitespace above it. */
+.lp-aggregate-footer .lp-col-delete {
+    flex: 0 0 29px;
+    width: 29px;
+    min-width: 29px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ---------- Config overlay ---------- */
+.config-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.config-overlay[hidden] { display: none; }
+
+.config-panel {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+    width: 1380px;
+    max-width: calc(100vw - 24px);
+    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.config-panel-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 16px 0;
+    background: #2c3e50;
+    border-radius: 10px 10px 0 0;
+}
+
+.config-header-left {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.config-header-right {
+    flex: 0 0 auto;
+}
+
+.config-header-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.config-preset {
+    padding: 4px 8px;
+    background: #fff;
+    color: #000;
+    border: 1px solid #cfcfcf;
+    border-radius: 4px;
+    cursor: default;
+    font-weight: 400;
+    font-size: 0.85em;
+    transition: box-shadow 0.12s, border-color 0.12s;
+    -webkit-appearance: menulist-button;
+    appearance: auto;
+}
+
+.config-preset:hover {
+    border-color: #bfbfbf;
+}
+
+.menu-btn--secondary {
+    background: #546e7a;
+}
+
+.menu-btn--secondary:hover {
+    background: #455a64;
+}
+
+#config-export-btn,
+#config-import-btn {
+    min-width: 9em;
+    border-radius: 6px 6px 0 0;
+}
+
+/* Position export/import buttons adjacent to the centered mode-switch
+   in the config header without changing the existing DOM structure. */
+.config-panel-header #config-export-btn,
+.config-panel-header #config-import-btn {
+    position: absolute;
+    top: 14px;
+    z-index: 2;
+    margin: 0;
+}
+
+.config-panel-header #config-export-btn {
+    /* place export to the right of the centered mode switch */
+    left: calc(50% + var(--cfg-center-half, 100px) + var(--cfg-gap, 8px));
+}
+
+.config-panel-header #config-import-btn {
+    /* place import to the right of the export button */
+    left: calc(50% + var(--cfg-center-half, 100px) + var(--cfg-gap, 8px) + var(--cfg-export-width, 140px) + 8px);
+}
+
+.config-panel-header .mode-switch {
+    border-radius: 12px 12px 0 0;
+}
+
+/* Nudge the left-side preset + Apply button and the close (x) up slightly
+   so they sit a bit higher in the config header without affecting the
+   centered mode-switch or the absolute export/import buttons. */
+.config-panel-header .config-header-left {
+    transform: translateY(-6px);
+    will-change: transform;
+}
+
+.config-panel-header .config-close {
+    transform: translateY(-6px);
+    will-change: transform;
+}
+
+.config-tabs {
+    display: flex;
+    gap: 4px;
+}
+
+.config-tab {
+    padding: 6px 18px;
+    background: rgba(255,255,255,0.12);
+    color: #c8d0dc;
+    border: none;
+    border-radius: 6px 6px 0 0;
+    cursor: pointer;
+    font-size: 0.88em;
+    font-weight: 600;
+    transition: background 0.15s, color 0.15s;
+}
+
+.config-tab--active {
+    background: #fff;
+    color: #2c3e50;
+}
+
+.config-close {
+    background: none;
+    border: none;
+    color: #c8d0dc;
+    font-size: 1.5em;
+    line-height: 1;
+    cursor: pointer;
+    padding: 2px 6px;
+    margin-bottom: 4px;
+    border-radius: 4px;
+    transition: color 0.15s;
+    align-self: center;
+}
+.config-close:hover { color: #fff; }
+
+.config-body {
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1;
+}
+
+.config-quest-list {
+    display: flex;
+    align-items: flex-start;
+}
+
+.config-quest-names {
+    flex: 0 0 200px;
+    width: 200px;
+}
+
+.config-quest-name {
+    height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 8px;
+    font-size: 0.52em;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-bottom: 1px solid #f0f0f0;
+    box-sizing: border-box;
+}
+
+/* Highlight states for config quest names
+   - .missing: quest not present anywhere in the textarea (red)
+   - .mismatch: quest present in textarea but not on the same line (orange) */
+.config-quest-name.missing {
+    color: #e74c3c;
+    font-weight: 700;
+}
+.config-quest-name.mismatch {
+    color: #e67e22;
+    font-weight: 700;
+}
+
+.config-quest-name:nth-child(odd) {
+    background: #f8f9fb;
+}
+
+.config-quest-header {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    background: #eef1f6;
+    border-bottom: 2px solid #c8cdd9;
+}
+
+.config-quest-header-name {
+    flex: 0 0 200px;
+    width: 200px;
+    padding: 8px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    font-size: 0.72em;
+    font-weight: 700;
+    color: #4a5568;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-sizing: border-box;
+}
+
+.config-quest-header-name.has-errors {
+    color: #e74c3c;
+}
+
+.config-quest-header-cols {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 278px 273px 273px 273px 273px;
+    gap: 0;
+}
+
+.config-quest-header-col {
+    padding: 8px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    font-size: 0.72em;
+    font-weight: 700;
+    color: #4a5568;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-left: 1px solid #e0e0e0;
+    box-sizing: border-box;
+}
+
+.config-quest-header-col:last-child {
+    border-right: none;
+}
+
+.config-header-label-text {
+    flex: 1;
+    text-align: left;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.config-quest-textarea {
+    flex: 1;
+    min-width: 0;
+    border-left: 1px solid #e0e0e0;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    outline: none;
+    resize: none;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.58em;
+    tab-size: 49;
+    color: #333;
+    line-height: 15px;
+    padding: 0 8px;
+    box-sizing: border-box;
+    background: transparent;
+    /* textarea must not show its own vertical scrollbar — the overlay provides a fixed scrollbar */
+    overflow-y: hidden;
+    overflow-x: hidden;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    scrollbar-gutter: stable;
+}
+.config-quest-textarea:focus {
+    background: #f5f8ff;
 }
