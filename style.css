@@ -525,8 +525,12 @@ h1 {
     flex-direction: column;
     min-height: 0;
     overflow: hidden;
-
 }
+
+.empty-message {
+    padding: 2px 10px;
+}
+
 .list-section.special {
     grid-column: 2;
     grid-row: 2;

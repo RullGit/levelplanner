@@ -1291,7 +1291,7 @@ function renderList(listId) {
     listElement.innerHTML = '';
 
     if (items.length === 0) {
-        listElement.innerHTML = '<div class="empty-message">No quests yet</div>';
+        listElement.innerHTML = '<div class="empty-message">No quests yet. Add a quest with ← or drag one from the available quests.</div>';
         if (listId === 'levelplan') renderLevelplanFooter();
         return;
     }
