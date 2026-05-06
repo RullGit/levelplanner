@@ -2008,6 +2008,21 @@ window.EPIC_QUESTS_BASE =
     "rXP": null
   },
   {
+    "name": "An Invitation to Dinner",
+    "requirements": [
+      "Into the Mists",
+      "Death House",
+      "Fresh-baked Dreams"
+    ],
+    "lvl": 32,
+    "patron": "Keepers of the Feather",
+    "favor": 18,
+    "difficulty": "H",
+    "xp": 128193,
+    "baseXP": 49305,
+    "rXP": null
+  },
+  {
     "name": "A Mad Tea Party",
     "requirements": [
       "Into the Mists",
@@ -2115,6 +2130,26 @@ window.EPIC_QUESTS_BASE =
     "rXP": null
   },
   {
+    "name": "Wrath of the Earth",
+    "requirements": [
+      "Into the Mists",
+      "Death House",
+      "Fresh-baked Dreams",
+      "An Invitation to Dinner",
+      "A Mad Tea Party",
+      "A Raven at the Door",
+      "Oath of Vengeance",
+      "Sealed in Amber"
+    ],
+    "lvl": 32,
+    "patron": "Keepers of the Feather",
+    "favor": 15,
+    "difficulty": "H",
+    "xp": 40825,
+    "baseXP": 15702,
+    "rXP": null
+  },
+  {
     "name": "Sunrise",
     "requirements": [
       "Into the Mists",
@@ -2136,6 +2171,25 @@ window.EPIC_QUESTS_BASE =
     "xp": 61280,
     "baseXP": 21352,
     "rXP": null
+  },
+  {
+    "name": "Epic Ravenloft Saga",
+    "isSaga": true,
+    "requirements": [
+      "Into the Mists",
+      "Death House",
+      "Fresh-baked Dreams",
+      "A Mad Tea Party",
+      "A Raven at the Door",
+      "Oath of Vengeance",
+      "Sealed in Amber",
+      "The Final Vintage",
+      "Ravens' Bane",
+      "Sunrise",
+      "Wrath of the Earth",
+      "An Invitation to Dinner"
+    ],
+    "xp": 276000
   },
   {
     "name": "Strike Back",
@@ -2690,60 +2744,6 @@ window.EPIC_QUESTS_BASE =
       "The Magma Must Flow",
       "Roll Call",
       "Security Detail"
-    ],
-    "xp": 276000
-  },
-  {
-    "name": "Wrath of the Earth",
-    "requirements": [
-      "Into the Mists",
-      "Death House",
-      "Fresh-baked Dreams",
-      "An Invitation to Dinner",
-      "A Mad Tea Party",
-      "A Raven at the Door",
-      "Oath of Vengeance",
-      "Sealed in Amber"
-    ],
-    "lvl": 32,
-    "patron": "Keepers of the Feather",
-    "favor": 15,
-    "difficulty": "H",
-    "xp": 40825,
-    "baseXP": 15702,
-    "rXP": null
-  },
-  {
-    "name": "An Invitation to Dinner",
-    "requirements": [
-      "Into the Mists",
-      "Death House",
-      "Fresh-baked Dreams"
-    ],
-    "lvl": 32,
-    "patron": "Keepers of the Feather",
-    "favor": 18,
-    "difficulty": "H",
-    "xp": 128193,
-    "baseXP": 49305,
-    "rXP": null
-  },
-  {
-    "name": "Epic Ravenloft Saga",
-    "isSaga": true,
-    "requirements": [
-      "Into the Mists",
-      "Death House",
-      "Fresh-baked Dreams",
-      "A Mad Tea Party",
-      "A Raven at the Door",
-      "Oath of Vengeance",
-      "Sealed in Amber",
-      "The Final Vintage",
-      "Ravens' Bane",
-      "Sunrise",
-      "Wrath of the Earth",
-      "An Invitation to Dinner"
     ],
     "xp": 276000
   },
@@ -3373,6 +3373,36 @@ window.EPIC_QUESTS_BASE =
     "rXP": null
   },
   {
+    "name": "Fall of the Forbidden Temple",
+    "requirements": [],
+    "lvl": 34,
+    "patron": "The Gatekeepers",
+    "favor": 15,
+    "difficulty": "H",
+    "xp": 122658,
+    "baseXP": 45429,
+    "rXP": null
+  },
+  {
+    "name": "Epic Dread Saga",
+    "isSaga": true,
+    "requirements": [
+      "Captive of the Hidden God",
+      "The Curse and the Captive Crustacean",
+      "The Trouble with Tar Pits",
+      "All Hail the King",
+      "Spiders and Flies",
+      "Trials of the Triceratops",
+      "Wild Thing",
+      "Whispers of Return",
+      "Plundering Pirates' Point",
+      "Bullywugs and Booby Traps",
+      "The Stone Crypt Chronicle",
+      "Fall of the Forbidden Temple"
+    ],
+    "xp": 276000
+  },
+  {
     "name": "Kill Ten Rats",
     "requirements": [],
     "lvl": 34,
@@ -3723,36 +3753,6 @@ window.EPIC_QUESTS_BASE =
       "The Devils to Pay",
       "What Dreams May Come"
     ],
-    "xp": null
-  },
-  {
-    "name": "Fall of the Forbidden Temple",
-    "requirements": [],
-    "lvl": 34,
-    "patron": "The Gatekeepers",
-    "favor": 15,
-    "difficulty": "H",
-    "xp": 122658,
-    "baseXP": 45429,
-    "rXP": null
-  },
-  {
-    "name": "Epic Dread Saga",
-    "isSaga": true,
-    "requirements": [
-      "Captive of the Hidden God",
-      "The Curse and the Captive Crustacean",
-      "The Trouble with Tar Pits",
-      "All Hail the King",
-      "Spiders and Flies",
-      "Trials of the Triceratops",
-      "Wild Thing",
-      "Whispers of Return",
-      "Plundering Pirates' Point",
-      "Bullywugs and Booby Traps",
-      "The Stone Crypt Chronicle",
-      "Fall of the Forbidden Temple"
-    ],
     "xp": 276000
   },
   {
@@ -4052,6 +4052,26 @@ window.EPIC_QUESTS_BASE =
     "baseXP": 23883,
     "rXP": null
   },
+    {
+    "name": "Myth Drannor Saga",
+    "isSaga": true,
+    "requirements": [
+      "The Safehold",
+      "Death Hosts this Banquet",
+      "Ogmha's Song",
+      "The Key to the Mythal",
+      "Secrets of the Red Wizards",
+      "Voices of the Dead",
+      "The House of Gems",
+      "Times Long Past",
+      "The Zulkir's Plan",
+      "Book Burning",
+      "Ettercap Incursion",
+      "Seeds of Decay",
+      "Portal to Below"
+    ],
+    "xp": 276000
+  },
   {
     "name": "The Coveted Culvert",
     "requirements": [],
@@ -4240,6 +4260,26 @@ window.EPIC_QUESTS_BASE =
     "xp": 114114,
     "baseXP": 35112,
     "rXP": 822
+  },
+    {
+    "name": "Lamordia Saga",
+    "isSaga": true,
+    "requirements": [
+      "The Bodysnatchers",
+      "Locked Away pt1",
+      "Locked Away pt2",
+      "A Light in the Attic",
+      "A Miner Sacrifice",
+      "The Wish",
+      "Beneath the Streets",
+      "Special Delivery",
+      "Zoo Creeper",
+      "Cold Snap",
+      "Ends and Means",
+      "The Proper Authorities",
+      "Snowfall and Sunlight"
+    ],
+    "xp": 276000
   },
   {
     "name": "Body and Mind",
