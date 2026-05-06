@@ -337,13 +337,6 @@ window.EPIC_UKENBURGER_CONFIG =
     "optionalXP": 0.85
   },
   {
-    "name": "Thrall of Duty",
-    "travelTime": 0.1,
-    "qTime": 5.0,
-    "xpMult": 3.03,
-    "optionalXP": 0.1
-  },
-  {
     "name": "The Vault of Night",
     "travelTime": null,
     "qTime": null,

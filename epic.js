@@ -108,18 +108,6 @@ window.EPIC_QUESTS_BASE =
     "tokens": 1
   },
   {
-    "name": "An Offering of Blood",
-    "requirements": [],
-    "lvl": 21,
-    "patron": "The Free Agents",
-    "favor": 24,
-    "difficulty": "R",
-    "xp": 100787,
-    "baseXP": 23997,
-    "rXP": 684,
-    "tokens": 1
-  },
-  {
     "name": "Devil Assault",
     "requirements": [],
     "lvl": 21,
@@ -277,6 +265,86 @@ window.EPIC_QUESTS_BASE =
     "rXP": 667
   },
   {
+    "name": "Total Chaos",
+    "requirements": [],
+    "lvl": 22,
+    "patron": "The Gatekeepers",
+    "favor": 9,
+    "difficulty": "R",
+    "xp": 56848,
+    "baseXP": 14392,
+    "rXP": 684
+  },
+  {
+    "name": "An Offering of Blood",
+    "requirements": [],
+    "lvl": 21,
+    "patron": "The Free Agents",
+    "favor": 24,
+    "difficulty": "R",
+    "xp": 100787,
+    "baseXP": 23997,
+    "rXP": 684,
+    "tokens": 1
+  },
+  {
+    "name": "The Chamber of Raiyum",
+    "requirements": [],
+    "lvl": 22,
+    "patron": "The Free Agents",
+    "favor": 24,
+    "difficulty": "R",
+    "xp": 118275,
+    "baseXP": 28500,
+    "rXP": 684,
+    "tokens": 1.5
+  },
+  {
+    "name": "Chains of Flame",
+    "requirements": [],
+    "lvl": 22,
+    "patron": "The Free Agents",
+    "favor": 21,
+    "difficulty": "R",
+    "xp": 141999,
+    "baseXP": 30277,
+    "rXP": 702,
+    "tokens": 2.5
+  },
+      {
+    "name": "Against the Demon Queen",
+    "requirements": [
+      "An Offering of Blood",
+      "The Chamber of Raiyum",
+      "Chains of Flame"
+    ],
+    "lvl": 22,
+    "patron": "The Free Agents",
+    "favor": 24,
+    "difficulty": "R",
+    "xp": 126825,
+    "baseXP": 28500,
+    "rXP": 711,
+    "tokens": 1.5
+  },
+  {
+    "name": "Zawabi's Revenge",
+    "requirements": [
+      "An Offering of Blood",
+      "The Chamber of Raiyum",
+      "Chains of Flame",
+      "Against the Demon Queen"
+    ],
+    "lvl": 22,
+    "patron": "The Free Agents",
+    "favor": 18,
+    "difficulty": "H",
+    "xp": 64000,
+    "baseXP": 22857,
+    "rXP": null,
+    "tokens": 1
+  },
+  {
     "name": "Impossible Demands",
     "requirements": [],
     "lvl": 21,
@@ -413,6 +481,65 @@ window.EPIC_QUESTS_BASE =
     "tokens": 1
   },
   {
+    "name": "Jungle of Khyber",
+    "requirements": [],
+    "lvl": 22,
+    "patron": "House Kundarak",
+    "favor": 27,
+    "difficulty": "R",
+    "xp": 130116,
+    "baseXP": 24784,
+    "rXP": 742,
+    "tokens": 1.5
+  },
+  {
+    "name": "Haywire Foundry",
+    "requirements": [],
+    "lvl": 22,
+    "patron": "House Kundarak",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 120277,
+    "baseXP": 25866,
+    "rXP": 702,
+    "tokens": 1.5
+  },
+  {
+    "name": "The Vault of Night",
+    "requirements": [
+      "Tharashk Arena",
+      "The Prisoner",
+      "Jungle of Khyber",
+      "Haywire Foundry"
+    ],
+    "lvl": 22,
+    "patron": "House Kundarak",
+    "favor": 27,
+    "difficulty": null,
+    "xp": null,
+    "baseXP": 56715,
+    "rXP": null,
+    "tokens": 1.5
+  },
+  {
+    "name": "Plane of Night",
+    "requirements": [
+      "Tharashk Arena",
+      "The Prisoner",
+      "Jungle of Khyber",
+      "Haywire Foundry",
+      "Plane of Night"
+    ],
+    "lvl": 22,
+    "patron": "House Kundarak",
+    "favor": 15,
+    "difficulty": null,
+    "xp": null,
+    "baseXP": 9689,
+    "rXP": null,
+    "tokens": 1
+  },
+  {
     "name": "Another Man's Treasure",
     "requirements": [],
     "lvl": 21,
@@ -432,74 +559,6 @@ window.EPIC_QUESTS_BASE =
     "difficulty": "R",
     "xp": 74285,
     "baseXP": 18342,
-    "rXP": 684
-  },
-  {
-    "name": "Against the Demon Queen",
-    "requirements": [
-      "An Offering of Blood",
-      "The Chamber of Raiyum",
-      "Chains of Flame"
-    ],
-    "lvl": 22,
-    "patron": "The Free Agents",
-    "favor": 24,
-    "difficulty": "R",
-    "xp": 126825,
-    "baseXP": 28500,
-    "rXP": 711,
-    "tokens": 1.5
-  },
-  {
-    "name": "The Chamber of Raiyum",
-    "requirements": [],
-    "lvl": 22,
-    "patron": "The Free Agents",
-    "favor": 24,
-    "difficulty": "R",
-    "xp": 118275,
-    "baseXP": 28500,
-    "rXP": 684,
-    "tokens": 1.5
-  },
-  {
-    "name": "Chains of Flame",
-    "requirements": [],
-    "lvl": 22,
-    "patron": "The Free Agents",
-    "favor": 21,
-    "difficulty": "R",
-    "xp": 141999,
-    "baseXP": 30277,
-    "rXP": 702,
-    "tokens": 2.5
-  },
-  {
-    "name": "Zawabi's Revenge",
-    "requirements": [
-      "An Offering of Blood",
-      "The Chamber of Raiyum",
-      "Chains of Flame",
-      "Against the Demon Queen"
-    ],
-    "lvl": 22,
-    "patron": "The Free Agents",
-    "favor": 18,
-    "difficulty": "H",
-    "xp": 64000,
-    "baseXP": 22857,
-    "rXP": null,
-    "tokens": 1
-  },
-  {
-    "name": "Total Chaos",
-    "requirements": [],
-    "lvl": 22,
-    "patron": "The Gatekeepers",
-    "favor": 9,
-    "difficulty": "R",
-    "xp": 56848,
-    "baseXP": 14392,
     "rXP": 684
   },
   {
@@ -533,26 +592,6 @@ window.EPIC_QUESTS_BASE =
     "xp": 116562,
     "baseXP": 25067,
     "rXP": 702
-  },
-  {
-    "name": "Epic Underdark Saga",
-    "isSaga": true,
-    "requirements": [
-      "Impossible Demands",
-      "The Unquiet Graves",
-      "The Lost Thread",
-      "The Battle for Eveningstar",
-      "The House of Death Undone",
-      "The House of Rusted Blades",
-      "The House of Broken Chains",
-      "The Portal Opens",
-      "Trial by Fury",
-      "The Deal and the Demon",
-      "Reclaiming the Rift",
-      "Don't Drink the Water",
-      "In the Belly of the Beast"
-    ],
-    "xp": 134000
   },
   {
     "name": "The House of Death Undone",
@@ -620,76 +659,6 @@ window.EPIC_QUESTS_BASE =
     "xp": 74679,
     "baseXP": 18906,
     "rXP": 690
-  },
-  {
-    "name": "Haywire Foundry",
-    "requirements": [],
-    "lvl": 22,
-    "patron": "House Kundarak",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 120277,
-    "baseXP": 25866,
-    "rXP": 702,
-    "tokens": 1.5
-  },
-  {
-    "name": "Jungle of Khyber",
-    "requirements": [],
-    "lvl": 22,
-    "patron": "House Kundarak",
-    "favor": 27,
-    "difficulty": "R",
-    "xp": 130116,
-    "baseXP": 24784,
-    "rXP": 742,
-    "tokens": 1.5
-  },
-  {
-    "name": "Thrall of Duty",
-    "requirements": [],
-    "lvl": 22,
-    "patron": null,
-    "favor": null,
-    "difficulty": "R",
-    "xp": 51204,
-    "baseXP": 12398,
-    "rXP": 699
-  },
-  {
-    "name": "The Vault of Night",
-    "requirements": [
-      "Tharashk Arena",
-      "The Prisoner",
-      "Jungle of Khyber",
-      "Haywire Foundry"
-    ],
-    "lvl": 22,
-    "patron": "House Kundarak",
-    "favor": 27,
-    "difficulty": null,
-    "xp": null,
-    "baseXP": 56715,
-    "rXP": null,
-    "tokens": 1.5
-  },
-  {
-    "name": "Plane of Night",
-    "requirements": [
-      "Tharashk Arena",
-      "The Prisoner",
-      "Jungle of Khyber",
-      "Haywire Foundry",
-      "Plane of Night"
-    ],
-    "lvl": 22,
-    "patron": "House Kundarak",
-    "favor": 15,
-    "difficulty": null,
-    "xp": null,
-    "baseXP": 9689,
-    "rXP": null,
-    "tokens": 1
   },
   {
     "name": "Trial by Fury",
@@ -768,6 +737,26 @@ window.EPIC_QUESTS_BASE =
       "Reclaiming the Rift"
     ],
     "xp": 102000
+  },
+  {
+    "name": "Epic Underdark Saga",
+    "isSaga": true,
+    "requirements": [
+      "Impossible Demands",
+      "The Unquiet Graves",
+      "The Lost Thread",
+      "The Battle for Eveningstar",
+      "The House of Death Undone",
+      "The House of Rusted Blades",
+      "The House of Broken Chains",
+      "The Portal Opens",
+      "Trial by Fury",
+      "The Deal and the Demon",
+      "Reclaiming the Rift",
+      "Don't Drink the Water",
+      "In the Belly of the Beast"
+    ],
+    "xp": 134000
   },
   {
     "name": "The Friar's Niece",
