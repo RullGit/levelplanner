@@ -547,6 +547,10 @@ h1 {
     min-height: 54px;
 }
 
+.list-section.quests .section-header {
+    height: 34px;
+}
+
 @media (max-width: 768px) {
     .lists-container {
         grid-template-columns: 1fr;
