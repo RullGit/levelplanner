@@ -127,6 +127,23 @@ window.HEROIC_QUESTS_BASE =
     "rXP": null
   },
   {
+    "name": "Misery's Peak",
+    "requirements": [
+      "Heyton's Rest",
+      "The Cannith Crystal",
+      "The Storehouse's Secret",
+      "The Collaborator",
+      "Redemption"
+    ],
+    "lvl": 2,
+    "patron": "The Free Agents",
+    "favor": 12,
+    "difficulty": "E",
+    "xp": 5810,
+    "baseXP": 1660,
+    "rXP": null
+  },
+  {
     "name": "Violent Delights",
     "requirements": [],
     "lvl": 1,
@@ -204,21 +221,15 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 250
   },
   {
-    "name": "Misery's Peak",
-    "requirements": [
-      "Heyton's Rest",
-      "The Cannith Crystal",
-      "The Storehouse's Secret",
-      "The Collaborator",
-      "Redemption"
-    ],
+    "name": "Total Chaos",
+    "requirements": [],
     "lvl": 2,
-    "patron": "The Free Agents",
-    "favor": 12,
-    "difficulty": "E",
-    "xp": 5810,
-    "baseXP": 1660,
-    "rXP": null
+    "patron": "The Gatekeepers",
+    "favor": 9,
+    "difficulty": "R",
+    "xp": 3981,
+    "baseXP": 983,
+    "rXP": 336
   },
   {
     "name": "Hall of the Mark",
@@ -402,14 +413,58 @@ window.HEROIC_QUESTS_BASE =
     "rXP": null
   },
   {
-    "name": "Missing in Action",
+    "name": "Home Sweet Sewer",
+    "requirements": [],
+    "lvl": 3,
+    "patron": "The Coin Lords",
+    "favor": 2,
+    "difficulty": "S",
+    "xp": 429,
+    "baseXP": 220,
+    "rXP": null
+  },
+  {
+    "name": "Where There's Smoke...",
+    "requirements": [],
+    "lvl": 3,
+    "patron": "The Free Agents",
+    "favor": 9,
+    "difficulty": "R",
+    "xp": 4406,
+    "baseXP": 1080,
+    "rXP": 359
+  },
+  {
+    "name": "The Captives",
+    "requirements": [],
+    "lvl": 3,
+    "patron": "The Free Agents",
+    "favor": 9,
+    "difficulty": "R",
+    "xp": 3638,
+    "baseXP": 856,
+    "rXP": 354
+  },
+  {
+    "name": "Sleeping with the Fishes",
+    "requirements": [],
+    "lvl": 3,
+    "patron": "The Free Agents",
+    "favor": 12,
+    "difficulty": "R",
+    "xp": 13427,
+    "baseXP": 2900,
+    "rXP": 434
+  },
+  {
+    "name": "Kobold Assault",
     "requirements": [],
     "lvl": 3,
     "patron": "The Coin Lords",
     "favor": 9,
     "difficulty": "R",
-    "xp": 4752,
-    "baseXP": 1145,
+    "xp": 6418,
+    "baseXP": 1528,
     "rXP": 363
   },
   {
@@ -424,15 +479,15 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 348
   },
   {
-    "name": "Total Chaos",
+    "name": "Missing in Action",
     "requirements": [],
-    "lvl": 2,
-    "patron": "The Gatekeepers",
+    "lvl": 3,
+    "patron": "The Coin Lords",
     "favor": 9,
     "difficulty": "R",
-    "xp": 3981,
-    "baseXP": 983,
-    "rXP": 336
+    "xp": 4752,
+    "baseXP": 1145,
+    "rXP": 363
   },
   {
     "name": "Redfang the Unruled",
@@ -480,60 +535,34 @@ window.HEROIC_QUESTS_BASE =
     "baseXP": 1556,
     "rXP": 425
   },
-  {
-    "name": "Where There's Smoke...",
-    "requirements": [],
-    "lvl": 3,
-    "patron": "The Free Agents",
-    "favor": 9,
-    "difficulty": "R",
-    "xp": 4406,
-    "baseXP": 1080,
-    "rXP": 359
-  },
-  {
-    "name": "The Captives",
-    "requirements": [],
-    "lvl": 3,
-    "patron": "The Free Agents",
-    "favor": 9,
-    "difficulty": "R",
-    "xp": 3638,
-    "baseXP": 856,
-    "rXP": 354
-  },
-  {
-    "name": "Home Sweet Sewer",
-    "requirements": [],
-    "lvl": 3,
-    "patron": "The Coin Lords",
-    "favor": 2,
-    "difficulty": "S",
-    "xp": 429,
-    "baseXP": 220,
-    "rXP": null
-  },
-  {
-    "name": "An Explosive Situation",
-    "requirements": [],
+    {
+    "name": "Venn's Trail: Clan Tunnelworm",
+    "requirements": [
+      "The Kobold's Den: Clan Gnashtooth",
+      "The Kobold's Den: Rescuing Arlos"
+    ],
     "lvl": 4,
     "patron": "The Coin Lords",
-    "favor": 6,
-    "difficulty": "E",
-    "xp": 1980,
-    "baseXP": 900,
-    "rXP": null
+    "favor": 12,
+    "difficulty": "R",
+    "xp": 8817,
+    "baseXP": 2060,
+    "rXP": 452
   },
   {
-    "name": "Kobold Assault",
-    "requirements": [],
-    "lvl": 3,
+    "name": "Venn's Trail: Venn's Fate",
+    "requirements": [
+      "The Kobold's Den: Clan Gnashtooth",
+      "The Kobold's Den: Rescuing Arlos",
+      "Venn's Trail: Clan Tunnelworm"
+    ],
+    "lvl": 4,
     "patron": "The Coin Lords",
     "favor": 9,
     "difficulty": "R",
-    "xp": 6418,
-    "baseXP": 1528,
-    "rXP": 363
+    "xp": 4036,
+    "baseXP": 1009,
+    "rXP": 372
   },
   {
     "name": "The Haunting of Saltmarsh",
@@ -661,30 +690,6 @@ window.HEROIC_QUESTS_BASE =
       "Danger at Dunwater"
     ],
     "xp": 20000
-  },
-  {
-    "name": "First Strike",
-    "requirements": [],
-    "lvl": 3,
-    "patron": "House Phiarlan",
-    "favor": 9,
-    "difficulty": "E",
-    "xp": 3094,
-    "baseXP": 884,
-    "rXP": null
-  },
-  {
-    "name": "The Hobgoblins' Captives",
-    "requirements": [
-      "First Strike"
-    ],
-    "lvl": 3,
-    "patron": "House Phiarlan",
-    "favor": 9,
-    "difficulty": "E",
-    "xp": 3290,
-    "baseXP": 940,
-    "rXP": null
   },
   {
     "name": "The Friar's Niece",
@@ -868,15 +873,66 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 425
   },
   {
-    "name": "Sleeping with the Fishes",
-    "requirements": [],
-    "lvl": 3,
-    "patron": "The Free Agents",
+    "name": "The Cloven-jaw Scourge: The Caverns of Shaagh",
+    "requirements": [
+      "The Cloven-jaw Scourge:Blockade"
+    ],
+    "lvl": 4,
+    "patron": "The Coin Lords",
     "favor": 12,
     "difficulty": "R",
-    "xp": 13427,
-    "baseXP": 2900,
-    "rXP": 434
+    "xp": 9309,
+    "baseXP": 2140,
+    "rXP": 450
+  },
+  {
+    "name": "The Halls of Shan-To-Kor",
+    "requirements": [
+      "The Cloven-jaw Scourge:Blockade",
+      "The Cloven-jaw Scourge: The Caverns of Shaagh"
+    ],
+    "lvl": 5,
+    "patron": "The Coin Lords",
+    "favor": 12,
+    "difficulty": "R",
+    "xp": 9673,
+    "baseXP": 2276,
+    "rXP": 480
+  },
+  {
+    "name": "First Strike",
+    "requirements": [],
+    "lvl": 3,
+    "patron": "House Phiarlan",
+    "favor": 9,
+    "difficulty": "E",
+    "xp": 3094,
+    "baseXP": 884,
+    "rXP": null
+  },
+  {
+    "name": "The Hobgoblins' Captives",
+    "requirements": [
+      "First Strike"
+    ],
+    "lvl": 3,
+    "patron": "House Phiarlan",
+    "favor": 9,
+    "difficulty": "E",
+    "xp": 3290,
+    "baseXP": 940,
+    "rXP": null
+  },
+  {
+    "name": "An Explosive Situation",
+    "requirements": [],
+    "lvl": 4,
+    "patron": "The Coin Lords",
+    "favor": 6,
+    "difficulty": "E",
+    "xp": 1980,
+    "baseXP": 900,
+    "rXP": null
   },
   {
     "name": "Irestone Inlet",
@@ -888,35 +944,6 @@ window.HEROIC_QUESTS_BASE =
     "xp": 7138,
     "baseXP": 1720,
     "rXP": 450
-  },
-  {
-    "name": "Venn's Trail: Clan Tunnelworm",
-    "requirements": [
-      "The Kobold's Den: Clan Gnashtooth",
-      "The Kobold's Den: Rescuing Arlos"
-    ],
-    "lvl": 4,
-    "patron": "The Coin Lords",
-    "favor": 12,
-    "difficulty": "R",
-    "xp": 8817,
-    "baseXP": 2060,
-    "rXP": 452
-  },
-  {
-    "name": "Venn's Trail: Venn's Fate",
-    "requirements": [
-      "The Kobold's Den: Clan Gnashtooth",
-      "The Kobold's Den: Rescuing Arlos",
-      "Venn's Trail: Clan Tunnelworm"
-    ],
-    "lvl": 4,
-    "patron": "The Coin Lords",
-    "favor": 9,
-    "difficulty": "R",
-    "xp": 4036,
-    "baseXP": 1009,
-    "rXP": 372
   },
   {
     "name": "Proof is in the Poison",
@@ -961,6 +988,28 @@ window.HEROIC_QUESTS_BASE =
     "xp": 3686,
     "baseXP": 910,
     "rXP": 366
+  },
+  {
+    "name": "The Depths of Discord",
+    "requirements": [],
+    "lvl": 5,
+    "patron": "House Deneith",
+    "favor": 9,
+    "difficulty": "R",
+    "xp": 4078,
+    "baseXP": 964,
+    "rXP": 398
+  },
+  {
+    "name": "The Depths of Doom",
+    "requirements": [],
+    "lvl": 5,
+    "patron": "House Deneith",
+    "favor": 9,
+    "difficulty": "R",
+    "xp": 3559,
+    "baseXP": 868,
+    "rXP": 390
   },
   {
     "name": "Rest for the Restless",
@@ -1020,19 +1069,6 @@ window.HEROIC_QUESTS_BASE =
     "xp": 468,
     "baseXP": 120,
     "rXP": 293
-  },
-  {
-    "name": "The Cloven-jaw Scourge: The Caverns of Shaagh",
-    "requirements": [
-      "The Cloven-jaw Scourge:Blockade"
-    ],
-    "lvl": 4,
-    "patron": "The Coin Lords",
-    "favor": 12,
-    "difficulty": "R",
-    "xp": 9309,
-    "baseXP": 2140,
-    "rXP": 450
   },
   {
     "name": "The Bookbinder Rescue",
@@ -1260,6 +1296,92 @@ window.HEROIC_QUESTS_BASE =
     "baseXP": 2148,
     "rXP": 393
   },
+    {
+    "name": "The Knight Who Cried Windmill",
+    "requirements": [],
+    "lvl": 6,
+    "patron": "The Summer Court",
+    "favor": 9,
+    "difficulty": "R",
+    "xp": 5942,
+    "baseXP": 1460,
+    "rXP": 329
+  },
+  {
+    "name": "The Thornwright",
+    "requirements": [],
+    "lvl": 6,
+    "patron": "The Summer Court",
+    "favor": 9,
+    "difficulty": "R",
+    "xp": 5913,
+    "baseXP": 1460,
+    "rXP": 329
+  },
+  {
+    "name": "Quid Pro Quo",
+    "requirements": [],
+    "lvl": 6,
+    "patron": "The Summer Court",
+    "favor": 12,
+    "difficulty": "R",
+    "xp": 12711,
+    "baseXP": 2956,
+    "rXP": 408
+  },
+  {
+    "name": "The Icemount Curse",
+    "requirements": [],
+    "lvl": 6,
+    "patron": "The Summer Court",
+    "favor": 15,
+    "difficulty": "R",
+    "xp": 14700,
+    "baseXP": 3500,
+    "rXP": 494
+  },
+  {
+    "name": "Needle in a Fey Stack",
+    "requirements": [],
+    "lvl": 6,
+    "patron": "The Summer Court",
+    "favor": 15,
+    "difficulty": "R",
+    "xp": 19040,
+    "baseXP": 4588,
+    "rXP": 490
+  },
+  {
+    "name": "Immortality Lessons",
+    "requirements": [],
+    "lvl": 6,
+    "patron": "The Summer Court",
+    "favor": 15,
+    "difficulty": "R",
+    "xp": 19040,
+    "baseXP": 4588,
+    "rXP": 502
+  },
+  {
+    "name": "Feywild Saga",
+    "isSaga": true,
+    "requirements": [
+      "Wake Me Up Inside",
+      "Make Believe",
+      "The Endless Revels",
+      "Combatting Corruption",
+      "A Frosty Reception",
+      "Witch Hunt",
+      "The Legend of the Lost Locket",
+      "The Knight Who Cried Windmill",
+      "The Thornwright",
+      "Quid Pro Quo",
+      "The Icemount Curse",
+      "Needle in a Fey Stack",
+      "Immortality Lessons"
+    ],
+    "xp": 26000
+  },
   {
     "name": "Archer Point Defense",
     "requirements": [],
@@ -1291,28 +1413,6 @@ window.HEROIC_QUESTS_BASE =
     "difficulty": "R",
     "xp": 4496,
     "baseXP": 1124,
-    "rXP": 390
-  },
-  {
-    "name": "The Depths of Discord",
-    "requirements": [],
-    "lvl": 5,
-    "patron": "House Deneith",
-    "favor": 9,
-    "difficulty": "R",
-    "xp": 4078,
-    "baseXP": 964,
-    "rXP": 398
-  },
-  {
-    "name": "The Depths of Doom",
-    "requirements": [],
-    "lvl": 5,
-    "patron": "House Deneith",
-    "favor": 9,
-    "difficulty": "R",
-    "xp": 3559,
-    "baseXP": 868,
     "rXP": 390
   },
   {
@@ -1397,6 +1497,84 @@ window.HEROIC_QUESTS_BASE =
     "rXP": null
   },
   {
+    "name": "Doom Of The Witch Doctor: Zulkash, Herald Of Woe",
+    "requirements": [
+      "First Strike",
+      "The Hobgoblins' Captives",
+      "Yarkuch's War Plans",
+      "Whisperdoom's Spawn",
+      "The Deadly Package: The Stronghold Key",
+      "The Deadly Package: Agent of Darguul",
+      "Doom of the Witchdoctor: The Way to Zulkash"
+    ],
+    "lvl": 6,
+    "patron": "House Phiarlan",
+    "favor": 12,
+    "difficulty": "E",
+    "xp": 4792,
+    "baseXP": 1369,
+    "rXP": null
+  },
+  {
+    "name": "Doom of the Witchdoctor: The Way to Zulkash",
+    "requirements": [
+      "First Strike",
+      "The Hobgoblins' Captives",
+      "Yarkuch's War Plans",
+      "Whisperdoom's Spawn",
+      "The Deadly Package: The Stronghold Key",
+      "The Deadly Package: Agent of Darguul"
+    ],
+    "lvl": 6,
+    "patron": "House Phiarlan",
+    "favor": 12,
+    "difficulty": "E",
+    "xp": 5068,
+    "baseXP": 1448,
+    "rXP": null
+  },
+  {
+    "name": "The Last Move: Yarkuch's Last Stand",
+    "requirements": [
+      "First Strike",
+      "The Hobgoblins' Captives",
+      "Yarkuch's War Plans",
+      "Whisperdoom's Spawn",
+      "The Deadly Package: The Stronghold Key",
+      "The Deadly Package: Agent of Darguul",
+      "Doom of the Witchdoctor: The Way to Zulkash",
+      "Doom Of The Witch Doctor: Zulkash, Herald Of Woe",
+      "The Last Move: The Way to Yarkuch"
+    ],
+    "lvl": 7,
+    "patron": "House Phiarlan",
+    "favor": 12,
+    "difficulty": "E",
+    "xp": 2501,
+    "baseXP": 676,
+    "rXP": null
+  },
+  {
+    "name": "The Last Move: The Way to Yarkuch",
+    "requirements": [
+      "First Strike",
+      "The Hobgoblins' Captives",
+      "Yarkuch's War Plans",
+      "Whisperdoom's Spawn",
+      "The Deadly Package: The Stronghold Key",
+      "The Deadly Package: Agent of Darguul",
+      "Doom of the Witchdoctor: The Way to Zulkash",
+      "Doom Of The Witch Doctor: Zulkash, Herald Of Woe"
+    ],
+    "lvl": 7,
+    "patron": "House Phiarlan",
+    "favor": 9,
+    "difficulty": "E",
+    "xp": 5095,
+    "baseXP": 1396,
+    "rXP": null
+  },
+  {
     "name": "Tomb of the Immortal Heart",
     "requirements": [],
     "lvl": 5,
@@ -1441,18 +1619,20 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 480
   },
   {
-    "name": "The Halls of Shan-To-Kor",
+    "name": "The Bloody Crypt",
     "requirements": [
-      "The Cloven-jaw Scourge:Blockade",
-      "The Cloven-jaw Scourge: The Caverns of Shaagh"
+      "Tomb of the Immortal Heart",
+      "Tomb of the Burning Heart",
+      "Tomb of the Sanguine Heart",
+      "Tomb of the Crimson Heart"
     ],
-    "lvl": 5,
-    "patron": "The Coin Lords",
-    "favor": 12,
+    "lvl": 6,
+    "patron": "The Silver Flame",
+    "favor": 21,
     "difficulty": "R",
-    "xp": 9673,
-    "baseXP": 2276,
-    "rXP": 480
+    "xp": 27754,
+    "baseXP": 5880,
+    "rXP": 418
   },
   {
     "name": "Guard Duty",
@@ -1558,92 +1738,6 @@ window.HEROIC_QUESTS_BASE =
     "xp": 7650,
     "baseXP": 1800,
     "rXP": 510
-  },
-  {
-    "name": "The Knight Who Cried Windmill",
-    "requirements": [],
-    "lvl": 6,
-    "patron": "The Summer Court",
-    "favor": 9,
-    "difficulty": "R",
-    "xp": 5942,
-    "baseXP": 1460,
-    "rXP": 329
-  },
-  {
-    "name": "The Thornwright",
-    "requirements": [],
-    "lvl": 6,
-    "patron": "The Summer Court",
-    "favor": 9,
-    "difficulty": "R",
-    "xp": 5913,
-    "baseXP": 1460,
-    "rXP": 329
-  },
-  {
-    "name": "Quid Pro Quo",
-    "requirements": [],
-    "lvl": 6,
-    "patron": "The Summer Court",
-    "favor": 12,
-    "difficulty": "R",
-    "xp": 12711,
-    "baseXP": 2956,
-    "rXP": 408
-  },
-  {
-    "name": "The Icemount Curse",
-    "requirements": [],
-    "lvl": 6,
-    "patron": "The Summer Court",
-    "favor": 15,
-    "difficulty": "R",
-    "xp": 14700,
-    "baseXP": 3500,
-    "rXP": 494
-  },
-  {
-    "name": "Needle in a Fey Stack",
-    "requirements": [],
-    "lvl": 6,
-    "patron": "The Summer Court",
-    "favor": 15,
-    "difficulty": "R",
-    "xp": 19040,
-    "baseXP": 4588,
-    "rXP": 490
-  },
-  {
-    "name": "Immortality Lessons",
-    "requirements": [],
-    "lvl": 6,
-    "patron": "The Summer Court",
-    "favor": 15,
-    "difficulty": "R",
-    "xp": 19040,
-    "baseXP": 4588,
-    "rXP": 502
-  },
-  {
-    "name": "Feywild Saga",
-    "isSaga": true,
-    "requirements": [
-      "Wake Me Up Inside",
-      "Make Believe",
-      "The Endless Revels",
-      "Combatting Corruption",
-      "A Frosty Reception",
-      "Witch Hunt",
-      "The Legend of the Lost Locket",
-      "The Knight Who Cried Windmill",
-      "The Thornwright",
-      "Quid Pro Quo",
-      "The Icemount Curse",
-      "Needle in a Fey Stack",
-      "Immortality Lessons"
-    ],
-    "xp": 26000
   },
   {
     "name": "Dread Sea Scrolls",
@@ -1789,59 +1883,6 @@ window.HEROIC_QUESTS_BASE =
     "xp": 4084,
     "baseXP": 984,
     "rXP": 408
-  },
-  {
-    "name": "Doom Of The Witch Doctor: Zulkash, Herald Of Woe",
-    "requirements": [
-      "First Strike",
-      "The Hobgoblins' Captives",
-      "Yarkuch's War Plans",
-      "Whisperdoom's Spawn",
-      "The Deadly Package: The Stronghold Key",
-      "The Deadly Package: Agent of Darguul",
-      "Doom of the Witchdoctor: The Way to Zulkash"
-    ],
-    "lvl": 6,
-    "patron": "House Phiarlan",
-    "favor": 12,
-    "difficulty": "E",
-    "xp": 4792,
-    "baseXP": 1369,
-    "rXP": null
-  },
-  {
-    "name": "Doom of the Witchdoctor: The Way to Zulkash",
-    "requirements": [
-      "First Strike",
-      "The Hobgoblins' Captives",
-      "Yarkuch's War Plans",
-      "Whisperdoom's Spawn",
-      "The Deadly Package: The Stronghold Key",
-      "The Deadly Package: Agent of Darguul"
-    ],
-    "lvl": 6,
-    "patron": "House Phiarlan",
-    "favor": 12,
-    "difficulty": "E",
-    "xp": 5068,
-    "baseXP": 1448,
-    "rXP": null
-  },
-  {
-    "name": "The Bloody Crypt",
-    "requirements": [
-      "Tomb of the Immortal Heart",
-      "Tomb of the Burning Heart",
-      "Tomb of the Sanguine Heart",
-      "Tomb of the Crimson Heart"
-    ],
-    "lvl": 6,
-    "patron": "The Silver Flame",
-    "favor": 21,
-    "difficulty": "R",
-    "xp": 27754,
-    "baseXP": 5880,
-    "rXP": 418
   },
   {
     "name": "The Troglodytes' Get",
@@ -2089,47 +2130,6 @@ window.HEROIC_QUESTS_BASE =
     "xp": 5644,
     "baseXP": 1360,
     "rXP": 426
-  },
-  {
-    "name": "The Last Move: Yarkuch's Last Stand",
-    "requirements": [
-      "First Strike",
-      "The Hobgoblins' Captives",
-      "Yarkuch's War Plans",
-      "Whisperdoom's Spawn",
-      "The Deadly Package: The Stronghold Key",
-      "The Deadly Package: Agent of Darguul",
-      "Doom of the Witchdoctor: The Way to Zulkash",
-      "Doom Of The Witch Doctor: Zulkash, Herald Of Woe",
-      "The Last Move: The Way to Yarkuch"
-    ],
-    "lvl": 7,
-    "patron": "House Phiarlan",
-    "favor": 12,
-    "difficulty": "E",
-    "xp": 2501,
-    "baseXP": 676,
-    "rXP": null
-  },
-  {
-    "name": "The Last Move: The Way to Yarkuch",
-    "requirements": [
-      "First Strike",
-      "The Hobgoblins' Captives",
-      "Yarkuch's War Plans",
-      "Whisperdoom's Spawn",
-      "The Deadly Package: The Stronghold Key",
-      "The Deadly Package: Agent of Darguul",
-      "Doom of the Witchdoctor: The Way to Zulkash",
-      "Doom Of The Witch Doctor: Zulkash, Herald Of Woe"
-    ],
-    "lvl": 7,
-    "patron": "House Phiarlan",
-    "favor": 9,
-    "difficulty": "E",
-    "xp": 5095,
-    "baseXP": 1396,
-    "rXP": null
   },
   {
     "name": "Captive of the Hidden God",
@@ -2569,26 +2569,20 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 448
   },
   {
-    "name": "Tharashk Arena",
-    "requirements": [],
-    "lvl": 8,
-    "patron": "House Kundarak",
-    "favor": 15,
+    "name": "The Shadow Crypt",
+    "requirements": [
+      "Tomb of the Shadow Lord",
+      "Tomb of the Shadow Knight",
+      "Tomb of the Shadow King",
+      "Tomb of the Shadow Guard"
+    ],
+    "lvl": 9,
+    "patron": "The Silver Flame",
+    "favor": 21,
     "difficulty": "R",
-    "xp": 10249,
-    "baseXP": 2228,
-    "rXP": 448
-  },
-  {
-    "name": "The Prisoner",
-    "requirements": [],
-    "lvl": 8,
-    "patron": "House Kundarak",
-    "favor": 15,
-    "difficulty": "R",
-    "xp": 14960,
-    "baseXP": 3520,
-    "rXP": 440
+    "xp": 58950,
+    "baseXP": 13100,
+    "rXP": 462
   },
   {
     "name": "ToEE: First lvl and Earth Temple",
@@ -2887,6 +2881,98 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 455
   },
   {
+    "name": "Tharashk Arena",
+    "requirements": [],
+    "lvl": 8,
+    "patron": "House Kundarak",
+    "favor": 15,
+    "difficulty": "R",
+    "xp": 10249,
+    "baseXP": 2228,
+    "rXP": 448
+  },
+  {
+    "name": "The Prisoner",
+    "requirements": [],
+    "lvl": 8,
+    "patron": "House Kundarak",
+    "favor": 15,
+    "difficulty": "R",
+    "xp": 14960,
+    "baseXP": 3520,
+    "rXP": 440
+  },
+  {
+    "name": "Gateway to Khyber",
+    "requirements": [],
+    "lvl": 9,
+    "patron": "House Kundarak",
+    "favor": 9,
+    "difficulty": "R",
+    "xp": 3148,
+    "baseXP": 793,
+    "rXP": 0
+  },
+  {
+    "name": "Jungle of Khyber",
+    "requirements": [
+      "Gateway to Khyber"
+    ],
+    "lvl": 9,
+    "patron": "House Kundarak",
+    "favor": 27,
+    "difficulty": "R",
+    "xp": 43864,
+    "baseXP": 8686,
+    "rXP": 477
+  },
+  {
+    "name": "Haywire Foundry",
+    "requirements": [],
+    "lvl": 9,
+    "patron": "House Kundarak",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 25650,
+    "baseXP": 5540,
+    "rXP": 474
+  },
+  {
+    "name": "The Vault of Night",
+    "requirements": [
+      "Tharashk Arena",
+      "The Prisoner",
+      "Gateway to Khyber",
+      "Jungle of Khyber",
+      "Haywire Foundry"
+    ],
+    "lvl": 10,
+    "patron": "House Kundarak",
+    "favor": 27,
+    "difficulty": "",
+    "xp": null,
+    "baseXP": 12699,
+    "rXP": null
+  },
+  {
+    "name": "Plane of Night",
+    "requirements": [
+      "Tharashk Arena",
+      "The Prisoner",
+      "Gateway to Khyber",
+      "Jungle of Khyber",
+      "Haywire Foundry",
+      "The Vault of Night"
+    ],
+    "lvl": 10,
+    "patron": "House Kundarak",
+    "favor": 15,
+    "difficulty": "",
+    "xp": null,
+    "baseXP": 2199,
+    "rXP": null
+  },
+  {
     "name": "The Keeper's Sanctuary",
     "requirements": [
       "Haunted Library"
@@ -3029,22 +3115,6 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 454
   },
   {
-    "name": "The Shadow Crypt",
-    "requirements": [
-      "Tomb of the Shadow Lord",
-      "Tomb of the Shadow Knight",
-      "Tomb of the Shadow King",
-      "Tomb of the Shadow Guard"
-    ],
-    "lvl": 9,
-    "patron": "The Silver Flame",
-    "favor": 21,
-    "difficulty": "R",
-    "xp": 58950,
-    "baseXP": 13100,
-    "rXP": 462
-  },
-  {
     "name": "The Claw of Vulkoor",
     "requirements": [],
     "lvl": 9,
@@ -3091,41 +3161,6 @@ window.HEROIC_QUESTS_BASE =
     "xp": 25803,
     "baseXP": 6100,
     "rXP": 472
-  },
-  {
-    "name": "Gateway to Khyber",
-    "requirements": [],
-    "lvl": 9,
-    "patron": "House Kundarak",
-    "favor": 9,
-    "difficulty": "R",
-    "xp": 3148,
-    "baseXP": 793,
-    "rXP": 0
-  },
-  {
-    "name": "Jungle of Khyber",
-    "requirements": [
-      "Gateway to Khyber"
-    ],
-    "lvl": 9,
-    "patron": "House Kundarak",
-    "favor": 27,
-    "difficulty": "R",
-    "xp": 43864,
-    "baseXP": 8686,
-    "rXP": 477
-  },
-  {
-    "name": "Haywire Foundry",
-    "requirements": [],
-    "lvl": 9,
-    "patron": "House Kundarak",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 25650,
-    "baseXP": 5540,
-    "rXP": 474
   },
   {
     "name": "White Plume Mountain",
@@ -3380,29 +3415,7 @@ window.HEROIC_QUESTS_BASE =
     "baseXP": 2242,
     "rXP": 472
   },
-  {
-    "name": "Slavers of the Shrieking Mines",
-    "requirements": [],
-    "lvl": 10,
-    "patron": "The Free Agents",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 19990,
-    "baseXP": 4299,
-    "rXP": 492
-  },
-  {
-    "name": "Bring Me the Head of Ghola-Fan!",
-    "requirements": [],
-    "lvl": 10,
-    "patron": "The Free Agents",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 17841,
-    "baseXP": 4299,
-    "rXP": 492
-  },
-  {
+    {
     "name": "Going Rogue",
     "requirements": [],
     "lvl": 10,
@@ -3463,38 +3476,54 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 484
   },
   {
-    "name": "The Vault of Night",
-    "requirements": [
-      "Tharashk Arena",
-      "The Prisoner",
-      "Gateway to Khyber",
-      "Jungle of Khyber",
-      "Haywire Foundry"
-    ],
+    "name": "Slavers of the Shrieking Mines",
+    "requirements": [],
     "lvl": 10,
-    "patron": "House Kundarak",
-    "favor": 27,
+    "patron": "The Free Agents",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 19990,
+    "baseXP": 4299,
+    "rXP": 492
+  },
+  {
+    "name": "Bring Me the Head of Ghola-Fan!",
+    "requirements": [],
+    "lvl": 10,
+    "patron": "The Free Agents",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 17841,
+    "baseXP": 4299,
+    "rXP": 492
+  },
+  {
+    "name": "The Twilight Forge",
+    "requirements": [
+      "Slavers of the Shrieking Mines",
+      "Bring Me the Head of Ghola-Fan!"
+    ],
+    "lvl": 11,
+    "patron": "The Free Agents",
+    "favor": 30,
     "difficulty": "",
     "xp": null,
-    "baseXP": 12699,
+    "baseXP": 13300,
     "rXP": null
   },
   {
-    "name": "Plane of Night",
+    "name": "The Titan Awakes",
     "requirements": [
-      "Tharashk Arena",
-      "The Prisoner",
-      "Gateway to Khyber",
-      "Jungle of Khyber",
-      "Haywire Foundry",
-      "The Vault of Night"
+      "Slavers of the Shrieking Mines",
+      "Bring Me the Head of Ghola-Fan!",
+      "The Twilight Forge"
     ],
-    "lvl": 10,
-    "patron": "House Kundarak",
-    "favor": 15,
+    "lvl": 12,
+    "patron": "The Free Agents",
+    "favor": 18,
     "difficulty": "",
-    "xp": null,
-    "baseXP": 2199,
+    "xp": 2860,
+    "baseXP": 2860,
     "rXP": null
   },
   {
@@ -3586,17 +3615,6 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 519
   },
   {
-    "name": "An Offering of Blood",
-    "requirements": [],
-    "lvl": 11,
-    "patron": "The Free Agents",
-    "favor": 24,
-    "difficulty": "R",
-    "xp": 24444,
-    "baseXP": 5820,
-    "rXP": 502
-  },
-  {
     "name": "Purge the Fallen Shrine",
     "requirements": [],
     "lvl": 11,
@@ -3628,6 +3646,70 @@ window.HEROIC_QUESTS_BASE =
     "xp": 15385,
     "baseXP": 3473,
     "rXP": 505
+  },
+  {
+    "name": "An Offering of Blood",
+    "requirements": [],
+    "lvl": 11,
+    "patron": "The Free Agents",
+    "favor": 24,
+    "difficulty": "R",
+    "xp": 24444,
+    "baseXP": 5820,
+    "rXP": 502
+  },
+  {
+    "name": "The Chamber of Raiyum",
+    "requirements": [],
+    "lvl": 12,
+    "patron": "The Free Agents",
+    "favor": 24,
+    "difficulty": "R",
+    "xp": 29750,
+    "baseXP": 7000,
+    "rXP": 516
+  },
+  {
+    "name": "Chains of Flame",
+    "requirements": [],
+    "lvl": 12,
+    "patron": "The Free Agents",
+    "favor": 21,
+    "difficulty": "R",
+    "xp": 23394,
+    "baseXP": 4884,
+    "rXP": 529
+  },
+  {
+    "name": "Against the Demon Queen",
+    "requirements": [
+      "An Offering of Blood",
+      "The Chamber of Raiyum",
+      "Chains of Flame"
+    ],
+    "lvl": 12,
+    "patron": "The Free Agents",
+    "favor": 24,
+    "difficulty": "R",
+    "xp": 31850,
+    "baseXP": 7000,
+    "rXP": 536
+  },
+  {
+    "name": "Zawabi's Revenge",
+    "requirements": [
+      "An Offering of Blood",
+      "The Chamber of Raiyum",
+      "Chains of Flame",
+      "Against the Demon Queen"
+    ],
+    "lvl": 12,
+    "patron": "The Free Agents",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 23323,
+    "baseXP": 5620,
+    "rXP": 635
   },
   {
     "name": "A Mad Tea Party",
@@ -3741,71 +3823,20 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 517
   },
   {
-    "name": "The Twilight Forge",
+    "name": "The Cursed Crypt",
     "requirements": [
-      "Slavers of the Shrieking Mines",
-      "Bring Me the Head of Ghola-Fan!"
+      "Tomb of the Tormented",
+      "Tomb of the Unhallowed",
+      "Tomb of the Blighted",
+      "Tomb of the Forbidden"
     ],
-    "lvl": 11,
-    "patron": "The Free Agents",
-    "favor": 30,
-    "difficulty": "",
-    "xp": null,
-    "baseXP": 13300,
-    "rXP": null
-  },
-  {
-    "name": "The Chamber of Raiyum",
-    "requirements": [],
     "lvl": 12,
-    "patron": "The Free Agents",
-    "favor": 24,
-    "difficulty": "R",
-    "xp": 29750,
-    "baseXP": 7000,
-    "rXP": 516
-  },
-  {
-    "name": "Chains of Flame",
-    "requirements": [],
-    "lvl": 12,
-    "patron": "The Free Agents",
+    "patron": "The Silver Flame",
     "favor": 21,
     "difficulty": "R",
-    "xp": 23394,
-    "baseXP": 4884,
+    "xp": 35062,
+    "baseXP": 7460,
     "rXP": 529
-  },
-  {
-    "name": "Against the Demon Queen",
-    "requirements": [
-      "An Offering of Blood",
-      "The Chamber of Raiyum",
-      "Chains of Flame"
-    ],
-    "lvl": 12,
-    "patron": "The Free Agents",
-    "favor": 24,
-    "difficulty": "R",
-    "xp": 31850,
-    "baseXP": 7000,
-    "rXP": 536
-  },
-  {
-    "name": "Zawabi's Revenge",
-    "requirements": [
-      "An Offering of Blood",
-      "The Chamber of Raiyum",
-      "Chains of Flame",
-      "Against the Demon Queen"
-    ],
-    "lvl": 12,
-    "patron": "The Free Agents",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 23323,
-    "baseXP": 5620,
-    "rXP": 635
   },
   {
     "name": "Invaders!",
@@ -4009,37 +4040,6 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 516
   },
   {
-    "name": "The Cursed Crypt",
-    "requirements": [
-      "Tomb of the Tormented",
-      "Tomb of the Unhallowed",
-      "Tomb of the Blighted",
-      "Tomb of the Forbidden"
-    ],
-    "lvl": 12,
-    "patron": "The Silver Flame",
-    "favor": 21,
-    "difficulty": "R",
-    "xp": 35062,
-    "baseXP": 7460,
-    "rXP": 529
-  },
-  {
-    "name": "The Titan Awakes",
-    "requirements": [
-      "Slavers of the Shrieking Mines",
-      "Bring Me the Head of Ghola-Fan!",
-      "The Twilight Forge"
-    ],
-    "lvl": 12,
-    "patron": "The Free Agents",
-    "favor": 18,
-    "difficulty": "",
-    "xp": 2860,
-    "baseXP": 2860,
-    "rXP": null
-  },
-  {
     "name": "Blockade Buster",
     "requirements": [],
     "lvl": 13,
@@ -4108,61 +4108,6 @@ window.HEROIC_QUESTS_BASE =
     "xp": 11710,
     "baseXP": 2692,
     "rXP": 538
-  },
-  {
-    "name": "Feast or Famine",
-    "requirements": [],
-    "lvl": 13,
-    "patron": "Agents of Argonnessen",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 21924,
-    "baseXP": 5220,
-    "rXP": 538
-  },
-  {
-    "name": "Trial by Fire",
-    "requirements": [],
-    "lvl": 13,
-    "patron": "Agents of Argonnessen",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 19236,
-    "baseXP": 4580,
-    "rXP": 538
-  },
-  {
-    "name": "The Maze of Madness",
-    "requirements": [],
-    "lvl": 13,
-    "patron": "Agents of Argonnessen",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 16666,
-    "baseXP": 3940,
-    "rXP": 541
-  },
-  {
-    "name": "Foundation of Discord",
-    "requirements": [],
-    "lvl": 13,
-    "patron": "Agents of Argonnessen",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 18921,
-    "baseXP": 4452,
-    "rXP": 556
-  },
-  {
-    "name": "A Cry for Help",
-    "requirements": [],
-    "lvl": 13,
-    "patron": "Agents of Argonnessen",
-    "favor": 21,
-    "difficulty": "R",
-    "xp": 22991,
-    "baseXP": 5540,
-    "rXP": 547
   },
   {
     "name": "The Archons' Trial",
@@ -4372,6 +4317,153 @@ window.HEROIC_QUESTS_BASE =
     "rXP": 547
   },
   {
+    "name": "Feast or Famine",
+    "requirements": [],
+    "lvl": 13,
+    "patron": "Agents of Argonnessen",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 21924,
+    "baseXP": 5220,
+    "rXP": 538
+  },
+  {
+    "name": "Trial by Fire",
+    "requirements": [],
+    "lvl": 13,
+    "patron": "Agents of Argonnessen",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 19236,
+    "baseXP": 4580,
+    "rXP": 538
+  },
+  {
+    "name": "The Maze of Madness",
+    "requirements": [],
+    "lvl": 13,
+    "patron": "Agents of Argonnessen",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 16666,
+    "baseXP": 3940,
+    "rXP": 541
+  },
+  {
+    "name": "Foundation of Discord",
+    "requirements": [],
+    "lvl": 13,
+    "patron": "Agents of Argonnessen",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 18921,
+    "baseXP": 4452,
+    "rXP": 556
+  },
+  {
+    "name": "A Cry for Help",
+    "requirements": [],
+    "lvl": 13,
+    "patron": "Agents of Argonnessen",
+    "favor": 21,
+    "difficulty": "R",
+    "xp": 22991,
+    "baseXP": 5540,
+    "rXP": 547
+  },
+  {
+    "name": "The Prison of the Planes",
+    "requirements": [],
+    "lvl": 14,
+    "patron": "Agents of Argonnessen",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 21390,
+    "baseXP": 4600,
+    "rXP": 566
+  },
+  {
+    "name": "The Crucible",
+    "requirements": [],
+    "lvl": 14,
+    "patron": "Agents of Argonnessen",
+    "favor": 24,
+    "difficulty": "R",
+    "xp": 49124,
+    "baseXP": 11837,
+    "rXP": 566
+  },
+  {
+    "name": "Madstone Crater",
+    "requirements": [],
+    "lvl": 14,
+    "patron": "Agents of Argonnessen",
+    "favor": 24,
+    "difficulty": "R",
+    "xp": 37073,
+    "baseXP": 7566,
+    "rXP": 792
+  },
+  {
+    "name": "A Cabal for One",
+    "requirements": [],
+    "lvl": 14,
+    "patron": "Agents of Argonnessen",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 14700,
+    "baseXP": 3500,
+    "rXP": 557
+  },
+  {
+    "name": "Gianthold Tor",
+    "requirements": [
+      "The Prison of the Planes",
+      "Madstone Crater",
+      "A Cabal for One"
+    ],
+    "lvl": 14,
+    "patron": "Agents of Argonnessen",
+    "favor": 21,
+    "difficulty": "R",
+    "xp": 27945,
+    "baseXP": 6900,
+    "rXP": 779
+  },
+  {
+    "name": "Gianthold Saga",
+    "isSaga": true,
+    "requirements": [
+      "Feast or Famine",
+      "Trial by Fire",
+      "The Maze of Madness",
+      "Foundation of Discord",
+      "A Cry for Help",
+      "The Prison of the Planes",
+      "The Crucible",
+      "Madstone Crater",
+      "A Cabal for One",
+      "Gianthold Tor"
+    ],
+    "xp": 46000
+  },
+  {
+    "name": "The Reaver's Fate",
+    "requirements": [
+      "The Prison of the Planes",
+      "Madstone Crater",
+      "A Cabal for One",
+      "Gianthold Tor"
+    ],
+    "lvl": 14,
+    "patron": "Agents of Argonnessen",
+    "favor": 18,
+    "difficulty": "R",
+    "xp": 29465,
+    "baseXP": 7100,
+    "rXP": 566
+  },
+  {
     "name": "Night Falls on Stormreach",
     "requirements": [],
     "lvl": 14,
@@ -4445,98 +4537,6 @@ window.HEROIC_QUESTS_BASE =
     "favor": 18,
     "difficulty": "R",
     "xp": 32589,
-    "baseXP": 7100,
-    "rXP": 566
-  },
-  {
-    "name": "The Prison of the Planes",
-    "requirements": [],
-    "lvl": 14,
-    "patron": "Agents of Argonnessen",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 21390,
-    "baseXP": 4600,
-    "rXP": 566
-  },
-  {
-    "name": "The Crucible",
-    "requirements": [],
-    "lvl": 14,
-    "patron": "Agents of Argonnessen",
-    "favor": 24,
-    "difficulty": "R",
-    "xp": 49124,
-    "baseXP": 11837,
-    "rXP": 566
-  },
-  {
-    "name": "Madstone Crater",
-    "requirements": [],
-    "lvl": 14,
-    "patron": "Agents of Argonnessen",
-    "favor": 24,
-    "difficulty": "R",
-    "xp": 37073,
-    "baseXP": 7566,
-    "rXP": 792
-  },
-  {
-    "name": "Gianthold Tor",
-    "requirements": [
-      "The Prison of the Planes",
-      "Madstone Crater",
-      "A Cabal for One"
-    ],
-    "lvl": 14,
-    "patron": "Agents of Argonnessen",
-    "favor": 21,
-    "difficulty": "R",
-    "xp": 27945,
-    "baseXP": 6900,
-    "rXP": 779
-  },
-  {
-    "name": "A Cabal for One",
-    "requirements": [],
-    "lvl": 14,
-    "patron": "Agents of Argonnessen",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 14700,
-    "baseXP": 3500,
-    "rXP": 557
-  },
-  {
-    "name": "Gianthold Saga",
-    "isSaga": true,
-    "requirements": [
-      "Feast or Famine",
-      "Trial by Fire",
-      "The Maze of Madness",
-      "Foundation of Discord",
-      "A Cry for Help",
-      "The Prison of the Planes",
-      "The Crucible",
-      "Madstone Crater",
-      "A Cabal for One",
-      "Gianthold Tor"
-    ],
-    "xp": 46000
-  },
-  {
-    "name": "The Reaver's Fate",
-    "requirements": [
-      "The Prison of the Planes",
-      "Madstone Crater",
-      "A Cabal for One",
-      "Gianthold Tor"
-    ],
-    "lvl": 14,
-    "patron": "Agents of Argonnessen",
-    "favor": 18,
-    "difficulty": "R",
-    "xp": 29465,
     "baseXP": 7100,
     "rXP": 566
   },
