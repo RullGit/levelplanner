@@ -1,7 +1,7 @@
 // Storage key for localStorage
-const STORAGE_KEY = 'dragDropListsData';
-const SETTINGS_KEY = 'levelplannerSettings';
-const CONFIG_KEY = 'levelplannerConfig';
+const STORAGE_KEY = 'levelingplan';
+const SETTINGS_KEY = 'settings';
+const CONFIG_KEY = 'config';
 
 // HEROIC_QUESTS_BASE / EPIC_QUESTS_BASE are provided from external files (heroic.js / epic.js)
 // and should be included before script.js in index.html.
@@ -377,6 +377,9 @@ function initializeApp() {
         { name: 'XP Pot', xp: 0, source: 'special', isXpPot: true }
     ];
 
+    // loadSettings() must run before hydrating the level plan (and before setActiveMode())
+    loadSettings();
+
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
         try {
@@ -392,9 +395,6 @@ function initializeApp() {
         }
     }
 
-    // loadSettings() must run before setActiveMode() so the mode toggle
-    // reflects the persisted choice.
-    loadSettings();
     setActiveMode(getCurrentMode());
     checkRequirements();
     renderLists();

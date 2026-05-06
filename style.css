@@ -2180,6 +2180,7 @@ label,
     padding: 8px 8px;
     display: flex;
     align-items: center;
+    text-align: right;
     justify-content: space-between;
     gap: 6px;
     font-size: 0.72em;
@@ -2212,7 +2213,7 @@ label,
     color: #4a5568;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    border-left: 1px solid #e0e0e0;
+    /* border-left: 1px solid #e0e0e0; */
     box-sizing: border-box;
 }
 
@@ -2227,6 +2228,10 @@ label,
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.config-quest-header-name .config-header-label-text {
+    text-align: right;
 }
 
 .config-quest-textarea {
