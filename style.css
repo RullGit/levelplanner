@@ -33,7 +33,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #f5f5f5;
     min-height: 100vh;
-    padding: 8px;
+    padding: 2px;
 }
 
 .container {
@@ -43,7 +43,7 @@ body {
     padding: 12px;
     display: flex;
     flex-direction: column;
-    min-height: calc(100vh - 16px);
+    min-height: calc(100vh - 4px);
 }
 
 h1 {
@@ -58,7 +58,7 @@ h1 {
     grid-template-columns: 1.4fr 1fr;
     grid-template-rows: 1fr auto;
     gap: 8px;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 92px);
     min-height: 320px;
     min-width: 0;
 }
