@@ -59,7 +59,7 @@ h1 {
     grid-template-rows: 1fr auto;
     gap: 8px;
     margin-bottom: 12px;
-    height: calc(100vh - 90px);
+    height: calc(100vh - 100px);
     min-height: 320px;
     min-width: 0;
 }
