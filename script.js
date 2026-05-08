@@ -386,8 +386,8 @@ function initializeApp() {
             const parsed = JSON.parse(stored);
             const heroicStored = Array.isArray(parsed?.heroic) ? parsed.heroic : [];
             const epicStored = Array.isArray(parsed?.epic) ? parsed.epic : [];
-            data.levelplanByMode.heroic = hydrateLevelplan(heroicStored, HEROIC_QUESTS);
-            data.levelplanByMode.epic = hydrateLevelplan(epicStored, EPIC_QUESTS);
+            data.levelplanByMode.heroic = hydrateLevelplan(heroicStored, HEROIC_QUESTS, 'heroic');
+            data.levelplanByMode.epic = hydrateLevelplan(epicStored, EPIC_QUESTS, 'epic');
         } catch (e) {
             console.error('Error loading data from storage:', e);
             data.levelplanByMode.heroic = [];
@@ -798,7 +798,7 @@ function rebuildQuestsFromLevelplan() {
 
 // Hydrate a stored (minimal) levelplan array into full item objects, using the
 // supplied quest source as the source of truth for all derivable fields.
-function hydrateLevelplan(stored, questSource) {
+function hydrateLevelplan(stored, questSource, mode) {
     const source = questSource || getActiveQuests();
     const initialByName = new Map(source.map(q => [q.name, q]));
     return stored.map(entry => {
@@ -829,7 +829,7 @@ function hydrateLevelplan(stored, questSource) {
         if (!base) return null; // unknown quest — drop silently
 
         if (entry.elite) {
-            const eliteXP = Math.round(base.baseXP * (1 + base.xpMult + base.optionalXP - 2.05));
+            const eliteXP = Math.round(base.baseXP * (1 + base.xpMult + base.optionalXP - (mode === 'epic' ? 1.90 : 2.05)));
             return { ...base, name: base.name + ' (repeat)', xp: eliteXP, travelTime: 0.0, isEliteCopy: true, difficulty: 'E', source: 'quests', patron: null, favor: null };
         }
         const id = source.indexOf(base);
@@ -1199,7 +1199,7 @@ function loadFromFile() {
 
                 data.levelplanByMode.heroic = hydrateLevelplan(
                     Array.isArray(parsed.heroic) ? parsed.heroic : [],
-                    HEROIC_QUESTS
+                    HEROIC_QUESTS, 'heroic'
                 );
                 data.levelplanByMode.epic = hydrateLevelplan(
                     Array.isArray(parsed.epic) ? parsed.epic : [],
@@ -2286,7 +2286,7 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
                 eliteMarkerDiv.textContent = item.difficulty;
                 if (item.difficulty === 'R' && !item.isEliteCopy && !eliteAlreadyExists) {
                     const multiplier = parseFloat(document.getElementById('xp-multiplier')?.value);
-                    const rawEliteXP = Math.round(item.baseXP * (1 + item.xpMult + item.optionalXP - 2.05));
+                    const rawEliteXP = Math.round(item.baseXP * (1 + item.xpMult + item.optionalXP - (getCurrentMode() === 'epic' ? 1.90 : 2.05)));
                     const eliteXPMin = item.qTime > 0 ? Math.floor(rawEliteXP * multiplier / item.qTime) : '';
                     const eliteXPMinForColor = item.qTime > 0 ? Math.floor(rawEliteXP / item.qTime) : '';
                     const eliteXPMinColor = (eliteXPMinForColor !== '' && colorLevel != null) ? getXpMinColor(eliteXPMinForColor, colorLevel) : null;
@@ -2540,7 +2540,7 @@ function quickAddQuest(questIndex, singleOnly = false) {
 // Insert an elite copy of an R quest right below it in the levelplan
 function insertEliteCopy(index, sourceItem) {
     if (data.levelplan.some(i => i.isEliteCopy && i.name === sourceItem.name + ' (repeat)')) return;
-    const eliteXP = Math.round(sourceItem.baseXP * (1 + sourceItem.xpMult + sourceItem.optionalXP - 2.05));
+    const eliteXP = Math.round(sourceItem.baseXP * (1 + sourceItem.xpMult + sourceItem.optionalXP - (getCurrentMode() === 'epic' ? 1.90 : 2.05)));
     const eliteCopy = { ...sourceItem, name: sourceItem.name + ' (repeat)', xp: eliteXP, travelTime: 0.0, isEliteCopy: true, difficulty: 'E', patron: null, favor: null };
     delete eliteCopy.id;
     data.levelplan.splice(index + 1, 0, eliteCopy);
@@ -3317,8 +3317,8 @@ function saveConfig(textarea) {
     // Re-hydrate both levelplans so items pick up the updated config fields
     const heroicSerial = serialiseLevelplan(data.levelplanByMode.heroic);
     const epicSerial   = serialiseLevelplan(data.levelplanByMode.epic);
-    data.levelplanByMode.heroic = hydrateLevelplan(heroicSerial, HEROIC_QUESTS);
-    data.levelplanByMode.epic   = hydrateLevelplan(epicSerial,   EPIC_QUESTS);
+    data.levelplanByMode.heroic = hydrateLevelplan(heroicSerial, HEROIC_QUESTS, 'heroic');
+    data.levelplanByMode.epic   = hydrateLevelplan(epicSerial,   EPIC_QUESTS, 'epic');
     data.levelplan = data.levelplanByMode[getCurrentMode()];
 
     rebuildQuestsFromLevelplan();
