@@ -371,6 +371,18 @@ h1 {
     accent-color: #2980b9;
 }
 
+.learning-tome-select {
+    width: 200px;
+    padding: 2px 4px;
+    border-radius: 4px;
+    border: 1px solid #5b6b7d;
+    background: #e7e7e7;
+    color: #2c3e50;
+    font-size: 0.78em;
+    font-weight: 600;
+    cursor: pointer;
+}
+
 /* Compact three-part spinner: matches provided image (minus | value | plus) */
 .compact-spinner {
     display: inline-flex;
