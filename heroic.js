@@ -10,9 +10,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "",
     "favor": null,
     "difficulty": "S",
-    "xp": 675,
     "baseXP": 307,
-    "rXP": null
   },
   {
     "name": "Heyton's Rest",
@@ -21,9 +19,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 6,
     "difficulty": "E",
-    "xp": 1495,
     "baseXP": 356,
-    "rXP": null
   },
   {
     "name": "The Cannith Crystal",
@@ -32,9 +28,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 6,
     "difficulty": "E",
-    "xp": 891,
     "baseXP": 244,
-    "rXP": null
   },
   {
     "name": "The Storehouse's Secret",
@@ -43,9 +37,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 6,
     "difficulty": "E",
-    "xp": 1022,
     "baseXP": 292,
-    "rXP": null
   },
   {
     "name": "The Collaborator",
@@ -58,9 +50,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 12,
     "difficulty": "E",
-    "xp": 3153,
     "baseXP": 819,
-    "rXP": null
   },
   {
     "name": "Stopping the Sahuagin",
@@ -74,9 +64,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 9,
     "difficulty": "E",
-    "xp": 2311,
     "baseXP": 628,
-    "rXP": null
   },
   {
     "name": "Necromancer's Doom",
@@ -90,9 +78,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 6,
     "difficulty": "E",
-    "xp": 1292,
     "baseXP": 364,
-    "rXP": null
   },
   {
     "name": "Redemption",
@@ -106,9 +92,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 9,
     "difficulty": "E",
-    "xp": 2280,
     "baseXP": 628,
-    "rXP": null
   },
   {
     "name": "Sacrifices",
@@ -122,9 +106,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 9,
     "difficulty": "E",
-    "xp": 1246,
     "baseXP": 328,
-    "rXP": null
   },
   {
     "name": "Misery's Peak",
@@ -139,9 +121,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 12,
     "difficulty": "E",
-    "xp": 5810,
     "baseXP": 1660,
-    "rXP": null
   },
   {
     "name": "Violent Delights",
@@ -150,9 +130,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 6,
     "difficulty": "R",
-    "xp": 1831,
     "baseXP": 436,
-    "rXP": 254
   },
   {
     "name": "The Hobgoblin Horde",
@@ -161,9 +139,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 9,
     "difficulty": "R",
-    "xp": 3127,
     "baseXP": 772,
-    "rXP": 321
   },
   {
     "name": "Watch Your Step",
@@ -172,9 +148,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 6,
     "difficulty": "R",
-    "xp": 1772,
     "baseXP": 412,
-    "rXP": 254
   },
   {
     "name": "Obstructing the Orcs",
@@ -183,9 +157,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 6,
     "difficulty": "R",
-    "xp": 2017,
     "baseXP": 486,
-    "rXP": 257
   },
   {
     "name": "The Bugbear Bandits",
@@ -194,9 +166,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 6,
     "difficulty": "R",
-    "xp": 1909,
     "baseXP": 460,
-    "rXP": 257
   },
   {
     "name": "Treasure Hunt",
@@ -205,9 +175,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 6,
     "difficulty": "R",
-    "xp": 1960,
     "baseXP": 484,
-    "rXP": 257
   },
   {
     "name": "Caged Beast",
@@ -216,9 +184,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 6,
     "difficulty": "R",
-    "xp": 1981,
     "baseXP": 508,
-    "rXP": 250
   },
   {
     "name": "Total Chaos",
@@ -227,9 +193,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 9,
     "difficulty": "R",
-    "xp": 3981,
     "baseXP": 983,
-    "rXP": 336
   },
   {
     "name": "Hall of the Mark",
@@ -238,9 +202,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "",
     "favor": null,
     "difficulty": "S",
-    "xp": 0,
     "baseXP": 0,
-    "rXP": null
   },
   {
     "name": "Stealthy Repossession",
@@ -249,9 +211,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 9,
     "difficulty": "R",
-    "xp": 4411,
     "baseXP": 1131,
-    "rXP": 330
   },
   {
     "name": "The Kobold's New Ringleader",
@@ -260,9 +220,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 12,
     "difficulty": "R",
-    "xp": 6098,
     "baseXP": 1452,
-    "rXP": 403
   },
   {
     "name": "Bringing the Light",
@@ -271,9 +229,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 6,
     "difficulty": "R",
-    "xp": 1336,
     "baseXP": 334,
-    "rXP": 269
   },
   {
     "name": "Garrison's Missing Pack",
@@ -282,9 +238,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 12,
     "difficulty": "R",
-    "xp": 3736,
     "baseXP": 879,
-    "rXP": 407
   },
   {
     "name": "Recovering the Lost Tome",
@@ -293,9 +247,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 9,
     "difficulty": "R",
-    "xp": 4134,
     "baseXP": 1001,
-    "rXP": 343
   },
   {
     "name": "Walk the Butcher's Path",
@@ -304,9 +256,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 12,
     "difficulty": "R",
-    "xp": 5892,
     "baseXP": 1339,
-    "rXP": 413
   },
   {
     "name": "Durk's Got a Secret",
@@ -315,9 +265,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 12,
     "difficulty": "R",
-    "xp": 4107,
     "baseXP": 1053,
-    "rXP": 396
   },
   {
     "name": "Haverdasher",
@@ -326,9 +274,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 6,
     "difficulty": "R",
-    "xp": 1648,
     "baseXP": 412,
-    "rXP": 264
   },
   {
     "name": "Information is Key",
@@ -337,9 +283,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 12,
     "difficulty": "R",
-    "xp": 4788,
     "baseXP": 1140,
-    "rXP": 413
   },
   {
     "name": "The Smuggler's Warehouse",
@@ -348,9 +292,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 9,
     "difficulty": "R",
-    "xp": 3272,
     "baseXP": 802,
-    "rXP": 340
   },
   {
     "name": "Protect Baudry's Interests",
@@ -359,9 +301,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 6,
     "difficulty": "E",
-    "xp": 1694,
     "baseXP": 464,
-    "rXP": 253
   },
   {
     "name": "Stop Hazadill's Shipment",
@@ -372,9 +312,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 6,
     "difficulty": "E",
-    "xp": 1442,
     "baseXP": 412,
-    "rXP": 246
   },
   {
     "name": "Retrieve the Stolen Goods",
@@ -386,9 +324,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 9,
     "difficulty": "R",
-    "xp": 2896,
     "baseXP": 724,
-    "rXP": 336
   },
   {
     "name": "The Miller's Debt",
@@ -397,9 +333,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 2,
     "difficulty": "S",
-    "xp": 546,
     "baseXP": 273,
-    "rXP": null
   },
   {
     "name": "Arachnophobia",
@@ -408,9 +342,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 2,
     "difficulty": "S",
-    "xp": 381,
     "baseXP": 173,
-    "rXP": null
   },
   {
     "name": "Home Sweet Sewer",
@@ -419,9 +351,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 2,
     "difficulty": "S",
-    "xp": 429,
     "baseXP": 220,
-    "rXP": null
   },
   {
     "name": "Where There's Smoke...",
@@ -430,9 +360,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 9,
     "difficulty": "R",
-    "xp": 4406,
     "baseXP": 1080,
-    "rXP": 359
   },
   {
     "name": "The Captives",
@@ -441,9 +369,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 9,
     "difficulty": "R",
-    "xp": 3638,
     "baseXP": 856,
-    "rXP": 354
   },
   {
     "name": "Sleeping with the Fishes",
@@ -452,9 +378,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 12,
     "difficulty": "R",
-    "xp": 13427,
     "baseXP": 2900,
-    "rXP": 434
   },
   {
     "name": "Kobold Assault",
@@ -463,9 +387,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 9,
     "difficulty": "R",
-    "xp": 6418,
     "baseXP": 1528,
-    "rXP": 363
   },
   {
     "name": "The Sunken Sewer",
@@ -474,9 +396,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 9,
     "difficulty": "R",
-    "xp": 4103,
     "baseXP": 1052,
-    "rXP": 348
   },
   {
     "name": "Missing in Action",
@@ -485,9 +405,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 9,
     "difficulty": "R",
-    "xp": 4752,
     "baseXP": 1145,
-    "rXP": 363
   },
   {
     "name": "Redfang the Unruled",
@@ -496,9 +414,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 9,
     "difficulty": "R",
-    "xp": 4109,
     "baseXP": 856,
-    "rXP": 354
   },
   {
     "name": "The Swiped Signet",
@@ -507,9 +423,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 12,
     "difficulty": "R",
-    "xp": 7313,
     "baseXP": 1556,
-    "rXP": 435
   },
   {
     "name": "The Kobold's Den: Clan Gnashtooth",
@@ -518,9 +432,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 12,
     "difficulty": "R",
-    "xp": 5429,
     "baseXP": 1220,
-    "rXP": 428
   },
   {
     "name": "The Kobold's Den: Rescuing Arlos",
@@ -531,9 +443,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 12,
     "difficulty": "R",
-    "xp": 6846,
     "baseXP": 1556,
-    "rXP": 425
   },
     {
     "name": "Venn's Trail: Clan Tunnelworm",
@@ -545,9 +455,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 12,
     "difficulty": "R",
-    "xp": 8817,
     "baseXP": 2060,
-    "rXP": 452
   },
   {
     "name": "Venn's Trail: Venn's Fate",
@@ -560,9 +468,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 9,
     "difficulty": "R",
-    "xp": 4036,
     "baseXP": 1009,
-    "rXP": 372
   },
   {
     "name": "The Haunting of Saltmarsh",
@@ -571,9 +477,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 9,
     "difficulty": "R",
-    "xp": 5699,
     "baseXP": 1341,
-    "rXP": 354
   },
   {
     "name": "Under the Cover of Darkness",
@@ -582,9 +486,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 6,
     "difficulty": "R",
-    "xp": 5038,
     "baseXP": 940,
-    "rXP": 286
   },
   {
     "name": "What Sleeps Below",
@@ -593,9 +495,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 9,
     "difficulty": "R",
-    "xp": 4787,
     "baseXP": 1052,
-    "rXP": 372
   },
   {
     "name": "Back to Basics",
@@ -604,9 +504,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 9,
     "difficulty": "R",
-    "xp": 4187,
     "baseXP": 1052,
-    "rXP": 353
   },
   {
     "name": "Rest for the Night",
@@ -615,9 +513,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 9,
     "difficulty": "R",
-    "xp": 4471,
     "baseXP": 1052,
-    "rXP": 369
   },
   {
     "name": "Swim at Your Own Risk",
@@ -626,9 +522,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 6,
     "difficulty": "R",
-    "xp": 3807,
     "baseXP": 940,
-    "rXP": 286
   },
   {
     "name": "Down You Go",
@@ -637,9 +531,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 9,
     "difficulty": "R",
-    "xp": 4681,
     "baseXP": 1052,
-    "rXP": 372
   },
   {
     "name": "The Final Enemy",
@@ -648,9 +540,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 12,
     "difficulty": "R",
-    "xp": 11824,
     "baseXP": 2956,
-    "rXP": 425
   },
   {
     "name": "The Hijacked Haul",
@@ -659,9 +549,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 9,
     "difficulty": "R",
-    "xp": 4734,
     "baseXP": 1052,
-    "rXP": 372
   },
   {
     "name": "Danger at Dunwater",
@@ -670,9 +558,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 12,
     "difficulty": "R",
-    "xp": 10413,
     "baseXP": 2340,
-    "rXP": 435
   },
   {
     "name": "Saltmarch Saga",
@@ -698,9 +584,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 6,
     "difficulty": "R",
-    "xp": 2282,
     "baseXP": 585,
-    "rXP": 278
   },
   {
     "name": "Return to the Sanctuary",
@@ -711,9 +595,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 9,
     "difficulty": "R",
-    "xp": 4523,
     "baseXP": 1145,
-    "rXP": 348
   },
   {
     "name": "The Old Archives",
@@ -725,9 +607,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 9,
     "difficulty": "R",
-    "xp": 3948,
     "baseXP": 940,
-    "rXP": 363
   },
   {
     "name": "The Crypt of Gerard Dryden",
@@ -740,9 +620,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 12,
     "difficulty": "R",
-    "xp": 8343,
     "baseXP": 1854,
-    "rXP": 425
   },
   {
     "name": "Setting the Wards: The Patriarch's Crypt",
@@ -756,9 +634,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 9,
     "difficulty": "R",
-    "xp": 4208,
     "baseXP": 1052,
-    "rXP": 354
   },
   {
     "name": "Setting the Wards: The Lower Cathedral",
@@ -773,9 +649,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 9,
     "difficulty": "R",
-    "xp": 4277,
     "baseXP": 940,
-    "rXP": 348
   },
   {
     "name": "Endgame: Marguerite",
@@ -791,9 +665,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 6,
     "difficulty": "R",
-    "xp": 2739,
     "baseXP": 660,
-    "rXP": 290
   },
   {
     "name": "The Home of Memory",
@@ -802,9 +674,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 9,
     "difficulty": "R",
-    "xp": 4212,
     "baseXP": 1080,
-    "rXP": 348
   },
   {
     "name": "Rosemary's Ballad",
@@ -813,9 +683,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 9,
     "difficulty": "R",
-    "xp": 5339,
     "baseXP": 1369,
-    "rXP": 348
   },
   {
     "name": "Heart of the Problem",
@@ -824,9 +692,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 9,
     "difficulty": "R",
-    "xp": 5339,
     "baseXP": 1369,
-    "rXP": 348
   },
   {
     "name": "The Sacred Bounty",
@@ -835,9 +701,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 6,
     "difficulty": "R",
-    "xp": 3736,
     "baseXP": 958,
-    "rXP": 278
   },
   {
     "name": "Housekeeping",
@@ -846,9 +710,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 9,
     "difficulty": "R",
-    "xp": 5339,
     "baseXP": 1369,
-    "rXP": 348
   },
   {
     "name": "The Sacred Helm",
@@ -857,9 +719,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 12,
     "difficulty": "R",
-    "xp": 6883,
     "baseXP": 1434,
-    "rXP": 446
   },
   {
     "name": "The Cloven-jaw Scourge:Blockade",
@@ -868,9 +728,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 12,
     "difficulty": "R",
-    "xp": 5712,
     "baseXP": 1313,
-    "rXP": 425
   },
   {
     "name": "The Cloven-jaw Scourge: The Caverns of Shaagh",
@@ -881,9 +739,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 12,
     "difficulty": "R",
-    "xp": 9309,
     "baseXP": 2140,
-    "rXP": 450
   },
   {
     "name": "The Halls of Shan-To-Kor",
@@ -895,9 +751,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 12,
     "difficulty": "R",
-    "xp": 9673,
     "baseXP": 2276,
-    "rXP": 480
   },
   {
     "name": "First Strike",
@@ -906,9 +760,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 9,
     "difficulty": "E",
-    "xp": 3094,
     "baseXP": 884,
-    "rXP": null
   },
   {
     "name": "The Hobgoblins' Captives",
@@ -919,9 +771,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 9,
     "difficulty": "E",
-    "xp": 3290,
     "baseXP": 940,
-    "rXP": null
   },
     {
     "name": "Yarkuch's War Plans",
@@ -933,9 +783,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 9,
     "difficulty": "E",
-    "xp": 4270,
     "baseXP": 1220,
-    "rXP": null
   },
   {
     "name": "Whisperdoom's Spawn",
@@ -948,9 +796,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 9,
     "difficulty": "E",
-    "xp": 4830,
     "baseXP": 1380,
-    "rXP": null
   },
   {
     "name": "An Explosive Situation",
@@ -959,9 +805,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 6,
     "difficulty": "E",
-    "xp": 1980,
     "baseXP": 900,
-    "rXP": null
   },
   {
     "name": "Irestone Inlet",
@@ -970,9 +814,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 12,
     "difficulty": "R",
-    "xp": 7138,
     "baseXP": 1720,
-    "rXP": 450
   },
   {
     "name": "Proof is in the Poison",
@@ -981,9 +823,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 15,
     "difficulty": "R",
-    "xp": 14453,
     "baseXP": 2980,
-    "rXP": 534
   },
   {
     "name": "Freshen the Air",
@@ -992,9 +832,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 9,
     "difficulty": "R",
-    "xp": 4845,
     "baseXP": 1140,
-    "rXP": 375
   },
   {
     "name": "The Depths of Despair",
@@ -1003,9 +841,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 9,
     "difficulty": "R",
-    "xp": 2880,
     "baseXP": 729,
-    "rXP": 366
   },
   {
     "name": "The Depths of Darkness",
@@ -1014,9 +850,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 9,
     "difficulty": "R",
-    "xp": 3686,
     "baseXP": 910,
-    "rXP": 366
   },
   {
     "name": "The Depths of Discord",
@@ -1025,9 +859,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 9,
     "difficulty": "R",
-    "xp": 4078,
     "baseXP": 964,
-    "rXP": 398
   },
   {
     "name": "The Depths of Doom",
@@ -1036,9 +868,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 9,
     "difficulty": "R",
-    "xp": 3559,
     "baseXP": 868,
-    "rXP": 390
   },
   {
     "name": "Rest for the Restless",
@@ -1047,9 +877,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 9,
     "difficulty": "R",
-    "xp": 4897,
     "baseXP": 1180,
-    "rXP": 381
   },
   {
     "name": "Endgame: The Archbishop's Fate",
@@ -1066,9 +894,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 6,
     "difficulty": "R",
-    "xp": 468,
     "baseXP": 120,
-    "rXP": 293
   },
   {
     "name": "Stand Your Ground",
@@ -1077,9 +903,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 6,
     "difficulty": "R",
-    "xp": 4185,
     "baseXP": 900,
-    "rXP": 310
   },
   {
     "name": "Dirty Laundry",
@@ -1088,9 +912,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 6,
     "difficulty": "R",
-    "xp": 3510,
     "baseXP": 900,
-    "rXP": 293
   },
   {
     "name": "The Stormreaver Fresco",
@@ -1099,9 +921,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 6,
     "difficulty": "R",
-    "xp": 3915,
     "baseXP": 900,
-    "rXP": 295
   },
     {
     "name": "The Bookbinder Rescue",
@@ -1110,9 +930,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 6,
     "difficulty": "R",
-    "xp": 4290,
     "baseXP": 1100,
-    "rXP": 293
   },
   {
     "name": "Repossession",
@@ -1121,9 +939,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 6,
     "difficulty": "R",
-    "xp": 3600,
     "baseXP": 900,
-    "rXP": 298
   },
   {
     "name": "Come Out and Slay",
@@ -1138,9 +954,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 6,
     "difficulty": "R",
-    "xp": 3825,
     "baseXP": 900,
-    "rXP": 298
   },
   {
     "name": "Catastrophe",
@@ -1149,9 +963,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 9,
     "difficulty": "R",
-    "xp": 6846,
     "baseXP": 1630,
-    "rXP": 293
   },
   {
     "name": "Rats in a Cage",
@@ -1160,9 +972,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 9,
     "difficulty": "R",
-    "xp": 8463,
     "baseXP": 2170,
-    "rXP": 293
   },
   {
     "name": "The Wizard's Labyrinth",
@@ -1171,9 +981,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 9,
     "difficulty": "R",
-    "xp": 7657,
     "baseXP": 1900,
-    "rXP": 299
   },
   {
     "name": "The Knife's Edge",
@@ -1182,9 +990,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 9,
     "difficulty": "R",
-    "xp": 9635,
     "baseXP": 2350,
-    "rXP": 295
   },
   {
     "name": "The Darkness and the Light",
@@ -1193,9 +999,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 12,
     "difficulty": "R",
-    "xp": 11297,
     "baseXP": 2860,
-    "rXP": 295
   },
   {
     "name": "The Coveted Culvert",
@@ -1204,9 +1008,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 12,
     "difficulty": "R",
-    "xp": 9588,
     "baseXP": 2350,
-    "rXP": 302
   },
   {
     "name": "The Mystery of Delera's Tomb",
@@ -1215,9 +1017,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 12,
     "difficulty": "R",
-    "xp": 8303,
     "baseXP": 1977,
-    "rXP": 468
   },
   {
     "name": "Wake Me Up Inside",
@@ -1226,9 +1026,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Summer Court",
     "favor": 9,
     "difficulty": "R",
-    "xp": 11152,
     "baseXP": 2788,
-    "rXP": 390
   },
   {
     "name": "Make Believe",
@@ -1237,9 +1035,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Summer Court",
     "favor": 9,
     "difficulty": "R",
-    "xp": 10384,
     "baseXP": 2596,
-    "rXP": 312
   },
   {
     "name": "The Endless Revels",
@@ -1248,9 +1044,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Summer Court",
     "favor": 6,
     "difficulty": "R",
-    "xp": 11598,
     "baseXP": 2788,
-    "rXP": 390
   },
   {
     "name": "Combatting Corruption",
@@ -1259,9 +1053,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Summer Court",
     "favor": 9,
     "difficulty": "R",
-    "xp": 6452,
     "baseXP": 1593,
-    "rXP": 315
   },
   {
     "name": "A Frosty Reception",
@@ -1270,9 +1062,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Summer Court",
     "favor": 9,
     "difficulty": "R",
-    "xp": 17413,
     "baseXP": 4196,
-    "rXP": 480
   },
   {
     "name": "Witch Hunt",
@@ -1281,9 +1071,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Summer Court",
     "favor": 9,
     "difficulty": "R",
-    "xp": 12546,
     "baseXP": 2788,
-    "rXP": 390
   },
   {
     "name": "The Legend of the Lost Locket",
@@ -1292,9 +1080,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Summer Court",
     "favor": 9,
     "difficulty": "R",
-    "xp": 8699,
     "baseXP": 2148,
-    "rXP": 393
   },
     {
     "name": "The Knight Who Cried Windmill",
@@ -1303,9 +1089,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Summer Court",
     "favor": 9,
     "difficulty": "R",
-    "xp": 5942,
     "baseXP": 1460,
-    "rXP": 329
   },
   {
     "name": "The Thornwright",
@@ -1314,9 +1098,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Summer Court",
     "favor": 9,
     "difficulty": "R",
-    "xp": 5913,
     "baseXP": 1460,
-    "rXP": 329
   },
   {
     "name": "Quid Pro Quo",
@@ -1325,9 +1107,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Summer Court",
     "favor": 12,
     "difficulty": "R",
-    "xp": 12711,
     "baseXP": 2956,
-    "rXP": 408
   },
   {
     "name": "The Icemount Curse",
@@ -1336,9 +1116,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Summer Court",
     "favor": 15,
     "difficulty": "R",
-    "xp": 14700,
     "baseXP": 3500,
-    "rXP": 494
   },
   {
     "name": "Needle in a Fey Stack",
@@ -1347,9 +1125,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Summer Court",
     "favor": 15,
     "difficulty": "R",
-    "xp": 19040,
     "baseXP": 4588,
-    "rXP": 490
   },
   {
     "name": "Immortality Lessons",
@@ -1358,9 +1134,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Summer Court",
     "favor": 15,
     "difficulty": "R",
-    "xp": 19040,
     "baseXP": 4588,
-    "rXP": 502
   },
   {
     "name": "Feywild Saga",
@@ -1389,9 +1163,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 9,
     "difficulty": "R",
-    "xp": 3689,
     "baseXP": 868,
-    "rXP": 400
   },
   {
     "name": "The Chamber of Insanity",
@@ -1400,9 +1172,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 9,
     "difficulty": "R",
-    "xp": 4133,
     "baseXP": 996,
-    "rXP": 400
   },
   {
     "name": "The Lair of Summoning",
@@ -1411,9 +1181,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 9,
     "difficulty": "R",
-    "xp": 4496,
     "baseXP": 1124,
-    "rXP": 390
   },
   {
     "name": "A Small Problem",
@@ -1422,9 +1190,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 12,
     "difficulty": "R",
-    "xp": 16578,
     "baseXP": 3684,
-    "rXP": 472
   },
   {
     "name": "Partycrashers",
@@ -1433,9 +1199,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 12,
     "difficulty": "R",
-    "xp": 15345,
     "baseXP": 3300,
-    "rXP": 480
   },
   {
     "name": "The Snitch",
@@ -1444,9 +1208,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 12,
     "difficulty": "R",
-    "xp": 10552,
     "baseXP": 2638,
-    "rXP": 468
   },
   {
     "name": "Under the Big Top",
@@ -1459,9 +1221,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 12,
     "difficulty": "R",
-    "xp": 11920,
     "baseXP": 2980,
-    "rXP": 468
   },
   {
     "name": "The Deadly Package: The Stronghold Key",
@@ -1475,9 +1235,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 9,
     "difficulty": "E",
-    "xp": 5425,
     "baseXP": 1550,
-    "rXP": null
   },
   {
     "name": "The Deadly Package: Agent of Darguul",
@@ -1492,9 +1250,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 9,
     "difficulty": "E",
-    "xp": 734,
     "baseXP": 216,
-    "rXP": null
   },
   {
     "name": "Doom Of The Witch Doctor: Zulkash, Herald Of Woe",
@@ -1511,9 +1267,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 12,
     "difficulty": "E",
-    "xp": 4792,
     "baseXP": 1369,
-    "rXP": null
   },
   {
     "name": "Doom of the Witchdoctor: The Way to Zulkash",
@@ -1529,9 +1283,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 12,
     "difficulty": "E",
-    "xp": 5068,
     "baseXP": 1448,
-    "rXP": null
   },
   {
     "name": "The Last Move: Yarkuch's Last Stand",
@@ -1550,9 +1302,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 12,
     "difficulty": "E",
-    "xp": 2501,
     "baseXP": 676,
-    "rXP": null
   },
   {
     "name": "The Last Move: The Way to Yarkuch",
@@ -1570,9 +1320,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 9,
     "difficulty": "E",
-    "xp": 5095,
     "baseXP": 1396,
-    "rXP": null
   },
   {
     "name": "Tomb of the Immortal Heart",
@@ -1581,9 +1329,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 12,
     "difficulty": "R",
-    "xp": 7409,
     "baseXP": 1764,
-    "rXP": 468
   },
   {
     "name": "Tomb of the Burning Heart",
@@ -1592,9 +1338,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 9,
     "difficulty": "R",
-    "xp": 6468,
     "baseXP": 1540,
-    "rXP": 390
   },
   {
     "name": "Tomb of the Sanguine Heart",
@@ -1603,9 +1347,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 12,
     "difficulty": "R",
-    "xp": 7285,
     "baseXP": 1764,
-    "rXP": 478
   },
   {
     "name": "Tomb of the Crimson Heart",
@@ -1614,9 +1356,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 12,
     "difficulty": "R",
-    "xp": 8026,
     "baseXP": 1764,
-    "rXP": 480
   },
   {
     "name": "The Bloody Crypt",
@@ -1630,9 +1370,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 21,
     "difficulty": "R",
-    "xp": 27754,
     "baseXP": 5880,
-    "rXP": 418
   },
   {
     "name": "Guard Duty",
@@ -1641,9 +1379,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 9,
     "difficulty": "R",
-    "xp": 5589,
     "baseXP": 1433,
-    "rXP": 384
   },
   {
     "name": "The Stones Run Red",
@@ -1652,9 +1388,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 12,
     "difficulty": "R",
-    "xp": 18119,
     "baseXP": 4366,
-    "rXP": 480
   },
   {
     "name": "Brood of Flame",
@@ -1665,9 +1399,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 9,
     "difficulty": "R",
-    "xp": 10625,
     "baseXP": 2500,
-    "rXP": 400
   },
   {
     "name": "The Legend of Two-Toed Tobias",
@@ -1676,9 +1408,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 12,
     "difficulty": "R",
-    "xp": 17413,
     "baseXP": 4196,
-    "rXP": 480
   },
   {
     "name": "Prove Your Worth",
@@ -1687,9 +1417,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 12,
     "difficulty": "R",
-    "xp": 15282,
     "baseXP": 3513,
-    "rXP": 472
   },
   {
     "name": "Ghost of a Chance",
@@ -1698,9 +1426,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 12,
     "difficulty": "R",
-    "xp": 14025,
     "baseXP": 3300,
-    "rXP": 468
   },
   {
     "name": "The Troglodytes' Get",
@@ -1709,9 +1435,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 12,
     "difficulty": "R",
-    "xp": 10600,
     "baseXP": 2650,
-    "rXP": 408
   },
   {
     "name": "The Scoundrel's Run",
@@ -1720,9 +1444,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 12,
     "difficulty": "R",
-    "xp": 12367,
     "baseXP": 2980,
-    "rXP": 430
   },
   {
     "name": "Old Grey Garl",
@@ -1733,9 +1455,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 15,
     "difficulty": "R",
-    "xp": 15374,
     "baseXP": 3796,
-    "rXP": 430
   },
   {
     "name": "Toil and Trouble",
@@ -1744,9 +1464,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 9,
     "difficulty": "R",
-    "xp": 10375,
     "baseXP": 2500,
-    "rXP": 480
   },
   {
     "name": "Valak's Mausoleum",
@@ -1755,9 +1473,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 12,
     "difficulty": "R",
-    "xp": 7650,
     "baseXP": 1800,
-    "rXP": 510
   },
   {
     "name": "Dread Sea Scrolls",
@@ -1766,9 +1482,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 12,
     "difficulty": "R",
-    "xp": 9499,
     "baseXP": 2289,
-    "rXP": 585
   },
   {
     "name": "Dead Predators",
@@ -1777,9 +1491,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 12,
     "difficulty": "R",
-    "xp": 2892,
     "baseXP": 723,
-    "rXP": 408
   },
   {
     "name": "The Promise of Fire",
@@ -1788,9 +1500,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 12,
     "difficulty": "R",
-    "xp": 9156,
     "baseXP": 2289,
-    "rXP": 408
   },
   {
     "name": "Redwillow's Ruins",
@@ -1799,9 +1509,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 15,
     "difficulty": "R",
-    "xp": 9142,
     "baseXP": 2344,
-    "rXP": 401
   },
   {
     "name": "Purge the Heretics",
@@ -1810,9 +1518,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 12,
     "difficulty": "R",
-    "xp": 2892,
     "baseXP": 723,
-    "rXP": 408
   },
   {
     "name": "Caged Trolls",
@@ -1821,9 +1527,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 12,
     "difficulty": "R",
-    "xp": 3710,
     "baseXP": 916,
-    "rXP": 411
   },
   {
     "name": "Ruined Halls",
@@ -1832,9 +1536,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 12,
     "difficulty": "R",
-    "xp": 7105,
     "baseXP": 1528,
-    "rXP": 418
   },
   {
     "name": "The Forgotten Caverns",
@@ -1843,9 +1545,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 12,
     "difficulty": "R",
-    "xp": 5071,
     "baseXP": 1222,
-    "rXP": 418
   },
   {
     "name": "Mirra's Sleepless Nights",
@@ -1854,9 +1554,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 12,
     "difficulty": "R",
-    "xp": 3392,
     "baseXP": 848,
-    "rXP": 408
   },
   {
     "name": "Gladewatch Outpost Defense",
@@ -1865,9 +1563,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 12,
     "difficulty": "R",
-    "xp": 7428,
     "baseXP": 1834,
-    "rXP": 411
   },
   {
     "name": "The Bounty Hunter",
@@ -1876,9 +1572,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 15,
     "difficulty": "R",
-    "xp": 5913,
     "baseXP": 1460,
-    "rXP": 411
   },
   {
     "name": "The Iron Mines: Freeing Achka",
@@ -1887,9 +1581,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 9,
     "difficulty": "R",
-    "xp": 2304,
     "baseXP": 576,
-    "rXP": 408
   },
   {
     "name": "The Iron Mines: Justice for Grust",
@@ -1900,9 +1592,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 12,
     "difficulty": "R",
-    "xp": 4084,
     "baseXP": 984,
-    "rXP": 408
   },
   {
     "name": "The Grey Moon's Den: The Trollish Scourge",
@@ -1914,9 +1604,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 12,
     "difficulty": "R",
-    "xp": 6160,
     "baseXP": 1540,
-    "rXP": 426
   },
   {
     "name": "The Grey Moon's Den: Extermination",
@@ -1929,9 +1617,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 12,
     "difficulty": "R",
-    "xp": 5644,
     "baseXP": 1360,
-    "rXP": 426
   },
   {
     "name": "The Price of Freedom",
@@ -1940,9 +1626,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 15,
     "difficulty": "R",
-    "xp": 23353,
     "baseXP": 4588,
-    "rXP": 417
   },
   {
     "name": "Kind of a Big Deal",
@@ -1951,9 +1635,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 12,
     "difficulty": "R",
-    "xp": 14731,
     "baseXP": 3466,
-    "rXP": 425
   },
   {
     "name": "Another Man's Treasure",
@@ -1962,9 +1644,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 15,
     "difficulty": "R",
-    "xp": 14272,
     "baseXP": 3568,
-    "rXP": 408
   },
   {
     "name": "Memory Lapse",
@@ -1973,9 +1653,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 12,
     "difficulty": "R",
-    "xp": 16810,
     "baseXP": 3466,
-    "rXP": 435
   },
   {
     "name": "The Chronoscope",
@@ -1984,9 +1662,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 15,
     "difficulty": "",
-    "xp": null,
     "baseXP": 4792,
-    "rXP": null
   },
   {
     "name": "The Missing Party",
@@ -1997,9 +1673,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 18,
     "difficulty": "R",
-    "xp": 21743,
     "baseXP": 5116,
-    "rXP": 430
   },
   {
     "name": "Free Delera",
@@ -2011,9 +1685,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 15,
     "difficulty": "R",
-    "xp": 11058,
     "baseXP": 2404,
-    "rXP": 426
   },
   {
     "name": "Return to Delera's Tomb",
@@ -2026,9 +1698,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 9,
     "difficulty": "R",
-    "xp": 0,
     "baseXP": 0,
-    "rXP": 401
   },
     {
     "name": "Thrall of the Necromancer",
@@ -2042,9 +1712,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 18,
     "difficulty": "R",
-    "xp": 16181,
     "baseXP": 3899,
-    "rXP": 448
   },
   {
     "name": "The Tear of Dhakaan",
@@ -2053,9 +1721,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 21,
     "difficulty": "R",
-    "xp": 20995,
     "baseXP": 4420,
-    "rXP": 437
   },
   {
     "name": "Gwylan's Stand",
@@ -2064,9 +1730,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 18,
     "difficulty": "R",
-    "xp": 18918,
     "baseXP": 4420,
-    "rXP": 442
   },
   {
     "name": "The Graverobber",
@@ -2075,9 +1739,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 15,
     "difficulty": "R",
-    "xp": 10012,
     "baseXP": 2260,
-    "rXP": 442
   },
   {
     "name": "The Pit",
@@ -2086,9 +1748,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 27,
     "difficulty": "R",
-    "xp": 39592,
     "baseXP": 8740,
-    "rXP": 453
   },
   {
     "name": "Taming the Flames",
@@ -2097,9 +1757,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 15,
     "difficulty": "R",
-    "xp": 8973,
     "baseXP": 1972,
-    "rXP": 430
   },
   {
     "name": "Through the Tulgey Wood",
@@ -2108,9 +1766,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Summer Court",
     "favor": 15,
     "difficulty": "R",
-    "xp": 13210,
     "baseXP": 3123,
-    "rXP": 442
   },
   {
     "name": "One Dame Thing After Another",
@@ -2119,9 +1775,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Summer Court",
     "favor": 12,
     "difficulty": "R",
-    "xp": 10724,
     "baseXP": 2584,
-    "rXP": 437
   },
   {
     "name": "The Black Loch",
@@ -2130,9 +1784,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 12,
     "difficulty": "R",
-    "xp": 10485,
     "baseXP": 2589,
-    "rXP": 430
   },
   {
     "name": "Storm the Beaches",
@@ -2141,9 +1793,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 12,
     "difficulty": "R",
-    "xp": 10002,
     "baseXP": 2410,
-    "rXP": 426
   },
   {
     "name": "Bargain of Blood",
@@ -2152,9 +1802,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 12,
     "difficulty": "R",
-    "xp": 7749,
     "baseXP": 1987,
-    "rXP": 419
   },
   {
     "name": "The Tide Turns",
@@ -2167,9 +1815,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 15,
     "difficulty": "R",
-    "xp": 12057,
     "baseXP": 2977,
-    "rXP": 430
   },
   {
     "name": "Captive of the Hidden God",
@@ -2178,9 +1824,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 12,
     "difficulty": "R",
-    "xp": 8814,
     "baseXP": 2260,
-    "rXP": 419
   },
   {
     "name": "The Curse and the Captive Crustacean",
@@ -2189,9 +1833,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 12,
     "difficulty": "R",
-    "xp": 9661,
     "baseXP": 2368,
-    "rXP": 432
   },
   {
     "name": "The Trouble with Tar Pits",
@@ -2200,9 +1842,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 12,
     "difficulty": "R",
-    "xp": 13694,
     "baseXP": 3340,
-    "rXP": 426
   },
   {
     "name": "All Hail the King",
@@ -2211,9 +1851,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 12,
     "difficulty": "R",
-    "xp": 16302,
     "baseXP": 4096,
-    "rXP": 425
   },
   {
     "name": "Spiders and Flies",
@@ -2222,9 +1860,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 12,
     "difficulty": "R",
-    "xp": 10903,
     "baseXP": 2692,
-    "rXP": 437
   },
   {
     "name": "Trials of the Triceratops",
@@ -2233,9 +1869,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 12,
     "difficulty": "R",
-    "xp": 14799,
     "baseXP": 3566,
-    "rXP": 419
   },
   {
     "name": "Wild Thing",
@@ -2244,9 +1878,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 9,
     "difficulty": "R",
-    "xp": 8814,
     "baseXP": 2260,
-    "rXP": 419
   },
   {
     "name": "Whispers of Return",
@@ -2255,9 +1887,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 12,
     "difficulty": "R",
-    "xp": 11656,
     "baseXP": 2692,
-    "rXP": 442
   },
   {
     "name": "Plundering Pirates' Point",
@@ -2266,9 +1896,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 12,
     "difficulty": "R",
-    "xp": 13792,
     "baseXP": 3448,
-    "rXP": 426
   },
   {
     "name": "Bullywugs and Booby Traps",
@@ -2277,9 +1905,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 15,
     "difficulty": "R",
-    "xp": 19928,
     "baseXP": 4240,
-    "rXP": 447
   },
   {
     "name": "The Stone Crypt Chronicle",
@@ -2288,9 +1914,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 15,
     "difficulty": "R",
-    "xp": 20184,
     "baseXP": 4852,
-    "rXP": 437
   },
   {
     "name": "Fall of the Forbidden Temple",
@@ -2299,9 +1923,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 15,
     "difficulty": "R",
-    "xp": 29495,
     "baseXP": 6940,
-    "rXP": 463
   },
   {
     "name": "Dread Saga",
@@ -2346,9 +1968,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 15,
     "difficulty": "R",
-    "xp": 23577,
     "baseXP": 5420,
-    "rXP": 455
   },
   {
     "name": "Secret of the Slavers' Stockade",
@@ -2359,9 +1979,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 18,
     "difficulty": "R",
-    "xp": 34265,
     "baseXP": 7700,
-    "rXP": 463
   },
   {
     "name": "Assault on the Aerie of the Slave Lords",
@@ -2373,9 +1991,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 15,
     "difficulty": "R",
-    "xp": 24986,
     "baseXP": 5420,
-    "rXP": 455
   },
   {
     "name": "The Path to Madness",
@@ -2384,9 +2000,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 9,
     "difficulty": "R",
-    "xp": 3032,
     "baseXP": 758,
-    "rXP": 444
   },
   {
     "name": "The Xorian Cipher",
@@ -2397,9 +2011,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 21,
     "difficulty": "R",
-    "xp": 23335,
     "baseXP": 5040,
-    "rXP": 454
   },
   {
     "name": "Stormcleave Outpost",
@@ -2408,9 +2020,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 18,
     "difficulty": "R",
-    "xp": 18639,
     "baseXP": 4052,
-    "rXP": 463
   },
   {
     "name": "The Faithful Departed",
@@ -2419,9 +2029,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 12,
     "difficulty": "R",
-    "xp": 9744,
     "baseXP": 2266,
-    "rXP": 455
   },
   {
     "name": "Haunted Library",
@@ -2430,9 +2038,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 15,
     "difficulty": "R",
-    "xp": 13991,
     "baseXP": 3292,
-    "rXP": 444
   },
   {
     "name": "Stromvauld's Mine",
@@ -2441,9 +2047,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 15,
     "difficulty": "R",
-    "xp": 16699,
     "baseXP": 3064,
-    "rXP": 459
   },
   {
     "name": "Caverns of Korromar",
@@ -2452,9 +2056,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 15,
     "difficulty": "R",
-    "xp": 10829,
     "baseXP": 2380,
-    "rXP": 455
   },
   {
     "name": "In Need of Supplies",
@@ -2463,9 +2065,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 9,
     "difficulty": "R",
-    "xp": 3440,
     "baseXP": 860,
-    "rXP": 444
   },
   {
     "name": "The Rescue",
@@ -2476,9 +2076,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 15,
     "difficulty": "R",
-    "xp": 13820,
     "baseXP": 3330,
-    "rXP": 455
   },
   {
     "name": "Secure the Area",
@@ -2490,9 +2088,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 12,
     "difficulty": "R",
-    "xp": 9827,
     "baseXP": 2368,
-    "rXP": 492
   },
   {
     "name": "The Library of Threnal",
@@ -2501,9 +2097,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 9,
     "difficulty": "R",
-    "xp": 3994,
     "baseXP": 1006,
-    "rXP": 460
   },
   {
     "name": "Escort the Expedition",
@@ -2514,9 +2108,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 18,
     "difficulty": "R",
-    "xp": 20596,
     "baseXP": 4963,
-    "rXP": 484
   },
   {
     "name": "Hold for Reinforcements",
@@ -2528,9 +2120,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 9,
     "difficulty": "R",
-    "xp": 8910,
     "baseXP": 2200,
-    "rXP": 484
   },
   {
     "name": "The Missing Expedition",
@@ -2546,9 +2136,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 12,
     "difficulty": "R",
-    "xp": 4104,
     "baseXP": 1006,
-    "rXP": 468
   },
   {
     "name": "Entering the Gate Chamber",
@@ -2565,9 +2153,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 15,
     "difficulty": "R",
-    "xp": 20605,
     "baseXP": 4989,
-    "rXP": 472
   },
   {
     "name": "The Gate Chamber",
@@ -2585,9 +2171,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 9,
     "difficulty": "R",
-    "xp": 1034,
     "baseXP": 265,
-    "rXP": 0
   },
   {
     "name": "The Threnal Arena",
@@ -2596,9 +2180,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "None",
     "favor": 0,
     "difficulty": "N",
-    "xp": null,
     "baseXP": 0,
-    "rXP": null
   },
   {
     "name": "The Giant Lieutenants",
@@ -2607,9 +2189,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "None",
     "favor": 0,
     "difficulty": "R",
-    "xp": 2025,
     "baseXP": 500,
-    "rXP": 466
   },
   {
     "name": "The Giants' Lair",
@@ -2618,9 +2198,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "None",
     "favor": 0,
     "difficulty": "R",
-    "xp": 1909,
     "baseXP": 460,
-    "rXP": 474
   },
   {
     "name": "The Giants' Supplies",
@@ -2629,9 +2207,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "None",
     "favor": 0,
     "difficulty": "R",
-    "xp": 2236,
     "baseXP": 520,
-    "rXP": 504
   },
   {
     "name": "Spies in the House",
@@ -2640,9 +2216,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 15,
     "difficulty": "R",
-    "xp": 35356,
     "baseXP": 7320,
-    "rXP": 461
   },
   {
     "name": "The Temple Outpost: Captives of the Cult",
@@ -2656,9 +2230,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 12,
     "difficulty": "R",
-    "xp": 6565,
     "baseXP": 1582,
-    "rXP": 455
   },
   {
     "name": "The Temple Outpost: The Libram of the Six",
@@ -2673,9 +2245,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 12,
     "difficulty": "R",
-    "xp": 7850,
     "baseXP": 1924,
-    "rXP": 450
   },
   {
     "name": "The Fane of the Six: Cleansing the Temple",
@@ -2691,9 +2261,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 12,
     "difficulty": "R",
-    "xp": 8560,
     "baseXP": 2140,
-    "rXP": 462
   },
   {
     "name": "The Fane of the Six: Fall of the Prelate",
@@ -2710,9 +2278,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 12,
     "difficulty": "R",
-    "xp": 8814,
     "baseXP": 2260,
-    "rXP": 454
   },
     {
     "name": "The Sanctum: Quench the Flames",
@@ -2730,9 +2296,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 12,
     "difficulty": "R",
-    "xp": 9080,
     "baseXP": 2242,
-    "rXP": 484
   },
   {
     "name": "The Sanctum: Church of the Fury",
@@ -2751,9 +2315,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 12,
     "difficulty": "R",
-    "xp": 8744,
     "baseXP": 2242,
-    "rXP": 472
   },
   {
     "name": "Tomb of the Shadow Lord",
@@ -2762,9 +2324,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 15,
     "difficulty": "R",
-    "xp": 14979,
     "baseXP": 3292,
-    "rXP": 455
   },
   {
     "name": "Tomb of the Shadow Knight",
@@ -2773,9 +2333,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 15,
     "difficulty": "R",
-    "xp": 20600,
     "baseXP": 4204,
-    "rXP": 466
   },
   {
     "name": "Tomb of the Shadow King",
@@ -2784,9 +2342,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 15,
     "difficulty": "R",
-    "xp": 19712,
     "baseXP": 4660,
-    "rXP": 461
   },
   {
     "name": "Tomb of the Shadow Guard",
@@ -2795,9 +2351,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 15,
     "difficulty": "R",
-    "xp": 17026,
     "baseXP": 4204,
-    "rXP": 448
   },
   {
     "name": "The Shadow Crypt",
@@ -2811,9 +2365,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 21,
     "difficulty": "R",
-    "xp": 58950,
     "baseXP": 13100,
-    "rXP": 462
   },
   {
     "name": "ToEE: First lvl and Earth Temple",
@@ -2822,9 +2374,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 15,
     "difficulty": "R",
-    "xp": 20737,
     "baseXP": 4508,
-    "rXP": 444
   },
   {
     "name": "ToEE: Lower Temple Complex",
@@ -2835,9 +2385,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 18,
     "difficulty": "R",
-    "xp": 33217,
     "baseXP": 8004,
-    "rXP": 440
   },
   {
     "name": "ToEE: Fire Node",
@@ -2849,9 +2397,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 15,
     "difficulty": "R",
-    "xp": 20389,
     "baseXP": 4204,
-    "rXP": 455
   },
   {
     "name": "ToEE: Earth Node",
@@ -2863,9 +2409,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 15,
     "difficulty": "R",
-    "xp": 17867,
     "baseXP": 4204,
-    "rXP": 448
   },
   {
     "name": "ToEE: Air Node",
@@ -2877,9 +2421,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 15,
     "difficulty": "R",
-    "xp": 17657,
     "baseXP": 4204,
-    "rXP": 437
   },
   {
     "name": "ToEE: Water Node",
@@ -2891,9 +2433,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 15,
     "difficulty": "R",
-    "xp": 17447,
     "baseXP": 4204,
-    "rXP": 448
   },
   {
     "name": "ToEE: Depths of the Temple",
@@ -2909,9 +2449,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 12,
     "difficulty": "R",
-    "xp": 16620,
     "baseXP": 3976,
-    "rXP": 450
   },
   {
     "name": "The Bodysnatchers",
@@ -2920,9 +2458,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of Lamordia",
     "favor": 12,
     "difficulty": "R",
-    "xp": 13624,
     "baseXP": 3406,
-    "rXP": 444
   },
   {
     "name": "Locked Away pt1",
@@ -2933,9 +2469,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of Lamordia",
     "favor": 12,
     "difficulty": "R",
-    "xp": 15179,
     "baseXP": 3748,
-    "rXP": 448
   },
   {
     "name": "Locked Away pt2",
@@ -2946,9 +2480,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of Lamordia",
     "favor": 12,
     "difficulty": "R",
-    "xp": 15179,
     "baseXP": 3748,
-    "rXP": 448
   },
   {
     "name": "A Light in the Attic",
@@ -2959,9 +2491,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of Lamordia",
     "favor": 12,
     "difficulty": "R",
-    "xp": 13624,
     "baseXP": 3406,
-    "rXP": 444
   },
   {
     "name": "A Miner Sacrifice",
@@ -2972,9 +2502,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of Lamordia",
     "favor": 12,
     "difficulty": "R",
-    "xp": 13283,
     "baseXP": 3406,
-    "rXP": 437
   },
   {
     "name": "The Wish",
@@ -2985,9 +2513,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of Lamordia",
     "favor": 12,
     "difficulty": "R",
-    "xp": 27184,
     "baseXP": 6712,
-    "rXP": 448
   },
   {
     "name": "Beneath the Streets",
@@ -2998,9 +2524,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of Lamordia",
     "favor": 15,
     "difficulty": "R",
-    "xp": 24404,
     "baseXP": 5610,
-    "rXP": 455
   },
   {
     "name": "Special Delivery",
@@ -3011,9 +2535,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of Lamordia",
     "favor": 12,
     "difficulty": "R",
-    "xp": 14173,
     "baseXP": 3634,
-    "rXP": 437
   },
   {
     "name": "Zoo Creeper",
@@ -3024,9 +2546,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of Lamordia",
     "favor": 12,
     "difficulty": "R",
-    "xp": 13794,
     "baseXP": 3406,
-    "rXP": 448
   },
   {
     "name": "Cold Snap",
@@ -3037,9 +2557,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of Lamordia",
     "favor": 12,
     "difficulty": "R",
-    "xp": 13283,
     "baseXP": 3406,
-    "rXP": 437
   },
   {
     "name": "Ends and Means",
@@ -3050,9 +2568,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of Lamordia",
     "favor": 12,
     "difficulty": "R",
-    "xp": 13794,
     "baseXP": 3406,
-    "rXP": 448
   },
   {
     "name": "The Proper Authorities",
@@ -3063,9 +2579,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of Lamordia",
     "favor": 12,
     "difficulty": "R",
-    "xp": 13794,
     "baseXP": 3406,
-    "rXP": 448
   },
   {
     "name": "Snowfall and Sunlight",
@@ -3076,9 +2590,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of Lamordia",
     "favor": 15,
     "difficulty": "R",
-    "xp": 30529,
     "baseXP": 7446,
-    "rXP": 448
   },
   {
     "name": "Lamordia Saga",
@@ -3107,9 +2619,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of Lamordia",
     "favor": 15,
     "difficulty": "R",
-    "xp": 18287,
     "baseXP": 4204,
-    "rXP": 455
   },
   {
     "name": "Tharashk Arena",
@@ -3118,9 +2628,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 15,
     "difficulty": "R",
-    "xp": 10249,
     "baseXP": 2228,
-    "rXP": 448
   },
   {
     "name": "The Prisoner",
@@ -3129,9 +2637,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 15,
     "difficulty": "R",
-    "xp": 14960,
     "baseXP": 3520,
-    "rXP": 440
   },
   {
     "name": "Gateway to Khyber",
@@ -3140,9 +2646,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 9,
     "difficulty": "R",
-    "xp": 3148,
     "baseXP": 793,
-    "rXP": 0
   },
   {
     "name": "Jungle of Khyber",
@@ -3153,9 +2657,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 27,
     "difficulty": "R",
-    "xp": 43864,
     "baseXP": 8686,
-    "rXP": 477
   },
   {
     "name": "Haywire Foundry",
@@ -3164,9 +2666,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 18,
     "difficulty": "R",
-    "xp": 25650,
     "baseXP": 5540,
-    "rXP": 474
   },
   {
     "name": "The Vault of Night",
@@ -3181,9 +2681,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 27,
     "difficulty": "",
-    "xp": null,
     "baseXP": 12699,
-    "rXP": null
   },
   {
     "name": "Plane of Night",
@@ -3199,9 +2697,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 15,
     "difficulty": "",
-    "xp": null,
     "baseXP": 2199,
-    "rXP": null
   },
   {
     "name": "The Keeper's Sanctuary",
@@ -3212,9 +2708,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 12,
     "difficulty": "R",
-    "xp": 13885,
     "baseXP": 3267,
-    "rXP": 474
   },
   {
     "name": "The Church and the Cult",
@@ -3223,9 +2717,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 15,
     "difficulty": "R",
-    "xp": 9044,
     "baseXP": 1966,
-    "rXP": 474
   },
   {
     "name": "The Claw of Vulkoor",
@@ -3234,9 +2726,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 12,
     "difficulty": "R",
-    "xp": 14228,
     "baseXP": 3340,
-    "rXP": 460
   },
   {
     "name": "Fathom the Depths",
@@ -3245,9 +2735,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 15,
     "difficulty": "R",
-    "xp": 19339,
     "baseXP": 4660,
-    "rXP": 454
   },
   {
     "name": "The Last Stand",
@@ -3256,9 +2744,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 12,
     "difficulty": "R",
-    "xp": 10742,
     "baseXP": 2620,
-    "rXP": 458
   },
   {
     "name": "Into the Deep",
@@ -3271,9 +2757,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 15,
     "difficulty": "R",
-    "xp": 25803,
     "baseXP": 6100,
-    "rXP": 472
   },
   {
     "name": "White Plume Mountain",
@@ -3282,9 +2766,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 15,
     "difficulty": "R",
-    "xp": 28167,
     "baseXP": 6820,
-    "rXP": 472
   },
   {
     "name": "The Chamber of Rahmat",
@@ -3293,9 +2775,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 15,
     "difficulty": "R",
-    "xp": 6671,
     "baseXP": 1499,
-    "rXP": 484
   },
   {
     "name": "Black and Blue",
@@ -3304,9 +2784,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 15,
     "difficulty": "R",
-    "xp": 26432,
     "baseXP": 6147,
-    "rXP": 504
   },
   {
     "name": "The Newcomers",
@@ -3315,9 +2793,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 15,
     "difficulty": "R",
-    "xp": 29322,
     "baseXP": 6819,
-    "rXP": 504
   },
   {
     "name": "Hiding in Plain Sight",
@@ -3326,9 +2802,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 15,
     "difficulty": "R",
-    "xp": 12768,
     "baseXP": 3040,
-    "rXP": 484
   },
   {
     "name": "Tempest's Spine",
@@ -3337,9 +2811,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 18,
     "difficulty": "R",
-    "xp": 29336,
     "baseXP": 7155,
-    "rXP": 480
   },
   {
     "name": "Reclamation",
@@ -3348,9 +2820,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 15,
     "difficulty": "R",
-    "xp": 15738,
     "baseXP": 3459,
-    "rXP": 492
   },
   {
     "name": "Sykros' Jewel",
@@ -3359,9 +2829,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 15,
     "difficulty": "R",
-    "xp": 13836,
     "baseXP": 3459,
-    "rXP": 480
   },
   {
     "name": "Into the Mists",
@@ -3370,9 +2838,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of the Feather",
     "favor": 9,
     "difficulty": "R",
-    "xp": 5328,
     "baseXP": 1332,
-    "rXP": 480
   },
   {
     "name": "Death House",
@@ -3383,9 +2849,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of the Feather",
     "favor": 12,
     "difficulty": "R",
-    "xp": 11628,
     "baseXP": 2871,
-    "rXP": 484
   },
   {
     "name": "Fresh-baked Dreams",
@@ -3396,9 +2860,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of the Feather",
     "favor": 12,
     "difficulty": "R",
-    "xp": 12202,
     "baseXP": 2871,
-    "rXP": 484
   },
   {
     "name": "An Invitation to Dinner",
@@ -3411,9 +2873,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of the Feather",
     "favor": 18,
     "difficulty": "R",
-    "xp": 34680,
     "baseXP": 8500,
-    "rXP": 480
   },
   {
     "name": "Going Rogue",
@@ -3422,9 +2882,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 12,
     "difficulty": "R",
-    "xp": 11628,
     "baseXP": 2871,
-    "rXP": 484
   },
   {
     "name": "Wish Upon a Card",
@@ -3433,9 +2891,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 12,
     "difficulty": "R",
-    "xp": 10873,
     "baseXP": 2620,
-    "rXP": 492
   },
   {
     "name": "Burning Down the House",
@@ -3444,9 +2900,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 12,
     "difficulty": "R",
-    "xp": 13041,
     "baseXP": 2998,
-    "rXP": 484
   },
   {
     "name": "Thrall of Duty",
@@ -3455,9 +2909,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 15,
     "difficulty": "R",
-    "xp": 18189,
     "baseXP": 4300,
-    "rXP": 490
   },
   {
     "name": "The Final Draw",
@@ -3471,9 +2923,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 12,
     "difficulty": "R",
-    "xp": 12442,
     "baseXP": 2998,
-    "rXP": 484
   },
   {
     "name": "Slavers of the Shrieking Mines",
@@ -3482,9 +2932,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 18,
     "difficulty": "R",
-    "xp": 19990,
     "baseXP": 4299,
-    "rXP": 492
   },
   {
     "name": "Bring Me the Head of Ghola-Fan!",
@@ -3493,9 +2941,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 18,
     "difficulty": "R",
-    "xp": 17841,
     "baseXP": 4299,
-    "rXP": 492
   },
   {
     "name": "The Twilight Forge",
@@ -3507,9 +2953,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 30,
     "difficulty": "",
-    "xp": null,
     "baseXP": 13300,
-    "rXP": null
   },
   {
     "name": "The Titan Awakes",
@@ -3522,9 +2966,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 18,
     "difficulty": "",
-    "xp": 2860,
     "baseXP": 2860,
-    "rXP": null
   },
   {
     "name": "The Spawn of Whisperdoom",
@@ -3533,9 +2975,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 18,
     "difficulty": "R",
-    "xp": 19447,
     "baseXP": 4060,
-    "rXP": 519
   },
   {
     "name": "Made to Order",
@@ -3544,9 +2984,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Kundarak",
     "favor": 18,
     "difficulty": "R",
-    "xp": 15717,
     "baseXP": 3532,
-    "rXP": 502
   },
   {
     "name": "The Enemy Within",
@@ -3555,9 +2993,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 24,
     "difficulty": "R",
-    "xp": 25899,
     "baseXP": 5820,
-    "rXP": 510
   },
   {
     "name": "Dreams of Insanity",
@@ -3566,9 +3002,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 18,
     "difficulty": "R",
-    "xp": 25463,
     "baseXP": 4588,
-    "rXP": 510
   },
   {
     "name": "From Beyond the Grave",
@@ -3577,9 +3011,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 15,
     "difficulty": "R",
-    "xp": 6319,
     "baseXP": 1420,
-    "rXP": 502
   },
   {
     "name": "And the Dead Shall Rise...",
@@ -3588,9 +3020,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 18,
     "difficulty": "R",
-    "xp": 18270,
     "baseXP": 4060,
-    "rXP": 498
   },
   {
     "name": "Desert Caravan",
@@ -3599,9 +3029,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Phiarlan",
     "favor": 15,
     "difficulty": "R",
-    "xp": 18137,
     "baseXP": 3268,
-    "rXP": 510
   },
   {
     "name": "Raid the Vulkoorim",
@@ -3610,9 +3038,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 18,
     "difficulty": "R",
-    "xp": 10350,
     "baseXP": 2300,
-    "rXP": 519
   },
   {
     "name": "Purge the Fallen Shrine",
@@ -3621,9 +3047,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 18,
     "difficulty": "R",
-    "xp": 11371,
     "baseXP": 2740,
-    "rXP": 510
   },
   {
     "name": "The Chamber of Kourush",
@@ -3632,9 +3056,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 18,
     "difficulty": "R",
-    "xp": 6389,
     "baseXP": 1566,
-    "rXP": 496
   },
   {
     "name": "Maraud the Mines",
@@ -3643,9 +3065,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 18,
     "difficulty": "R",
-    "xp": 15385,
     "baseXP": 3473,
-    "rXP": 505
   },
   {
     "name": "An Offering of Blood",
@@ -3654,9 +3074,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 24,
     "difficulty": "R",
-    "xp": 24444,
     "baseXP": 5820,
-    "rXP": 502
   },
   {
     "name": "The Chamber of Raiyum",
@@ -3665,9 +3083,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 24,
     "difficulty": "R",
-    "xp": 29750,
     "baseXP": 7000,
-    "rXP": 516
   },
   {
     "name": "Chains of Flame",
@@ -3676,9 +3092,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 21,
     "difficulty": "R",
-    "xp": 23394,
     "baseXP": 4884,
-    "rXP": 529
   },
   {
     "name": "Against the Demon Queen",
@@ -3691,9 +3105,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 24,
     "difficulty": "R",
-    "xp": 31850,
     "baseXP": 7000,
-    "rXP": 536
   },
   {
     "name": "Zawabi's Revenge",
@@ -3707,9 +3119,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 18,
     "difficulty": "R",
-    "xp": 23323,
     "baseXP": 5620,
-    "rXP": 635
   },
   {
     "name": "A Mad Tea Party",
@@ -3723,9 +3133,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of the Feather",
     "favor": 18,
     "difficulty": "R",
-    "xp": 17495,
     "baseXP": 3326,
-    "rXP": 502
   },
   {
     "name": "A Raven at the Door",
@@ -3739,9 +3147,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of the Feather",
     "favor": 18,
     "difficulty": "R",
-    "xp": 24341,
     "baseXP": 5908,
-    "rXP": 498
   },
   {
     "name": "Oath of Vengeance",
@@ -3755,9 +3161,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of the Feather",
     "favor": 18,
     "difficulty": "R",
-    "xp": 22848,
     "baseXP": 5600,
-    "rXP": 505
   },
   {
     "name": "Sealed in Amber",
@@ -3774,9 +3178,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of the Feather",
     "favor": 18,
     "difficulty": "R",
-    "xp": 32671,
     "baseXP": 5908,
-    "rXP": 509
   },
   {
     "name": "Tomb of the Tormented",
@@ -3785,9 +3187,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 18,
     "difficulty": "R",
-    "xp": 36491,
     "baseXP": 8020,
-    "rXP": 510
   },
   {
     "name": "Tomb of the Unhallowed",
@@ -3796,9 +3196,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 18,
     "difficulty": "R",
-    "xp": 22481,
     "baseXP": 4588,
-    "rXP": 510
   },
   {
     "name": "Tomb of the Blighted",
@@ -3807,9 +3205,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 18,
     "difficulty": "R",
-    "xp": 21520,
     "baseXP": 5380,
-    "rXP": 498
   },
   {
     "name": "Tomb of the Forbidden",
@@ -3818,9 +3214,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 18,
     "difficulty": "R",
-    "xp": 23687,
     "baseXP": 5116,
-    "rXP": 517
   },
   {
     "name": "The Cursed Crypt",
@@ -3834,9 +3228,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 21,
     "difficulty": "R",
-    "xp": 35062,
     "baseXP": 7460,
-    "rXP": 529
   },
   {
     "name": "Invaders!",
@@ -3845,9 +3237,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 21,
     "difficulty": "R",
-    "xp": 23030,
     "baseXP": 4700,
-    "rXP": 529
   },
   {
     "name": "A Relic of a Sovereign Past",
@@ -3856,9 +3246,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 21,
     "difficulty": "R",
-    "xp": 27737,
     "baseXP": 6233,
-    "rXP": 520
   },
   {
     "name": "Frame Work",
@@ -3867,9 +3255,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 15,
     "difficulty": "R",
-    "xp": 17893,
     "baseXP": 4240,
-    "rXP": 516
   },
   {
     "name": "Eyes of Stone",
@@ -3878,9 +3264,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 18,
     "difficulty": "R",
-    "xp": 20779,
     "baseXP": 5068,
-    "rXP": 516
   },
   {
     "name": "Diplomatic Impunity",
@@ -3889,9 +3273,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 18,
     "difficulty": "R",
-    "xp": 16040,
     "baseXP": 4010,
-    "rXP": 507
   },
   {
     "name": "Wrath of the Earth",
@@ -3909,9 +3291,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of the Feather",
     "favor": 15,
     "difficulty": "R",
-    "xp": 12248,
     "baseXP": 3062,
-    "rXP": 516
   },
   {
     "name": "Sunrise",
@@ -3932,9 +3312,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of the Feather",
     "favor": 18,
     "difficulty": "R",
-    "xp": 17712,
     "baseXP": 4148,
-    "rXP": 520
   },
   {
     "name": "The Final Vintage",
@@ -3952,9 +3330,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of the Feather",
     "favor": 12,
     "difficulty": "R",
-    "xp": 14148,
     "baseXP": 3329,
-    "rXP": 538
   },
   {
     "name": "Ravens' Bane",
@@ -3972,9 +3348,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Keepers of the Feather",
     "favor": 15,
     "difficulty": "R",
-    "xp": 17596,
     "baseXP": 4240,
-    "rXP": 529
   },
   {
     "name": "Ravenloft Saga",
@@ -4002,9 +3376,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 15,
     "difficulty": "R",
-    "xp": 13819,
     "baseXP": 3412,
-    "rXP": 520
   },
   {
     "name": "Eye Know Whodunnit",
@@ -4013,9 +3385,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 18,
     "difficulty": "R",
-    "xp": 23042,
     "baseXP": 5620,
-    "rXP": 507
   },
   {
     "name": "Seizing the Dawn",
@@ -4024,9 +3394,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 15,
     "difficulty": "R",
-    "xp": 13648,
     "baseXP": 3412,
-    "rXP": 516
   },
   {
     "name": "Beautiful Nightmares",
@@ -4035,9 +3403,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 18,
     "difficulty": "R",
-    "xp": 25290,
     "baseXP": 5620,
-    "rXP": 516
   },
   {
     "name": "Blockade Buster",
@@ -4046,9 +3412,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 15,
     "difficulty": "R",
-    "xp": 17205,
     "baseXP": 3700,
-    "rXP": 538
   },
   {
     "name": "Undermine",
@@ -4057,9 +3421,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 18,
     "difficulty": "R",
-    "xp": 27119,
     "baseXP": 5832,
-    "rXP": 547
   },
   {
     "name": "Assault on Summerfield",
@@ -4068,9 +3430,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 15,
     "difficulty": "R",
-    "xp": 14935,
     "baseXP": 3556,
-    "rXP": 534
   },
   {
     "name": "Siegebreaker",
@@ -4083,9 +3443,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 18,
     "difficulty": "R",
-    "xp": 28914,
     "baseXP": 6100,
-    "rXP": 556
   },
   {
     "name": "Memoirs of an Illusory Larcener",
@@ -4094,9 +3452,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 18,
     "difficulty": "R",
-    "xp": 17395,
     "baseXP": 4295,
-    "rXP": 538
   },
   {
     "name": "Mired in Kobolds",
@@ -4105,9 +3461,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 15,
     "difficulty": "R",
-    "xp": 11710,
     "baseXP": 2692,
-    "rXP": 538
   },
   {
     "name": "The Archons' Trial",
@@ -4116,9 +3470,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 18,
     "difficulty": "R",
-    "xp": 23655,
     "baseXP": 5700,
-    "rXP": 547
   },
   {
     "name": "Demon Assault",
@@ -4127,9 +3479,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 18,
     "difficulty": "R",
-    "xp": 17243,
     "baseXP": 4010,
-    "rXP": 561
   },
   {
     "name": "The Devil's Details",
@@ -4138,9 +3488,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 18,
     "difficulty": "R",
-    "xp": 20580,
     "baseXP": 4900,
-    "rXP": 525
   },
   {
     "name": "The Safehold",
@@ -4149,9 +3497,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Cormanthor Elves",
     "favor": 15,
     "difficulty": "R",
-    "xp": 18343,
     "baseXP": 4420,
-    "rXP": 547
   },
   {
     "name": "Death Hosts this Banquet",
@@ -4160,9 +3506,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Cormanthor Elves",
     "favor": 15,
     "difficulty": "R",
-    "xp": 13721,
     "baseXP": 3191,
-    "rXP": 547
   },
   {
     "name": "Ogmha's Song",
@@ -4171,9 +3515,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Cormanthor Elves",
     "favor": 15,
     "difficulty": "R",
-    "xp": 19227,
     "baseXP": 4420,
-    "rXP": 547
   },
   {
     "name": "The Key to the Mythal",
@@ -4182,9 +3524,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Cormanthor Elves",
     "favor": 21,
     "difficulty": "R",
-    "xp": 33876,
     "baseXP": 8163,
-    "rXP": 547
   },
   {
     "name": "Secrets of the Red Wizards",
@@ -4193,9 +3533,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Cormanthor Elves",
     "favor": 18,
     "difficulty": "R",
-    "xp": 30295,
     "baseXP": 7300,
-    "rXP": 547
   },
   {
     "name": "Voices of the Dead",
@@ -4204,9 +3542,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Cormanthor Elves",
     "favor": 15,
     "difficulty": "R",
-    "xp": 20111,
     "baseXP": 4420,
-    "rXP": 565
   },
   {
     "name": "The House of Gems",
@@ -4215,9 +3551,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Cormanthor Elves",
     "favor": 15,
     "difficulty": "R",
-    "xp": 18343,
     "baseXP": 4420,
-    "rXP": 547
   },
   {
     "name": "Times Long Past",
@@ -4226,9 +3560,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Cormanthor Elves",
     "favor": 21,
     "difficulty": "R",
-    "xp": 37550,
     "baseXP": 8163,
-    "rXP": 552
   },
   {
     "name": "The Zulkir's Plan",
@@ -4237,9 +3569,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Cormanthor Elves",
     "favor": 18,
     "difficulty": "R",
-    "xp": 30879,
     "baseXP": 7300,
-    "rXP": 554
   },
   {
     "name": "Book Burning",
@@ -4248,9 +3578,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Cormanthor Elves",
     "favor": 12,
     "difficulty": "R",
-    "xp": 9711,
     "baseXP": 2340,
-    "rXP": 547
   },
   {
     "name": "Ettercap Incursion",
@@ -4259,9 +3587,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Cormanthor Elves",
     "favor": 15,
     "difficulty": "R",
-    "xp": 18343,
     "baseXP": 4420,
-    "rXP": 547
   },
   {
     "name": "Seeds of Decay",
@@ -4270,9 +3596,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Cormanthor Elves",
     "favor": 15,
     "difficulty": "R",
-    "xp": 18343,
     "baseXP": 4420,
-    "rXP": 547
   },
   {
     "name": "Portal to Below",
@@ -4281,9 +3605,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Cormanthor Elves",
     "favor": 15,
     "difficulty": "R",
-    "xp": 20111,
     "baseXP": 4420,
-    "rXP": 547
   },
   {
     "name": "Myth Drannor Saga",
@@ -4312,9 +3634,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 15,
     "difficulty": "R",
-    "xp": 15355,
     "baseXP": 3700,
-    "rXP": 547
   },
   {
     "name": "Feast or Famine",
@@ -4323,9 +3643,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 18,
     "difficulty": "R",
-    "xp": 21924,
     "baseXP": 5220,
-    "rXP": 538
   },
   {
     "name": "Trial by Fire",
@@ -4334,9 +3652,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 18,
     "difficulty": "R",
-    "xp": 19236,
     "baseXP": 4580,
-    "rXP": 538
   },
   {
     "name": "The Maze of Madness",
@@ -4345,9 +3661,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 18,
     "difficulty": "R",
-    "xp": 16666,
     "baseXP": 3940,
-    "rXP": 541
   },
   {
     "name": "Foundation of Discord",
@@ -4356,9 +3670,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 18,
     "difficulty": "R",
-    "xp": 18921,
     "baseXP": 4452,
-    "rXP": 556
   },
   {
     "name": "A Cry for Help",
@@ -4367,9 +3679,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 21,
     "difficulty": "R",
-    "xp": 22991,
     "baseXP": 5540,
-    "rXP": 547
   },
   {
     "name": "The Prison of the Planes",
@@ -4378,9 +3688,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 18,
     "difficulty": "R",
-    "xp": 21390,
     "baseXP": 4600,
-    "rXP": 566
   },
   {
     "name": "The Crucible",
@@ -4389,9 +3697,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 24,
     "difficulty": "R",
-    "xp": 49124,
     "baseXP": 11837,
-    "rXP": 566
   },
   {
     "name": "Madstone Crater",
@@ -4400,9 +3706,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 24,
     "difficulty": "R",
-    "xp": 37073,
     "baseXP": 7566,
-    "rXP": 792
   },
   {
     "name": "A Cabal for One",
@@ -4411,9 +3715,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 18,
     "difficulty": "R",
-    "xp": 14700,
     "baseXP": 3500,
-    "rXP": 557
   },
   {
     "name": "Gianthold Tor",
@@ -4426,9 +3728,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 21,
     "difficulty": "R",
-    "xp": 27945,
     "baseXP": 6900,
-    "rXP": 779
   },
   {
     "name": "Gianthold Saga",
@@ -4459,9 +3759,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 18,
     "difficulty": "R",
-    "xp": 29465,
     "baseXP": 7100,
-    "rXP": 566
   },
   {
     "name": "Night Falls on Stormreach",
@@ -4470,9 +3768,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 15,
     "difficulty": "R",
-    "xp": 18468,
     "baseXP": 4450,
-    "rXP": 566
   },
   {
     "name": "Quarantine",
@@ -4483,9 +3779,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 15,
     "difficulty": "R",
-    "xp": 17171,
     "baseXP": 3850,
-    "rXP": 567
   },
   {
     "name": "The Madness of Crowds",
@@ -4496,9 +3790,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 15,
     "difficulty": "R",
-    "xp": 17325,
     "baseXP": 3850,
-    "rXP": 552
   },
   {
     "name": "Age of Rage",
@@ -4509,9 +3801,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 15,
     "difficulty": "R",
-    "xp": 17430,
     "baseXP": 4150,
-    "rXP": 570
   },
   {
     "name": "Toxic Treatment",
@@ -4525,9 +3815,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Jorasco",
     "favor": 18,
     "difficulty": "R",
-    "xp": 22825,
     "baseXP": 5500,
-    "rXP": 566
   },
   {
     "name": "Tower of Frost",
@@ -4536,9 +3824,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 18,
     "difficulty": "R",
-    "xp": 32589,
     "baseXP": 7100,
-    "rXP": 566
   },
   {
     "name": "Subversion",
@@ -4547,9 +3833,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 18,
     "difficulty": "R",
-    "xp": 25515,
     "baseXP": 6300,
-    "rXP": 557
   },
   {
     "name": "Grim and Barett",
@@ -4558,9 +3842,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 18,
     "difficulty": "R",
-    "xp": 21418,
     "baseXP": 4606,
-    "rXP": 580
   },
   {
     "name": "Tavern Brawl",
@@ -4569,9 +3851,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 12,
     "difficulty": "R",
-    "xp": 6018,
     "baseXP": 1450,
-    "rXP": 566
   },
   {
     "name": "Multitude of Menace",
@@ -4580,9 +3860,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Gatekeepers",
     "favor": 18,
     "difficulty": "R",
-    "xp": 25665,
     "baseXP": 5900,
-    "rXP": 584
   },
   {
     "name": "Inferno of the Damned",
@@ -4591,9 +3869,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 18,
     "difficulty": "R",
-    "xp": 35377,
     "baseXP": 8735,
-    "rXP": 557
   },
   {
     "name": "Ghosts of Perdition",
@@ -4602,9 +3878,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 18,
     "difficulty": "R",
-    "xp": 28000,
     "baseXP": 7000,
-    "rXP": 552
   },
   {
     "name": "Flesh Maker's Laboratory",
@@ -4613,9 +3887,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 18,
     "difficulty": "R",
-    "xp": 23490,
     "baseXP": 5800,
-    "rXP": 779
   },
   {
     "name": "Desecrated Temple of Vol",
@@ -4624,9 +3896,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 18,
     "difficulty": "R",
-    "xp": 25810,
     "baseXP": 5800,
-    "rXP": 580
   },
   {
     "name": "Litany of the Dead",
@@ -4640,9 +3910,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 18,
     "difficulty": "R",
-    "xp": 30806,
     "baseXP": 7899,
-    "rXP": 760
   },
   {
     "name": "Delirium",
@@ -4651,9 +3919,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 15,
     "difficulty": "R",
-    "xp": 17164,
     "baseXP": 4156,
-    "rXP": 582
   },
   {
     "name": "Acid Wit",
@@ -4662,9 +3928,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 18,
     "difficulty": "R",
-    "xp": 18985,
     "baseXP": 4467,
-    "rXP": 594
   },
   {
     "name": "Disciples of Shar",
@@ -4673,9 +3937,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Purple Dragon Knights",
     "favor": 18,
     "difficulty": "R",
-    "xp": 18046,
     "baseXP": 4246,
-    "rXP": 594
   },
   {
     "name": "Escape Plan",
@@ -4684,9 +3946,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Purple Dragon Knights",
     "favor": 15,
     "difficulty": "R",
-    "xp": 13102,
     "baseXP": 3448,
-    "rXP": 542
   },
   {
     "name": "Shadow of a Doubt",
@@ -4695,9 +3955,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Purple Dragon Knights",
     "favor": 18,
     "difficulty": "R",
-    "xp": 18619,
     "baseXP": 4433,
-    "rXP": 570
   },
   {
     "name": "Search and Rescue",
@@ -4706,9 +3964,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 18,
     "difficulty": "R",
-    "xp": 26311,
     "baseXP": 6340,
-    "rXP": 584
   },
   {
     "name": "Missing",
@@ -4717,9 +3973,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 18,
     "difficulty": "R",
-    "xp": 22748,
     "baseXP": 5687,
-    "rXP": 570
   },
   {
     "name": "Sinister Storage",
@@ -4728,9 +3982,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 15,
     "difficulty": "R",
-    "xp": 9479,
     "baseXP": 2284,
-    "rXP": 584
   },
   {
     "name": "Fear Factory",
@@ -4739,9 +3991,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 15,
     "difficulty": "R",
-    "xp": 19213,
     "baseXP": 4744,
-    "rXP": 575
   },
   {
     "name": "In The Flesh",
@@ -4754,9 +4004,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 18,
     "difficulty": "R",
-    "xp": 29227,
     "baseXP": 6877,
-    "rXP": 584
   },
   {
     "name": "Strike Back",
@@ -4765,9 +4013,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 15,
     "difficulty": "R",
-    "xp": 24676,
     "baseXP": 6048,
-    "rXP": 578
   },
   {
     "name": "Third Time's a Charm",
@@ -4776,9 +4022,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 15,
     "difficulty": "R",
-    "xp": 26006,
     "baseXP": 6048,
-    "rXP": 584
   },
   {
     "name": "Graveyard Shift",
@@ -4787,9 +4031,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 15,
     "difficulty": "R",
-    "xp": 21302,
     "baseXP": 5133,
-    "rXP": 584
   },
   {
     "name": "Records of the Past",
@@ -4798,9 +4040,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 15,
     "difficulty": "R",
-    "xp": 21752,
     "baseXP": 5438,
-    "rXP": 570
   },
   {
     "name": "Desire in the Dark",
@@ -4814,9 +4054,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 15,
     "difficulty": "R",
-    "xp": 24192,
     "baseXP": 6048,
-    "rXP": 570
   },
   {
     "name": "Creeping Death",
@@ -4825,9 +4063,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 18,
     "difficulty": "R",
-    "xp": 26002,
     "baseXP": 6118,
-    "rXP": 594
   },
   {
     "name": "To Curse the Sky",
@@ -4836,9 +4072,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Deneith",
     "favor": 18,
     "difficulty": "R",
-    "xp": 28465,
     "baseXP": 6859,
-    "rXP": 584
   },
     {
     "name": "Lost at Sea",
@@ -4847,9 +4081,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 15,
     "difficulty": "R",
-    "xp": 13044,
     "baseXP": 3261,
-    "rXP": 570
   },
   {
     "name": "A Sharn Welcome",
@@ -4858,9 +4090,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 15,
     "difficulty": "R",
-    "xp": 22240,
     "baseXP": 5560,
-    "rXP": 570
   },
   {
     "name": "Red Rain",
@@ -4871,9 +4101,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 15,
     "difficulty": "R",
-    "xp": 24742,
     "baseXP": 5560,
-    "rXP": 575
   },
   {
     "name": "Best Laid Plans",
@@ -4884,9 +4112,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 15,
     "difficulty": "R",
-    "xp": 27856,
     "baseXP": 5560,
-    "rXP": 570
   },
   {
     "name": "The Same Old Song",
@@ -4897,9 +4123,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 15,
     "difficulty": "R",
-    "xp": 24464,
     "baseXP": 5560,
-    "rXP": 570
   },
   {
     "name": "Just Business",
@@ -4913,9 +4137,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 15,
     "difficulty": "R",
-    "xp": 25677,
     "baseXP": 6340,
-    "rXP": 570
   },
   {
     "name": "No Refunds",
@@ -4930,9 +4152,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 18,
     "difficulty": "R",
-    "xp": 23080,
     "baseXP": 5770,
-    "rXP": 588
   },
   {
     "name": "House of Pain",
@@ -4948,9 +4168,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 21,
     "difficulty": "R",
-    "xp": 24061,
     "baseXP": 5770,
-    "rXP": 578
   },
   {
     "name": "Blown Deadline",
@@ -4966,9 +4184,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 18,
     "difficulty": "R",
-    "xp": 22503,
     "baseXP": 5770,
-    "rXP": 578
   },
   {
     "name": "Reach for the Sky",
@@ -4986,9 +4202,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 21,
     "difficulty": "R",
-    "xp": 41308,
     "baseXP": 9496,
-    "rXP": 603
   },
   {
     "name": "Sharn Saga",
@@ -5014,9 +4228,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 12,
     "difficulty": "R",
-    "xp": 10936,
     "baseXP": 2804,
-    "rXP": 561
   },
   {
     "name": "The Wraithcallers",
@@ -5025,9 +4237,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 12,
     "difficulty": "R",
-    "xp": 11216,
     "baseXP": 2804,
-    "rXP": 570
   },
   {
     "name": "Smash and Burn",
@@ -5036,9 +4246,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 15,
     "difficulty": "R",
-    "xp": 18642,
     "baseXP": 4780,
-    "rXP": 561
   },
   {
     "name": "Thralls of the Fungus Lord",
@@ -5047,9 +4255,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 15,
     "difficulty": "R",
-    "xp": 18642,
     "baseXP": 4780,
-    "rXP": 561
   },
   {
     "name": "Scavenger Hunt",
@@ -5058,9 +4264,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 15,
     "difficulty": "R",
-    "xp": 14330,
     "baseXP": 3412,
-    "rXP": 588
   },
   {
     "name": "The Magma Must Flow",
@@ -5069,9 +4273,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 15,
     "difficulty": "R",
-    "xp": 11341,
     "baseXP": 2908,
-    "rXP": 578
   },
   {
     "name": "Roll Call",
@@ -5080,9 +4282,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 15,
     "difficulty": "R",
-    "xp": 13819,
     "baseXP": 3412,
-    "rXP": 593
   },
   {
     "name": "Security Detail",
@@ -5091,9 +4291,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 15,
     "difficulty": "R",
-    "xp": 11341,
     "baseXP": 2908,
-    "rXP": 578
   },
   {
     "name": "Cogs Saga",
@@ -5117,9 +4315,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 18,
     "difficulty": "R",
-    "xp": 18776,
     "baseXP": 4636,
-    "rXP": 593
   },
   {
     "name": "Order in the Court!",
@@ -5128,9 +4324,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 18,
     "difficulty": "R",
-    "xp": 20074,
     "baseXP": 4636,
-    "rXP": 601
   },
   {
     "name": "Growing Pains",
@@ -5139,9 +4333,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 18,
     "difficulty": "R",
-    "xp": 18776,
     "baseXP": 4636,
-    "rXP": 593
   },
   {
     "name": "Three Paths to Battle",
@@ -5150,9 +4342,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 21,
     "difficulty": "R",
-    "xp": 25058,
     "baseXP": 5896,
-    "rXP": 603
   },
   {
     "name": "The Hand and the Eyes",
@@ -5161,9 +4351,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 21,
     "difficulty": "R",
-    "xp": 25211,
     "baseXP": 5932,
-    "rXP": 603
   },
   {
     "name": "Friends in Low Places",
@@ -5172,9 +4360,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Purple Dragon Knights",
     "favor": 21,
     "difficulty": "R",
-    "xp": 28388,
     "baseXP": 6526,
-    "rXP": 603
   },
   {
     "name": "A Lesson in Deception",
@@ -5183,9 +4369,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Purple Dragon Knights",
     "favor": 21,
     "difficulty": "R",
-    "xp": 21976,
     "baseXP": 5052,
-    "rXP": 603
   },
   {
     "name": "Army of Shadow",
@@ -5194,9 +4378,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Purple Dragon Knights",
     "favor": 21,
     "difficulty": "R",
-    "xp": 25736,
     "baseXP": 5719,
-    "rXP": 630
   },
   {
     "name": "The Thrill of the Hunt",
@@ -5205,9 +4387,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Purple Dragon Knights",
     "favor": 18,
     "difficulty": "R",
-    "xp": 20546,
     "baseXP": 4617,
-    "rXP": 603
   },
   {
     "name": "Through a Mirror Darkly",
@@ -5221,9 +4401,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Purple Dragon Knights",
     "favor": 21,
     "difficulty": "R",
-    "xp": 37642,
     "baseXP": 8555,
-    "rXP": 593
   },
   {
     "name": "The Mask of Deception",
@@ -5232,9 +4410,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 18,
     "difficulty": "E",
-    "xp": 16780,
     "baseXP": 4535,
-    "rXP": null
   },
   {
     "name": "The Lords of Dust",
@@ -5243,9 +4419,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 21,
     "difficulty": "R",
-    "xp": 24200,
     "baseXP": 5500,
-    "rXP": 603
   },
   {
     "name": "Servants of the Overlord",
@@ -5256,9 +4430,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 21,
     "difficulty": "R",
-    "xp": 32485,
     "baseXP": 7300,
-    "rXP": 603
   },
   {
     "name": "The Spinner of Shadows",
@@ -5270,9 +4442,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 21,
     "difficulty": "R",
-    "xp": 29190,
     "baseXP": 6634,
-    "rXP": 603
   },
   {
     "name": "Beyond the Rift",
@@ -5285,9 +4455,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 21,
     "difficulty": "R",
-    "xp": 30743,
     "baseXP": 7408,
-    "rXP": 603
   },
   {
     "name": "Rainbow in the Dark",
@@ -5296,9 +4464,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 24,
     "difficulty": "R",
-    "xp": 38671,
     "baseXP": 9099,
-    "rXP": 613
   },
   {
     "name": "Ritual Sacrifice",
@@ -5307,9 +4473,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 24,
     "difficulty": "R",
-    "xp": 33283,
     "baseXP": 8020,
-    "rXP": 603
   },
   {
     "name": "The Coalescence Chamber",
@@ -5318,9 +4482,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 24,
     "difficulty": "R",
-    "xp": 43155,
     "baseXP": 10036,
-    "rXP": 617
   },
   {
     "name": "Running with the Devils",
@@ -5329,9 +4491,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 24,
     "difficulty": "R",
-    "xp": 32168,
     "baseXP": 7659,
-    "rXP": 578
   },
   {
     "name": "Let Sleeping Dust Lie",
@@ -5340,9 +4500,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 24,
     "difficulty": "R",
-    "xp": 30291,
     "baseXP": 7299,
-    "rXP": 603
   },
   {
     "name": "Good Intentions",
@@ -5351,9 +4509,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Free Agents",
     "favor": 21,
     "difficulty": "R",
-    "xp": 27240,
     "baseXP": 6726,
-    "rXP": 611
   },
   {
     "name": "The Lord of Stone",
@@ -5362,9 +4518,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 18,
     "difficulty": "R",
-    "xp": 23416,
     "baseXP": 5854,
-    "rXP": 606
   },
   {
     "name": "Acute Delirium",
@@ -5373,9 +4527,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 21,
     "difficulty": "E",
-    "xp": 24998,
     "baseXP": 6493,
-    "rXP": 0
   },
   {
     "name": "The Sane Asylum",
@@ -5384,9 +4536,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 21,
     "difficulty": "R",
-    "xp": 26069,
     "baseXP": 5793,
-    "rXP": 606
   },
   {
     "name": "The Lord of Eyes",
@@ -5399,9 +4549,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 21,
     "difficulty": "R",
-    "xp": 30883,
     "baseXP": 7067,
-    "rXP": 621
   },
   {
     "name": "Outbreak",
@@ -5410,9 +4558,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 18,
     "difficulty": "R",
-    "xp": 12516,
     "baseXP": 3129,
-    "rXP": 606
   },
   {
     "name": "Overgrowth",
@@ -5421,9 +4567,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 18,
     "difficulty": "R",
-    "xp": 14936,
     "baseXP": 3086,
-    "rXP": 621
   },
   {
     "name": "Thorn and Paw",
@@ -5432,9 +4576,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 18,
     "difficulty": "R",
-    "xp": 18858,
     "baseXP": 4544,
-    "rXP": 621
   },
   {
     "name": "The Druid's Curse",
@@ -5447,9 +4589,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 21,
     "difficulty": "R",
-    "xp": 20932,
     "baseXP": 5233,
-    "rXP": 606
   },
   {
     "name": "Monastery of the Scorpion",
@@ -5458,9 +4598,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 24,
     "difficulty": "R",
-    "xp": 46442,
     "baseXP": 9060,
-    "rXP": 619
   },
   {
     "name": "Enter the Kobold",
@@ -5469,9 +4607,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 24,
     "difficulty": "R",
-    "xp": 51888,
     "baseXP": 9508,
-    "rXP": 621
   },
   {
     "name": "Prey on the Hunter",
@@ -5480,9 +4616,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 24,
     "difficulty": "R",
-    "xp": 39431,
     "baseXP": 6820,
-    "rXP": 619
   },
   {
     "name": "Stealer of Souls",
@@ -5495,9 +4629,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Agents of Argonnessen",
     "favor": 24,
     "difficulty": "R",
-    "xp": 42122,
     "baseXP": 9956,
-    "rXP": 611
   },
   {
     "name": "Finding Dorris",
@@ -5506,9 +4638,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 21,
     "difficulty": "R",
-    "xp": 40050,
     "baseXP": 8500,
-    "rXP": 626
   },
   {
     "name": "Safety in Numbers",
@@ -5517,9 +4647,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 18,
     "difficulty": "R",
-    "xp": 15264,
     "baseXP": 3366,
-    "rXP": 606
   },
   {
     "name": "The Underlane Assignment",
@@ -5528,9 +4656,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 18,
     "difficulty": "R",
-    "xp": 19895,
     "baseXP": 4468,
-    "rXP": 611
   },
   {
     "name": "The Offshore Account",
@@ -5539,9 +4665,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 18,
     "difficulty": "R",
-    "xp": 18095,
     "baseXP": 4468,
-    "rXP": 611
   },
   {
     "name": "Members Only",
@@ -5550,9 +4674,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 18,
     "difficulty": "R",
-    "xp": 18185,
     "baseXP": 4468,
-    "rXP": 596
   },
   {
     "name": "Soul Survivor",
@@ -5561,9 +4683,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Sharn City Council",
     "favor": 21,
     "difficulty": "R",
-    "xp": 36975,
     "baseXP": 8500,
-    "rXP": 621
   },
   {
     "name": "The Shroud",
@@ -5578,9 +4698,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 33,
     "difficulty": "",
-    "xp": null,
     "baseXP": 12420,
-    "rXP": null
   },
   {
     "name": "Ascension Chamber",
@@ -5598,9 +4716,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 21,
     "difficulty": "",
-    "xp": null,
     "baseXP": 6820,
-    "rXP": null
   },
   {
     "name": "In the Demon´s Den",
@@ -5609,9 +4725,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Silver Flame",
     "favor": 18,
     "difficulty": "R",
-    "xp": 19190,
     "baseXP": 4624,
-    "rXP": 640
   },
   {
     "name": "Kill Ten Rats",
@@ -5620,9 +4734,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 18,
     "difficulty": "R",
-    "xp": 17066,
     "baseXP": 3835,
-    "rXP": 629
   },
   {
     "name": "Palace of Stone",
@@ -5631,9 +4743,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 21,
     "difficulty": "R",
-    "xp": 25124,
     "baseXP": 6054,
-    "rXP": 640
   },
   {
     "name": "Terminal Delirium",
@@ -5642,9 +4752,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 21,
     "difficulty": "R",
-    "xp": 36039,
     "baseXP": 8684,
-    "rXP": 640
   },
   {
     "name": "Fashion Madness",
@@ -5653,9 +4761,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 21,
     "difficulty": "R",
-    "xp": 22879,
     "baseXP": 5513,
-    "rXP": 640
   },
   {
     "name": "Detour",
@@ -5664,9 +4770,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 21,
     "difficulty": "R",
-    "xp": 27679,
     "baseXP": 6220,
-    "rXP": 640
   },
   {
     "name": "Rest Stop",
@@ -5675,9 +4779,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 18,
     "difficulty": "R",
-    "xp": 18112,
     "baseXP": 4528,
-    "rXP": 624
   },
   {
     "name": "A Stay at the Inn",
@@ -5686,9 +4788,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 18,
     "difficulty": "R",
-    "xp": 15579,
     "baseXP": 3754,
-    "rXP": 640
   },
   {
     "name": "Lost in the Swamp",
@@ -5697,9 +4797,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 18,
     "difficulty": "R",
-    "xp": 19432,
     "baseXP": 4798,
-    "rXP": 629
   },
   {
     "name": "The End of the Road",
@@ -5713,9 +4811,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 21,
     "difficulty": "R",
-    "xp": 25649,
     "baseXP": 6333,
-    "rXP": 629
   },
   {
     "name": "Turn the Page",
@@ -5724,9 +4820,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 18,
     "difficulty": "R",
-    "xp": 25070,
     "baseXP": 6190,
-    "rXP": 629
   },
   {
     "name": "Grand Theft Aureon",
@@ -5735,9 +4829,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 21,
     "difficulty": "R",
-    "xp": 36579,
     "baseXP": 8220,
-    "rXP": 640
   },
   {
     "name": "Vecna Unleashed",
@@ -5746,9 +4838,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 18,
     "difficulty": "R",
-    "xp": 25565,
     "baseXP": 6190,
-    "rXP": 638
   },
   {
     "name": "Enemy of My Enemy",
@@ -5757,9 +4847,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 18,
     "difficulty": "R",
-    "xp": 26927,
     "baseXP": 6190,
-    "rXP": 640
   },
   {
     "name": "Law and Order",
@@ -5768,9 +4856,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 21,
     "difficulty": "R",
-    "xp": 35076,
     "baseXP": 8452,
-    "rXP": 640
   },
   {
     "name": "Taken in Hand",
@@ -5779,9 +4865,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 18,
     "difficulty": "R",
-    "xp": 27047,
     "baseXP": 6364,
-    "rXP": 640
   },
   {
     "name": "The Bark and the Blade",
@@ -5790,9 +4874,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 21,
     "difficulty": "R",
-    "xp": 35346,
     "baseXP": 8220,
-    "rXP": 640
   },
   {
     "name": "The Evil We Know",
@@ -5801,9 +4883,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 18,
     "difficulty": "R",
-    "xp": 27546,
     "baseXP": 6190,
-    "rXP": 640
   },
   {
     "name": "Vecna Denied",
@@ -5812,9 +4892,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 21,
     "difficulty": "R",
-    "xp": 36039,
     "baseXP": 8684,
-    "rXP": 640
   },
   {
     "name": "Paper Trail",
@@ -5823,9 +4901,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 18,
     "difficulty": "R",
-    "xp": 21280,
     "baseXP": 5320,
-    "rXP": 499
   },
   {
     "name": "Party 101",
@@ -5834,9 +4910,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 15,
     "difficulty": "R",
-    "xp": 12464,
     "baseXP": 3116,
-    "rXP": 499
   },
   {
     "name": "The Devils to Pay",
@@ -5845,9 +4919,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 15,
     "difficulty": "R",
-    "xp": 12464,
     "baseXP": 3116,
-    "rXP": 499
   },
   {
     "name": "What Dreams May Come",
@@ -5856,9 +4928,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 15,
     "difficulty": "R",
-    "xp": 11364,
     "baseXP": 2806,
-    "rXP": 503
   },
   {
     "name": "University Saga",
@@ -5887,9 +4957,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 15,
     "difficulty": "E",
-    "xp": 33124,
     "baseXP": 5386,
-    "rXP": 401
   },
   {
     "name": "Fred's First Date",
@@ -5898,9 +4966,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 18,
     "difficulty": "R",
-    "xp": 20392,
     "baseXP": 4798,
-    "rXP": 411
   },
   {
     "name": "Too Many Cooks",
@@ -5909,9 +4975,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 18,
     "difficulty": "R",
-    "xp": 20631,
     "baseXP": 4798,
-    "rXP": 418
   },
   {
     "name": "This Old Haunt",
@@ -5920,9 +4984,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Morgrave University",
     "favor": 15,
     "difficulty": "R",
-    "xp": 19359,
     "baseXP": 4430,
-    "rXP": 424
   },
   {
     "name": "A Vision of Destruction",
@@ -5931,9 +4993,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 27,
     "difficulty": "H",
-    "xp": 25960,
     "baseXP": 8800,
-    "rXP": 337
   },
   {
     "name": "Hound of Xoriat",
@@ -5942,9 +5002,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 27,
     "difficulty": "H",
-    "xp": 25960,
     "baseXP": 8800,
-    "rXP": 337
   },
     {
     "name": "Finding the Path",
@@ -5953,9 +5011,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 18,
     "difficulty": "R",
-    "xp": 17023,
     "baseXP": 4102,
-    "rXP": 640
   },
   {
     "name": "Dream Conspiracy",
@@ -5964,9 +5020,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 18,
     "difficulty": "R",
-    "xp": 17434,
     "baseXP": 4102,
-    "rXP": 650
   },
   {
     "name": "I Dream of Jeets",
@@ -5977,9 +5031,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 18,
     "difficulty": "R",
-    "xp": 23998,
     "baseXP": 5106,
-    "rXP": 645
   },
   {
     "name": "The Mindsunder",
@@ -5991,9 +5043,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 18,
     "difficulty": "R",
-    "xp": 17351,
     "baseXP": 4102,
-    "rXP": 648
   },
   {
     "name": "The Shipwrecked Spy",
@@ -6002,9 +5052,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 18,
     "difficulty": "R",
-    "xp": 20915,
     "baseXP": 4450,
-    "rXP": 640
   },
   {
     "name": "Eye of the Titan",
@@ -6013,9 +5061,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 18,
     "difficulty": "R",
-    "xp": 18630,
     "baseXP": 4600,
-    "rXP": 647
   },
   {
     "name": "Reclaiming Memories",
@@ -6026,9 +5072,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 18,
     "difficulty": "R",
-    "xp": 13086,
     "baseXP": 3231,
-    "rXP": 647
   },
   {
     "name": "Mining for Ancient Secrets",
@@ -6040,9 +5084,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 18,
     "difficulty": "R",
-    "xp": 12336,
     "baseXP": 3046,
-    "rXP": 647
   },
   {
     "name": "Raiding the Giants' Vault",
@@ -6054,9 +5096,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 6,
     "difficulty": "S",
-    "xp": 10148,
     "baseXP": 3440,
-    "rXP": 498
   },
     {
     "name": "The Dreaming Dark",
@@ -6069,9 +5109,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Coin Lords",
     "favor": 18,
     "difficulty": "R",
-    "xp": 20744,
     "baseXP": 5122,
-    "rXP": 666
   },
   {
     "name": "Murder by Night",
@@ -6080,9 +5118,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Purple Dragon Knights",
     "favor": 18,
     "difficulty": "R",
-    "xp": 15460,
     "baseXP": 3964,
-    "rXP": 631
   },
   {
     "name": "The Riddle",
@@ -6091,9 +5127,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "Purple Dragon Knights",
     "favor": 21,
     "difficulty": "R",
-    "xp": 22714,
     "baseXP": 5824,
-    "rXP": 631
   },
   {
     "name": "Power Play",
@@ -6102,9 +5136,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Cannith",
     "favor": 21,
     "difficulty": "R",
-    "xp": 43559,
     "baseXP": 10396,
-    "rXP": 658
   },
   {
     "name": "Blown to Bits",
@@ -6113,9 +5145,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Cannith",
     "favor": 18,
     "difficulty": "R",
-    "xp": 27730,
     "baseXP": 6682,
-    "rXP": 658
   },
   {
     "name": "Schemes of the Enemy",
@@ -6124,9 +5154,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Cannith",
     "favor": 18,
     "difficulty": "R",
-    "xp": 58863,
     "baseXP": 13689,
-    "rXP": 658
   },
   {
     "name": "The Tracker's Trap",
@@ -6135,9 +5163,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 18,
     "difficulty": "R",
-    "xp": 34524,
     "baseXP": 8319,
-    "rXP": 658
   },
   {
     "name": "Lines of Supply",
@@ -6146,9 +5172,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 18,
     "difficulty": "R",
-    "xp": 29383,
     "baseXP": 5066,
-    "rXP": 674
   },
   {
     "name": "Breaking the Ranks",
@@ -6157,9 +5181,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 18,
     "difficulty": "R",
-    "xp": 22753,
     "baseXP": 4790,
-    "rXP": 658
   },
   {
     "name": "A Break in the Ice",
@@ -6168,9 +5190,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 21,
     "difficulty": "R",
-    "xp": 32400,
     "baseXP": 7347,
-    "rXP": 675
   },
   {
     "name": "What Goes Up",
@@ -6184,9 +5204,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Harpers",
     "favor": 21,
     "difficulty": "R",
-    "xp": 80650,
     "baseXP": 16979,
-    "rXP": 658
   },
   {
     "name": "Cormyr Saga",
@@ -6246,9 +5264,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Yugoloth",
     "favor": 21,
     "difficulty": "R",
-    "xp": 39771,
     "baseXP": 9820,
-    "rXP": 647
   },
   {
     "name": "Sins of Attrition",
@@ -6257,9 +5273,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Yugoloth",
     "favor": 21,
     "difficulty": "R",
-    "xp": 31023,
     "baseXP": 7660,
-    "rXP": 647
   },
   {
     "name": "The Weapons Shipment",
@@ -6268,9 +5282,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 18,
     "difficulty": "R",
-    "xp": 28573,
     "baseXP": 6885,
-    "rXP": 658
   },
   {
     "name": "Genesis Point",
@@ -6279,9 +5291,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Yugoloth",
     "favor": 24,
     "difficulty": "R",
-    "xp": 40255,
     "baseXP": 9700,
-    "rXP": 658
   },
   {
     "name": "Wrath of the Flame",
@@ -6290,9 +5300,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Twelve",
     "favor": 18,
     "difficulty": "R",
-    "xp": 10968,
     "baseXP": 2742,
-    "rXP": 642
   },
   {
     "name": "Bastion of Power",
@@ -6301,9 +5309,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Yugoloth",
     "favor": 21,
     "difficulty": "R",
-    "xp": 31602,
     "baseXP": 7615,
-    "rXP": 658
   },
   {
     "name": "Tower of Despair",
@@ -6317,9 +5323,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "The Yugoloth",
     "favor": 24,
     "difficulty": "",
-    "xp": null,
     "baseXP": 12500,
-    "rXP": null
   },
   {
     "name": "The Master Artificer",
@@ -6328,9 +5332,7 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Cannith",
     "favor": 21,
     "difficulty": "",
-    "xp": null,
     "baseXP": 4900,
-    "rXP": null
   },
   {
     "name": "The Lord of Blades",
@@ -6339,8 +5341,6 @@ window.HEROIC_QUESTS_BASE =
     "patron": "House Cannith",
     "favor": 21,
     "difficulty": "",
-    "xp": null,
     "baseXP": 6816,
-    "rXP": null
   } 
 ];

@@ -72,8 +72,8 @@ function _configToTextareaLines(configArr) {
         .map(q => {
             const travel = q.travelTime != null ? q.travelTime : '';
             const qtime  = q.qTime != null ? q.qTime : '';
-            const bonus  = (q.xpMult !== null && q.xpMult !== undefined && q.xpMult !== '')
-                ? Math.round(Number(q.xpMult) * 100) : '';
+            const bonus  = (q.xpmods !== null && q.xpmods !== undefined && q.xpmods !== '')
+                ? Math.round(Number(q.xpmods) * 100) : '';
             const opt    = (q.optionalXP !== null && q.optionalXP !== undefined && q.optionalXP !== '')
                 ? Math.round(Number(q.optionalXP) * 100) : '';
             return `${q.name}\t${travel}\t${qtime}\t${bonus}\t${opt}`;
@@ -97,7 +97,7 @@ function _parseConfigLines(text) {
         const optRaw    = parts[4] != null ? parts[4].trim() : '';
         if (travelRaw !== '') { const v = parseFloat(travelRaw); if (isFinite(v)) entry.travelTime = v; }
         if (qtimeRaw  !== '') { const v = parseFloat(qtimeRaw);  if (isFinite(v)) entry.qTime      = v; }
-        if (bonusRaw  !== '') { const v = parseFloat(bonusRaw);  if (isFinite(v)) entry.xpMult     = v / 100; }
+        if (bonusRaw  !== '') { const v = parseFloat(bonusRaw);  if (isFinite(v)) entry.xpmods     = v / 100; }
         if (optRaw    !== '') { const v = parseFloat(optRaw);    if (isFinite(v)) entry.optionalXP = v / 100; }
         result.push(entry);
     }
@@ -853,7 +853,7 @@ function hydrateLevelplan(stored, questSource, mode) {
         if (!base) return null; // unknown quest — drop silently
 
         if (entry.elite) {
-            const eliteXP = Math.round(base.baseXP * (1 + base.xpMult + base.optionalXP - (mode === 'epic' ? 1.90 : 2.05)));
+            const eliteXP = Math.round(base.baseXP * (1 + base.xpmods + base.optionalXP - (mode === 'epic' ? 1.90 : 2.05)));
             return { ...base, name: base.name + ' (repeat)', xp: eliteXP, travelTime: 0.0, isEliteCopy: true, difficulty: 'E', source: 'quests', patron: null, favor: null };
         }
         const id = source.indexOf(base);
@@ -979,7 +979,7 @@ function getLearningTomeBonus() {
 
 // Save/load the xp-multiplier input to/from localStorage
 function saveSettings() {
-    const xpMult = document.getElementById('xp-multiplier')?.value;
+    const xpmods = document.getElementById('xp-multiplier')?.value;
     const patronView = document.getElementById('patron-view')?.value || 'None';
     const mode = document.getElementById('mode-switch')?.checked ? 'epic' : 'heroic';
     const vipSagas = document.getElementById('vip-sagas-header')?.checked ? true : false;
@@ -992,7 +992,7 @@ function saveSettings() {
         if (existing.learningTomeByMode) learningTomeByMode = existing.learningTomeByMode;
     } catch (e) {}
     learningTomeByMode[mode] = learningTome;
-    localStorage.setItem(SETTINGS_KEY, JSON.stringify({ xpMultiplier: xpMult, patronView, mode, vipSagas, twelveTokens, learningTomeByMode }));
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify({ xpmodsiplier: xpmods, patronView, mode, vipSagas, twelveTokens, learningTomeByMode }));
     // Persist custom config and active preset separately
     localStorage.setItem(CONFIG_KEY, JSON.stringify({
         activePreset: ACTIVE_QUESTS_PRESET,
@@ -1020,7 +1020,7 @@ function loadSettings() {
         const raw = localStorage.getItem(SETTINGS_KEY);
     if (!raw) return;
     try {
-        const { xpMultiplier, patronView, favorView, mode, vipSagas, twelveTokens, learningTomeByMode } = JSON.parse(raw);
+        const { xpmodsiplier, patronView, favorView, mode, vipSagas, twelveTokens, learningTomeByMode } = JSON.parse(raw);
         const xpInput = document.getElementById('xp-multiplier');
         const pvSelect = document.getElementById('patron-view');
         const modeSwitch = document.getElementById('mode-switch');
@@ -1028,7 +1028,7 @@ function loadSettings() {
         const tokensCb = document.getElementById('twelve-tokens');
         const tokensLabel = document.getElementById('twelve-tokens-label');
         if (vipCb && vipSagas !== undefined) vipCb.checked = vipSagas;
-        if (xpInput && xpMultiplier !== undefined) xpInput.value = xpMultiplier;
+        if (xpInput && xpmodsiplier !== undefined) xpInput.value = xpmodsiplier;
         const pv = patronView !== undefined ? patronView : favorView;
         if (pvSelect && pv !== undefined) pvSelect.value = pv;
         if (modeSwitch && mode !== undefined) {
@@ -1178,7 +1178,7 @@ function saveToFile() {
         if (raw) learningTomeByMode = JSON.parse(raw).learningTomeByMode || learningTomeByMode;
     } catch (e) {}
     const output = {
-        xpMultiplier: parseFloat(document.getElementById('xp-multiplier')?.value) || 1.15,
+        xpmodsiplier: parseFloat(document.getElementById('xp-multiplier')?.value) || 1.15,
         learningTomeByMode,
         configPreset: ACTIVE_QUESTS_PRESET,
         heroic: serialiseLevelplan(data.levelplanByMode.heroic),
@@ -1281,7 +1281,7 @@ function loadFromFile() {
                 // All other cases (no filePreset, ukenburger+ukenburger, custom without included config): load normally
 
                                 const xpInput = document.getElementById('xp-multiplier');
-                if (xpInput && parsed.xpMultiplier !== undefined) xpInput.value = parsed.xpMultiplier;
+                if (xpInput && parsed.xpmodsiplier !== undefined) xpInput.value = parsed.xpmodsiplier;
                 // Restore per-mode learning tome values from the file.
                 if (parsed.learningTomeByMode) {
                     const currentMode = getCurrentMode();
@@ -2388,7 +2388,7 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
                 eliteMarkerDiv.textContent = item.difficulty;
                                 if (item.difficulty === 'R' && !item.isEliteCopy && !eliteAlreadyExists) {
                     const multiplier = parseFloat(document.getElementById('xp-multiplier')?.value);
-                    const rawEliteXP = Math.round(item.baseXP * (1 + item.xpMult + item.optionalXP - (getCurrentMode() === 'epic' ? 1.90 : 2.05)));
+                    const rawEliteXP = Math.round(item.baseXP * (1 + item.xpmods + item.optionalXP - (getCurrentMode() === 'epic' ? 1.90 : 2.05)));
                     const eliteXPMin = item.qTime > 0 ? Math.floor(rawEliteXP * multiplier / item.qTime) : '';
                     const eliteXPMinForColor = item.qTime > 0 ? Math.floor(rawEliteXP / item.qTime) : '';
                     const eliteXPMinColor = (eliteXPMinForColor !== '' && colorLevel != null) ? getXpMinColor(eliteXPMinForColor, colorLevel) : null;
@@ -2642,7 +2642,7 @@ function quickAddQuest(questIndex, singleOnly = false) {
 // Insert an elite copy of an R quest right below it in the levelplan
 function insertEliteCopy(index, sourceItem) {
     if (data.levelplan.some(i => i.isEliteCopy && i.name === sourceItem.name + ' (repeat)')) return;
-    const eliteXP = Math.round(sourceItem.baseXP * (1 + sourceItem.xpMult + sourceItem.optionalXP - (getCurrentMode() === 'epic' ? 1.90 : 2.05)));
+    const eliteXP = Math.round(sourceItem.baseXP * (1 + sourceItem.xpmods + sourceItem.optionalXP - (getCurrentMode() === 'epic' ? 1.90 : 2.05)));
     const eliteCopy = { ...sourceItem, name: sourceItem.name + ' (repeat)', xp: eliteXP, travelTime: 0.0, isEliteCopy: true, difficulty: 'E', patron: null, favor: null };
     delete eliteCopy.id;
     data.levelplan.splice(index + 1, 0, eliteCopy);
@@ -3519,8 +3519,8 @@ function _exportCustomConfigToFile() {
             const questName = `"${q.name}"`;
             const travel = q.travelTime != null ? q.travelTime : '';
             const qtime = q.qTime != null ? q.qTime : '';
-            const bonus = (q.xpMult !== null && q.xpMult !== undefined && q.xpMult !== '') 
-                ? Math.round(Number(q.xpMult) * 100) : '';
+            const bonus = (q.xpmods !== null && q.xpmods !== undefined && q.xpmods !== '') 
+                ? Math.round(Number(q.xpmods) * 100) : '';
             const opt = (q.optionalXP !== null && q.optionalXP !== undefined && q.optionalXP !== '') 
                 ? Math.round(Number(q.optionalXP) * 100) : '';
             csvContent += `${questName},${travel},${qtime},${bonus},${opt}\n`;
@@ -3594,7 +3594,7 @@ function importConfig() {
                         const opt = parts[4];
                         if (travel !== '') { const v = parseFloat(travel); if (isFinite(v)) entry.travelTime = v; }
                         if (qtime !== '') { const v = parseFloat(qtime); if (isFinite(v)) entry.qTime = v; }
-                        if (bonus !== '') { const v = parseFloat(bonus); if (isFinite(v)) entry.xpMult = v / 100; }
+                        if (bonus !== '') { const v = parseFloat(bonus); if (isFinite(v)) entry.xpmods = v / 100; }
                         if (opt !== '') { const v = parseFloat(opt); if (isFinite(v)) entry.optionalXP = v / 100; }
                         importedData.push(entry);
                         continue;
@@ -3616,7 +3616,7 @@ function importConfig() {
                     const opt = match[5]?.trim();
                     if (travel !== '') { const v = parseFloat(travel); if (isFinite(v)) entry.travelTime = v; }
                     if (qtime !== '') { const v = parseFloat(qtime); if (isFinite(v)) entry.qTime = v; }
-                    if (bonus !== '') { const v = parseFloat(bonus); if (isFinite(v)) entry.xpMult = v / 100; }
+                    if (bonus !== '') { const v = parseFloat(bonus); if (isFinite(v)) entry.xpmods = v / 100; }
                     if (opt !== '') { const v = parseFloat(opt); if (isFinite(v)) entry.optionalXP = v / 100; }
                     importedData.push(entry);
                 }
