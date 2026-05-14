@@ -47,9 +47,28 @@ function _rebuildEpicQuests() {
     );
 }
 
+// Compute the .xp field on every quest in HEROIC_QUESTS and EPIC_QUESTS.
+// For quests with baseXP: xp = round(baseXP * (1 + xpmods + optionalXP + learningTomeBonus))
+// Sagas and custom-xp entries (no baseXP) keep their existing .xp unchanged.
+function _computeQuestXP() {
+    const tomeBonus = getLearningTomeBonus();
+    for (const quests of [window.HEROIC_QUESTS, window.EPIC_QUESTS]) {
+        if (!quests) continue;
+        for (const q of quests) {
+            if (q.baseXP != null && q.baseXP > 0) {
+                const xpmods = (q.xpmods != null && q.xpmods !== '') ? Number(q.xpmods) : 0;
+                const optXP  = (q.optionalXP != null && q.optionalXP !== '') ? Number(q.optionalXP) : 0;
+                q.xp = Math.round(q.baseXP * (1 + xpmods + optXP + tomeBonus));
+            }
+            // else: saga / custom-xp entry — .xp stays as defined in the base data
+        }
+    }
+}
+
 // Initial build (default: Ukenburger)
 _rebuildHeroicQuests();
 _rebuildEpicQuests();
+_computeQuestXP();
 
 // Cache for config textarea content per mode to preserve user edits when switching
 const CONFIG_TEXTAREA_CACHE = {
@@ -377,8 +396,10 @@ function initializeApp() {
         { name: 'XP Pot', xp: 0, source: 'special', isXpPot: true }
     ];
 
-    // loadSettings() must run before hydrating the level plan (and before setActiveMode())
+        // loadSettings() must run before hydrating the level plan (and before setActiveMode())
     loadSettings();
+    // Recompute quest XP after settings are loaded (learning tome may have changed)
+    _computeQuestXP();
 
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
@@ -428,10 +449,22 @@ function initializeApp() {
     // (loadSettings already restores the saved value; this is a safe fallback
     // for first-run when there are no saved settings yet.)
     populateLearningTomeSelect();
-    const learningTomeSel = document.getElementById('learning-tome');
+        const learningTomeSel = document.getElementById('learning-tome');
     if (learningTomeSel) {
         learningTomeSel.addEventListener('change', () => {
             saveSettings();
+            _computeQuestXP();
+            // Invalidate xpMin table cache since quest XP values changed
+            _xpMinTableCache.heroic = null;
+            _xpMinTableCache.epic = null;
+            computeXpMinTable();
+            // Re-hydrate levelplan items so they pick up new XP values
+            const heroicSerial = serialiseLevelplan(data.levelplanByMode.heroic);
+            const epicSerial   = serialiseLevelplan(data.levelplanByMode.epic);
+            data.levelplanByMode.heroic = hydrateLevelplan(heroicSerial, HEROIC_QUESTS, 'heroic');
+            data.levelplanByMode.epic   = hydrateLevelplan(epicSerial,   EPIC_QUESTS, 'epic');
+            data.levelplan = data.levelplanByMode[getCurrentMode()];
+            rebuildQuestsFromLevelplan();
             renderLists();
         });
     }
@@ -559,8 +592,9 @@ function initializeApp() {
                     savedTomeForMode = (parsed.learningTomeByMode && parsed.learningTomeByMode[newMode]) || '0';
                 } catch (e) { /* ignore */ }
             }
-            populateLearningTomeSelect(savedTomeForMode);
+                        populateLearningTomeSelect(savedTomeForMode);
             saveSettings();
+            _computeQuestXP();
             setActiveMode(getCurrentMode());
             // Clear quest filters when switching modes
             const levelInput = document.getElementById('quests-level-filter');
@@ -1012,8 +1046,9 @@ function loadSettings() {
             if (activePreset === 'custom' || activePreset === 'ukenburger') {
                 window.ACTIVE_QUESTS_PRESET = activePreset;
             }
-            _rebuildHeroicQuests();
+                        _rebuildHeroicQuests();
             _rebuildEpicQuests();
+            _computeQuestXP();
         } catch (e) { /* ignore corrupt config */ }
     }
 
@@ -1232,10 +1267,11 @@ function loadFromFile() {
 
                 if (filePreset === 'ukenburger' && ACTIVE_QUESTS_PRESET === 'custom') {
                     // File used Ukenburger but user currently has Custom active
-                    if (confirm('This plan was created with the Ukenburger config. Switch to Ukenburger?')) {
+                                        if (confirm('This plan was created with the Ukenburger config. Switch to Ukenburger?')) {
                         window.ACTIVE_QUESTS_PRESET = 'ukenburger';
                         _rebuildHeroicQuests();
                         _rebuildEpicQuests();
+                        _computeQuestXP();
                         _persistConfig();
                     }
                     // else: load using current custom config
@@ -1245,12 +1281,13 @@ function loadFromFile() {
                     const userConfigStr = JSON.stringify({ h: HEROIC_CUSTOM_CONFIG, e: EPIC_CUSTOM_CONFIG });
 
                     if (!userHasCustomConfig) {
-                        // User has no custom config yet — silently adopt the file's config
+                                                // User has no custom config yet — silently adopt the file's config
                         window.HEROIC_CUSTOM_CONFIG = parsed.heroicCustomConfig;
                         window.EPIC_CUSTOM_CONFIG   = Array.isArray(parsed.epicCustomConfig) ? parsed.epicCustomConfig : [];
                         window.ACTIVE_QUESTS_PRESET = 'custom';
                         _rebuildHeroicQuests();
                         _rebuildEpicQuests();
+                        _computeQuestXP();
                         _persistConfig();
 
                     } else if (fileConfigStr !== userConfigStr) {
@@ -1266,12 +1303,13 @@ function loadFromFile() {
                         if (choice === 'export') {
                             _exportCustomConfigToFile();
                         }
-                        if (choice === 'overwrite' || choice === 'export') {
+                                                if (choice === 'overwrite' || choice === 'export') {
                             window.HEROIC_CUSTOM_CONFIG = parsed.heroicCustomConfig;
                             window.EPIC_CUSTOM_CONFIG   = Array.isArray(parsed.epicCustomConfig) ? parsed.epicCustomConfig : [];
                             window.ACTIVE_QUESTS_PRESET = 'custom';
                             _rebuildHeroicQuests();
                             _rebuildEpicQuests();
+                            _computeQuestXP();
                             _persistConfig();
                         }
                         // 'keep': load with current config unchanged
@@ -3413,8 +3451,9 @@ function saveConfig(textarea) {
         window.ACTIVE_QUESTS_PRESET = 'ukenburger';
     }
 
-    _rebuildHeroicQuests();
+        _rebuildHeroicQuests();
     _rebuildEpicQuests();
+    _computeQuestXP();
 
     // Re-hydrate both levelplans so items pick up the updated config fields
     const heroicSerial = serialiseLevelplan(data.levelplanByMode.heroic);
