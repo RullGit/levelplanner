@@ -47,28 +47,22 @@ function _rebuildEpicQuests() {
     );
 }
 
-// Compute the .xp field on every quest in HEROIC_QUESTS and EPIC_QUESTS.
-// For quests with baseXP: xp = round(baseXP * (1 + xpmods + optionalXP + learningTomeBonus))
-// Sagas and custom-xp entries (no baseXP) keep their existing .xp unchanged.
-function _computeQuestXP() {
-    const tomeBonus = getLearningTomeBonus();
-    for (const quests of [window.HEROIC_QUESTS, window.EPIC_QUESTS]) {
-        if (!quests) continue;
-        for (const q of quests) {
-            if (q.baseXP != null && q.baseXP > 0) {
-                const xpmods = (q.xpmods != null && q.xpmods !== '') ? Number(q.xpmods) : 0;
-                const optXP  = (q.optionalXP != null && q.optionalXP !== '') ? Number(q.optionalXP) : 0;
-                q.xp = Math.round(q.baseXP * (1 + xpmods + optXP + tomeBonus));
-            }
-            // else: saga / custom-xp entry — .xp stays as defined in the base data
+function _computeQuestXP(mode) {
+
+    const tomeBonus =  getLearningTomeBonus(mode);
+    for (const q of (mode === 'heroic' ? window.HEROIC_QUESTS : window.EPIC_QUESTS)) {
+        if (q.baseXP != null && q.baseXP > 0) {
+            const xpmods = (q.xpmods != null && q.xpmods !== '') ? Number(q.xpmods) : 0;
+            const optXP  = (q.optionalXP != null && q.optionalXP !== '') ? Number(q.optionalXP) : 0;
+            q.xp = Math.round(q.baseXP * (1 + xpmods + optXP + getQuestVariableBonus(mode, q.difficulty, false, tomeBonus)));
         }
+        // else: saga / custom-xp entry — .xp stays as defined in the base data
     }
 }
 
 // Initial build (default: Ukenburger)
 _rebuildHeroicQuests();
 _rebuildEpicQuests();
-_computeQuestXP();
 
 // Cache for config textarea content per mode to preserve user edits when switching
 const CONFIG_TEXTAREA_CACHE = {
@@ -396,10 +390,10 @@ function initializeApp() {
         { name: 'XP Pot', xp: 0, source: 'special', isXpPot: true }
     ];
 
-        // loadSettings() must run before hydrating the level plan (and before setActiveMode())
+    // loadSettings() must run before hydrating the level plan (and before setActiveMode())
     loadSettings();
-    // Recompute quest XP after settings are loaded (learning tome may have changed)
-    _computeQuestXP();
+    _computeQuestXP('heroic');
+    _computeQuestXP('epic');
 
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
@@ -417,6 +411,7 @@ function initializeApp() {
     }
 
     setActiveMode(getCurrentMode());
+
     checkRequirements();
     renderLists();
     setupDragListeners();
@@ -449,21 +444,28 @@ function initializeApp() {
     // (loadSettings already restores the saved value; this is a safe fallback
     // for first-run when there are no saved settings yet.)
     populateLearningTomeSelect();
-        const learningTomeSel = document.getElementById('learning-tome');
+    const learningTomeSel = document.getElementById('learning-tome');
     if (learningTomeSel) {
         learningTomeSel.addEventListener('change', () => {
             saveSettings();
-            _computeQuestXP();
-            // Invalidate xpMin table cache since quest XP values changed
-            _xpMinTableCache.heroic = null;
-            _xpMinTableCache.epic = null;
-            computeXpMinTable();
-            // Re-hydrate levelplan items so they pick up new XP values
-            const heroicSerial = serialiseLevelplan(data.levelplanByMode.heroic);
-            const epicSerial   = serialiseLevelplan(data.levelplanByMode.epic);
-            data.levelplanByMode.heroic = hydrateLevelplan(heroicSerial, HEROIC_QUESTS, 'heroic');
-            data.levelplanByMode.epic   = hydrateLevelplan(epicSerial,   EPIC_QUESTS, 'epic');
-            data.levelplan = data.levelplanByMode[getCurrentMode()];
+            const mode = getCurrentMode();
+            _computeQuestXP(mode);
+            if (mode === 'epic') {
+                // Invalidate xpMin table cache since quest XP values changed
+                _xpMinTableCache.epic = null;
+                computeXpMinTable();
+                // Re-hydrate levelplan items so they pick up new XP values
+                const epicSerial = serialiseLevelplan(data.levelplanByMode.epic);
+                data.levelplanByMode.epic = hydrateLevelplan(epicSerial,   EPIC_QUESTS, 'epic');
+            } else {
+                // Invalidate xpMin table cache since quest XP values changed
+                _xpMinTableCache.heroic = null;
+                computeXpMinTable();
+                // Re-hydrate levelplan items so they pick up new XP values
+                const heroicSerial = serialiseLevelplan(data.levelplanByMode.heroic);
+                data.levelplanByMode.heroic = hydrateLevelplan(heroicSerial, HEROIC_QUESTS, 'heroic');
+            }
+            data.levelplan = data.levelplanByMode[mode];
             rebuildQuestsFromLevelplan();
             renderLists();
         });
@@ -579,7 +581,7 @@ function initializeApp() {
             }
         };
         applyModeClass();
-                modeSwitch.addEventListener('change', () => {
+        modeSwitch.addEventListener('change', () => {
             applyModeClass();
             // Repopulate the learning tome dropdown for the new mode and
             // restore the per-mode saved value from localStorage.
@@ -592,9 +594,9 @@ function initializeApp() {
                     savedTomeForMode = (parsed.learningTomeByMode && parsed.learningTomeByMode[newMode]) || '0';
                 } catch (e) { /* ignore */ }
             }
-                        populateLearningTomeSelect(savedTomeForMode);
+            populateLearningTomeSelect(savedTomeForMode);
             saveSettings();
-            _computeQuestXP();
+            _computeQuestXP(document.getElementById('mode-switch')?.checked ? 'epic' : 'heroic');
             setActiveMode(getCurrentMode());
             // Clear quest filters when switching modes
             const levelInput = document.getElementById('quests-level-filter');
@@ -887,8 +889,7 @@ function hydrateLevelplan(stored, questSource, mode) {
         if (!base) return null; // unknown quest — drop silently
 
         if (entry.elite) {
-            const eliteXpMod = base.xpmods - 1.75 + getLearningTomeRepeatBonus();
-            const eliteXP = base.baseXP * ( 1 + base.optionalXP + eliteXpMod);
+            const eliteXP = base.baseXP * ( 1 + base.optionalXP + base.xpmods + getQuestVariableBonus(mode, 'E', true));
             return { ...base, name: base.name + ' (repeat)', xp: eliteXP, travelTime: 0.0, isEliteCopy: true, difficulty: 'E', source: 'quests', patron: null, favor: null };
         }
         const id = source.indexOf(base);
@@ -1003,6 +1004,35 @@ function populateLearningTomeSelect(restoreValue) {
     }
 }
 
+function getQuestVariableBonus(mode, difficulty, repeat) {
+    const learning = repeat ? getLearningTomeRepeatBonus(mode) : getLearningTomeBonus(mode);
+
+    return getQuestVariableBonus (mode, difficulty, repeat, learning);
+}
+
+function getQuestVariableBonus(mode, difficulty, repeat, learningTomeBonus) {
+    let delve = 0;
+    let firstTimeDif = 0;
+    if (difficulty === 'R') {
+        delve = 1.5;
+        firstTimeDif = 0.45;
+    } else if (difficulty === 'E') {
+        delve = 1;
+        firstTimeDif = 0.45;
+    } else if (difficulty === 'H') {
+        delve = 0.5;
+        firstTimeDif = 0.2;
+    } else {
+        firstTimeDif = 0.2;
+    }
+
+    const firstTimeDay = repeat ? 0 : mode == 'epic' ? 0.4 : 0.25;
+
+    return (firstTimeDif + repeat ? 0 : delve) + learningTomeBonus + firstTimeDay;
+}
+
+
+
 // Returns the additive per-item XP bonus fraction from the currently selected
 // Tome of Learning (e.g. 0.25 for a 25% tome).
 function getLearningTomeBonus() {
@@ -1056,13 +1086,12 @@ function loadSettings() {
             if (activePreset === 'custom' || activePreset === 'ukenburger') {
                 window.ACTIVE_QUESTS_PRESET = activePreset;
             }
-                        _rebuildHeroicQuests();
+            _rebuildHeroicQuests();
             _rebuildEpicQuests();
-            _computeQuestXP();
         } catch (e) { /* ignore corrupt config */ }
     }
 
-        const raw = localStorage.getItem(SETTINGS_KEY);
+    const raw = localStorage.getItem(SETTINGS_KEY);
     if (!raw) return;
     try {
         const { xpmultiplier, patronView, favorView, mode, vipSagas, twelveTokens, learningTomeByMode } = JSON.parse(raw);
@@ -1281,7 +1310,8 @@ function loadFromFile() {
                         window.ACTIVE_QUESTS_PRESET = 'ukenburger';
                         _rebuildHeroicQuests();
                         _rebuildEpicQuests();
-                        _computeQuestXP();
+                        _computeQuestXP('heroic');
+                        _computeQuestXP('epic');
                         _persistConfig();
                     }
                     // else: load using current custom config
@@ -1297,7 +1327,8 @@ function loadFromFile() {
                         window.ACTIVE_QUESTS_PRESET = 'custom';
                         _rebuildHeroicQuests();
                         _rebuildEpicQuests();
-                        _computeQuestXP();
+                        _computeQuestXP('heroic');
+                        _computeQuestXP('epic');
                         _persistConfig();
 
                     } else if (fileConfigStr !== userConfigStr) {
@@ -1319,7 +1350,8 @@ function loadFromFile() {
                             window.ACTIVE_QUESTS_PRESET = 'custom';
                             _rebuildHeroicQuests();
                             _rebuildEpicQuests();
-                            _computeQuestXP();
+                            _computeQuestXP('heroic');
+                            _computeQuestXP('epic');
                             _persistConfig();
                         }
                         // 'keep': load with current config unchanged
@@ -1327,8 +1359,7 @@ function loadFromFile() {
                     // else configs are identical — load normally
                 }
                 // All other cases (no filePreset, ukenburger+ukenburger, custom without included config): load normally
-
-                                const xpInput = document.getElementById('xp-multiplier');
+                const xpInput = document.getElementById('xp-multiplier');
                 if (xpInput && parsed.xpmultiplier !== undefined) xpInput.value = parsed.xpmultiplier;
                 // Restore per-mode learning tome values from the file.
                 if (parsed.learningTomeByMode) {
@@ -2436,7 +2467,7 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
                 eliteMarkerDiv.textContent = item.difficulty;
                                 if (item.difficulty === 'R' && !item.isEliteCopy && !eliteAlreadyExists) {
                     const multiplier = parseFloat(document.getElementById('xp-multiplier')?.value);
-                    const rawEliteXP = Math.round(item.baseXP * (1 + item.xpmods + item.optionalXP - 1.75 + getLearningTomeRepeatBonus()));
+                    const rawEliteXP = Math.round(item.baseXP * (1 + item.xpmods + item.optionalXP + getQuestVariableBonus(getCurrentMode(), 'E', true)));
                     const eliteXPMin = item.qTime > 0 ? Math.floor(rawEliteXP * multiplier / item.qTime) : '';
                     const eliteXPMinForColor = item.qTime > 0 ? Math.floor(rawEliteXP / item.qTime) : '';
                     const eliteXPMinColor = (eliteXPMinForColor !== '' && colorLevel != null) ? getXpMinColor(eliteXPMinForColor, colorLevel) : null;
@@ -3461,9 +3492,10 @@ function saveConfig(textarea) {
         window.ACTIVE_QUESTS_PRESET = 'ukenburger';
     }
 
-        _rebuildHeroicQuests();
+    _rebuildHeroicQuests();
     _rebuildEpicQuests();
-    _computeQuestXP();
+    _computeQuestXP('heroic');
+    _computeQuestXP('epic');
 
     // Re-hydrate both levelplans so items pick up the updated config fields
     const heroicSerial = serialiseLevelplan(data.levelplanByMode.heroic);
