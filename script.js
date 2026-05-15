@@ -54,7 +54,7 @@ function _computeQuestXP(mode) {
         if (q.baseXP != null && q.baseXP > 0) {
             const xpmods = (q.xpmods != null && q.xpmods !== '') ? Number(q.xpmods) : 0;
             const optXP  = (q.optionalXP != null && q.optionalXP !== '') ? Number(q.optionalXP) : 0;
-            q.xp = Math.round(q.baseXP * (1 + xpmods + optXP + getQuestVariableBonus(mode, q.difficulty, false, tomeBonus)));
+            q.xp = Math.round(q.baseXP * (1 + xpmods + optXP + getQuickQuestVariableBonus(mode, q.difficulty, false, tomeBonus)));
         }
         // else: saga / custom-xp entry — .xp stays as defined in the base data
     }
@@ -675,6 +675,9 @@ function initializeApp() {
             renderConfigList();
         });
     }
+
+    // Leveling Plan search box
+    initLevelplanSearch();
 }
 
 // Per-level xpMin thresholds computed by accumulating XP (best-first) up to 75%
@@ -893,7 +896,12 @@ function hydrateLevelplan(stored, questSource, mode) {
             return { ...base, name: base.name + ' (repeat)', xp: eliteXP, travelTime: 0.0, isEliteCopy: true, difficulty: 'E', source: 'quests', patron: null, favor: null };
         }
         const id = source.indexOf(base);
-        return { ...base, id, source: 'quests' };
+        const result = { ...base, id, source: 'quests' };
+        // Restore slayer bonus if present
+        if (entry.slayerBonus) {
+            result.slayerBonus = entry.slayerBonus;
+        }
+        return result;
     }).filter(Boolean);
 }
 
@@ -1007,10 +1015,10 @@ function populateLearningTomeSelect(restoreValue) {
 function getQuestVariableBonus(mode, difficulty, repeat) {
     const learning = repeat ? getLearningTomeRepeatBonus(mode) : getLearningTomeBonus(mode);
 
-    return getQuestVariableBonus (mode, difficulty, repeat, learning);
+    return getQuickQuestVariableBonus(mode, difficulty, repeat, learning);
 }
 
-function getQuestVariableBonus(mode, difficulty, repeat, learningTomeBonus) {
+function getQuickQuestVariableBonus(mode, difficulty, repeat, learningTomeBonus) {
     let delve = 0;
     let firstTimeDif = 0;
     if (difficulty === 'R') {
@@ -1028,7 +1036,7 @@ function getQuestVariableBonus(mode, difficulty, repeat, learningTomeBonus) {
 
     const firstTimeDay = repeat ? 0 : mode == 'epic' ? 0.4 : 0.25;
 
-    return (firstTimeDif + repeat ? 0 : delve) + learningTomeBonus + firstTimeDay;
+    return firstTimeDif + (repeat ? 0 : delve) + learningTomeBonus + firstTimeDay;
 }
 
 
@@ -1230,7 +1238,12 @@ function serialiseLevelplan(levelplan) {
                 : item.name;
             return { name: baseName, elite: true };
         }
-        return { name: item.name };
+        const result = { name: item.name };
+        // Store slayer bonus if present and not default
+        if (item.slayerBonus && item.slayerBonus !== 'No Slayer Bonus') {
+            result.slayerBonus = item.slayerBonus;
+        }
+        return result;
     });
 }
 
@@ -1582,7 +1595,8 @@ function renderList(listId) {
             // For custom items: calculate xpMin based on custom XP and time
             // Respect the applyMultipliers flag for xpMin calculation
             const cumMultiplier = multiplier + activePotPct / 100;
-            const totalTime = (item.travelTime || 0) + (item.qTime || 0);
+            const effectiveQTime = getEffectiveQTime(item);
+            const totalTime = (item.travelTime || 0) + effectiveQTime;
             const customXpForMin = item.applyMultipliers ? Math.round((item.xp || 0) * cumMultiplier) : (item.xp || 0);
             row.xpMin = totalTime > 0 ? Math.floor(customXpForMin / totalTime) : '';
             row.xpMinAdjusted = false;
@@ -1595,7 +1609,8 @@ function renderList(listId) {
             const related = collectItemsForXpMin(item, levelplanNameSet, allItemsByName);
             const relatedReqs = related.slice(1).filter(Boolean);
             const relatedHasMissingTime = relatedReqs.some(it => (it.qTime === null || it.qTime === undefined) && (it.travelTime === null || it.travelTime === undefined));
-            const plainTime = (item.travelTime || 0) + (item.qTime || 0);
+            const effectiveQTime = getEffectiveQTime(item);
+            const plainTime = (item.travelTime || 0) + effectiveQTime;
             const plainXpMin = plainTime > 0 ? Math.floor((item.xp || 0) * multiplier / plainTime) : '';
             row.unmetRequirements = related.slice(1).map(it => it.name);
             // Detect sagas using explicit flag set in data.
@@ -1637,7 +1652,7 @@ function renderList(listId) {
                                                 if (deps && deps.length > 0) {
                             const group = [item, ...deps];
                             const totalXP = group.reduce((s, it) => s + (it.xp || 0) * multiplier, 0);
-                            const totalTime = group.reduce((s, it) => s + (it.travelTime || 0) + (it.qTime || 0), 0);
+                            const totalTime = group.reduce((s, it) => s + (it.travelTime || 0) + getEffectiveQTime(it), 0);
                             row.cumulativeXpMin = totalTime > 0 ? Math.floor(totalXP / totalTime) : '';
                             row.dependentNames = deps.map(it => it.name);
                         }
@@ -1646,7 +1661,7 @@ function renderList(listId) {
             } else {
                 // For quests list: keep original behavior even for sagas
                 const totalXP = related.reduce((sum, it) => sum + (it.xp || 0) * multiplier, 0);
-                const totalTime = related.reduce((sum, it) => sum + (it.travelTime || 0) + (it.qTime || 0), 0);
+                const totalTime = related.reduce((sum, it) => sum + (it.travelTime || 0) + getEffectiveQTime(it), 0);
                 if (relatedHasMissingTime) {
                     row.xpMin = null;
                     row.xpMinAdjusted = false;
@@ -1662,14 +1677,15 @@ function renderList(listId) {
                 }
             }
                 } else if (item.isEliteCopy) {
-            const plainTime = (item.travelTime || 0) + (item.qTime || 0);
+            const effectiveQTime = getEffectiveQTime(item);
+            const plainTime = (item.travelTime || 0) + effectiveQTime;
             row.xpMin = plainTime > 0 ? Math.floor((item.xp || 0) * multiplier / plainTime) : '';
             row.xpMinAdjusted = false;
             row.xpMinPlain = '';
             row.unmetRequirements = [];
             row.xpMinForColor = plainTime > 0 ? Math.floor((item.xp || 0) / plainTime) : '';
         } else if (item.isCustom) {
-            const qTime = item.qTime || 0;
+            const qTime = getEffectiveQTime(item);
             row.xpMin = qTime > 0 ? Math.floor((item.xp || 0) / qTime) : '';
             row.xpMinAdjusted = false;
             row.xpMinPlain = '';
@@ -1785,7 +1801,7 @@ function renderLevelplanFooter() {
     // Total effective time: sum of qTime and travelTime.
     let totalTime = 0;
     items.forEach(item => {
-        totalTime += (item.travelTime || 0) + (item.qTime || 0);
+        totalTime += (item.travelTime || 0) + getEffectiveQTime(item);
     });
 
     // XP/min using total effective time (total XP divided by effective minutes)
@@ -1871,6 +1887,58 @@ function renderLevelplanFooter() {
     }
 }
 
+// Sort button handler for the levelplan footer: sorts the levelplan by quest `id`.
+// Items without a numeric `id` are assigned to the nearest item that has an `id`,
+// so they remain adjacent to quests with IDs. Sort is stable for items sharing the same key.
+function lpFooterSort() {
+    const arr = data.levelplan || [];
+    if (!Array.isArray(arr) || arr.length <= 1) return;
+
+    // If there are no items with numeric id, nothing to do.
+    const hasAnyId = arr.some(it => Number.isFinite(it && it.id));
+    if (!hasAnyId) return;
+
+    // Build assignment: each item gets a numeric key = its id, or the nearest neighbor's id.
+    const assigned = arr.map((it, idx) => {
+        if (Number.isFinite(it && it.id)) return { idx, key: it.id, item: it, orig: idx };
+        // find nearest item with id to the left
+        let left = idx - 1;
+        let leftDist = Infinity, leftId = null;
+        while (left >= 0) {
+            if (Number.isFinite(arr[left] && arr[left].id)) { leftDist = idx - left; leftId = arr[left].id; break; }
+            left--;
+        }
+        // find nearest item with id to the right
+        let right = idx + 1;
+        let rightDist = Infinity, rightId = null;
+        while (right < arr.length) {
+            if (Number.isFinite(arr[right] && arr[right].id)) { rightDist = right - idx; rightId = arr[right].id; break; }
+            right++;
+        }
+        let key;
+        if (leftId === null && rightId === null) key = Infinity;
+        else if (leftId !== null && rightId === null) key = leftId;
+        else if (leftId === null && rightId !== null) key = rightId;
+        else key = (leftDist <= rightDist) ? leftId : rightId;
+        return { idx, key, item: it, orig: idx };
+    });
+
+    // Stable sort: primary by key (Infinity goes last), secondary by original index
+    assigned.sort((a, b) => {
+        if (a.key === b.key) return a.orig - b.orig;
+        if (a.key === Infinity) return 1;
+        if (b.key === Infinity) return -1;
+        return a.key - b.key;
+    });
+
+    const newArr = assigned.map(a => a.item);
+    const mode = getCurrentMode();
+    data.levelplanByMode[mode] = newArr;
+    data.levelplan = data.levelplanByMode[mode];
+    saveToStorage();
+    renderLists();
+}
+
 // Linear interpolation between two RGB triples; returns a CSS rgb() string.
 function lerpColor(c1, c2, t) {
     t = Math.max(0, Math.min(1, t));
@@ -1910,6 +1978,35 @@ function getXpMinColor(xpMin, level) {
     }
 }
 
+// Calculate the effective qTime after applying slayer bonus divisor.
+// Returns: qTime / divisor, where divisor is based on the slayer bonus level.
+function applySlayerBonus(qTime, slayerBonus) {
+    if (!slayerBonus || slayerBonus === 'No Slayer Bonus' || !qTime) {
+        return qTime || 0;
+    }
+    
+    const divisors = {
+        'No Slayer Bonus': 1.0,
+        '25% Slayer Bonus': 1.25,
+        '50% Slayer Bonus': 1.5,
+        '100% Slayer Bonus': 2.0,
+        '150% Slayer Bonus': 2.5,
+        '200% Slayer Bonus': 3.0
+    };
+    
+    const divisor = divisors[slayerBonus] || 1.0;
+    return qTime / divisor;
+}
+
+// Get the effective qTime for an item, applying slayer bonus if applicable.
+function getEffectiveQTime(item) {
+    const qTime = item.qTime || 0;
+    if (item.isSlayer && item.slayerBonus) {
+        return applySlayerBonus(qTime, item.slayerBonus);
+    }
+    return qTime;
+}
+
 // Small helpers for parsing/formatting minutes <-> m:ss
 function parseTimeToMinutes(input) {
     if (input === undefined || input === null) return 0;
@@ -1937,6 +2034,58 @@ function formatMinutesToMSS(mins) {
     let s = Math.round((mins - m) * 60);
     if (s === 60) { m += 1; s = 0; }
     return `${m}:${String(s).padStart(2, '0')}`;
+}
+
+// Format minutes as "XH YM" (e.g., "3H 37M")
+function formatMinutesToHM(mins) {
+    if (mins === undefined || mins === null || mins <= 0) return '';
+    const hours = Math.floor(mins / 60);
+    const minutes = Math.round(mins % 60);
+    if (hours === 0) {
+        return `${minutes}M`;
+    } else if (minutes === 0) {
+        return `${hours}H`;
+    } else {
+        return `${hours}H ${minutes}M`;
+    }
+}
+
+// Calculate cumulative time for an XP pot (Start or End marker)
+function calculateXpPotCumulativeTime(data, index) {
+    const item = data.levelplan[index];
+    if (!item || (!item.isXpPotStart && !item.isXpPotEnd)) return 0;
+
+    let totalMinutes = 0;
+
+    if (item.isXpPotStart) {
+        // Find the next End marker or end of levelplan
+        const endIndex = data.levelplan.slice(index + 1).findIndex(i => i.isXpPotEnd);
+        const lastIdx = endIndex !== -1 ? index + 1 + endIndex : data.levelplan.length;
+        
+        // Sum time from Start (exclusive) to End (inclusive) or end of array
+        for (let i = index + 1; i < lastIdx; i++) {
+            const q = data.levelplan[i];
+            if (q && !q.isXpPotStart && !q.isXpPotEnd) {
+                totalMinutes += (q.travelTime || 0) + getEffectiveQTime(q);
+            }
+        }
+    } else if (item.isXpPotEnd) {
+        // Find the most recent Start marker
+        const startIdx = [...data.levelplan].slice(0, index).reverse().findIndex(i => i.isXpPotStart);
+        if (startIdx === -1) return 0;
+        
+        const actualStartIdx = index - 1 - startIdx;
+        
+        // Sum time from Start (exclusive) to End (inclusive)
+        for (let i = actualStartIdx + 1; i <= index; i++) {
+            const q = data.levelplan[i];
+            if (q && !q.isXpPotStart && !q.isXpPotEnd) {
+                totalMinutes += (q.travelTime || 0) + getEffectiveQTime(q);
+            }
+        }
+    }
+
+    return totalMinutes;
 }
 
 // Safe numeric formatting helper: attempts locale formatting but falls back.
@@ -2359,6 +2508,10 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
             const potNameDiv = document.createElement('div');
             potNameDiv.className = 'item-questname';
 
+            const potCumulativeTime = calculateXpPotCumulativeTime(data, index);
+            const potTimeStr = formatMinutesToHM(potCumulativeTime);
+            const potTimeDisplay = potTimeStr ? ` (${potTimeStr})` : '';
+
             if (item.isXpPotEnd) {
                 // Find the most recent preceding Start XP Pot and read its pct
                 const precedingStart = [...data.levelplan].slice(0, index).reverse().find(i => i.isXpPotStart);
@@ -2371,10 +2524,10 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
                     potNameDiv.dataset.tip = `${pctLabel} pot already ended`;
                     potNameDiv.classList.add('warning');
                 } else {
-                    potNameDiv.textContent = 'End ' + pctLabel + ' Pot';
+                    potNameDiv.textContent = 'End ' + pctLabel + ' Pot' + potTimeDisplay;
                 }
             } else {
-                potNameDiv.textContent = item.name;
+                potNameDiv.textContent = item.name + potTimeDisplay;
                 if (item.isXpPotStart) {
                     // If the most recent preceding pot marker is a Start (i.e. an
                     // active pot exists), this Start will replace that active pot.
@@ -2456,6 +2609,46 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
             contentWrapper.appendChild(levelDiv);
             contentWrapper.appendChild(nameDiv);
 
+            // Add slayer bonus dropdown inline with quest name for slayer quests in levelplan
+            if (listId === 'levelplan' && item.isSlayer) {
+                const slayerBonusSelect = document.createElement('select');
+                slayerBonusSelect.className = 'slayer-bonus-select';
+                slayerBonusSelect.draggable = false;
+                
+                const options = [
+                    'No Slayer Bonus',
+                    '25% Slayer Bonus',
+                    '50% Slayer Bonus',
+                    '100% Slayer Bonus',
+                    '150% Slayer Bonus',
+                    '200% Slayer Bonus'
+                ];
+                
+                options.forEach(opt => {
+                    const optEl = document.createElement('option');
+                    optEl.value = opt;
+                    optEl.textContent = opt;
+                    slayerBonusSelect.appendChild(optEl);
+                });
+                
+                // Set current value
+                slayerBonusSelect.value = item.slayerBonus || 'No Slayer Bonus';
+                
+                // Prevent drag when interacting with the dropdown
+                slayerBonusSelect.addEventListener('mousedown', e => { e.stopPropagation(); div._suppressDrag = true; });
+                slayerBonusSelect.addEventListener('pointerdown', e => { e.stopPropagation(); div._suppressDrag = true; });
+                slayerBonusSelect.addEventListener('dragstart', e => { e.stopPropagation(); e.preventDefault(); });
+                
+                // Save selection on change
+                slayerBonusSelect.addEventListener('change', () => {
+                    item.slayerBonus = slayerBonusSelect.value;
+                    saveToStorage();
+                    renderLists();
+                });
+                
+                nameDiv.appendChild(slayerBonusSelect);
+            }
+
             const eliteMarkerDiv = document.createElement('div');
             eliteMarkerDiv.className = 'difficulty-marker';
             const eliteAlreadyExists = item.difficulty === 'R' && !item.isEliteCopy &&
@@ -2468,8 +2661,9 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
                                 if (item.difficulty === 'R' && !item.isEliteCopy && !eliteAlreadyExists) {
                     const multiplier = parseFloat(document.getElementById('xp-multiplier')?.value);
                     const rawEliteXP = Math.round(item.baseXP * (1 + item.xpmods + item.optionalXP + getQuestVariableBonus(getCurrentMode(), 'E', true)));
-                    const eliteXPMin = item.qTime > 0 ? Math.floor(rawEliteXP * multiplier / item.qTime) : '';
-                    const eliteXPMinForColor = item.qTime > 0 ? Math.floor(rawEliteXP / item.qTime) : '';
+                    const effectiveQTime = getEffectiveQTime(item);
+                    const eliteXPMin = effectiveQTime > 0 ? Math.floor(rawEliteXP * multiplier / effectiveQTime) : '';
+                    const eliteXPMinForColor = effectiveQTime > 0 ? Math.floor(rawEliteXP / effectiveQTime) : '';
                     const eliteXPMinColor = (eliteXPMinForColor !== '' && colorLevel != null) ? getXpMinColor(eliteXPMinForColor, colorLevel) : null;
                     if (eliteXPMinColor) {
                         eliteMarkerDiv.style.setProperty('--elite-tooltip-bg', eliteXPMinColor);
@@ -2721,7 +2915,7 @@ function quickAddQuest(questIndex, singleOnly = false) {
 // Insert an elite copy of an R quest right below it in the levelplan
 function insertEliteCopy(index, sourceItem) {
     if (data.levelplan.some(i => i.isEliteCopy && i.name === sourceItem.name + ' (repeat)')) return;
-    const eliteXP = Math.round(sourceItem.baseXP * (1 + sourceItem.xpmods + sourceItem.optionalXP - (getCurrentMode() === 'epic' ? 1.90 : 2.05)));
+    const eliteXP = Math.round(sourceItem.baseXP * (1 + sourceItem.xpmods + sourceItem.optionalXP + getQuestVariableBonus(getCurrentMode(), 'E', true)));
     const eliteCopy = { ...sourceItem, name: sourceItem.name + ' (repeat)', xp: eliteXP, travelTime: 0.0, isEliteCopy: true, difficulty: 'E', patron: null, favor: null };
     delete eliteCopy.id;
     data.levelplan.splice(index + 1, 0, eliteCopy);
@@ -2764,6 +2958,92 @@ function highlightInserted(names, listId = 'levelplan', duration = 1000, doScrol
 }
 
 // Drag state
+// Leveling Plan inline search box
+function initLevelplanSearch() {
+    const input = document.getElementById('lp-search-input');
+    const dropdown = document.getElementById('lp-search-dropdown');
+    if (!input || !dropdown) return;
+
+    let activeIndex = -1;
+
+    function getMatches(query) {
+        const q = query.trim().toLowerCase();
+        if (!q) return [];
+        return data.levelplan.filter(item => item.name && item.name.toLowerCase().includes(q));
+    }
+
+    function renderDropdown(matches) {
+        dropdown.innerHTML = '';
+        activeIndex = -1;
+        if (matches.length === 0) {
+            dropdown.hidden = true;
+            return;
+        }
+        matches.forEach((item, i) => {
+            const li = document.createElement('li');
+            li.textContent = item.name;
+            li.dataset.name = item.name;
+            li.addEventListener('mousedown', (e) => {
+                e.preventDefault(); // keep focus on input
+                jumpToLevelplanItem(item.name);
+                input.value = '';
+                dropdown.hidden = true;
+            });
+            dropdown.appendChild(li);
+        });
+        dropdown.hidden = false;
+    }
+
+    function setActive(index) {
+        const items = dropdown.querySelectorAll('li');
+        items.forEach((li, i) => li.classList.toggle('lp-search-active', i === index));
+        activeIndex = index;
+    }
+
+    input.addEventListener('input', () => {
+        const matches = getMatches(input.value);
+        if (matches.length > 0 && matches.length <= 5) {
+            renderDropdown(matches);
+        } else {
+            dropdown.hidden = true;
+            activeIndex = -1;
+        }
+    });
+
+    input.addEventListener('keydown', (e) => {
+        if (dropdown.hidden) return;
+        const items = dropdown.querySelectorAll('li');
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            setActive(Math.min(activeIndex + 1, items.length - 1));
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            setActive(Math.max(activeIndex - 1, 0));
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            const active = activeIndex >= 0 ? items[activeIndex] : items[0];
+            if (active) {
+                jumpToLevelplanItem(active.dataset.name);
+                input.value = '';
+                dropdown.hidden = true;
+            }
+        } else if (e.key === 'Escape') {
+            dropdown.hidden = true;
+        }
+    });
+
+    input.addEventListener('blur', () => {
+        // Slight delay so mousedown on a list item fires first
+        setTimeout(() => { dropdown.hidden = true; }, 150);
+    });
+}
+
+// Jump to a named item in the leveling plan and flash-highlight it
+function jumpToLevelplanItem(name) {
+    ensureHighlightStyle();
+    highlightInserted([name], 'levelplan', 1200, true);
+}
+
 let draggedElement = null;
 let draggedListId = null;
 let draggedIndex = null;
@@ -2864,6 +3144,17 @@ function updatePhantomPosition() {
             lo = mid + 1;
         }
     }
+    // Restrict elite copy phantom: cannot appear above its source quest
+    if (draggedListId === 'levelplan' && draggedIndex !== null) {
+        const draggedItem = data.levelplan[draggedIndex];
+        if (draggedItem && draggedItem.isEliteCopy) {
+            const baseName = draggedItem.name.endsWith(' (repeat)') ? draggedItem.name.slice(0, -' (repeat)'.length) : draggedItem.name;
+            const sourceQuestDomIdx = allItems.findIndex(el => el.dataset.name === baseName);
+            if (sourceQuestDomIdx !== -1) {
+                lo = Math.max(lo, sourceQuestDomIdx + 1);
+            }
+        }
+    }
     const insertBefore = lo < allItems.length ? allItems[lo] : null;
 
     // Only touch the DOM if the position changed
@@ -2917,6 +3208,9 @@ function handleDrop(e) {
     if (targetListId === 'quests' && draggedListId === 'levelplan') {
         if (!sourceItem.isTakeLevel && !sourceItem.isEliteCopy && !sourceItem.isCustom) {
             data.levelplan.splice(draggedIndex, 1);
+            // Remove the elite copy entirely when the source quest leaves levelplan
+            const eliteIdx = data.levelplan.findIndex(i => i.isEliteCopy && i.name === sourceItem.name + ' (repeat)');
+            if (eliteIdx !== -1) data.levelplan.splice(eliteIdx, 1);
             insertQuestInOriginalPosition({ ...sourceItem, source: 'quests' });
             ensureHighlightStyle();
             insertedNames.push(sourceItem.name);
@@ -2933,11 +3227,31 @@ function handleDrop(e) {
     // If dropping within same list -> reorder
     if (targetListId === draggedListId) {
         data[draggedListId].splice(draggedIndex, 1);
+        let actualDrop = draggedIndex < dropIndex ? dropIndex - 1 : dropIndex;
 
-        if (draggedIndex < dropIndex) {
-            data[draggedListId].splice(dropIndex - 1, 0, sourceItem);
-        } else {
-            data[draggedListId].splice(dropIndex, 0, sourceItem);
+        // Elite copy: enforce minimum position (must stay after its source quest)
+        if (targetListId === 'levelplan' && sourceItem.isEliteCopy) {
+            const baseName = sourceItem.name.endsWith(' (repeat)') ? sourceItem.name.slice(0, -' (repeat)'.length) : sourceItem.name;
+            const sourceQuestIdx = data[draggedListId].findIndex(i => i.name === baseName && !i.isEliteCopy);
+            if (sourceQuestIdx !== -1) {
+                actualDrop = Math.max(actualDrop, sourceQuestIdx + 1);
+            }
+        }
+
+        data[draggedListId].splice(actualDrop, 0, sourceItem);
+
+        // Regular quest: move its elite copy to directly below its new position
+        if (targetListId === 'levelplan' && !sourceItem.isEliteCopy && !sourceItem.isTakeLevel &&
+                !sourceItem.isCustom && !sourceItem.isXpPot && !sourceItem.isXpPotStart && !sourceItem.isXpPotEnd) {
+            const eliteName = sourceItem.name + ' (repeat)';
+            const eliteIdx = data.levelplan.findIndex(i => i.isEliteCopy && i.name === eliteName);
+            if (eliteIdx !== -1) {
+                const eliteCopy = data.levelplan.splice(eliteIdx, 1)[0];
+                const sourceNewIdx = data.levelplan.indexOf(sourceItem);
+                if (sourceNewIdx !== -1) {
+                    data.levelplan.splice(sourceNewIdx + 1, 0, eliteCopy);
+                }
+            }
         }
     } else {
         // If dragging from special -> copy single item. Special-case XP Pot
@@ -3009,6 +3323,9 @@ function handleDrop(e) {
 function deleteItem(listId, index) {
     const item = data[listId].splice(index, 1)[0];
     if (listId === 'levelplan' && !item.isTakeLevel && !item.isEliteCopy && !item.isCustom) {
+        // Remove the elite copy entirely before returning the quest to the pool
+        const eliteIdx = data.levelplan.findIndex(i => i.isEliteCopy && i.name === item.name + ' (repeat)');
+        if (eliteIdx !== -1) data.levelplan.splice(eliteIdx, 1);
         insertQuestInOriginalPosition(item);
     }
     saveToStorage();

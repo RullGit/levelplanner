@@ -619,13 +619,76 @@ h1 {
     font-family: inherit;
 }
 
-.header-title-group {
+/* Leveling Plan title + search row */
+.lp-title-row {
+    display: flex;
+    align-items: flex-start;
+    align-self: stretch;
+    gap: 8px;
+}
+
+/* Leveling Plan search box */
+.lp-search-wrap {
+    position: relative;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-end;
-    height: 100%;
-    gap: 3px;
+    align-self: flex-end;
+    margin-bottom: -6px;
+    margin-left: 50px;
+}
+
+.lp-search-input {
+    padding: 4px 6px;
+    font-size: 0.85em;
+    border: 1px solid #bbb;
+    border-radius: 4px 4px 0 0;
+    border-bottom: none;
+    background: #fff;
+    width: 160px;
+    font-family: inherit;
+    outline-offset: 1px;
+}
+
+.lp-search-input:focus {
+    border-color: #7aabda;
+    outline: 2px solid rgba(100,160,230,0.35);
+}
+
+.lp-search-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 200;
+    background: #fff;
+    border: 1px solid #aaa;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    min-width: 100%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.13);
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.lp-search-dropdown li {
+    padding: 5px 10px;
+    font-size: 0.85em;
+    cursor: pointer;
+    white-space: nowrap;
+    color: #222;
+    border-bottom: 1px solid #eee;
+}
+
+.lp-search-dropdown li:last-child {
+    border-bottom: none;
+}
+
+.lp-search-dropdown li:hover,
+.lp-search-dropdown li.lp-search-active {
+    background: #e8f0fb;
+    color: #1a3a6e;
 }
 
 
@@ -1184,6 +1247,9 @@ label,
     padding: 4px 8px;
     font-size: 0.9em;
     word-break: break-word;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
 .item-content-wrapper {
@@ -1975,6 +2041,38 @@ label,
     justify-content: center;
 }
 
+/* Sort button inside the levelplan footer: absolute so it doesn't change layout size */
+.lp-aggregate-footer .lp-col-qlvl {
+    position: relative;
+}
+
+.lp-aggregate-footer .lp-footer-sort {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: #19140d;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    font-size: 1.05em;
+    line-height: 1;
+}
+.lp-aggregate-footer .lp-footer-sort:hover {
+    color: #e74c3c;
+}
+.lp-aggregate-footer .lp-footer-sort:focus-visible {
+    outline: 2px solid rgba(231,76,60,0.2);
+    outline-offset: 2px;
+}
+
 /* ---------- Config overlay ---------- */
 .config-overlay {
     position: fixed;
@@ -2280,4 +2378,17 @@ label,
 }
 .config-quest-textarea:focus {
     background: #f5f8ff;
+}
+
+/* Slayer bonus dropdown for slayer quests in levelplan */
+.slayer-bonus-select {
+    padding: 2px 4px;
+    font-size: 0.8em;
+    background: rgba(0,0,0,0.1);
+    border: 1px solid #d8dce3;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 6px;
+    display: inline-block;
+    vertical-align: middle;
 }

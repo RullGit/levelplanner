@@ -43,8 +43,12 @@
         <div class="lists-container">
             <div class="list-section levelplan">
                 <div class="section-header">
-                    <div class="header-title-group">
-                        <h2>Leveling Plan</h2>
+                    <div class="lp-title-row">
+                    <h2>Leveling Plan</h2>
+                    <div class="lp-search-wrap" id="lp-search-wrap">
+                        <input type="text" id="lp-search-input" class="lp-search-input" placeholder="Search plan…" autocomplete="off" aria-label="Search leveling plan">
+                        <ul class="lp-search-dropdown" id="lp-search-dropdown" hidden></ul>
+                    </div>
                     </div>
                     <div class="plan-settings-box">
                         <div class="small-settings">
@@ -90,7 +94,9 @@
                     <div class="col-playerlvl">
                         <span class="col-header-label" id="footer-player-level"></span>
                     </div>
-                    <div class="lp-col-qlvl"></div>
+                    <div class="lp-col-qlvl">
+                        <button id="lp-footer-sort" class="lp-footer-sort" title="Sort leveling plan" aria-label="Sort leveling plan by Quests order" onclick="lpFooterSort()">⇅</button>
+                    </div>
                     <div class="lp-col-name"><span class="col-header-label" id="footer-quest-count"></span></div>
                     <div class="lp-col-difficulty"><span class="col-header-label" id="footer-total-time"></span></div>
                     <div class="lp-col-xpmin"><span class="col-header-label" id="footer-xpmin"></span></div>

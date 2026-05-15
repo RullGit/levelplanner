@@ -196,15 +196,6 @@ window.HEROIC_QUESTS_BASE =
     "baseXP": 983,
   },
   {
-    "name": "Hall of the Mark",
-    "requirements": [],
-    "lvl": 1,
-    "patron": "",
-    "favor": null,
-    "difficulty": "S",
-    "baseXP": 0,
-  },
-  {
     "name": "Stealthy Repossession",
     "requirements": [],
     "lvl": 2,
@@ -1002,7 +993,7 @@ window.HEROIC_QUESTS_BASE =
     "baseXP": 2860,
   },
   {
-    "name": "The Coveted Culvert",
+    "name": "The Covered Culvert",
     "requirements": [],
     "lvl": 4,
     "patron": "The Free Agents",
@@ -1700,7 +1691,7 @@ window.HEROIC_QUESTS_BASE =
     "difficulty": "R",
     "baseXP": 0,
   },
-    {
+  {
     "name": "Thrall of the Necromancer",
     "requirements": [
       "The Mystery of Delera's Tomb",
@@ -2174,15 +2165,6 @@ window.HEROIC_QUESTS_BASE =
     "baseXP": 265,
   },
   {
-    "name": "The Threnal Arena",
-    "requirements": [],
-    "lvl": 9,
-    "patron": "None",
-    "favor": 0,
-    "difficulty": "N",
-    "baseXP": 0,
-  },
-  {
     "name": "The Giant Lieutenants",
     "requirements": [],
     "lvl": 9,
@@ -2452,7 +2434,7 @@ window.HEROIC_QUESTS_BASE =
     "baseXP": 3976,
   },
   {
-    "name": "The Bodysnatchers",
+    "name": "The Body Snatchers",
     "requirements": [],
     "lvl": 8,
     "patron": "Keepers of Lamordia",
@@ -2463,7 +2445,7 @@ window.HEROIC_QUESTS_BASE =
   {
     "name": "Locked Away pt1",
     "requirements": [
-      "The Bodysnatchers"
+      "The Body Snatchers"
     ],
     "lvl": 8,
     "patron": "Keepers of Lamordia",
@@ -2474,7 +2456,7 @@ window.HEROIC_QUESTS_BASE =
   {
     "name": "Locked Away pt2",
     "requirements": [
-      "The Bodysnatchers"
+      "The Body Snatchers"
     ],
     "lvl": 8,
     "patron": "Keepers of Lamordia",
@@ -2485,7 +2467,7 @@ window.HEROIC_QUESTS_BASE =
   {
     "name": "A Light in the Attic",
     "requirements": [
-      "The Bodysnatchers"
+      "The Body Snatchers"
     ],
     "lvl": 8,
     "patron": "Keepers of Lamordia",
@@ -2496,7 +2478,7 @@ window.HEROIC_QUESTS_BASE =
   {
     "name": "A Miner Sacrifice",
     "requirements": [
-      "The Bodysnatchers"
+      "The Body Snatchers"
     ],
     "lvl": 8,
     "patron": "Keepers of Lamordia",
@@ -2507,7 +2489,7 @@ window.HEROIC_QUESTS_BASE =
   {
     "name": "The Wish",
     "requirements": [
-      "The Bodysnatchers"
+      "The Body Snatchers"
     ],
     "lvl": 8,
     "patron": "Keepers of Lamordia",
@@ -2516,9 +2498,9 @@ window.HEROIC_QUESTS_BASE =
     "baseXP": 6712,
   },
   {
-    "name": "Beneath the Streets",
+    "name": "Beneath the City Streets",
     "requirements": [
-      "The Bodysnatchers"
+      "The Body Snatchers"
     ],
     "lvl": 8,
     "patron": "Keepers of Lamordia",
@@ -2529,7 +2511,7 @@ window.HEROIC_QUESTS_BASE =
   {
     "name": "Special Delivery",
     "requirements": [
-      "The Bodysnatchers"
+      "The Body Snatchers"
     ],
     "lvl": 8,
     "patron": "Keepers of Lamordia",
@@ -2540,7 +2522,7 @@ window.HEROIC_QUESTS_BASE =
   {
     "name": "Zoo Creeper",
     "requirements": [
-      "The Bodysnatchers"
+      "The Body Snatchers"
     ],
     "lvl": 8,
     "patron": "Keepers of Lamordia",
@@ -2551,7 +2533,7 @@ window.HEROIC_QUESTS_BASE =
   {
     "name": "Cold Snap",
     "requirements": [
-      "The Bodysnatchers"
+      "The Body Snatchers"
     ],
     "lvl": 8,
     "patron": "Keepers of Lamordia",
@@ -2562,7 +2544,7 @@ window.HEROIC_QUESTS_BASE =
   {
     "name": "Ends and Means",
     "requirements": [
-      "The Bodysnatchers"
+      "The Body Snatchers"
     ],
     "lvl": 8,
     "patron": "Keepers of Lamordia",
@@ -2573,7 +2555,7 @@ window.HEROIC_QUESTS_BASE =
   {
     "name": "The Proper Authorities",
     "requirements": [
-      "The Bodysnatchers"
+      "The Body Snatchers"
     ],
     "lvl": 8,
     "patron": "Keepers of Lamordia",
@@ -2584,7 +2566,7 @@ window.HEROIC_QUESTS_BASE =
   {
     "name": "Snowfall and Sunlight",
     "requirements": [
-      "The Bodysnatchers"
+      "The Body Snatchers"
     ],
     "lvl": 8,
     "patron": "Keepers of Lamordia",
@@ -2596,13 +2578,13 @@ window.HEROIC_QUESTS_BASE =
     "name": "Lamordia Saga",
     "isSaga": true,
     "requirements": [
-      "The Bodysnatchers",
+      "The Body Snatchers",
       "Locked Away pt1",
       "Locked Away pt2",
       "A Light in the Attic",
       "A Miner Sacrifice",
       "The Wish",
-      "Beneath the Streets",
+      "Beneath the City Streets",
       "Special Delivery",
       "Zoo Creeper",
       "Cold Snap",
