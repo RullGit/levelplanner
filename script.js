@@ -887,7 +887,8 @@ function hydrateLevelplan(stored, questSource, mode) {
         if (!base) return null; // unknown quest — drop silently
 
         if (entry.elite) {
-            const eliteXP = Math.round(base.baseXP * (1 + base.xpmods + base.optionalXP - (mode === 'epic' ? 1.90 : 2.05)));
+            const eliteXpMod = base.xpmods - 1.75 + getLearningTomeRepeatBonus();
+            const eliteXP = base.baseXP * ( 1 + base.optionalXP + eliteXpMod);
             return { ...base, name: base.name + ' (repeat)', xp: eliteXP, travelTime: 0.0, isEliteCopy: true, difficulty: 'E', source: 'quests', patron: null, favor: null };
         }
         const id = source.indexOf(base);
@@ -969,14 +970,14 @@ function checkRequirements() {
 // The Tome of Learning options per mode.
 const LEARNING_TOME_OPTIONS = {
     heroic: [
-        { label: 'No Heroic Tome of Learning', bonus: 0 },
-        { label: 'Heroic Lesser Tome 25%',     bonus: 0.25 },
-        { label: 'Heroic Greater Tome 50%',    bonus: 0.50 }
+        { label: 'No Heroic Tome of Learning', bonus: 0 , repeatBonus: 0 },
+        { label: 'Heroic Lesser Tome 25%',     bonus: 0.25, repeatBonus: 0.1 },
+        { label: 'Heroic Greater Tome 50%',    bonus: 0.50, repeatBonus: 0.2 }
     ],
     epic: [
-        { label: 'No Epic Tome of Learning', bonus: 0 },
-        { label: 'Epic Lesser Tome 15%',     bonus: 0.15 },
-        { label: 'Epic Greater Tome 25%',    bonus: 0.25 }
+        { label: 'No Epic Tome of Learning', bonus: 0, repeatBonus: 0 },
+        { label: 'Epic Lesser Tome 15%',     bonus: 0.15, repeatBonus: 0.05 },
+        { label: 'Epic Greater Tome 25%',    bonus: 0.25, repeatBonus: 0.1 }
     ]
 };
 
@@ -1011,9 +1012,18 @@ function getLearningTomeBonus() {
     return isFinite(v) ? v : 0;
 }
 
+// Returns the additive per-item XP bonus fraction from the currently selected
+// Tome of Learning (e.g. 0.25 for a 25% tome).
+function getLearningTomeRepeatBonus() {
+    const sel = document.getElementById('learning-tome');
+    if (!sel) return 0;
+    const v = parseFloat(sel.value);
+    return LEARNING_TOME_OPTIONS[getCurrentMode()].find(opt => String(opt.bonus) === sel.value)?.repeatBonus || 0;
+}
+
 // Save/load the xp-multiplier input to/from localStorage
 function saveSettings() {
-    const xpmods = document.getElementById('xp-multiplier')?.value;
+    const xpmultiplier = document.getElementById('xp-multiplier')?.value;
     const patronView = document.getElementById('patron-view')?.value || 'None';
     const mode = document.getElementById('mode-switch')?.checked ? 'epic' : 'heroic';
     const vipSagas = document.getElementById('vip-sagas-header')?.checked ? true : false;
@@ -1026,7 +1036,7 @@ function saveSettings() {
         if (existing.learningTomeByMode) learningTomeByMode = existing.learningTomeByMode;
     } catch (e) {}
     learningTomeByMode[mode] = learningTome;
-    localStorage.setItem(SETTINGS_KEY, JSON.stringify({ xpmodsiplier: xpmods, patronView, mode, vipSagas, twelveTokens, learningTomeByMode }));
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify({ xpmultiplier, patronView, mode, vipSagas, twelveTokens, learningTomeByMode }));
     // Persist custom config and active preset separately
     localStorage.setItem(CONFIG_KEY, JSON.stringify({
         activePreset: ACTIVE_QUESTS_PRESET,
@@ -1055,7 +1065,7 @@ function loadSettings() {
         const raw = localStorage.getItem(SETTINGS_KEY);
     if (!raw) return;
     try {
-        const { xpmodsiplier, patronView, favorView, mode, vipSagas, twelveTokens, learningTomeByMode } = JSON.parse(raw);
+        const { xpmultiplier, patronView, favorView, mode, vipSagas, twelveTokens, learningTomeByMode } = JSON.parse(raw);
         const xpInput = document.getElementById('xp-multiplier');
         const pvSelect = document.getElementById('patron-view');
         const modeSwitch = document.getElementById('mode-switch');
@@ -1063,7 +1073,7 @@ function loadSettings() {
         const tokensCb = document.getElementById('twelve-tokens');
         const tokensLabel = document.getElementById('twelve-tokens-label');
         if (vipCb && vipSagas !== undefined) vipCb.checked = vipSagas;
-        if (xpInput && xpmodsiplier !== undefined) xpInput.value = xpmodsiplier;
+        if (xpInput && xpmultiplier !== undefined) xpInput.value = xpmultiplier;
         const pv = patronView !== undefined ? patronView : favorView;
         if (pvSelect && pv !== undefined) pvSelect.value = pv;
         if (modeSwitch && mode !== undefined) {
@@ -1213,7 +1223,7 @@ function saveToFile() {
         if (raw) learningTomeByMode = JSON.parse(raw).learningTomeByMode || learningTomeByMode;
     } catch (e) {}
     const output = {
-        xpmodsiplier: parseFloat(document.getElementById('xp-multiplier')?.value) || 1.15,
+        xpmultiplier: parseFloat(document.getElementById('xp-multiplier')?.value) || 1.15,
         learningTomeByMode,
         configPreset: ACTIVE_QUESTS_PRESET,
         heroic: serialiseLevelplan(data.levelplanByMode.heroic),
@@ -1319,7 +1329,7 @@ function loadFromFile() {
                 // All other cases (no filePreset, ukenburger+ukenburger, custom without included config): load normally
 
                                 const xpInput = document.getElementById('xp-multiplier');
-                if (xpInput && parsed.xpmodsiplier !== undefined) xpInput.value = parsed.xpmodsiplier;
+                if (xpInput && parsed.xpmultiplier !== undefined) xpInput.value = parsed.xpmultiplier;
                 // Restore per-mode learning tome values from the file.
                 if (parsed.learningTomeByMode) {
                     const currentMode = getCurrentMode();
@@ -2426,7 +2436,7 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
                 eliteMarkerDiv.textContent = item.difficulty;
                                 if (item.difficulty === 'R' && !item.isEliteCopy && !eliteAlreadyExists) {
                     const multiplier = parseFloat(document.getElementById('xp-multiplier')?.value);
-                    const rawEliteXP = Math.round(item.baseXP * (1 + item.xpmods + item.optionalXP - (getCurrentMode() === 'epic' ? 1.90 : 2.05)));
+                    const rawEliteXP = Math.round(item.baseXP * (1 + item.xpmods + item.optionalXP - 1.75 + getLearningTomeRepeatBonus()));
                     const eliteXPMin = item.qTime > 0 ? Math.floor(rawEliteXP * multiplier / item.qTime) : '';
                     const eliteXPMinForColor = item.qTime > 0 ? Math.floor(rawEliteXP / item.qTime) : '';
                     const eliteXPMinColor = (eliteXPMinForColor !== '' && colorLevel != null) ? getXpMinColor(eliteXPMinForColor, colorLevel) : null;
