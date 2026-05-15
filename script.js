@@ -51,7 +51,7 @@ function _computeQuestXP(mode) {
 
     const tomeBonus =  getLearningTomeBonus(mode);
     for (const q of (mode === 'heroic' ? window.HEROIC_QUESTS : window.EPIC_QUESTS)) {
-        if (q.baseXP != null && q.baseXP > 0) {
+        if (q.baseXP != null) {
             const xpmods = (q.xpmods != null && q.xpmods !== '') ? Number(q.xpmods) : 0;
             const optXP  = (q.optionalXP != null && q.optionalXP !== '') ? Number(q.optionalXP) : 0;
             q.xp = Math.round(q.baseXP * (1 + xpmods + optXP + getQuickQuestVariableBonus(mode, q.difficulty, false, tomeBonus)));
