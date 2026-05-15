@@ -1769,12 +1769,19 @@ function renderLevelplanFooter() {
     const items = data.levelplan || [];
     const hasLevelupItems = items.some(i => i.isTakeLevel);
 
-    // Total XP (all non-TakeLevel items with multiplier applied)
-        let totalXP = 0;
+    // Total XP — mirrors the cumulative XP logic in renderList so that XP pot
+    // bonuses (activePotPct) and the custom-item applyMultipliers flag are both
+    // taken into account, exactly as the per-row cumulative column does.
+    let totalXP = 0;
+    let activePotPctFooter = 0;
     items.forEach(item => {
-        if (!item.isTakeLevel) {
-            totalXP += item.isCustom ? (item.xp || 0) : Math.round((item.xp || 0) * multiplier);
-        }
+        if (item.isXpPotStart) activePotPctFooter = item.pct != null ? item.pct : 0;
+        if (item.isXpPotEnd)   activePotPctFooter = 0;
+        if (item.isTakeLevel || item.isXpPot || item.isXpPotStart || item.isXpPotEnd) return;
+        const cumMultiplier = multiplier + activePotPctFooter / 100;
+        totalXP += item.isCustom
+            ? (item.applyMultipliers ? Math.round((item.xp || 0) * cumMultiplier) : (item.xp || 0))
+            : Math.round((item.xp || 0) * cumMultiplier);
     });
 
     // Highest player level: if the plan contains explicit "Take Level"
