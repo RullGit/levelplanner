@@ -2651,7 +2651,7 @@ window.EPIC_QUESTS_BASE =
       "Wrath of the Earth (hard)",
       "An Invitation to Dinner (hard)"
     ],
-    "xp": 207000
+    "xp": 147000
   },
   {
     "name": "Strike Back (hard)",
@@ -2874,7 +2874,7 @@ window.EPIC_QUESTS_BASE =
       "The Legend of the Lost Locket (hard)",
       "Immortality Lessons (hard)"
     ],
-    "xp": 207000
+    "xp": 147000
   },
   {
     "name": "Through the Tulgey Wood (hard)",
@@ -3123,7 +3123,7 @@ window.EPIC_QUESTS_BASE =
       "Roll Call (hard)",
       "Security Detail (hard)"
     ],
-    "xp": 207000
+    "xp": 147000
   },
   {
     "name": "An Element of Chaos (hard)",
@@ -3666,7 +3666,7 @@ window.EPIC_QUESTS_BASE =
       "The Stone Crypt Chronicle (hard)",
       "Fall of the Forbidden Temple (hard)"
     ],
-    "xp": 207000
+    "xp": 147000
   },
   {
     "name": "Kill Ten Rats (hard)",
@@ -3963,7 +3963,7 @@ window.EPIC_QUESTS_BASE =
       "The Devils to Pay (hard)",
       "What Dreams May Come (hard)"
     ],
-    "xp": 207000
+    "xp": 147000
   },
   {
     "name": "Pilgrims' Peril (hard)",
@@ -4226,7 +4226,7 @@ window.EPIC_QUESTS_BASE =
       "Seeds of Decay (hard)",
       "Portal to Below (hard)"
     ],
-    "xp": 207000
+    "xp": 147000
   },
   {
     "name": "The Covered Culvert (hard)",
@@ -4405,7 +4405,7 @@ window.EPIC_QUESTS_BASE =
       "The Proper Authorities (hard)",
       "Snowfall and Sunlight (hard)"
     ],
-    "xp": 207000
+    "xp": 147000
   },
   {
     "name": "Body and Mind (hard)",
