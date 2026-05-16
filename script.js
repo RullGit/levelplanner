@@ -2302,9 +2302,7 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
             const combinedColor = getXpMinColor(Number(cumulativeXpMin), colorLevel);
             if (combinedColor) xpminDiv.dataset.tipBg = combinedColor;
         }
-        const plus = document.createElement('sup');
-        plus.textContent = '+';
-        xpminDiv.appendChild(plus);
+        xpminDiv.textContent += '+';
     }
 
     const levelDiv = document.createElement('div');
@@ -2641,14 +2639,73 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
                 // Set current value
                 slayerBonusSelect.value = item.slayerBonus || 'No Slayer Bonus';
                 
-                // Prevent drag when interacting with the dropdown
-                slayerBonusSelect.addEventListener('mousedown', e => { e.stopPropagation(); div._suppressDrag = true; });
-                slayerBonusSelect.addEventListener('pointerdown', e => { e.stopPropagation(); div._suppressDrag = true; });
+                let ctrlPressed = false;
+
+                // Prevent drag when interacting with the dropdown and record whether CTRL is held for use on change    
+                slayerBonusSelect.addEventListener('mousedown', e => { 
+                    ctrlPressed = e.ctrlKey || e.metaKey;
+                    e.stopPropagation(); div._suppressDrag = true; });
+                slayerBonusSelect.addEventListener('pointerdown', e => { 
+                    ctrlPressed = e.ctrlKey || e.metaKey;
+                    e.stopPropagation(); div._suppressDrag = true; });
                 slayerBonusSelect.addEventListener('dragstart', e => { e.stopPropagation(); e.preventDefault(); });
                 
                 // Save selection on change
-                slayerBonusSelect.addEventListener('change', () => {
-                    item.slayerBonus = slayerBonusSelect.value;
+                slayerBonusSelect.addEventListener('change', (e) => {
+                    const newBonus = slayerBonusSelect.value;
+                    item.slayerBonus = newBonus;
+
+                    // If CTRL is not held, propagate the new slayer bonus to all
+                    // related items in the levelplan: those that this item requires
+                    // (transitively) AND those that require this item (transitively).
+                    if (!ctrlPressed) {
+                        // Build a name→item map for everything currently in the levelplan.
+                        const lpByName = new Map();
+                        data.levelplan.forEach(lp => { if (lp.name !== undefined) lpByName.set(lp.name, lp); });
+
+                        // Collect all names reachable from `item` via its requirements (downward).
+                        const reqNames = new Set();
+                        const reqStack = [item];
+                        while (reqStack.length) {
+                            const cur = reqStack.pop();
+                            if (!cur || !Array.isArray(cur.requirements)) continue;
+                            for (const rName of cur.requirements) {
+                                if (!reqNames.has(rName)) {
+                                    reqNames.add(rName);
+                                    const rItem = lpByName.get(rName);
+                                    if (rItem) reqStack.push(rItem);
+                                }
+                            }
+                        }
+
+                        // Collect all names that (transitively) require `item` (upward).
+                        const depNames = new Set();
+                        data.levelplan.forEach(b => {
+                            if (!b || b.name === undefined || b.name === item.name) return;
+                            const visited = new Set();
+                            const stack = [b];
+                            while (stack.length) {
+                                const cur = stack.pop();
+                                if (!cur || !Array.isArray(cur.requirements)) continue;
+                                for (const rName of cur.requirements) {
+                                    if (visited.has(rName)) continue;
+                                    visited.add(rName);
+                                    if (rName === item.name) { depNames.add(b.name); break; }
+                                    const rItem = lpByName.get(rName);
+                                    if (rItem) stack.push(rItem);
+                                }
+                            }
+                        });
+
+                        // Apply the new bonus to every related slayer item in the levelplan.
+                        data.levelplan.forEach(lp => {
+                            if (!lp || !lp.isSlayer || lp.name === item.name) return;
+                            if (reqNames.has(lp.name) || depNames.has(lp.name)) {
+                                lp.slayerBonus = newBonus;
+                            }
+                        });
+                    }
+
                     saveToStorage();
                     renderLists();
                 });
@@ -3447,6 +3504,14 @@ function resetData() {
         }
     });
 }());
+
+// ---------- Planning visibility toggle ----------
+function togglePlanningVisibility() {
+    const container = document.querySelector('.lists-container');
+    const btn = document.getElementById('hide-planning-btn');
+    const isHidden = container.classList.toggle('planning-hidden');
+    btn.textContent = isHidden ? 'Show Planning' : 'Hide Planning';
+}
 
 // ---------- Config overlay ----------
 function openConfig() {
