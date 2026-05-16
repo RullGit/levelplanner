@@ -1993,12 +1993,12 @@ function applySlayerBonus(qTime, slayerBonus) {
     }
     
     const divisors = {
-        'No Slayer Bonus': 1.0,
-        '25% Slayer Bonus': 1.25,
-        '50% Slayer Bonus': 1.5,
-        '100% Slayer Bonus': 2.0,
-        '150% Slayer Bonus': 2.5,
-        '200% Slayer Bonus': 3.0
+        'No Count Boost': 1.0,
+        'Minor 25% Boost': 1.25,
+        'Lesser 50% Boost': 1.5,
+        'Medium 100% Boost': 2.0,
+        'Greater 150% Boost': 2.5,
+        'Major 200% Boost': 3.0
     };
     
     const divisor = divisors[slayerBonus] || 1.0;
@@ -2621,12 +2621,12 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
                 slayerBonusSelect.draggable = false;
                 
                 const options = [
-                    'No Slayer Bonus',
-                    '25% Slayer Bonus',
-                    '50% Slayer Bonus',
-                    '100% Slayer Bonus',
-                    '150% Slayer Bonus',
-                    '200% Slayer Bonus'
+                    'No Count Boost',
+                    'Minor 25% Boost',
+                    'Lesser 50% Boost',
+                    'Medium 100% Boost',
+                    'Greater 150% Boost',
+                    'Major 200% Boost'
                 ];
                 
                 options.forEach(opt => {
@@ -2637,7 +2637,7 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
                 });
                 
                 // Set current value
-                slayerBonusSelect.value = item.slayerBonus || 'No Slayer Bonus';
+                slayerBonusSelect.value = item.slayerBonus || 'No Count Boost';
                 
                 let ctrlPressed = false;
 

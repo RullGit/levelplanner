@@ -2389,7 +2389,7 @@ label,
     border: 1px solid #d8dce3;
     border-radius: 3px;
     cursor: pointer;
-    margin-left: 6px;
+    margin-left: auto;
     display: inline-block;
     vertical-align: middle;
 }
