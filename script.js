@@ -1278,7 +1278,9 @@ function saveToStorage() {
 }
 
 // Save both minimal levelplans (heroic + epic) to a downloadable JSON file.
-function saveToFile() {
+// Uses the native OS Save dialog (showSaveFilePicker) when available (Chrome/Edge
+// desktop), and falls back to a prompt() + <a download> approach elsewhere.
+async function saveToFile() {
     let learningTomeByMode = { heroic: '0', epic: '0' };
     try {
         const raw = localStorage.getItem(SETTINGS_KEY);
@@ -1299,11 +1301,41 @@ function saveToFile() {
         }
     }
 
-    const blob = new Blob([JSON.stringify(output, null, 2)], { type: 'application/json' });
+    const json = JSON.stringify(output, null, 2);
+
+    // --- Native OS Save dialog (Chrome / Edge desktop) ---
+    if (typeof window.showSaveFilePicker === 'function') {
+        try {
+            const handle = await window.showSaveFilePicker({
+                suggestedName: 'levelplan.json',
+                types: [{ description: 'JSON file', accept: { 'application/json': ['.json'] } }]
+            });
+            const writable = await handle.createWritable();
+            await writable.write(json);
+            await writable.close();
+            return; // done — skip the fallback below
+        } catch (err) {
+            // AbortError means the user dismissed the dialog — treat as cancel.
+            if (err.name === 'AbortError') return;
+            // Any other error (e.g. permissions): fall through to the prompt fallback.
+            console.warn('showSaveFilePicker failed, falling back to prompt save:', err);
+        }
+    }
+
+    // --- Fallback: prompt for filename, then trigger <a download> ---
+    const rawName = prompt('Save as (filename):', 'levelplan');
+    // If the user cancelled or entered an empty string, abort.
+    if (rawName === null) return;
+    const trimmed = rawName.trim();
+    if (!trimmed) return;
+    // Ensure the filename ends with .json
+    const filename = trimmed.endsWith('.json') ? trimmed : trimmed + '.json';
+
+    const blob = new Blob([json], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'levelplan.json';
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
     a.remove();
