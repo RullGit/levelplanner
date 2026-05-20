@@ -307,8 +307,7 @@ h1 {
     right: 0;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 4px 10px;
+    padding: 3px 10px;
     background: linear-gradient(180deg, rgba(44,62,80,0.6) 0%, rgba(31,45,61,0.6) 100%);
     border-radius: 0 0 0 8px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.18);
@@ -341,9 +340,16 @@ h1 {
 /* Small stacked settings to the left of the multiplier */
 .small-settings {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
     margin-right: 10px;
+}
+
+.small-settings-dropdowns {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
 }
 
 .small-field {
@@ -358,6 +364,25 @@ h1 {
     width: 140px;
 }
 
+.small-field--vip {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: auto;
+}
+
+.small-field--vip span {
+    text-align: left;
+}
+
+.small-field--vip input[type="checkbox"] {
+    align-self: center;
+    margin-left: 0;
+    width: 16px;
+    height: 16px;
+    accent-color: #2980b9;
+}
+
 .small-field span {
     display: inline-block;
     text-align: left;
@@ -366,16 +391,26 @@ h1 {
     text-overflow: ellipsis;
 }
 
-.small-field--vip input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
-    accent-color: #2980b9;
+.learning-tome-select {
+    width: 210px;
+    height: 20px;
+    padding: 1px 1px;
+    margin: 0;
+    border-radius: 3px;
+    border: 1px solid #5b6b7d;
+    background: #e7e7e7;
+    color: #2c3e50;
+    font-size: 0.78em;
+    font-weight: 600;
+    cursor: pointer;
 }
 
-.learning-tome-select {
-    width: 200px;
-    padding: 2px 4px;
-    border-radius: 4px;
+.default-slayer-bonus-select {
+    width: 210px;
+    height: 20px;
+    padding: 1px 1px;
+    margin: 0;
+    border-radius: 3px;
     border: 1px solid #5b6b7d;
     background: #e7e7e7;
     color: #2c3e50;
@@ -560,7 +595,7 @@ h1 {
 }
 
 .list-section.levelplan .section-header {
-    min-height: 54px;
+    min-height: 52px;
 }
 
 .list-section.quests .section-header {
@@ -656,10 +691,8 @@ h1 {
 }
 
 .lp-search-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 200;
+    position: absolute; /* positioned via JS to avoid clipping by header */
+    z-index: 9999;
     background: #fff;
     border: 1px solid #aaa;
     border-top: none;
@@ -667,7 +700,6 @@ h1 {
     margin: 0;
     padding: 0;
     list-style: none;
-    min-width: 100%;
     box-shadow: 0 4px 10px rgba(0,0,0,0.13);
     max-height: 220px;
     overflow-y: auto;
@@ -690,6 +722,39 @@ h1 {
 .lp-search-dropdown li.lp-search-active {
     background: #e8f0fb;
     color: #1a3a6e;
+}
+
+/* When the search input is placed inside the levelplan list-header, keep
+   the header size unchanged and center the input in the space after the
+   "Questname" label. */
+.levelplan .list-header .lp-col-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.levelplan .list-header .lp-col-name-search {
+    flex: 1 1 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.levelplan .list-header .lp-search-wrap {
+    position: relative; /* keep dropdown positioned correctly */
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    align-self: center;
+}
+.levelplan .list-header .lp-search-input {
+    width: 160px;
+    padding: 4px 6px;
+    font-size: 0.85em;
+    border-radius: 4px;
+    border-bottom: none; /* keep dropdown visually attached */
+    background: #fff;
+}
+.levelplan .list-header .lp-search-dropdown {
+    min-width: 160px;
 }
 
 
@@ -748,10 +813,10 @@ label,
     color: #e6ebf2;
 }
 
-/* Slightly larger labels for VIP skip and Speed Factor */
-.small-field--vip span,
-.small-field--speed span {
+/* Slightly larger labels for VIP skip */
+.small-field--vip span {
     font-size: 0.88em;
+    line-height: 1.5;
 }
 
 /* Reinforce toggle and mode-switch styles (placed last to ensure precedence) */
@@ -1680,7 +1745,7 @@ label,
 }
 
 /* Levelplan list-header uses flex inside col-content; lp-col-favor sits between xpmin and delete */
-.lists-container.favor-active .lp-col-favor {
+.lists-container.favor-active .col-content .lp-col-favor {
     flex: 0 0 69px;
     padding: 6px 8px;
     border-right: none;
@@ -1694,11 +1759,37 @@ label,
     padding-left: 2px;
 }
 
+.lists-container.favor-active .lp-aggregate-footer .lp-col-favor {
+    flex: 0 0 40px;
+    padding: 6px 8px;
+    border-right: none;
+    border-left: 1px solid #c8cdd9;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 2px;
+    padding-left: 2px;
+}
+
 /* Hide the header delete cell when the favor column is visible */
 .lists-container.favor-active .levelplan .list-header .lp-col-delete,
-.lists-container.favor-active #levelplan .list-header .lp-col-delete,
-.lists-container.favor-active .lp-aggregate-footer .lp-col-delete {
+.lists-container.favor-active #levelplan .list-header .lp-col-delete {
     display: none !important;
+}
+
+/* Keep the footer delete button visible when favor/token view is active.
+   The header delete cell is hidden above, but the footer's delete column
+   should remain shown so the clear/⇶ button stays accessible. */
+.lists-container.favor-active .lp-aggregate-footer .lp-col-delete {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    /* Match the default footer delete sizing so showing it doesn't shift layout */
+    flex: 0 0 29px !important;
+    width: 29px !important;
+    min-width: 29px !important;
+    padding: 0 !important;
 }
 
 /* Levelplan: add cumulative-favor column (46px) on the far right */
@@ -2156,6 +2247,57 @@ label,
     background: #455a64;
 }
 
+/* Tactile sticky toggle button (e.g. Hide Planning) */
+.menu-btn--toggle {
+    background: linear-gradient(180deg, #546e7a 0%, #37474f 100%);
+    color: #eceff1;
+    border-top: 1px solid #78909c;
+    border-left: 1px solid #607d8b;
+    border-right: 1px solid #263238;
+    border-bottom: 1px solid #1a252b;
+    border-radius: 10px;
+    margin-left: -12px;
+    margin-top: -6px;
+    /* make the toggle nearly as tall as the menu bar */
+    height: 52px;
+    padding: 0 14px;
+    /* flush with menu bar: remove lift/shadow */
+    box-shadow: none;
+    transform: none;
+    transition: background 0.12s, color 0.12s, border-color 0.08s;
+}
+
+.menu-btn--toggle:hover {
+    background: linear-gradient(180deg, #607d8b 0%, #455a64 100%);
+    color: #fff;
+}
+
+.menu-btn--toggle:active {
+    background: linear-gradient(180deg, #2e464f 0%, #263840 100%);
+    border-top-color: #263238;
+    border-left-color: #263238;
+    /* remove active lift/shadow so button stays flush */
+    box-shadow: none;
+    transform: none;
+}
+
+.menu-btn--toggle[aria-pressed="true"] {
+    background: linear-gradient(180deg, #1e3038 0%, #243640 100%);
+    color: #80cbc4;
+    border-top: 1px solid #263238;
+    border-left: 1px solid #263238;
+    border-right: 1px solid #4a6572;
+    border-bottom: 1px solid #4a6572;
+    /* keep pressed visual but avoid shadow/translation */
+    box-shadow: none;
+    transform: none;
+}
+
+.menu-btn--toggle[aria-pressed="true"]:hover {
+    background: linear-gradient(180deg, #243640 0%, #2c4552 100%);
+    color: #a7ffeb;
+}
+
 #config-export-btn,
 #config-import-btn {
     min-width: 9em;
@@ -2397,6 +2539,20 @@ label,
 /* ===== "Leveling plan only" mode (Hide Planning) ===== */
 
 /* Hide the quests list entirely */
+/* --- Hide-planning: navbar changes --- */
+body.planning-hidden .menu-bar {
+    grid-template-columns: auto auto 1fr;
+}
+
+body.planning-hidden .menu-left .menu-btn:not(#hide-planning-btn) {
+    display: none;
+}
+
+body.planning-hidden .menu-center {
+    justify-self: start;
+}
+
+/* --- Hide-planning: list layout --- */
 .lists-container.planning-hidden .list-section.quests {
     display: none;
 }

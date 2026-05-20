@@ -554,6 +554,14 @@ function initializeApp() {
             renderLists();
         });
     }
+    // Default slayer bonus dropdown — re-render both lists and persist
+    const defaultSlayerBonusSel = document.getElementById('default-slayer-bonus');
+    if (defaultSlayerBonusSel) {
+        defaultSlayerBonusSel.addEventListener('change', () => {
+            saveSettings();
+            renderLists();
+        });
+    }
     // Heroic / Epic mode switch (UI state only, persisted)
     const modeSwitch = document.getElementById('mode-switch');
     if (modeSwitch) {
@@ -1059,6 +1067,14 @@ function getLearningTomeRepeatBonus() {
     return LEARNING_TOME_OPTIONS[getCurrentMode()].find(opt => String(opt.bonus) === sel.value)?.repeatBonus || 0;
 }
 
+// Returns the default slayer bonus string (e.g. 'No Count Boost') from the
+// plan-settings dropdown. Used as the fallback for slayer items that have no
+// explicit per-item bonus set, both in the quests list and the levelplan.
+function getDefaultSlayerBonus() {
+    const sel = document.getElementById('default-slayer-bonus');
+    return (sel && sel.value) ? sel.value : 'No Count Boost';
+}
+
 // Save/load the xp-multiplier input to/from localStorage
 function saveSettings() {
     const xpmultiplier = document.getElementById('xp-multiplier')?.value;
@@ -1067,6 +1083,7 @@ function saveSettings() {
     const vipSagas = document.getElementById('vip-sagas-header')?.checked ? true : false;
     const twelveTokens = document.getElementById('twelve-tokens')?.checked ? true : false;
     const learningTome = document.getElementById('learning-tome')?.value || '0';
+    const defaultSlayerBonus = document.getElementById('default-slayer-bonus')?.value || 'No Count Boost';
     // Preserve the per-mode learning tome values already stored.
     let learningTomeByMode = { heroic: '0', epic: '0' };
     try {
@@ -1074,7 +1091,7 @@ function saveSettings() {
         if (existing.learningTomeByMode) learningTomeByMode = existing.learningTomeByMode;
     } catch (e) {}
     learningTomeByMode[mode] = learningTome;
-    localStorage.setItem(SETTINGS_KEY, JSON.stringify({ xpmultiplier, patronView, mode, vipSagas, twelveTokens, learningTomeByMode }));
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify({ xpmultiplier, patronView, mode, vipSagas, twelveTokens, learningTomeByMode, defaultSlayerBonus }));
     // Persist custom config and active preset separately
     localStorage.setItem(CONFIG_KEY, JSON.stringify({
         activePreset: ACTIVE_QUESTS_PRESET,
@@ -1102,7 +1119,7 @@ function loadSettings() {
     const raw = localStorage.getItem(SETTINGS_KEY);
     if (!raw) return;
     try {
-        const { xpmultiplier, patronView, favorView, mode, vipSagas, twelveTokens, learningTomeByMode } = JSON.parse(raw);
+        const { xpmultiplier, patronView, favorView, mode, vipSagas, twelveTokens, learningTomeByMode, defaultSlayerBonus } = JSON.parse(raw);
         const xpInput = document.getElementById('xp-multiplier');
         const pvSelect = document.getElementById('patron-view');
         const modeSwitch = document.getElementById('mode-switch');
@@ -1127,6 +1144,9 @@ function loadSettings() {
         const activeMode = (mode === 'epic') ? 'epic' : 'heroic';
         const savedTome = (learningTomeByMode && learningTomeByMode[activeMode]) || '0';
         populateLearningTomeSelect(savedTome);
+        // Restore default slayer bonus setting.
+        const slayerBonusSel = document.getElementById('default-slayer-bonus');
+        if (slayerBonusSel && defaultSlayerBonus) slayerBonusSel.value = defaultSlayerBonus;
     } catch (e) { /* ignore corrupt settings */ }
 }
 
@@ -1609,7 +1629,7 @@ function renderList(listId) {
             const related = collectItemsForXpMin(item, levelplanNameSet, allItemsByName);
             const relatedReqs = related.slice(1).filter(Boolean);
             const relatedHasMissingTime = relatedReqs.some(it => (it.qTime === null || it.qTime === undefined) && (it.travelTime === null || it.travelTime === undefined));
-            const effectiveQTime = getEffectiveQTime(item);
+            const effectiveQTime = listId === 'levelplan' ? getEffectiveQTime(item) : getQuestsEffectiveQTime(item);
             const plainTime = (item.travelTime || 0) + effectiveQTime;
             const plainXpMin = plainTime > 0 ? Math.floor((item.xp || 0) * multiplier / plainTime) : '';
             row.unmetRequirements = related.slice(1).map(it => it.name);
@@ -1661,7 +1681,7 @@ function renderList(listId) {
             } else {
                 // For quests list: keep original behavior even for sagas
                 const totalXP = related.reduce((sum, it) => sum + (it.xp || 0) * multiplier, 0);
-                const totalTime = related.reduce((sum, it) => sum + (it.travelTime || 0) + getEffectiveQTime(it), 0);
+                const totalTime = related.reduce((sum, it) => sum + (it.travelTime || 0) + getQuestsEffectiveQTime(it), 0);
                 if (relatedHasMissingTime) {
                     row.xpMin = null;
                     row.xpMinAdjusted = false;
@@ -1702,6 +1722,58 @@ function renderList(listId) {
     });
 
     let filteredRowData = rowData;
+    // Collapse verbose slayer series in the quests list: hide intermediate
+    // slayer entries except the first, the last, the 200 and the 1500.
+    if (listId === 'quests') {
+        const slayerRows = filteredRowData.filter(r => r.item && r.item.isSlayer);
+        if (slayerRows.length > 0) {
+            // Group by base name (strip trailing number)
+            const groups = new Map();
+            const trailingNumRe = /\s(\d+)$/;
+            filteredRowData.forEach((r, idx) => {
+                if (!r.item || !r.item.isSlayer) return;
+                const m = r.item.name.match(trailingNumRe);
+                const base = m ? r.item.name.slice(0, m.index) : r.item.name;
+                if (!groups.has(base)) groups.set(base, []);
+                groups.get(base).push({ row: r, idx });
+            });
+            // Determine which rows to keep
+            const keepSet = new Set();
+            for (const [base, arr] of groups.entries()) {
+                if (arr.length === 0) continue;
+                // sort by original index to determine first/last
+                arr.sort((a, b) => a.idx - b.idx);
+                // always keep last
+                keepSet.add(arr[arr.length - 1].row);
+                // also keep any whose trailing number is 200 or 1500
+                for (const el of arr) {
+                    const m = el.row.item.name.match(trailingNumRe);
+                    if (m) {
+                        const n = Number(m[1]);
+                        if (n === 200 || n === 1500) keepSet.add(el.row);
+                    }
+                }
+                // Keep the first only if any entry from this slayer series is
+                // missing from the current quests list (e.g., moved to levelplan).
+                // Build the full set of series names from allItemsByName (which
+                // includes quests + levelplan) and check whether any of those
+                // names are not present in the current filteredRowData.
+                const presentQuestNames = new Set(filteredRowData.map(r => r.item && r.item.name).filter(Boolean));
+                const fullSeriesNames = new Set();
+                for (const name of allItemsByName.keys()) {
+                    if (typeof name !== 'string') continue;
+                    if (name.startsWith(base)) fullSeriesNames.add(name);
+                }
+                const anyMissing = [...fullSeriesNames].some(n => !presentQuestNames.has(n));
+                if (anyMissing) keepSet.add(arr[0].row);
+            }
+            // Apply the keepSet: remove slayer rows not in keepSet
+            filteredRowData = filteredRowData.filter(r => {
+                if (!r.item || !r.item.isSlayer) return true;
+                return keepSet.has(r);
+            });
+        }
+    }
     if (listId === 'quests') {
         const xpminRaw = document.getElementById('quests-xpmin-filter')?.value;
         const xpminMin = xpminRaw !== '' && xpminRaw !== undefined ? parseInt(xpminRaw, 10) : NaN;
@@ -1832,7 +1904,8 @@ function renderLevelplanFooter() {
     const totalTimeEl   = document.getElementById('footer-total-time');
     const xpminEl       = document.getElementById('footer-xpmin');
     const totalXpEl     = document.getElementById('footer-total-xp');
-    const totalFavorEl  = document.getElementById('footer-total-favor');
+    const totalFavorEl      = document.getElementById('footer-total-favor');
+    const itemFavorEl       = document.getElementById('footer-item-favor');
 
     if (playerLevelEl) playerLevelEl.textContent = maxPlayerLevel !== '' ? maxPlayerLevel : '';
     if (questCountEl)  questCountEl.textContent  = items.length > 0 ? `${questCount} quests` : '';
@@ -1866,6 +1939,7 @@ function renderLevelplanFooter() {
             if (item.tokens != null && typeof item.tokens === 'number') totalTokens += item.tokens;
         });
         if (totalFavorEl) totalFavorEl.textContent = safeToLocaleString(totalTokens);
+        if (itemFavorEl)  itemFavorEl.textContent  = safeToLocaleString(totalTokens);
     } else {
         if (patronView && patronView !== 'None') {
             items.forEach(item => {
@@ -1891,6 +1965,7 @@ function renderLevelplanFooter() {
             if (isFinite(heroicBase) && heroicBase !== 0) totalFavor += heroicBase;
         }
         if (totalFavorEl) totalFavorEl.textContent = (patronView && patronView !== 'None') ? safeToLocaleString(totalFavor) : '';
+        if (itemFavorEl)  itemFavorEl.textContent  = (patronView && patronView !== 'None') ? safeToLocaleString(totalFavor) : '';
     }
 }
 
@@ -2005,11 +2080,26 @@ function applySlayerBonus(qTime, slayerBonus) {
     return qTime / divisor;
 }
 
-// Get the effective qTime for an item, applying slayer bonus if applicable.
+// Get the effective qTime for a levelplan item, applying its explicit slayer
+// bonus if set. Items without an explicit slayerBonus are treated as 'No Count
+// Boost' so that changing the plan-settings default never retroactively alters
+// entries already in the leveling plan.
 function getEffectiveQTime(item) {
     const qTime = item.qTime || 0;
     if (item.isSlayer && item.slayerBonus) {
         return applySlayerBonus(qTime, item.slayerBonus);
+    }
+    return qTime;
+}
+
+// Variant of getEffectiveQTime for the quests list. Uses the plan-settings
+// default slayer bonus as a fallback for items without an explicit slayerBonus,
+// so the quests list xpmin reflects the currently selected default boost.
+function getQuestsEffectiveQTime(item) {
+    const qTime = item.qTime || 0;
+    if (item.isSlayer) {
+        const bonus = item.slayerBonus || getDefaultSlayerBonus();
+        return applySlayerBonus(qTime, bonus);
     }
     return qTime;
 }
@@ -2637,7 +2727,7 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
                 });
                 
                 // Set current value
-                slayerBonusSelect.value = item.slayerBonus || 'No Count Boost';
+                slayerBonusSelect.value = item.slayerBonus || getDefaultSlayerBonus();
                 
                 let ctrlPressed = false;
 
@@ -2968,6 +3058,13 @@ function quickAddQuest(questIndex, singleOnly = false) {
     }
 
     const insertIndex = findAutoInsertIndex({ lvl: insertLvl, id: sourceItem.id });
+    // Bake the current default slayer bonus into newly-added slayer items so
+    // their xpmin is frozen at that value; subsequent changes to the default
+    // won't retroactively alter items already in the leveling plan.
+    const _defaultBonus = getDefaultSlayerBonus();
+    for (const it of toInsert) {
+        if (it.isSlayer && !it.slayerBonus) it.slayerBonus = _defaultBonus;
+    }
     data.levelplan.splice(insertIndex, 0, ...toInsert);
 
     saveToStorage();
@@ -3033,7 +3130,7 @@ function initLevelplanSearch() {
     function getMatches(query) {
         const q = query.trim().toLowerCase();
         if (!q) return [];
-        return data.levelplan.filter(item => item.name && item.name.toLowerCase().includes(q));
+        return data.levelplan.filter(item => (item.name && item.name.toLowerCase().includes(q)) || (item.lvl && item.lvl.toString().includes(q)));
     }
 
     function renderDropdown(matches) {
@@ -3055,8 +3152,33 @@ function initLevelplanSearch() {
             });
             dropdown.appendChild(li);
         });
+        // Position the dropdown so it's not clipped by header overflow.
+        positionDropdown();
         dropdown.hidden = false;
     }
+
+    function positionDropdown() {
+        try {
+            const rect = input.getBoundingClientRect();
+            // Use fixed positioning relative to the viewport so the dropdown
+            // isn't clipped by ancestor overflow. JS updates left/top/width.
+            dropdown.style.position = 'fixed';
+            dropdown.style.left = Math.max(0, rect.left) + 'px';
+            dropdown.style.top = Math.max(0, rect.bottom) + 'px';
+            dropdown.style.minWidth = Math.max(rect.width, 160) + 'px';
+            dropdown.style.zIndex = 9999;
+        } catch (e) {
+            // if positioning fails, fall back to the default layout
+            dropdown.style.position = '';
+            dropdown.style.left = '';
+            dropdown.style.top = '';
+            dropdown.style.minWidth = '';
+        }
+    }
+
+    // Reposition on viewport changes and when any scroll occurs (capture phase)
+    window.addEventListener('resize', () => { if (!dropdown.hidden) positionDropdown(); });
+    document.addEventListener('scroll', () => { if (!dropdown.hidden) positionDropdown(); }, true);
 
     function setActive(index) {
         const items = dropdown.querySelectorAll('li');
@@ -3066,7 +3188,7 @@ function initLevelplanSearch() {
 
     input.addEventListener('input', () => {
         const matches = getMatches(input.value);
-        if (matches.length > 0 && matches.length <= 5) {
+        if (matches.length > 0) {
             renderDropdown(matches);
         } else {
             dropdown.hidden = true;
@@ -3353,6 +3475,14 @@ function handleDrop(e) {
                 if (idx !== -1) data.quests.splice(idx, 1);
             }
 
+            // Bake the current default slayer bonus into newly-added slayer items.
+            if (targetListId === 'levelplan') {
+                const _defaultBonus = getDefaultSlayerBonus();
+                for (const it of toInsert) {
+                    if (it.isSlayer && !it.slayerBonus) it.slayerBonus = _defaultBonus;
+                }
+            }
+
             data[targetListId].splice(dropIndex, 0, ...toInsert);
             insertedNames.push(...toInsert.map(it => it.name));
         }
@@ -3364,6 +3494,11 @@ function handleDrop(e) {
             if (draggedListId !== 'special') {
                 // If moving from another source (e.g., quests with Ctrl), remove the original single item
                 data[draggedListId].splice(draggedIndex, 1);
+            }
+
+            // Bake the current default slayer bonus into newly-added slayer items.
+            if (targetListId === 'levelplan' && itemToInsert.isSlayer && !itemToInsert.slayerBonus) {
+                itemToInsert.slayerBonus = getDefaultSlayerBonus();
             }
 
             data[targetListId].splice(dropIndex, 0, itemToInsert);
@@ -3510,7 +3645,9 @@ function togglePlanningVisibility() {
     const container = document.querySelector('.lists-container');
     const btn = document.getElementById('hide-planning-btn');
     const isHidden = container.classList.toggle('planning-hidden');
+    document.body.classList.toggle('planning-hidden', isHidden);
     btn.textContent = isHidden ? 'Show Planning' : 'Hide Planning';
+    btn.setAttribute('aria-pressed', isHidden ? 'true' : 'false');
 }
 
 // ---------- Config overlay ----------

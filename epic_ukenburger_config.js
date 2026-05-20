@@ -2347,7 +2347,7 @@ window.EPIC_UKENBURGER_CONFIG =
   },
   {
     "name": "King's Forest Slayer 10",
-    "travelTime": 1,
+    "travelTime": 0.1,
     "qTime": 0.24,
     "optionalXP": 0,
     "xpmods": 0
@@ -2424,7 +2424,7 @@ window.EPIC_UKENBURGER_CONFIG =
   },
   {
     "name": "Orchard Slayer 10",
-    "travelTime": 1,
+    "travelTime": 0.1,
     "qTime": 0.16,
     "optionalXP": 0,
     "xpmods": 0
@@ -2501,7 +2501,7 @@ window.EPIC_UKENBURGER_CONFIG =
   },
   {
     "name": "Barovia Slayer 10",
-    "travelTime": 1,
+    "travelTime": 0.1,
     "qTime": 0.18,
     "optionalXP": 0,
     "xpmods": 0
@@ -2578,7 +2578,7 @@ window.EPIC_UKENBURGER_CONFIG =
   },
     {
     "name": "Thunderholme Slayer 10",
-    "travelTime": 1,
+    "travelTime": 0.1,
     "qTime": 0.24,
     "optionalXP": 0,
     "xpmods": 0
@@ -2655,7 +2655,7 @@ window.EPIC_UKENBURGER_CONFIG =
   },
   {
     "name": "Saltmarsh Slayer 10",
-    "travelTime": 1,
+    "travelTime": 0.1,
     "qTime": 0.24,
     "optionalXP": 0,
     "xpmods": 0

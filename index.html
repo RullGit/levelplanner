@@ -10,11 +10,11 @@
     <div class="container">
         <nav class="menu-bar" aria-label="Main toolbar">
             <div class="menu-left">
+                <button class="menu-btn menu-btn--toggle" id="hide-planning-btn" aria-pressed="false" onclick="togglePlanningVisibility()">Hide Planning</button>
                 <button class="menu-btn" onclick="saveToFile()">Save</button>
                 <button class="menu-btn" onclick="loadFromFile()">Load</button>
                 <button class="menu-btn" onclick="resetData()">New</button>
                 <button class="menu-btn" onclick="openConfig()">Config</button>
-                <button class="menu-btn" id="hide-planning-btn" onclick="togglePlanningVisibility()">Hide Planning</button>
             </div>
             <div class="menu-center">
                 <div class="mode-switch" role="group" aria-label="Mode">
@@ -46,10 +46,6 @@
                 <div class="section-header">
                     <div class="lp-title-row">
                     <h2>Leveling Plan</h2>
-                    <div class="lp-search-wrap" id="lp-search-wrap">
-                        <input type="text" id="lp-search-input" class="lp-search-input" placeholder="Search plan…" autocomplete="off" aria-label="Search leveling plan">
-                        <ul class="lp-search-dropdown" id="lp-search-dropdown" hidden></ul>
-                    </div>
                     </div>
                     <div class="plan-settings-box">
                         <div class="small-settings">
@@ -57,7 +53,17 @@
                                 <span>VIP skip for Sagas</span>
                                 <input type="checkbox" id="vip-sagas-header" name="vip-sagas-header">
                             </label>
+                            <div class="small-settings-dropdowns">
                             <select id="learning-tome" name="learning-tome" class="learning-tome-select"></select>
+                            <select id="default-slayer-bonus" name="default-slayer-bonus" class="default-slayer-bonus-select">
+                                <option value="No Count Boost">Default No Slayer Count Boost</option>
+                                <option value="Minor 25% Boost">Default Minor 25% Slayer Boost</option>
+                                <option value="Lesser 50% Boost">Default Lesser 50% Slayer Boost</option>
+                                <option value="Medium 100% Boost">Default Medium 100% Slayer Boost</option>
+                                <option value="Greater 150% Boost">Default Greater 150% Slayer Boost</option>
+                                <option value="Major 200% Boost">Default Major 200% Slayer Boost</option>
+                            </select>
+                            </div>
                         </div>
                         <div class="xp-mult-main">
                             <span class="xp-mult-label">XP Multiplier</span>
@@ -79,7 +85,14 @@
                             <span class="col-header-label">Quest</span>
                             <span class="col-header-label">Lvl</span>
                         </div>
-                        <div class="lp-col-name"><span class="col-header-label">Questname</span></div>
+                        <div class="lp-col-name">
+                            <span class="col-header-label">Questname</span>
+                            <div class="lp-col-name-search">
+                                <div class="lp-search-wrap" id="lp-search-wrap">
+                                    <input type="text" id="lp-search-input" class="lp-search-input" placeholder="Search…" autocomplete="off" aria-label="Search leveling plan">
+                                </div>
+                            </div>
+                        </div>
                         <div class="lp-col-difficulty"></div>
                         <div class="lp-col-xpmin"><span class="col-header-label">XP/min</span></div>
                         <div class="lp-col-favor"><span class="col-header-label">Favor</span></div>
@@ -101,7 +114,7 @@
                     <div class="lp-col-name"><span class="col-header-label" id="footer-quest-count"></span></div>
                     <div class="lp-col-difficulty"><span class="col-header-label" id="footer-total-time"></span></div>
                     <div class="lp-col-xpmin"><span class="col-header-label" id="footer-xpmin"></span></div>
-                    <div class="lp-col-favor"></div>
+                    <div class="lp-col-favor"><span class="col-header-label" id="footer-item-favor"></span></div>
                     <div class="lp-col-delete"><button class="lp-footer-clear" onclick="clearCurrentLevelplan()" data-tip="Clear this leveling plan" aria-label="Clear current leveling plan">&#x21F6;</button></div>
                     <div class="col-cumulative"><span class="col-header-label" id="footer-total-xp"></span></div>
                     <div class="col-cumfavor"><span class="col-header-label" id="footer-total-favor"></span></div>
@@ -188,6 +201,7 @@
     <script src="epic.js"></script>
     <script src="heroic_ukenburger_config.js"></script>
     <script src="epic_ukenburger_config.js"></script>
+    <ul class="lp-search-dropdown" id="lp-search-dropdown" hidden></ul>
     <script src="script.js"></script>
 </body>
 </html>
