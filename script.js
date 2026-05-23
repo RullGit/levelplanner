@@ -3369,10 +3369,10 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
             const addBtn = document.createElement('button');
             addBtn.className = 'item-quickadd';
             addBtn.textContent = '←';
-            addBtn.dataset.tip = 'Add to Level Plan';
+            addBtn.dataset.tip = 'Add to Level Plan\nHold Shift to add to bottom';
             addBtn.onclick = (e) => {
                 e.stopPropagation();
-                quickAddQuest(index, e.ctrlKey);
+                quickAddQuest(index, e.ctrlKey, e.shiftKey);
             };
             div.appendChild(addBtn);
         }
@@ -3433,7 +3433,7 @@ function findAutoInsertIndex(item) {
 
 // Quick-add a quest (and its unmet deps) to levelplan at the auto-calculated position.
 // If singleOnly is true, only the quest itself is moved (no dependencies).
-function quickAddQuest(questIndex, singleOnly = false) {
+function quickAddQuest(questIndex, singleOnly = false, addToBottom = false) {
     const sourceItem = data.quests[questIndex];
     if (!sourceItem) return;
 
@@ -3463,24 +3463,28 @@ function quickAddQuest(questIndex, singleOnly = false) {
         if (idx !== -1) data.quests.splice(idx, 1);
     }
 
-    // Determine insertion level. For sagas, insert where a quest of the
-    // highest required level would be placed (use collected unmet deps first,
-    // otherwise direct requirement levels).
-    let insertLvl = sourceItem.lvl;
-    if (sourceItem.isSaga) {
-        const candidates = [];
-        if (related && related.length > 1) {
-            candidates.push(...related.slice(1).map(it => it.lvl).filter(l => l != null));
-        } else if (Array.isArray(sourceItem.requirements)) {
-            candidates.push(...sourceItem.requirements.map(n => {
-                const it = allItemsByName.get(n);
-                return it && it.lvl != null ? it.lvl : null;
-            }).filter(l => l != null));
+    let insertIndex;
+    if (addToBottom) {
+        insertIndex = data.levelplan.length;
+    } else {
+        // Determine insertion level. For sagas, insert where a quest of the
+        // highest required level would be placed (use collected unmet deps first,
+        // otherwise direct requirement levels).
+        let insertLvl = sourceItem.lvl;
+        if (sourceItem.isSaga) {
+            const candidates = [];
+            if (related && related.length > 1) {
+                candidates.push(...related.slice(1).map(it => it.lvl).filter(l => l != null));
+            } else if (Array.isArray(sourceItem.requirements)) {
+                candidates.push(...sourceItem.requirements.map(n => {
+                    const it = allItemsByName.get(n);
+                    return it && it.lvl != null ? it.lvl : null;
+                }).filter(l => l != null));
+            }
+            if (candidates.length > 0) insertLvl = Math.max(...candidates);
         }
-        if (candidates.length > 0) insertLvl = Math.max(...candidates);
+        insertIndex = findAutoInsertIndex({ lvl: insertLvl, id: sourceItem.id });
     }
-
-    const insertIndex = findAutoInsertIndex({ lvl: insertLvl, id: sourceItem.id });
     // Bake the current default slayer bonus into newly-added slayer items so
     // their xpmin is frozen at that value; subsequent changes to the default
     // won't retroactively alter items already in the leveling plan.
