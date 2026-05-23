@@ -4137,7 +4137,11 @@ function handleDrop(e) {
 
             // `collectItemsForXpMin` returns [item, req1, req2...]. We want
             // dependencies in original order followed by the item (1,2,3,4).
-            const deps = related.slice(1).map(it => ({ ...it, source: 'quests' }));
+            let deps = related.slice(1).map(it => ({ ...it, source: 'quests' }));
+            const vipSagasChecked = document.getElementById('vip-sagas-header')?.checked;
+            if (sourceItem.isSaga && vipSagasChecked && deps.length === 1) {
+                deps = [];
+            }
             const toInsert = deps.concat({ ...related[0], source: 'quests' });
 
             // Remove each moved quest from `data.quests` (if present)
