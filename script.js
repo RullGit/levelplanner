@@ -3369,7 +3369,7 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
             const addBtn = document.createElement('button');
             addBtn.className = 'item-quickadd';
             addBtn.textContent = '←';
-            addBtn.dataset.tip = 'Add to Level Plan\nHold Shift to add to bottom';
+            addBtn.dataset.tip = 'Add to Level Plan\nHold Shift while adding to add to the bottom' + (xpMin !== '' && xpMinAdjusted ? '\nHold Control while adding to add without prereqs.' : '');
             addBtn.onclick = (e) => {
                 e.stopPropagation();
                 quickAddQuest(index, e.ctrlKey, e.shiftKey);
