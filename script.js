@@ -1101,22 +1101,43 @@ function getQuickQuestVariableBonus(mode, difficulty, repeat, learningTomeBonus)
 
 
 
+// Returns the raw bonus string value for the given mode.
+// When the requested mode matches the currently displayed dropdown, the
+// dropdown value is used directly. Otherwise the persisted per-mode value
+// is read from localStorage so that _computeQuestXP() called for the
+// *inactive* mode (e.g. during initialisation) always gets the right bonus.
+function _getLearningTomeBonusValue(mode) {
+    const currentMode = getCurrentMode();
+    const sel = document.getElementById('learning-tome');
+    if (mode === currentMode || !mode) {
+        return sel ? sel.value : '0';
+    }
+    // Inactive mode — read from localStorage.
+    try {
+        const raw = localStorage.getItem(SETTINGS_KEY);
+        if (raw) {
+            const parsed = JSON.parse(raw);
+            return (parsed.learningTomeByMode && parsed.learningTomeByMode[mode]) || '0';
+        }
+    } catch (e) { /* ignore */ }
+    return '0';
+}
+
 // Returns the additive per-item XP bonus fraction from the currently selected
 // Tome of Learning (e.g. 0.25 for a 25% tome).
-function getLearningTomeBonus() {
-    const sel = document.getElementById('learning-tome');
-    if (!sel) return 0;
-    const v = parseFloat(sel.value);
+// Pass `mode` when calling for a mode that may differ from the active UI mode.
+function getLearningTomeBonus(mode) {
+    const v = parseFloat(_getLearningTomeBonusValue(mode));
     return isFinite(v) ? v : 0;
 }
 
 // Returns the additive per-item XP bonus fraction from the currently selected
 // Tome of Learning (e.g. 0.25 for a 25% tome).
-function getLearningTomeRepeatBonus() {
-    const sel = document.getElementById('learning-tome');
-    if (!sel) return 0;
-    const v = parseFloat(sel.value);
-    return LEARNING_TOME_OPTIONS[getCurrentMode()].find(opt => String(opt.bonus) === sel.value)?.repeatBonus || 0;
+// Pass `mode` when calling for a mode that may differ from the active UI mode.
+function getLearningTomeRepeatBonus(mode) {
+    const bonusVal = _getLearningTomeBonusValue(mode);
+    const resolvedMode = mode || getCurrentMode();
+    return LEARNING_TOME_OPTIONS[resolvedMode].find(opt => String(opt.bonus) === bonusVal)?.repeatBonus || 0;
 }
 
 // Returns the default slayer bonus string (e.g. 'No Count Boost') from the
@@ -1571,6 +1592,24 @@ async function _applyLoadedPayload(parsed) {
         epicImportedConfig: EPIC_IMPORTED_CONFIG
     }));
 
+        // Restore per-mode learning tome values from the file FIRST so that any
+    // subsequent _computeQuestXP() calls read the correct per-mode bonus from
+    // localStorage for the inactive mode.
+    if (parsed.learningTomeByMode) {
+        const currentMode = getCurrentMode();
+        const tomeVal = parsed.learningTomeByMode[currentMode] || '0';
+        populateLearningTomeSelect(tomeVal);
+        // Merge into existing settings so the other mode's value is preserved.
+        try {
+            const rawS = localStorage.getItem(SETTINGS_KEY);
+            if (rawS) {
+                const s = JSON.parse(rawS);
+                s.learningTomeByMode = Object.assign({}, s.learningTomeByMode || {}, parsed.learningTomeByMode);
+                localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
+            }
+        } catch (e) {}
+    }
+
     if (fileHasCustomConfig) {
         // Always populate IMPORTED_CONFIG slots from the file, regardless of user choice below
         window.HEROIC_IMPORTED_CONFIG = parsed.heroicCustomConfig;
@@ -1608,7 +1647,13 @@ async function _applyLoadedPayload(parsed) {
             _persistConfig();
         }
         // else: load using current config
+    } else {
+        // No config change — but quest XP must still be recomputed with the
+        // tome values from the file (which were just written to localStorage).
+        _computeQuestXP('heroic');
+        _computeQuestXP('epic');
     }
+
     // All other cases (no filePreset, matching preset, etc.): load normally
     const xpInput = document.getElementById('xp-multiplier');
     if (xpInput && parsed.xpmultiplier !== undefined) xpInput.value = parsed.xpmultiplier;
@@ -1616,21 +1661,6 @@ async function _applyLoadedPayload(parsed) {
     if (parsed.vipSagas !== undefined) {
         const vipCb = document.getElementById('vip-sagas-header');
         if (vipCb) vipCb.checked = !!parsed.vipSagas;
-    }
-    // Restore per-mode learning tome values from the file.
-    if (parsed.learningTomeByMode) {
-        const currentMode = getCurrentMode();
-        const tomeVal = parsed.learningTomeByMode[currentMode] || '0';
-        populateLearningTomeSelect(tomeVal);
-        // Merge into existing settings so the other mode's value is preserved.
-        try {
-            const rawS = localStorage.getItem(SETTINGS_KEY);
-            if (rawS) {
-                const s = JSON.parse(rawS);
-                s.learningTomeByMode = Object.assign({}, s.learningTomeByMode || {}, parsed.learningTomeByMode);
-                localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
-            }
-        } catch (e) {}
     }
     saveSettings();
 
