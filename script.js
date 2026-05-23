@@ -3661,6 +3661,103 @@ let dragRafPending = false;
 let dragRafList = null;
 let dragRafClientY = 0;
 
+// --- Custom auto-scroll for the levelplan list during drag ---
+// Replaces the browser's native (often erratic) drag auto-scroll with a smooth
+// implementation. Acceleration starts inside the list near top/bottom edges and
+// continues growing over the header/footer, providing seamless scrolling.
+let _dragScrollAnimId = null;
+let _dragScrollClientY = 0;
+let _dragScrollClientX = 0;
+let _dragScrollLastTime = 0;
+const DRAG_SCROLL_INNER_ZONE = 40; // px inside list edge where acceleration begins
+const DRAG_SCROLL_MAX_SPEED = 3000; // px/s — reached at the outer edge of header/footer
+
+// Track cursor position globally during drag (capture phase fires everywhere).
+document.addEventListener('dragover', (e) => {
+    _dragScrollClientY = e.clientY;
+    _dragScrollClientX = e.clientX;
+}, true);
+
+function _dragScrollTick(timestamp) {
+    _dragScrollAnimId = null;
+    if (!draggedElement) return; // drag ended
+
+    const list = document.getElementById('levelplan');
+    if (!list) { _dragScrollAnimId = requestAnimationFrame(_dragScrollTick); return; }
+
+    const dt = _dragScrollLastTime
+        ? Math.min((timestamp - _dragScrollLastTime) / 1000, 0.05) // cap to 50 ms
+        : 0;
+    _dragScrollLastTime = timestamp;
+
+    // Geometry of the list and its header/footer
+    const listRect = list.getBoundingClientRect();
+    const lpSection = list.closest('.list-section.levelplan');
+    let headerTop = listRect.top;
+    let footerBottom = listRect.bottom;
+    if (lpSection) {
+        const header = lpSection.querySelector('.list-header');
+        const footer = lpSection.querySelector('.lp-aggregate-footer');
+        if (header) headerTop = header.getBoundingClientRect().top;
+        if (footer) footerBottom = footer.getBoundingClientRect().bottom;
+    }
+
+    // Only scroll when the cursor is horizontally within the levelplan section
+    if (lpSection) {
+        const secRect = lpSection.getBoundingClientRect();
+        if (_dragScrollClientX < secRect.left || _dragScrollClientX > secRect.right) {
+            _dragScrollAnimId = requestAnimationFrame(_dragScrollTick);
+            return;
+        }
+    }
+
+    const y = _dragScrollClientY;
+    let speed = 0; // px/s — negative = scroll up
+
+    // Top zone: acceleration starts at (listTop + INNER_ZONE), grows toward headerTop
+    const topZoneStart = listRect.top + DRAG_SCROLL_INNER_ZONE;
+    const topZoneEnd = headerTop;
+    if (y < topZoneStart) {
+        const zoneSize = topZoneStart - topZoneEnd;
+        const dist = topZoneStart - y;
+        // frac can exceed 1 when cursor is above the header — that's fine,
+        // it just means max+ speed, which the user explicitly wants.
+        const frac = zoneSize > 0 ? dist / zoneSize : 1;
+        speed = -DRAG_SCROLL_MAX_SPEED * frac * frac;
+    }
+
+    // Bottom zone: acceleration starts at (listBottom - INNER_ZONE), grows toward footerBottom
+    const bottomZoneStart = listRect.bottom - DRAG_SCROLL_INNER_ZONE;
+    const bottomZoneEnd = footerBottom;
+    if (y > bottomZoneStart) {
+        const zoneSize = bottomZoneEnd - bottomZoneStart;
+        const dist = y - bottomZoneStart;
+        const frac = zoneSize > 0 ? dist / zoneSize : 1;
+        speed = DRAG_SCROLL_MAX_SPEED * frac * frac;
+    }
+
+    if (speed !== 0 && dt > 0) {
+        list.scrollTop += speed * dt;
+    }
+
+    _dragScrollAnimId = requestAnimationFrame(_dragScrollTick);
+}
+
+function _startDragAutoScroll() {
+    _dragScrollLastTime = 0;
+    if (!_dragScrollAnimId) {
+        _dragScrollAnimId = requestAnimationFrame(_dragScrollTick);
+    }
+}
+
+function _stopDragAutoScroll() {
+    if (_dragScrollAnimId) {
+        cancelAnimationFrame(_dragScrollAnimId);
+        _dragScrollAnimId = null;
+    }
+    _dragScrollLastTime = 0;
+}
+
 // Handle drag start
 function handleDragStart(e) {
     draggedElement = this;
@@ -3671,6 +3768,19 @@ function handleDragStart(e) {
     // Some browsers require setData to be called for the drag to start.
     e.dataTransfer.setData('text/plain', '');
     this.classList.add('dragging');
+
+    // Suppress the browser's native drag auto-scroll on the levelplan list
+    // (it accelerates to extreme speeds near the edge and stops at the
+    // header/footer). We replace it with our own smooth implementation.
+    const lpList = document.getElementById('levelplan');
+    if (lpList) {
+        // Measure scrollbar width before hiding it, then compensate with padding
+        // so the content width doesn't shift.
+        const scrollbarW = lpList.offsetWidth - lpList.clientWidth;
+        lpList.style.overflowY = 'hidden';
+        if (scrollbarW > 0) lpList.style.paddingRight = scrollbarW + 'px';
+    }
+    _startDragAutoScroll();
 }
 
 // Handle drag end
@@ -3688,6 +3798,14 @@ function handleDragEnd(e) {
     draggedElement = null;
     draggedListId = null;
     draggedIndex = null;
+
+    // Stop custom auto-scroll and restore native overflow on the levelplan list
+    _stopDragAutoScroll();
+    const lpList = document.getElementById('levelplan');
+    if (lpList) {
+        lpList.style.overflowY = '';
+        lpList.style.paddingRight = '';
+    }
 }
 
 // Setup drag listeners for lists
@@ -4030,6 +4148,15 @@ function handleDrop(e) {
         phantomElement.parentNode.removeChild(phantomElement);
     }
     phantomElement = null;
+
+    // Restore native overflow before re-render so layout is correct
+    _stopDragAutoScroll();
+    const _lpList = document.getElementById('levelplan');
+    if (_lpList) {
+        _lpList.style.overflowY = '';
+        _lpList.style.paddingRight = '';
+    }
+
     saveToStorage();
     renderLists();
     ensureHighlightStyle();
