@@ -2001,7 +2001,7 @@ function renderList(listId) {
             } else {
                 // For cumulative XP the pot bonus is added to the multiplier (additive).
                 // Displayed XP (xpMin, tooltip, color) keeps using `multiplier` unchanged.
-                                const cumMultiplier = multiplier + activePotPct / 100;
+                const cumMultiplier = multiplier + activePotPct / 100;
                 const xpValue = item.isCustom ? 
                     (item.applyMultipliers ? Math.round((item.xp || 0) * cumMultiplier) : (item.xp || 0)) 
                     : Math.round(item.xp * cumMultiplier);
@@ -2050,7 +2050,13 @@ function renderList(listId) {
             row.isSaga = false;
             row.sagaRefLevel = null;
         } else if (!item.isTakeLevel && item.id !== undefined) {
-            const related = collectItemsForXpMin(item, levelplanNameSet, allItemsByName);
+            // For levelplan items, only items *above* the current position count as
+            // already-met prerequisites (requirements not yet reached are still unmet).
+            // For quests-list items the full levelplanNameSet is used (plan as a whole).
+            const prereqNameSet = listId === 'levelplan'
+                ? new Set(items.slice(0, index).filter(i => i.name !== undefined).map(i => i.name))
+                : levelplanNameSet;
+            const related = collectItemsForXpMin(item, prereqNameSet, allItemsByName);
             const relatedReqs = related.slice(1).filter(Boolean);
             const relatedHasMissingTime = relatedReqs.some(it => (it.qTime === null || it.qTime === undefined) && (it.travelTime === null || it.travelTime === undefined));
             const effectiveQTime = listId === 'levelplan' ? getEffectiveQTime(item) : getQuestsEffectiveQTime(item);
