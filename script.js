@@ -1,4 +1,4 @@
-// Storage key for localStorage
+﻿﻿// Storage key for localStorage
 const STORAGE_KEY = 'levelingplan';
 const SETTINGS_KEY = 'settings';
 const CONFIG_KEY = 'config';
@@ -3702,6 +3702,86 @@ function setupDragListeners() {
             list.addEventListener('dragleave', handleDragLeave);
         }
     });
+
+    // Extend the levelplan drop zone to include the list-header (top edge) and
+    // lp-aggregate-footer (bottom edge) so the user can drop at position 0 or
+    // at the very end even when the mouse drifts slightly outside the list div.
+    // Guard flag: only attach once per element instance (setupDragListeners is
+    // called again on mode switch, but the header/footer elements are persistent).
+    const lpSection = document.querySelector('.list-section.levelplan');
+    const lpList    = document.getElementById('levelplan');
+    if (lpSection && lpList) {
+        const lpHeader = lpSection.querySelector('.list-header');
+        const lpFooter = lpSection.querySelector('.lp-aggregate-footer');
+
+        // dragover the column-header row -> keep phantom at the very top
+        if (lpHeader && !lpHeader._lpDragListenersAttached) {
+            lpHeader._lpDragListenersAttached = true;
+            lpHeader.addEventListener('dragover', (e) => {
+                if (!draggedListId) return;
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+                lpList.classList.add('drag-over');
+                // Ensure phantom exists and is pinned at position 0
+                dragRafList = lpList;
+                dragRafClientY = -Infinity; // forces binary-search to resolve to index 0
+                if (!dragRafPending) {
+                    dragRafPending = true;
+                    requestAnimationFrame(updatePhantomPosition);
+                }
+            });
+            lpHeader.addEventListener('drop', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleDrop.call(lpList, e);
+            });
+            lpHeader.addEventListener('dragleave', (e) => {
+                // Only clean up if the cursor is leaving toward something outside
+                // the entire levelplan section.
+                const to = e.relatedTarget;
+                if (to && (lpList.contains(to) || lpList === to || lpHeader.contains(to))) return;
+                if (to && lpSection.contains(to)) return;
+                lpList.classList.remove('drag-over');
+                if (phantomElement && phantomElement.parentNode) {
+                    phantomElement.parentNode.removeChild(phantomElement);
+                }
+                phantomElement = null;
+            });
+        }
+
+        // dragover the aggregate footer row -> keep phantom at the very bottom
+        if (lpFooter && !lpFooter._lpDragListenersAttached) {
+            lpFooter._lpDragListenersAttached = true;
+            lpFooter.addEventListener('dragover', (e) => {
+                if (!draggedListId) return;
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+                lpList.classList.add('drag-over');
+                // Ensure phantom exists and is pinned at the bottom
+                dragRafList = lpList;
+                dragRafClientY = Infinity; // forces binary-search to resolve to last index
+                if (!dragRafPending) {
+                    dragRafPending = true;
+                    requestAnimationFrame(updatePhantomPosition);
+                }
+            });
+            lpFooter.addEventListener('drop', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleDrop.call(lpList, e);
+            });
+            lpFooter.addEventListener('dragleave', (e) => {
+                const to = e.relatedTarget;
+                if (to && (lpList.contains(to) || lpList === to || lpFooter.contains(to))) return;
+                if (to && lpSection.contains(to)) return;
+                lpList.classList.remove('drag-over');
+                if (phantomElement && phantomElement.parentNode) {
+                    phantomElement.parentNode.removeChild(phantomElement);
+                }
+                phantomElement = null;
+            });
+        }
+    }
 }
 
 // Handle drag over
@@ -3781,6 +3861,22 @@ function updatePhantomPosition() {
 // Handle drag leave
 function handleDragLeave(e) {
     if (e.target === this) {
+        // If the cursor is moving to the levelplan list-header or aggregate
+        // footer (which are outside #levelplan but still act as drop targets),
+        // keep the phantom and drag-over state alive.
+        const to = e.relatedTarget;
+        if (this.id === 'levelplan' && to) {
+            const lpSection = this.closest('.list-section.levelplan');
+            if (lpSection) {
+                const lpHeader = lpSection.querySelector('.list-header');
+                const lpFooter = lpSection.querySelector('.lp-aggregate-footer');
+                if ((lpHeader && (lpHeader === to || lpHeader.contains(to))) ||
+                    (lpFooter && (lpFooter === to || lpFooter.contains(to)))) {
+                    // Cursor entered a friendly zone -- do not remove phantom
+                    return;
+                }
+            }
+        }
         this.classList.remove('drag-over');
         if (phantomElement && phantomElement.parentNode) {
             phantomElement.parentNode.removeChild(phantomElement);
