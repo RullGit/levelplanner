@@ -1244,7 +1244,23 @@ window.HEROIC_QUESTS_BASE =
     "baseXP": 216,
   },
   {
-    "name": "Doom Of The Witch Doctor: Zulkash, Herald Of Woe",
+    "name": "Doom of the Witchdoctor: The Way to Zulkash",
+    "requirements": [
+      "First Strike",
+      "The Hobgoblins' Captives",
+      "Yarkuch's War Plans",
+      "Whisperdoom's Spawn",
+      "The Deadly Package: The Stronghold Key",
+      "The Deadly Package: Agent of Darguul"
+    ],
+    "lvl": 6,
+    "patron": "House Phiarlan",
+    "favor": 12,
+    "difficulty": "E",
+    "baseXP": 1448,
+  },
+  {
+    "name": "Doom of the Witch Doctor: Zulkash, Herald Of Woe",
     "requirements": [
       "First Strike",
       "The Hobgoblins' Captives",
@@ -1261,20 +1277,22 @@ window.HEROIC_QUESTS_BASE =
     "baseXP": 1369,
   },
   {
-    "name": "Doom of the Witchdoctor: The Way to Zulkash",
+    "name": "The Last Move: The Way to Yarkuch",
     "requirements": [
       "First Strike",
       "The Hobgoblins' Captives",
       "Yarkuch's War Plans",
       "Whisperdoom's Spawn",
       "The Deadly Package: The Stronghold Key",
-      "The Deadly Package: Agent of Darguul"
+      "The Deadly Package: Agent of Darguul",
+      "Doom of the Witchdoctor: The Way to Zulkash",
+      "Doom of the Witch Doctor: Zulkash, Herald Of Woe"
     ],
-    "lvl": 6,
+    "lvl": 7,
     "patron": "House Phiarlan",
-    "favor": 12,
+    "favor": 9,
     "difficulty": "E",
-    "baseXP": 1448,
+    "baseXP": 1396,
   },
   {
     "name": "The Last Move: Yarkuch's Last Stand",
@@ -1294,24 +1312,6 @@ window.HEROIC_QUESTS_BASE =
     "favor": 12,
     "difficulty": "E",
     "baseXP": 676,
-  },
-  {
-    "name": "The Last Move: The Way to Yarkuch",
-    "requirements": [
-      "First Strike",
-      "The Hobgoblins' Captives",
-      "Yarkuch's War Plans",
-      "Whisperdoom's Spawn",
-      "The Deadly Package: The Stronghold Key",
-      "The Deadly Package: Agent of Darguul",
-      "Doom of the Witchdoctor: The Way to Zulkash",
-      "Doom Of The Witch Doctor: Zulkash, Herald Of Woe"
-    ],
-    "lvl": 7,
-    "patron": "House Phiarlan",
-    "favor": 9,
-    "difficulty": "E",
-    "baseXP": 1396,
   },
   {
     "name": "Tomb of the Immortal Heart",

@@ -1030,7 +1030,7 @@ window.HEROIC_UKENBURGER_CONFIG =
     "xpmods": 0.3
   },
   {
-    "name": "Doom Of The Witch Doctor: Zulkash, Herald Of Woe",
+    "name": "Doom of the Witch Doctor: Zulkash, Herald Of Woe",
     "travelTime": 0.23,
     "qTime": 1.18,
     "optionalXP": 0.0,
