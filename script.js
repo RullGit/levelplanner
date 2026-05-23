@@ -467,9 +467,10 @@ function initializeApp() {
     // (loadSettings already restores the saved value; this is a safe fallback
     // for first-run when there are no saved settings yet.)
     populateLearningTomeSelect();
-    const learningTomeSel = document.getElementById('learning-tome');
+        const learningTomeSel = document.getElementById('learning-tome');
     if (learningTomeSel) {
         learningTomeSel.addEventListener('change', () => {
+            _learningTomeByMode[getCurrentMode()] = learningTomeSel.value || '0';
             saveSettings();
             const mode = getCurrentMode();
             _computeQuestXP(mode);
@@ -616,18 +617,11 @@ function initializeApp() {
             applyModeClass();
             // Repopulate the learning tome dropdown for the new mode and
             // restore the per-mode saved value from localStorage.
-            const rawSettings = localStorage.getItem(SETTINGS_KEY);
-            let savedTomeForMode = '0';
-            if (rawSettings) {
-                try {
-                    const parsed = JSON.parse(rawSettings);
-                    const newMode = document.getElementById('mode-switch')?.checked ? 'epic' : 'heroic';
-                    savedTomeForMode = (parsed.learningTomeByMode && parsed.learningTomeByMode[newMode]) || '0';
-                } catch (e) { /* ignore */ }
-            }
-            populateLearningTomeSelect(savedTomeForMode);
+                        // modeSwitch.checked has already flipped, so getCurrentMode()
+            // returns the new mode. Restore its value from the in-memory store.
+            populateLearningTomeSelect(_learningTomeByMode[getCurrentMode()] || '0');
             saveSettings();
-            _computeQuestXP(document.getElementById('mode-switch')?.checked ? 'epic' : 'heroic');
+            _computeQuestXP(getCurrentMode());
             setActiveMode(getCurrentMode());
             // Clear quest filters when switching modes
             const levelInput = document.getElementById('quests-level-filter');
@@ -1036,6 +1030,12 @@ function checkRequirements() {
     console.error('Broken prereqs:', broken);
 }
 
+// Per-mode learning tome bonus values — the single in-memory source of truth.
+// Populated from localStorage once by loadSettings(); updated in-place from
+// then on by saveSettings(), the mode-switch handler, and _applyLoadedPayload().
+// localStorage is only ever written (never re-read mid-flight) for persistence.
+let _learningTomeByMode = { heroic: '0', epic: '0' };
+
 // The Tome of Learning options per mode.
 const LEARNING_TOME_OPTIONS = {
     heroic: [
@@ -1102,25 +1102,10 @@ function getQuickQuestVariableBonus(mode, difficulty, repeat, learningTomeBonus)
 
 
 // Returns the raw bonus string value for the given mode.
-// When the requested mode matches the currently displayed dropdown, the
-// dropdown value is used directly. Otherwise the persisted per-mode value
-// is read from localStorage so that _computeQuestXP() called for the
-// *inactive* mode (e.g. during initialisation) always gets the right bonus.
+// Always reads from the in-memory store, which is kept in sync with the
+// dropdown by the change listener and saveSettings().
 function _getLearningTomeBonusValue(mode) {
-    const currentMode = getCurrentMode();
-    const sel = document.getElementById('learning-tome');
-    if (mode === currentMode || !mode) {
-        return sel ? sel.value : '0';
-    }
-    // Inactive mode — read from localStorage.
-    try {
-        const raw = localStorage.getItem(SETTINGS_KEY);
-        if (raw) {
-            const parsed = JSON.parse(raw);
-            return (parsed.learningTomeByMode && parsed.learningTomeByMode[mode]) || '0';
-        }
-    } catch (e) { /* ignore */ }
-    return '0';
+    return _learningTomeByMode[mode || getCurrentMode()] || '0';
 }
 
 // Returns the additive per-item XP bonus fraction from the currently selected
@@ -1157,14 +1142,11 @@ function saveSettings() {
     const twelveTokens = document.getElementById('twelve-tokens')?.checked ? true : false;
     const learningTome = document.getElementById('learning-tome')?.value || '0';
     const defaultSlayerBonus = document.getElementById('default-slayer-bonus')?.value || 'No Count Boost';
-    // Preserve the per-mode learning tome values already stored.
-    let learningTomeByMode = { heroic: '0', epic: '0' };
-    try {
-        const existing = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
-        if (existing.learningTomeByMode) learningTomeByMode = existing.learningTomeByMode;
-    } catch (e) {}
-    learningTomeByMode[mode] = learningTome;
-    localStorage.setItem(SETTINGS_KEY, JSON.stringify({ xpmultiplier, patronView, mode, vipSagas, twelveTokens, learningTomeByMode, defaultSlayerBonus }));
+    // Update the in-memory store for the current mode, then persist everything
+    // to localStorage. No re-read needed — _learningTomeByMode already holds
+    // the other mode's value.
+    _learningTomeByMode[mode] = learningTome;
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify({ xpmultiplier, patronView, mode, vipSagas, twelveTokens, learningTomeByMode: _learningTomeByMode, defaultSlayerBonus }));
     // Persist custom config and active preset separately
     localStorage.setItem(CONFIG_KEY, JSON.stringify({
         activePreset: ACTIVE_QUESTS_PRESET,
@@ -1217,10 +1199,16 @@ function loadSettings() {
             if (tokensLabel) tokensLabel.style.display = modeSwitch.checked ? '' : 'none';
         }
         if (tokensCb && twelveTokens !== undefined) tokensCb.checked = twelveTokens;
-        // Restore per-mode learning tome value for the active mode.
+        // Initialise the in-memory store from the persisted values, then
+        // populate the dropdown for the active mode.
+        if (learningTomeByMode) {
+            _learningTomeByMode = {
+                heroic: learningTomeByMode.heroic || '0',
+                epic:   learningTomeByMode.epic   || '0'
+            };
+        }
         const activeMode = (mode === 'epic') ? 'epic' : 'heroic';
-        const savedTome = (learningTomeByMode && learningTomeByMode[activeMode]) || '0';
-        populateLearningTomeSelect(savedTome);
+        populateLearningTomeSelect(_learningTomeByMode[activeMode]);
         // Restore default slayer bonus setting.
         const slayerBonusSel = document.getElementById('default-slayer-bonus');
         if (slayerBonusSel && defaultSlayerBonus) slayerBonusSel.value = defaultSlayerBonus;
@@ -1505,11 +1493,11 @@ function _showFilenameDialog(defaultName, extension) {
 // config — pass `includeConfigPromptLabel` as either 'file' or 'link' to vary
 // the wording slightly.
 async function _buildSavePayload(target) {
-    let learningTomeByMode = { heroic: '0', epic: '0' };
-    try {
-        const raw = localStorage.getItem(SETTINGS_KEY);
-        if (raw) learningTomeByMode = JSON.parse(raw).learningTomeByMode || learningTomeByMode;
-    } catch (e) {}
+    // Snapshot the in-memory store, then override the active mode with the
+    // live dropdown value as a belt-and-suspenders measure.
+    const learningTomeByMode = { ..._learningTomeByMode };
+    const _tomeSel = document.getElementById('learning-tome');
+    if (_tomeSel) learningTomeByMode[getCurrentMode()] = _tomeSel.value || '0';
     const output = {
         xpmultiplier: parseFloat(document.getElementById('xp-multiplier')?.value) || 1.15,
         vipSagas: document.getElementById('vip-sagas-header')?.checked ? true : false,
@@ -1593,21 +1581,16 @@ async function _applyLoadedPayload(parsed) {
     }));
 
         // Restore per-mode learning tome values from the file FIRST so that any
-    // subsequent _computeQuestXP() calls read the correct per-mode bonus from
-    // localStorage for the inactive mode.
+    // subsequent _computeQuestXP() calls read the correct per-mode bonus
+    // for the inactive mode from the in-memory store.
     if (parsed.learningTomeByMode) {
-        const currentMode = getCurrentMode();
-        const tomeVal = parsed.learningTomeByMode[currentMode] || '0';
-        populateLearningTomeSelect(tomeVal);
-        // Merge into existing settings so the other mode's value is preserved.
-        try {
-            const rawS = localStorage.getItem(SETTINGS_KEY);
-            if (rawS) {
-                const s = JSON.parse(rawS);
-                s.learningTomeByMode = Object.assign({}, s.learningTomeByMode || {}, parsed.learningTomeByMode);
-                localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
-            }
-        } catch (e) {}
+        // Update the in-memory store for both modes. The saveSettings() call at
+        // the end of this function will persist the new values to localStorage.
+        _learningTomeByMode = {
+            heroic: parsed.learningTomeByMode.heroic || '0',
+            epic:   parsed.learningTomeByMode.epic   || '0'
+        };
+        populateLearningTomeSelect(_learningTomeByMode[getCurrentMode()]);
     }
 
     if (fileHasCustomConfig) {
@@ -1670,7 +1653,7 @@ async function _applyLoadedPayload(parsed) {
     );
     data.levelplanByMode.epic = hydrateLevelplan(
         Array.isArray(parsed.epic) ? parsed.epic : [],
-        EPIC_QUESTS
+        EPIC_QUESTS, 'epic'
     );
     setActiveMode(getCurrentMode());
     saveToStorage();
