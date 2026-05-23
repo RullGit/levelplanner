@@ -1304,7 +1304,7 @@ window.HEROIC_QUESTS_BASE =
       "The Deadly Package: The Stronghold Key",
       "The Deadly Package: Agent of Darguul",
       "Doom of the Witchdoctor: The Way to Zulkash",
-      "Doom Of The Witch Doctor: Zulkash, Herald Of Woe",
+      "Doom of the Witch Doctor: Zulkash, Herald Of Woe",
       "The Last Move: The Way to Yarkuch"
     ],
     "lvl": 7,
