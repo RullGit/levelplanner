@@ -11,6 +11,7 @@
         <nav class="menu-bar" aria-label="Main toolbar">
             <div class="menu-left">
                 <button class="menu-btn menu-btn--toggle" id="hide-planning-btn" aria-pressed="false" onclick="togglePlanningVisibility()">Hide Planning</button>
+                <button class="menu-btn" onclick="generateLink()">Generate Link</button>
                 <button class="menu-btn" onclick="saveToFile()">Save</button>
                 <button class="menu-btn" onclick="loadFromFile()">Load</button>
                 <button class="menu-btn" onclick="resetData()">New</button>
@@ -176,6 +177,7 @@
                 <div class="config-header-left">
                     <select id="config-preset" name="config-preset" class="config-preset">
                         <option value="ukenburger">Ukenburger</option>
+                        <option value="imported">Imported</option>
                         <option value="custom" selected>Custom</option>
                     </select>
                     <button class="menu-btn" id="config-apply-btn" onclick="applyConfig()" title="Apply the textarea content to the active configuration">Apply</button>

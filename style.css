@@ -1333,6 +1333,11 @@ label,
 .item-content-wrapper.is-take-level {
     background: #C3DBFC;
     border-color: #d8dce3;
+    grid-template-columns: var(--item-qlvl-width, 50px) 1fr 55px 74px 30px;
+}
+
+.item-content-wrapper.is-take-level .item-delete {
+    grid-column: -2 / -1;
 }
 
 .item-content-wrapper > :first-child {
@@ -1609,7 +1614,7 @@ label,
     padding: 0 6px;
 }
 
-/* Saga items in the levelplan use the same color as custom XP */
+/* Saga items in the levelplan use the same color as Custom */
 .item-content-wrapper--saga {
     grid-template-columns: var(--item-qlvl-width, 50px) 1fr 92px 55px 74px 30px;
     background: #d7d9c8 !important;
@@ -1733,7 +1738,11 @@ label,
     grid-template-columns: var(--item-qlvl-width, 50px) 1fr auto 74px 40px 30px;
 }
 
-/* Custom XP rows have extra inputs (name, xp, time) instead of a single name + difficulty,
+.lists-container.favor-active .item-content-wrapper.is-take-level {
+    grid-template-columns: var(--item-qlvl-width, 50px) 1fr 55px 74px 40px 30px;
+}
+
+/* Custom rows have extra inputs (name, xp, time) instead of a single name + difficulty,
    so they need their own column definition when the favor column is visible. */
 .lists-container.favor-active .item-content-wrapper--custom {
     grid-template-columns: var(--item-qlvl-width, 50px) 1fr 24px 92px 55px 74px 40px 30px;
@@ -1761,7 +1770,7 @@ label,
 
 .lists-container.favor-active .lp-aggregate-footer .lp-col-favor {
     flex: 0 0 40px;
-    padding: 6px 8px;
+    padding: 6px 2px;
     border-right: none;
     border-left: 1px solid #c8cdd9;
     display: flex;
@@ -1770,6 +1779,7 @@ label,
     justify-content: center;
     gap: 2px;
     padding-left: 2px;
+    max-width: 40px;
 }
 
 /* Hide the header delete cell when the favor column is visible */
@@ -1995,7 +2005,7 @@ label,
     outline-offset: -2px;
 }
 
-/* Hide native number input spinners for custom XP/Time inputs without changing size */
+/* Hide native number input spinners for Custom/Time inputs without changing size */
 /* Chrome, Edge, Safari */
 .custom-xp-input::-webkit-outer-spin-button,
 .custom-xp-input::-webkit-inner-spin-button,

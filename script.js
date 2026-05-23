@@ -26,12 +26,31 @@ if (typeof EPIC_UKENBURGER_CONFIG === 'undefined') {
 window.HEROIC_CUSTOM_CONFIG = [];
 window.EPIC_CUSTOM_CONFIG   = [];
 
+// Imported config slots — populated whenever a levelplan file is loaded that includes config data.
+// Like the Ukenburger preset, these are not directly editable in the config panel.
+window.HEROIC_IMPORTED_CONFIG = [];
+window.EPIC_IMPORTED_CONFIG   = [];
+
 // Tracks which preset is currently applied to build HEROIC_QUESTS / EPIC_QUESTS.
 window.ACTIVE_QUESTS_PRESET = 'ukenburger';
 
+// Resolve a preset name to its underlying heroic config array.
+function _getHeroicConfigForPreset(preset) {
+    if (preset === 'custom')   return HEROIC_CUSTOM_CONFIG;
+    if (preset === 'imported') return HEROIC_IMPORTED_CONFIG;
+    return HEROIC_UKENBURGER_CONFIG;
+}
+
+// Resolve a preset name to its underlying epic config array.
+function _getEpicConfigForPreset(preset) {
+    if (preset === 'custom')   return EPIC_CUSTOM_CONFIG;
+    if (preset === 'imported') return EPIC_IMPORTED_CONFIG;
+    return EPIC_UKENBURGER_CONFIG;
+}
+
 // Rebuild HEROIC_QUESTS from whichever config source is currently active.
 function _rebuildHeroicQuests() {
-    const src = ACTIVE_QUESTS_PRESET === 'custom' ? HEROIC_CUSTOM_CONFIG : HEROIC_UKENBURGER_CONFIG;
+    const src = _getHeroicConfigForPreset(ACTIVE_QUESTS_PRESET);
     const cfgMap = Object.fromEntries(src.map(c => [c.name, c]));
     window.HEROIC_QUESTS = window.HEROIC_QUESTS_BASE.map(
         base => Object.assign({}, base, cfgMap[base.name] || {})
@@ -40,7 +59,7 @@ function _rebuildHeroicQuests() {
 
 // Rebuild EPIC_QUESTS from whichever config source is currently active.
 function _rebuildEpicQuests() {
-    const src = ACTIVE_QUESTS_PRESET === 'custom' ? EPIC_CUSTOM_CONFIG : EPIC_UKENBURGER_CONFIG;
+    const src = _getEpicConfigForPreset(ACTIVE_QUESTS_PRESET);
     const cfgMap = Object.fromEntries(src.map(c => [c.name, c]));
     window.EPIC_QUESTS = window.EPIC_QUESTS_BASE.map(
         base => Object.assign({}, base, cfgMap[base.name] || {})
@@ -162,6 +181,7 @@ function _updateConfigPresetVisual() {
     if (!sel) return;
     const customOpt = sel.querySelector('option[value="custom"]');
     const ukenOpt = sel.querySelector('option[value="ukenburger"]');
+    const importedOpt = sel.querySelector('option[value="imported"]');
     if (customOpt) {
         if (CONFIG_DIRTY_HIGHLIGHT) {
             customOpt.style.backgroundColor = '#e6c200';
@@ -171,16 +191,19 @@ function _updateConfigPresetVisual() {
             customOpt.style.color = '';
         }
     }
-    if (ukenOpt) {
+    const _normalizeOpt = (opt) => {
+        if (!opt) return;
         if (CONFIG_DIRTY_HIGHLIGHT) {
-            // Force Ukenburger to remain visually normal while Custom is highlighted
-            ukenOpt.style.backgroundColor = '#fff';
-            ukenOpt.style.color = '#000';
+            // Force non-custom options to remain visually normal while Custom is highlighted
+            opt.style.backgroundColor = '#fff';
+            opt.style.color = '#000';
         } else {
-            ukenOpt.style.backgroundColor = '';
-            ukenOpt.style.color = '';
+            opt.style.backgroundColor = '';
+            opt.style.color = '';
         }
-    }
+    };
+    _normalizeOpt(ukenOpt);
+    _normalizeOpt(importedOpt);
     if (sel.value === 'custom' && CONFIG_DIRTY_HIGHLIGHT) {
         sel.style.backgroundColor = '#e6c200';
         sel.style.color = '#000';
@@ -386,7 +409,7 @@ function initializeApp() {
     // Always set up special palette (not persisted).
     data.special = [
         { name: 'Take Level', xp: 0, level: '', source: 'special', isTakeLevel: true },
-        { name: 'Custom XP', xp: 0, qTime: 0, travelTime: 0, source: 'special', isCustom: true },
+        { name: 'Custom', xp: 0, qTime: 0, travelTime: 0, source: 'special', isCustom: true },
         { name: 'XP Pot', xp: 0, source: 'special', isXpPot: true }
     ];
 
@@ -669,6 +692,14 @@ function initializeApp() {
             if (newPreset === 'ukenburger') {
                 CONFIG_TEXTAREA_CACHE.heroic = _configToTextareaLines(HEROIC_UKENBURGER_CONFIG);
                 CONFIG_TEXTAREA_CACHE.epic   = _configToTextareaLines(EPIC_UKENBURGER_CONFIG);
+            } else if (newPreset === 'imported') {
+                // If no imported config available, fall back to ukenburger as a starting point
+                CONFIG_TEXTAREA_CACHE.heroic = _configToTextareaLines(
+                    HEROIC_IMPORTED_CONFIG.length > 0 ? HEROIC_IMPORTED_CONFIG : HEROIC_UKENBURGER_CONFIG
+                );
+                CONFIG_TEXTAREA_CACHE.epic   = _configToTextareaLines(
+                    EPIC_IMPORTED_CONFIG.length > 0 ? EPIC_IMPORTED_CONFIG : EPIC_UKENBURGER_CONFIG
+                );
             } else {
                 // If no custom config saved yet, fall back to ukenburger as a starting point
                 CONFIG_TEXTAREA_CACHE.heroic = _configToTextareaLines(
@@ -686,6 +717,22 @@ function initializeApp() {
 
     // Leveling Plan search box
     initLevelplanSearch();
+
+    // If the page was opened with a leveling plan encoded in the URL hash,
+    // decode + apply it (same path as Load), then strip the hash so a refresh
+    // doesn't keep re-importing.
+    if (window.location.hash && window.location.hash.length > 1) {
+        const encoded = window.location.hash.slice(1);
+        (async () => {
+            try {
+                const parsed = await _decodeHashToPayload(encoded);
+                await _applyLoadedPayload(parsed);
+                history.replaceState(null, '', window.location.pathname + window.location.search);
+            } catch (err) {
+                alert('Error loading shared link: ' + err.message);
+            }
+        })();
+    }
 }
 
 // Per-level xpMin thresholds computed by accumulating XP (best-first) up to 75%
@@ -848,7 +895,7 @@ function loadInitialData() {
     rebuildQuestsFromLevelplan();
     data.special = [
         { name: 'Take Level', xp: 0, level: '', source: 'special', isTakeLevel: true },
-        { name: 'Custom XP', xp: 0, qTime: 0, travelTime: 0, source: 'special', isCustom: true },
+        { name: 'Custom', xp: 0, qTime: 0, travelTime: 0, source: 'special', isCustom: true },
         { name: 'XP Pot', xp: 0, source: 'special', isXpPot: true }
     ];
     saveToStorage();
@@ -874,7 +921,11 @@ function hydrateLevelplan(stored, questSource, mode) {
     const initialByName = new Map(source.map(q => [q.name, q]));
     return stored.map(entry => {
         if (entry.takeLevel) {
-            return { name: 'Take Level', xp: 0, level: '', source: 'special', isTakeLevel: true };
+            return {
+                name: 'Take Level', xp: 0, level: '', source: 'special', isTakeLevel: true,
+                qTime: entry.qTime || 0,
+                travelTime: entry.travelTime || 0
+            };
         }
         if (entry.xpPotStart) {
             return { name: 'Start XP Pot', source: 'special', isXpPotStart: true, ...(entry.pct != null ? { pct: entry.pct } : {}) };
@@ -887,10 +938,11 @@ function hydrateLevelplan(stored, questSource, mode) {
         }
         if (entry.custom) {
             return {
-                name: entry.name || 'Custom XP',
+                name: entry.name || 'Custom',
                 xp: entry.xp || 0,
                 qTime: entry.qTime || 0,
                 travelTime: 0,
+                applyMultipliers: entry.applyMultipliers === true || entry.applyMultipliers === 'true' ? true : false,
                 source: 'special',
                 isCustom: true
             };
@@ -1096,7 +1148,9 @@ function saveSettings() {
     localStorage.setItem(CONFIG_KEY, JSON.stringify({
         activePreset: ACTIVE_QUESTS_PRESET,
         heroicCustomConfig: HEROIC_CUSTOM_CONFIG,
-        epicCustomConfig: EPIC_CUSTOM_CONFIG
+        epicCustomConfig: EPIC_CUSTOM_CONFIG,
+        heroicImportedConfig: HEROIC_IMPORTED_CONFIG,
+        epicImportedConfig: EPIC_IMPORTED_CONFIG
     }));
 }
 
@@ -1105,10 +1159,12 @@ function loadSettings() {
     const rawConfig = localStorage.getItem(CONFIG_KEY);
     if (rawConfig) {
         try {
-            const { activePreset, heroicCustomConfig, epicCustomConfig } = JSON.parse(rawConfig);
+            const { activePreset, heroicCustomConfig, epicCustomConfig, heroicImportedConfig, epicImportedConfig } = JSON.parse(rawConfig);
             if (Array.isArray(heroicCustomConfig)) window.HEROIC_CUSTOM_CONFIG = heroicCustomConfig;
             if (Array.isArray(epicCustomConfig))   window.EPIC_CUSTOM_CONFIG   = epicCustomConfig;
-            if (activePreset === 'custom' || activePreset === 'ukenburger') {
+            if (Array.isArray(heroicImportedConfig)) window.HEROIC_IMPORTED_CONFIG = heroicImportedConfig;
+            if (Array.isArray(epicImportedConfig))   window.EPIC_IMPORTED_CONFIG   = epicImportedConfig;
+            if (activePreset === 'custom' || activePreset === 'ukenburger' || activePreset === 'imported') {
                 window.ACTIVE_QUESTS_PRESET = activePreset;
             }
             _rebuildHeroicQuests();
@@ -1240,7 +1296,12 @@ function hasHeroicDuplicateForItem(item, heroicNames) {
 // Serialise a single levelplan array to its minimal storage form.
 function serialiseLevelplan(levelplan) {
     return levelplan.map(item => {
-        if (item.isTakeLevel) return { takeLevel: true };
+        if (item.isTakeLevel) {
+            const out = { takeLevel: true };
+            if (item.qTime != null && item.qTime !== 0) out.qTime = item.qTime;
+            if (item.travelTime != null && item.travelTime !== 0) out.travelTime = item.travelTime;
+            return out;
+        }
         if (item.isXpPotStart) return item.pct != null ? { xpPotStart: true, pct: item.pct } : { xpPotStart: true };
         if (item.isXpPotEnd) return item.pct != null ? { xpPotEnd: true, pct: item.pct } : { xpPotEnd: true };
         if (item.isXpPot) return { xpPot: true };
@@ -1249,7 +1310,8 @@ function serialiseLevelplan(levelplan) {
                 custom: true,
                 name: item.name,
                 xp: item.xp,
-                qTime: item.qTime
+                qTime: item.qTime,
+                applyMultipliers: item.applyMultipliers ? true : false
             };
         }
         if (item.isEliteCopy) {
@@ -1277,10 +1339,151 @@ function saveToStorage() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
 }
 
-// Save both minimal levelplans (heroic + epic) to a downloadable JSON file.
-// Uses the native OS Save dialog (showSaveFilePicker) when available (Chrome/Edge
-// desktop), and falls back to a prompt() + <a download> approach elsewhere.
-async function saveToFile() {
+// Shows a styled HTML confirm modal matching the app's dark theme.
+// Returns a Promise that resolves to true (confirmed) or false (cancelled).
+function _showConfirmDialog(message) {
+    return new Promise(resolve => {
+        const overlay = document.createElement('div');
+        overlay.style.cssText = [
+            'position:fixed', 'inset:0', 'z-index:99999',
+            'background:rgba(0,0,0,0.55)', 'display:flex',
+            'align-items:center', 'justify-content:center'
+        ].join(';');
+
+        const box = document.createElement('div');
+        box.style.cssText = [
+            'background:#2c2c2c', 'color:#e0e0e0', 'border-radius:10px',
+            'padding:28px 32px', 'max-width:380px', 'width:90%',
+            'box-shadow:0 8px 32px rgba(0,0,0,0.6)', 'font-family:inherit',
+            'display:flex', 'flex-direction:column', 'gap:14px'
+        ].join(';');
+
+        const msg = document.createElement('p');
+        msg.textContent = message;
+        msg.style.cssText = 'margin:0;font-size:0.95em;line-height:1.4;';
+
+        const btnRow = document.createElement('div');
+        btnRow.style.cssText = 'display:flex;gap:10px;justify-content:flex-end;';
+
+        const dismiss = value => { overlay.remove(); resolve(value); };
+
+        const cancelBtn = document.createElement('button');
+        cancelBtn.type = 'button';
+        cancelBtn.textContent = 'No';
+        cancelBtn.style.cssText = [
+            'background:#444', 'color:#e0e0e0', 'border:none', 'border-radius:6px',
+            'padding:8px 18px', 'cursor:pointer', 'font-size:0.95em', 'font-family:inherit'
+        ].join(';');
+        cancelBtn.addEventListener('click', () => dismiss(false));
+
+        const confirmBtn = document.createElement('button');
+        confirmBtn.type = 'button';
+        confirmBtn.textContent = 'Yes';
+        confirmBtn.style.cssText = [
+            'background:#4a7a4a', 'color:#fff', 'border:none', 'border-radius:6px',
+            'padding:8px 18px', 'cursor:pointer', 'font-size:0.95em', 'font-family:inherit'
+        ].join(';');
+        confirmBtn.addEventListener('click', () => dismiss(true));
+
+        overlay.addEventListener('keydown', e => { if (e.key === 'Escape') dismiss(false); });
+
+        btnRow.appendChild(cancelBtn);
+        btnRow.appendChild(confirmBtn);
+        box.appendChild(msg);
+        box.appendChild(btnRow);
+        overlay.appendChild(box);
+        document.body.appendChild(overlay);
+        setTimeout(() => confirmBtn.focus(), 0);
+    });
+}
+
+// Shows a styled HTML modal to enter a filename.
+// defaultName: suggested name without extension. extension: e.g. '.json' or '.csv'.
+// Returns a Promise that resolves to the full filename string, or null if cancelled.
+function _showFilenameDialog(defaultName, extension) {
+    return new Promise(resolve => {
+        const overlay = document.createElement('div');
+        overlay.style.cssText = [
+            'position:fixed', 'inset:0', 'z-index:99999',
+            'background:rgba(0,0,0,0.55)', 'display:flex',
+            'align-items:center', 'justify-content:center'
+        ].join(';');
+
+        const box = document.createElement('div');
+        box.style.cssText = [
+            'background:#2c2c2c', 'color:#e0e0e0', 'border-radius:10px',
+            'padding:28px 32px', 'max-width:380px', 'width:90%',
+            'box-shadow:0 8px 32px rgba(0,0,0,0.6)', 'font-family:inherit',
+            'display:flex', 'flex-direction:column', 'gap:14px'
+        ].join(';');
+
+        const label = document.createElement('label');
+        label.textContent = 'Save as:';
+        label.style.cssText = 'font-size:0.95em;';
+
+        const inp = document.createElement('input');
+        inp.type = 'text';
+        inp.value = defaultName;
+        inp.style.cssText = [
+            'background:#1a1a1a', 'color:#e0e0e0', 'border:1px solid #555',
+            'border-radius:5px', 'padding:6px 10px', 'font-size:1em',
+            'font-family:inherit', 'width:100%', 'box-sizing:border-box'
+        ].join(';');
+
+        const extHint = document.createElement('span');
+        extHint.textContent = extension;
+        extHint.style.cssText = 'color:#888;font-size:0.85em;margin-top:-6px;';
+
+        const btnRow = document.createElement('div');
+        btnRow.style.cssText = 'display:flex;gap:10px;justify-content:flex-end;';
+
+        const dismiss = value => { overlay.remove(); resolve(value); };
+
+        const cancelBtn = document.createElement('button');
+        cancelBtn.type = 'button';
+        cancelBtn.textContent = 'Cancel';
+        cancelBtn.style.cssText = [
+            'background:#444', 'color:#e0e0e0', 'border:none', 'border-radius:6px',
+            'padding:8px 18px', 'cursor:pointer', 'font-size:0.95em', 'font-family:inherit'
+        ].join(';');
+        cancelBtn.addEventListener('click', () => dismiss(null));
+
+        const saveBtn = document.createElement('button');
+        saveBtn.type = 'button';
+        saveBtn.textContent = 'Save';
+        saveBtn.style.cssText = [
+            'background:#4a7a4a', 'color:#fff', 'border:none', 'border-radius:6px',
+            'padding:8px 18px', 'cursor:pointer', 'font-size:0.95em', 'font-family:inherit'
+        ].join(';');
+        saveBtn.addEventListener('click', () => {
+            const trimmed = inp.value.trim();
+            if (!trimmed) return;
+            dismiss(trimmed.endsWith(extension) ? trimmed : trimmed + extension);
+        });
+
+        inp.addEventListener('keydown', e => {
+            if (e.key === 'Enter') saveBtn.click();
+            if (e.key === 'Escape') dismiss(null);
+        });
+        overlay.addEventListener('keydown', e => { if (e.key === 'Escape') dismiss(null); });
+
+        btnRow.appendChild(cancelBtn);
+        btnRow.appendChild(saveBtn);
+        box.appendChild(label);
+        box.appendChild(inp);
+        box.appendChild(extHint);
+        box.appendChild(btnRow);
+        overlay.appendChild(box);
+        document.body.appendChild(overlay);
+        setTimeout(() => { inp.focus(); inp.select(); }, 0);
+    });
+}
+
+// Build the JSON-serialisable payload that represents the full saved state.
+// Prompts the user (via _showConfirmDialog) about embedding a custom/imported
+// config — pass `includeConfigPromptLabel` as either 'file' or 'link' to vary
+// the wording slightly.
+async function _buildSavePayload(target) {
     let learningTomeByMode = { heroic: '0', epic: '0' };
     try {
         const raw = localStorage.getItem(SETTINGS_KEY);
@@ -1288,48 +1491,55 @@ async function saveToFile() {
     } catch (e) {}
     const output = {
         xpmultiplier: parseFloat(document.getElementById('xp-multiplier')?.value) || 1.15,
+        vipSagas: document.getElementById('vip-sagas-header')?.checked ? true : false,
         learningTomeByMode,
         configPreset: ACTIVE_QUESTS_PRESET,
         heroic: serialiseLevelplan(data.levelplanByMode.heroic),
         epic: serialiseLevelplan(data.levelplanByMode.epic)
     };
 
+    const where = target === 'link' ? 'link' : 'file';
     if (ACTIVE_QUESTS_PRESET === 'custom') {
-        if (confirm('Store your custom config in this file?')) {
+        if (await _showConfirmDialog(`Store your custom config in this ${where}?`)) {
             output.heroicCustomConfig = HEROIC_CUSTOM_CONFIG;
             output.epicCustomConfig   = EPIC_CUSTOM_CONFIG;
         }
+    } else if (ACTIVE_QUESTS_PRESET === 'imported') {
+        if (await _showConfirmDialog(`Store the imported config in this ${where}?`)) {
+            output.heroicCustomConfig = HEROIC_IMPORTED_CONFIG;
+            output.epicCustomConfig   = EPIC_IMPORTED_CONFIG;
+        }
     }
 
+    return output;
+}
+
+// Save both minimal levelplans (heroic + epic) to a downloadable JSON file.
+// Tries the native OS Save dialog first; falls back to an HTML filename dialog + download.
+async function saveToFile() {
+    const output = await _buildSavePayload('file');
     const json = JSON.stringify(output, null, 2);
 
     // --- Native OS Save dialog (Chrome / Edge desktop) ---
     if (typeof window.showSaveFilePicker === 'function') {
         try {
             const handle = await window.showSaveFilePicker({
-                suggestedName: 'levelplan.json',
+                suggestedName: 'levelingplan.json',
                 types: [{ description: 'JSON file', accept: { 'application/json': ['.json'] } }]
             });
             const writable = await handle.createWritable();
             await writable.write(json);
             await writable.close();
-            return; // done — skip the fallback below
+            return;
         } catch (err) {
-            // AbortError means the user dismissed the dialog — treat as cancel.
             if (err.name === 'AbortError') return;
-            // Any other error (e.g. permissions): fall through to the prompt fallback.
-            console.warn('showSaveFilePicker failed, falling back to prompt save:', err);
+            console.warn('showSaveFilePicker failed, falling back to download:', err);
         }
     }
 
-    // --- Fallback: prompt for filename, then trigger <a download> ---
-    const rawName = prompt('Save as (filename):', 'levelplan');
-    // If the user cancelled or entered an empty string, abort.
-    if (rawName === null) return;
-    const trimmed = rawName.trim();
-    if (!trimmed) return;
-    // Ensure the filename ends with .json
-    const filename = trimmed.endsWith('.json') ? trimmed : trimmed + '.json';
+    // --- Fallback: HTML filename dialog + browser download ---
+    const filename = await _showFilenameDialog('levelingplan', '.json');
+    if (!filename) return;
 
     const blob = new Blob([json], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -1340,6 +1550,103 @@ async function saveToFile() {
     a.click();
     a.remove();
     URL.revokeObjectURL(url);
+}
+
+// Apply an already-parsed save payload (from a file load or a shared link).
+// Mirrors the original `loadFromFile` reader.onload body. Throws on invalid input.
+async function _applyLoadedPayload(parsed) {
+    if (!parsed || (!Array.isArray(parsed.heroic) && !Array.isArray(parsed.epic))) {
+        throw new Error('Unrecognised file format');
+    }
+
+    const filePreset = parsed.configPreset; // 'ukenburger', 'custom', 'imported', or undefined (old file)
+    const fileHasCustomConfig = Array.isArray(parsed.heroicCustomConfig) && parsed.heroicCustomConfig.length > 0;
+
+    // Helper: persist config changes to localStorage
+    const _persistConfig = () => localStorage.setItem(CONFIG_KEY, JSON.stringify({
+        activePreset: ACTIVE_QUESTS_PRESET,
+        heroicCustomConfig: HEROIC_CUSTOM_CONFIG,
+        epicCustomConfig: EPIC_CUSTOM_CONFIG,
+        heroicImportedConfig: HEROIC_IMPORTED_CONFIG,
+        epicImportedConfig: EPIC_IMPORTED_CONFIG
+    }));
+
+    if (fileHasCustomConfig) {
+        // Always populate IMPORTED_CONFIG slots from the file, regardless of user choice below
+        window.HEROIC_IMPORTED_CONFIG = parsed.heroicCustomConfig;
+        window.EPIC_IMPORTED_CONFIG   = Array.isArray(parsed.epicCustomConfig) ? parsed.epicCustomConfig : [];
+
+        // Determine which active config the imported one would replace (for the prompt label)
+        const currentLabel = ACTIVE_QUESTS_PRESET === 'custom'
+            ? 'Custom'
+            : (ACTIVE_QUESTS_PRESET === 'imported' ? 'Imported' : 'Ukenburger');
+
+        const choice = await _showChoiceDialog(
+            'This leveling plan includes a config. Continue using your current config, or switch to the imported one?',
+            [
+                { label: `Keep current (${currentLabel}) config`, value: 'keep' },
+                { label: 'Switch to Imported config', value: 'switch' }
+            ]
+        );
+        if (choice === 'switch') {
+            window.ACTIVE_QUESTS_PRESET = 'imported';
+        }
+        _rebuildHeroicQuests();
+        _rebuildEpicQuests();
+        _computeQuestXP('heroic');
+        _computeQuestXP('epic');
+        _persistConfig();
+
+    } else if (filePreset === 'ukenburger' && ACTIVE_QUESTS_PRESET !== 'ukenburger') {
+        // File used Ukenburger (no embedded config) but user currently has a different preset active
+        if (confirm('This plan was created with the Ukenburger config. Switch to Ukenburger?')) {
+            window.ACTIVE_QUESTS_PRESET = 'ukenburger';
+            _rebuildHeroicQuests();
+            _rebuildEpicQuests();
+            _computeQuestXP('heroic');
+            _computeQuestXP('epic');
+            _persistConfig();
+        }
+        // else: load using current config
+    }
+    // All other cases (no filePreset, matching preset, etc.): load normally
+    const xpInput = document.getElementById('xp-multiplier');
+    if (xpInput && parsed.xpmultiplier !== undefined) xpInput.value = parsed.xpmultiplier;
+    // Restore VIP skip for Sagas checkbox state from the file.
+    if (parsed.vipSagas !== undefined) {
+        const vipCb = document.getElementById('vip-sagas-header');
+        if (vipCb) vipCb.checked = !!parsed.vipSagas;
+    }
+    // Restore per-mode learning tome values from the file.
+    if (parsed.learningTomeByMode) {
+        const currentMode = getCurrentMode();
+        const tomeVal = parsed.learningTomeByMode[currentMode] || '0';
+        populateLearningTomeSelect(tomeVal);
+        // Merge into existing settings so the other mode's value is preserved.
+        try {
+            const rawS = localStorage.getItem(SETTINGS_KEY);
+            if (rawS) {
+                const s = JSON.parse(rawS);
+                s.learningTomeByMode = Object.assign({}, s.learningTomeByMode || {}, parsed.learningTomeByMode);
+                localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
+            }
+        } catch (e) {}
+    }
+    saveSettings();
+
+    data.levelplanByMode.heroic = hydrateLevelplan(
+        Array.isArray(parsed.heroic) ? parsed.heroic : [],
+        HEROIC_QUESTS, 'heroic'
+    );
+    data.levelplanByMode.epic = hydrateLevelplan(
+        Array.isArray(parsed.epic) ? parsed.epic : [],
+        EPIC_QUESTS
+    );
+    setActiveMode(getCurrentMode());
+    saveToStorage();
+    renderLists();
+    ensureHighlightStyle();
+    highlightInserted(data.levelplan.filter(i => i.name).map(i => i.name));
 }
 
 // Load a saved JSON file and replace both level plans (heroic + epic).
@@ -1354,108 +1661,7 @@ function loadFromFile() {
         reader.onload = async () => {
             try {
                 const parsed = JSON.parse(reader.result);
-                if (!parsed || (!Array.isArray(parsed.heroic) && !Array.isArray(parsed.epic))) {
-                    throw new Error('Unrecognised file format');
-                }
-
-                const filePreset = parsed.configPreset; // 'ukenburger', 'custom', or undefined (old file)
-                const fileHasCustomConfig = Array.isArray(parsed.heroicCustomConfig) && parsed.heroicCustomConfig.length > 0;
-                const userHasCustomConfig = HEROIC_CUSTOM_CONFIG.length > 0 || EPIC_CUSTOM_CONFIG.length > 0;
-
-                // Helper: persist config changes to localStorage
-                const _persistConfig = () => localStorage.setItem(CONFIG_KEY, JSON.stringify({
-                    activePreset: ACTIVE_QUESTS_PRESET,
-                    heroicCustomConfig: HEROIC_CUSTOM_CONFIG,
-                    epicCustomConfig: EPIC_CUSTOM_CONFIG
-                }));
-
-                if (filePreset === 'ukenburger' && ACTIVE_QUESTS_PRESET === 'custom') {
-                    // File used Ukenburger but user currently has Custom active
-                                        if (confirm('This plan was created with the Ukenburger config. Switch to Ukenburger?')) {
-                        window.ACTIVE_QUESTS_PRESET = 'ukenburger';
-                        _rebuildHeroicQuests();
-                        _rebuildEpicQuests();
-                        _computeQuestXP('heroic');
-                        _computeQuestXP('epic');
-                        _persistConfig();
-                    }
-                    // else: load using current custom config
-
-                } else if (filePreset === 'custom' && fileHasCustomConfig) {
-                    const fileConfigStr = JSON.stringify({ h: parsed.heroicCustomConfig, e: parsed.epicCustomConfig || [] });
-                    const userConfigStr = JSON.stringify({ h: HEROIC_CUSTOM_CONFIG, e: EPIC_CUSTOM_CONFIG });
-
-                    if (!userHasCustomConfig) {
-                                                // User has no custom config yet — silently adopt the file's config
-                        window.HEROIC_CUSTOM_CONFIG = parsed.heroicCustomConfig;
-                        window.EPIC_CUSTOM_CONFIG   = Array.isArray(parsed.epicCustomConfig) ? parsed.epicCustomConfig : [];
-                        window.ACTIVE_QUESTS_PRESET = 'custom';
-                        _rebuildHeroicQuests();
-                        _rebuildEpicQuests();
-                        _computeQuestXP('heroic');
-                        _computeQuestXP('epic');
-                        _persistConfig();
-
-                    } else if (fileConfigStr !== userConfigStr) {
-                        // User already has a different custom config — ask
-                        const choice = await _showChoiceDialog(
-                            'A custom config was used to create this leveling plan.',
-                            [
-                                { label: 'Overwrite my custom config', value: 'overwrite' },
-                                { label: 'Export my custom config before loading', value: 'export' },
-                                { label: 'Use my current config', value: 'keep' }
-                            ]
-                        );
-                        if (choice === 'export') {
-                            _exportCustomConfigToFile();
-                        }
-                                                if (choice === 'overwrite' || choice === 'export') {
-                            window.HEROIC_CUSTOM_CONFIG = parsed.heroicCustomConfig;
-                            window.EPIC_CUSTOM_CONFIG   = Array.isArray(parsed.epicCustomConfig) ? parsed.epicCustomConfig : [];
-                            window.ACTIVE_QUESTS_PRESET = 'custom';
-                            _rebuildHeroicQuests();
-                            _rebuildEpicQuests();
-                            _computeQuestXP('heroic');
-                            _computeQuestXP('epic');
-                            _persistConfig();
-                        }
-                        // 'keep': load with current config unchanged
-                    }
-                    // else configs are identical — load normally
-                }
-                // All other cases (no filePreset, ukenburger+ukenburger, custom without included config): load normally
-                const xpInput = document.getElementById('xp-multiplier');
-                if (xpInput && parsed.xpmultiplier !== undefined) xpInput.value = parsed.xpmultiplier;
-                // Restore per-mode learning tome values from the file.
-                if (parsed.learningTomeByMode) {
-                    const currentMode = getCurrentMode();
-                    const tomeVal = parsed.learningTomeByMode[currentMode] || '0';
-                    populateLearningTomeSelect(tomeVal);
-                    // Merge into existing settings so the other mode's value is preserved.
-                    try {
-                        const rawS = localStorage.getItem(SETTINGS_KEY);
-                        if (rawS) {
-                            const s = JSON.parse(rawS);
-                            s.learningTomeByMode = Object.assign({}, s.learningTomeByMode || {}, parsed.learningTomeByMode);
-                            localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
-                        }
-                    } catch (e) {}
-                }
-                saveSettings();
-
-                data.levelplanByMode.heroic = hydrateLevelplan(
-                    Array.isArray(parsed.heroic) ? parsed.heroic : [],
-                    HEROIC_QUESTS, 'heroic'
-                );
-                data.levelplanByMode.epic = hydrateLevelplan(
-                    Array.isArray(parsed.epic) ? parsed.epic : [],
-                    EPIC_QUESTS
-                );
-                setActiveMode(getCurrentMode());
-                saveToStorage();
-                renderLists();
-                ensureHighlightStyle();
-                highlightInserted(data.levelplan.filter(i => i.name).map(i => i.name));
+                await _applyLoadedPayload(parsed);
             } catch (err) {
                 alert('Error loading file: ' + err.message);
             }
@@ -1463,6 +1669,154 @@ function loadFromFile() {
         reader.readAsText(file);
     });
     input.click();
+}
+
+// --- Shareable-link encoding (gzip + URL-safe base64) ---
+
+// Base URL used when generating a shareable link.
+const SHARE_LINK_BASE = 'https://rullgit.github.io/levelingplanner/';
+
+function _bytesToBase64Url(bytes) {
+    let binary = '';
+    const chunk = 0x8000;
+    for (let i = 0; i < bytes.length; i += chunk) {
+        binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
+    }
+    return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+function _base64UrlToBytes(str) {
+    let s = str.replace(/-/g, '+').replace(/_/g, '/');
+    while (s.length % 4) s += '=';
+    const binary = atob(s);
+    const out = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) out[i] = binary.charCodeAt(i);
+    return out;
+}
+
+// JSON-stringify + gzip + URL-safe base64. Requires modern browser (CompressionStream).
+async function _encodePayloadToHash(obj) {
+    const json = JSON.stringify(obj);
+    const input = new TextEncoder().encode(json);
+    const cs = new CompressionStream('gzip');
+    const compressed = await new Response(
+        new Blob([input]).stream().pipeThrough(cs)
+    ).arrayBuffer();
+    return _bytesToBase64Url(new Uint8Array(compressed));
+}
+
+// Reverse of _encodePayloadToHash. Throws on malformed input.
+async function _decodeHashToPayload(hash) {
+    const bytes = _base64UrlToBytes(hash);
+    const ds = new DecompressionStream('gzip');
+    const decompressed = await new Response(
+        new Blob([bytes]).stream().pipeThrough(ds)
+    ).arrayBuffer();
+    const json = new TextDecoder().decode(decompressed);
+    return JSON.parse(json);
+}
+
+// Generate a shareable URL containing the current plan and show it in a modal.
+async function generateLink() {
+    const output = await _buildSavePayload('link');
+    let encoded;
+    try {
+        encoded = await _encodePayloadToHash(output);
+    } catch (err) {
+        alert('Error generating link: ' + err.message);
+        return;
+    }
+    const url = SHARE_LINK_BASE + '#' + encoded;
+    _showShareLinkDialog(url);
+}
+
+// Modal that displays a shareable URL with a Copy button.
+function _showShareLinkDialog(url) {
+    const overlay = document.createElement('div');
+    overlay.style.cssText = [
+        'position:fixed', 'inset:0', 'z-index:99999',
+        'background:rgba(0,0,0,0.55)', 'display:flex',
+        'align-items:center', 'justify-content:center'
+    ].join(';');
+
+    const box = document.createElement('div');
+    box.style.cssText = [
+        'background:#2c2c2c', 'color:#e0e0e0', 'border-radius:10px',
+        'padding:28px 32px', 'max-width:560px', 'width:90%',
+        'box-shadow:0 8px 32px rgba(0,0,0,0.6)', 'font-family:inherit',
+        'display:flex', 'flex-direction:column', 'gap:14px'
+    ].join(';');
+
+    const label = document.createElement('label');
+    label.textContent = 'Shareable link:';
+    label.style.cssText = 'font-size:0.95em;';
+
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.readOnly = true;
+    inp.value = url;
+    inp.style.cssText = [
+        'background:#1a1a1a', 'color:#e0e0e0', 'border:1px solid #555',
+        'border-radius:5px', 'padding:6px 10px', 'font-size:0.9em',
+        'font-family:monospace', 'width:100%', 'box-sizing:border-box'
+    ].join(';');
+
+    const hint = document.createElement('span');
+    hint.textContent = `Length: ${url.length} chars`;
+    hint.style.cssText = 'color:#888;font-size:0.85em;margin-top:-6px;';
+
+    const btnRow = document.createElement('div');
+    btnRow.style.cssText = 'display:flex;gap:10px;justify-content:flex-end;align-items:center;';
+
+    const status = document.createElement('span');
+    status.style.cssText = 'color:#7fbf7f;font-size:0.85em;margin-right:auto;';
+
+    const dismiss = () => overlay.remove();
+
+    const copyBtn = document.createElement('button');
+    copyBtn.type = 'button';
+    copyBtn.textContent = 'Copy';
+    copyBtn.style.cssText = [
+        'background:#4a7a4a', 'color:#fff', 'border:none', 'border-radius:6px',
+        'padding:8px 18px', 'cursor:pointer', 'font-size:0.95em', 'font-family:inherit'
+    ].join(';');
+    copyBtn.addEventListener('click', async () => {
+        try {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(url);
+            } else {
+                inp.select();
+                document.execCommand('copy');
+            }
+            status.textContent = 'Copied!';
+            setTimeout(() => { status.textContent = ''; }, 2000);
+        } catch (e) {
+            status.style.color = '#d97070';
+            status.textContent = 'Copy failed';
+        }
+    });
+
+    const closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.textContent = 'Close';
+    closeBtn.style.cssText = [
+        'background:#444', 'color:#e0e0e0', 'border:none', 'border-radius:6px',
+        'padding:8px 18px', 'cursor:pointer', 'font-size:0.95em', 'font-family:inherit'
+    ].join(';');
+    closeBtn.addEventListener('click', dismiss);
+
+    overlay.addEventListener('keydown', e => { if (e.key === 'Escape') dismiss(); });
+
+    btnRow.appendChild(status);
+    btnRow.appendChild(copyBtn);
+    btnRow.appendChild(closeBtn);
+    box.appendChild(label);
+    box.appendChild(inp);
+    box.appendChild(hint);
+    box.appendChild(btnRow);
+    overlay.appendChild(box);
+    document.body.appendChild(overlay);
+    setTimeout(() => { inp.focus(); inp.select(); }, 0);
 }
 
 // Build a map of all items by name across quests and levelplan
@@ -1594,12 +1948,20 @@ function renderList(listId) {
     let activePotPct = 0;
     const rowData = items.map((item, index) => {
         const row = { item, dataIndex: index, cumulativeXP: '', cumulativeFavor: '', playerLevel: '', displayName: item.name };
+        // When rendering the special palette, show the next available level
+        // for the Take Level template (so it reads e.g. "Take Level 4").
+        if (listId === 'special' && item.isTakeLevel) {
+            const existingTakeCount = (data.levelplan || []).filter(i => i && i.isTakeLevel).length;
+            const baseLevel = getPlayerLevelForXP(0);
+            row.displayName = `Take Level ${baseLevel + existingTakeCount + 1}`;
+        }
         if (listId === 'levelplan') {
             const calculatedLevel = getPlayerLevelForXP(cumulativeXP);
             if (item.isTakeLevel) {
                 levelupCount += 1;
                 row.displayName = `Take level ${levelupCount}`;
                 row.playerLevelWarning = levelupCount > calculatedLevel ? 2 : 0;
+                row.cumulativeXP = cumulativeXP;
             } else if (item.isXpPot || item.isXpPotStart || item.isXpPotEnd) {
                 // XP Pot markers: no XP, treated as no-op placeholders.
                 // Update the active pot percentage so subsequent quests use it.
@@ -1644,7 +2006,7 @@ function renderList(listId) {
             }
         }
         if (item.isCustom && listId === 'levelplan') {
-            // For custom items: calculate xpMin based on custom XP and time
+            // For custom items: calculate xpMin based on Custom and time
             // Respect the applyMultipliers flag for xpMin calculation
             const cumMultiplier = multiplier + activePotPct / 100;
             const effectiveQTime = getEffectiveQTime(item);
@@ -1906,8 +2268,8 @@ function renderLevelplanFooter() {
         }
     }
 
-    // Quest count: include regular quests and elite copies; exclude saga, takeLevel, custom
-    const questCount = items.filter(i => !i.isSaga && !i.isTakeLevel && !i.isCustom).length;
+    // Quest count: include regular quests and elite copies; exclude saga, takeLevel, custom, and XP Pot markers
+    const questCount = items.filter(i => !i.isSlayer && !i.isSaga && !i.isTakeLevel && !i.isCustom && !i.isXpPot && !i.isXpPotStart && !i.isXpPotEnd).length;
 
     // Total effective time: sum of qTime and travelTime.
     let totalTime = 0;
@@ -2485,15 +2847,21 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
         const multiplier = parseFloat(document.getElementById('xp-multiplier')?.value) || 1.15;
         let xpVal = null;
         if (item && item.isCustom) {
-            if (item.xp != null && isFinite(item.xp)) xpVal = item.xp;
-            else if (item.baseXP != null && isFinite(item.baseXP)) xpVal = item.baseXP;
+            // Custom entries have editable XP — don't show a hover tooltip for them.
         } else {
-            if (item && item.xp != null && isFinite(item.xp)) xpVal = Math.round(item.xp * multiplier);
-            else if (item && item.baseXP != null && isFinite(item.baseXP)) xpVal = Math.round(item.baseXP * multiplier);
-            else if (item && item.isTakeLevel) xpVal = 0;
+            // Skip Take Level entries here (they shouldn't show "0 xp").
+            if (item && !item.isTakeLevel && item.xp != null && isFinite(item.xp)) xpVal = Math.round(item.xp * multiplier);
+            else if (item && !item.isTakeLevel && item.baseXP != null && isFinite(item.baseXP)) xpVal = Math.round(item.baseXP * multiplier);
         }
         if (xpVal != null) {
             nameDiv.dataset.tip = safeToLocaleString(xpVal) + 'xp';
+        }
+        if (item && item.isTakeLevel && playerLevelWarning === 2) {
+            const targetLevel = parseInt((displayName || '').replace(/Take level /i, ''), 10);
+            const xpNeeded = getXpForLevel(targetLevel);
+            if (xpNeeded != null && cumulativeXP !== '') {
+                nameDiv.dataset.tip = safeToLocaleString(xpNeeded - cumulativeXP) + ' xp missing';
+            }
         }
     })();
 
@@ -2505,27 +2873,21 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
             const nameInput = document.createElement('input');
             nameInput.className = 'custom-field-input custom-name-input';
             nameInput.type = 'text';
-            nameInput.value = (item.name && item.name !== 'Custom XP') ? item.name : '';
+            nameInput.value = (item.name && item.name !== 'Custom') ? item.name : '';
             nameInput.placeholder = 'Name';
-            // Tooltip: show XP on hover for custom-name input
-            (function() {
-                let customXp = null;
-                if (item && item.xp != null && isFinite(item.xp)) customXp = item.xp;
-                else if (item && item.baseXP != null && isFinite(item.baseXP)) customXp = item.baseXP;
-                else if (item && item.isTakeLevel) customXp = 0;
-                if (customXp != null) {
-                    nameInput.dataset.tip = safeToLocaleString(customXp) + 'xp';
-                }
-            })();
+            // No tooltip for custom-name input (XP is user-editable).
             nameInput.draggable = false;
             nameInput.addEventListener('mousedown', e => { e.stopPropagation(); div._suppressDrag = true; });
             nameInput.addEventListener('pointerdown', e => { e.stopPropagation(); div._suppressDrag = true; });
             nameInput.addEventListener('dragstart', e => { e.stopPropagation(); e.preventDefault(); });
+            nameInput.addEventListener('keydown', e => {
+                if (e.key === 'Enter') { e.preventDefault(); nameInput.blur(); }
+            });
             nameInput.addEventListener('blur', () => {
                 // IMPORTANT: write to the captured `item` object, NOT to
                 // data.levelplan[index]. After a drag-reorder the item at
                 // `index` may now point to a different item.
-                item.name = nameInput.value.trim() || 'Custom XP';
+                item.name = nameInput.value.trim() || 'Custom';
                 saveToStorage();
                 renderLists();
             });
@@ -2582,7 +2944,7 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
             qTimeInput.className = 'custom-field-input custom-qtime-input';
             qTimeInput.type = 'text';
             qTimeInput.value = (item.qTime !== undefined && item.qTime !== null && item.qTime !== '') ? formatMinutesToMSS(item.qTime) : '';
-            qTimeInput.placeholder = 'Time (m:ss)';
+            qTimeInput.placeholder = '0:00';
             qTimeInput.draggable = false;
             qTimeInput.addEventListener('mousedown', e => { e.stopPropagation(); div._suppressDrag = true; });
             qTimeInput.addEventListener('pointerdown', e => { e.stopPropagation(); div._suppressDrag = true; });
@@ -2875,10 +3237,39 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
                 const sagaTimeSpacer = document.createElement('div');
                 sagaTimeSpacer.className = 'saga-time-spacer';
                 contentWrapper.appendChild(sagaTimeSpacer);
+            } else if (item.isTakeLevel) {
+                const qTimeInput = document.createElement('input');
+                qTimeInput.className = 'custom-field-input custom-qtime-input';
+                qTimeInput.type = 'text';
+                qTimeInput.value = (item.qTime !== undefined && item.qTime !== null && item.qTime !== '') ? formatMinutesToMSS(item.qTime) : '';
+                qTimeInput.placeholder = '0:00';
+                qTimeInput.draggable = false;
+                qTimeInput.addEventListener('mousedown', e => { e.stopPropagation(); div._suppressDrag = true; });
+                qTimeInput.addEventListener('pointerdown', e => { e.stopPropagation(); div._suppressDrag = true; });
+                qTimeInput.addEventListener('dragstart', e => { e.stopPropagation(); e.preventDefault(); });
+                qTimeInput.addEventListener('blur', () => {
+                    const parsed = parseTimeToMinutes(qTimeInput.value);
+                    item.qTime = parsed || 0;
+                    qTimeInput.value = formatMinutesToMSS(item.qTime);
+                    saveToStorage();
+                    renderLists();
+                });
+                qTimeInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.keyCode === 13) {
+                        e.preventDefault();
+                        const parsed = parseTimeToMinutes(qTimeInput.value);
+                        item.qTime = parsed || 0;
+                        qTimeInput.value = formatMinutesToMSS(item.qTime);
+                        saveToStorage();
+                        renderLists();
+                        qTimeInput.blur();
+                    }
+                });
+                contentWrapper.appendChild(qTimeInput);
             } else {
                 contentWrapper.appendChild(eliteMarkerDiv);
             }
-            contentWrapper.appendChild(xpminDiv);
+            if (!item.isTakeLevel) contentWrapper.appendChild(xpminDiv);
             contentWrapper.appendChild(favorDiv);
 
             const deleteBtn = document.createElement('button');
@@ -2898,7 +3289,7 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
         }
     } else if (listId === 'special') {
         if (item.isTakeLevel || item.isCustom || item.isXpPot) {
-            // Render special palette items (Take Level, Custom XP, XP Pot) using
+            // Render special palette items (Take Level, Custom, XP Pot) using
             // the same item-content-wrapper appearance as levelplan cards.
             div.classList.add('item--take-level-template');
             if (item.isCustom) div.classList.add('is-custom');
@@ -2941,8 +3332,8 @@ function createItemElement(item, listId, index, cumulativeXP, playerLevel, displ
                     }
                 };
             } else {
-                arrowTitle = item.isCustom ? 'Insert Custom XP at end of Level Plan' : 'Insert Take Level at end of Level Plan';
-                arrowLabel = item.isCustom ? 'Insert Custom XP' : 'Insert Take Level';
+                arrowTitle = item.isCustom ? 'Insert Custom at end of Level Plan' : 'Insert Take Level at end of Level Plan';
+                arrowLabel = item.isCustom ? 'Insert Custom' : 'Insert Take Level';
                 arrowBtn.dataset.tip = arrowTitle;
                 arrowBtn.setAttribute('aria-label', arrowLabel);
                 arrowBtn.draggable = false;
@@ -3592,7 +3983,7 @@ function resetData() {
         rebuildQuestsFromLevelplan();
         data.special = [
             { name: 'Take Level', xp: 0, level: '', source: 'special', isTakeLevel: true },
-            { name: 'Custom XP', xp: 0, qTime: 0, travelTime: 0, source: 'special', isCustom: true }
+            { name: 'Custom', xp: 0, qTime: 0, travelTime: 0, source: 'special', isCustom: true }
         ];
         saveToStorage();
         renderLists();
@@ -3757,9 +4148,9 @@ function renderConfigList() {
     const configMode   = _getConfigMode();
     const baseSource   = configMode === 'epic' ? EPIC_QUESTS_BASE   : HEROIC_QUESTS_BASE;
     const _rawConfigSource = configMode === 'epic'
-        ? (CONFIG_PRESET === 'custom' ? EPIC_CUSTOM_CONFIG   : EPIC_UKENBURGER_CONFIG)
-        : (CONFIG_PRESET === 'custom' ? HEROIC_CUSTOM_CONFIG : HEROIC_UKENBURGER_CONFIG);
-    // If the custom config is empty (never saved), fall back to ukenburger so the textarea isn't blank
+        ? _getEpicConfigForPreset(CONFIG_PRESET)
+        : _getHeroicConfigForPreset(CONFIG_PRESET);
+    // If the selected preset's config is empty (never saved/imported), fall back to ukenburger so the textarea isn't blank
     const configSource = _rawConfigSource.length === 0
         ? (configMode === 'epic' ? EPIC_UKENBURGER_CONFIG : HEROIC_UKENBURGER_CONFIG)
         : _rawConfigSource;
@@ -4045,6 +4436,9 @@ function saveConfig(textarea) {
             window.EPIC_CUSTOM_CONFIG = _parseConfigLines(CONFIG_TEXTAREA_CACHE.epic);
         }
         window.ACTIVE_QUESTS_PRESET = 'custom';
+    } else if (CONFIG_PRESET === 'imported') {
+        // Imported preset: leave config slots untouched, just switch active preset
+        window.ACTIVE_QUESTS_PRESET = 'imported';
     } else {
         // Ukenburger preset: leave HEROIC_CUSTOM_CONFIG / EPIC_CUSTOM_CONFIG untouched
         window.ACTIVE_QUESTS_PRESET = 'ukenburger';
@@ -4074,7 +4468,9 @@ function saveConfig(textarea) {
     localStorage.setItem(CONFIG_KEY, JSON.stringify({
         activePreset: ACTIVE_QUESTS_PRESET,
         heroicCustomConfig: HEROIC_CUSTOM_CONFIG,
-        epicCustomConfig: EPIC_CUSTOM_CONFIG
+        epicCustomConfig: EPIC_CUSTOM_CONFIG,
+        heroicImportedConfig: HEROIC_IMPORTED_CONFIG,
+        epicImportedConfig: EPIC_IMPORTED_CONFIG
     }));
     closeConfig();
 }
@@ -4136,21 +4532,19 @@ function _showChoiceDialog(message, choices) {
     });
 }
 
-// Exports the current HEROIC_CUSTOM_CONFIG + EPIC_CUSTOM_CONFIG as a JSON file.
-function _exportCustomConfigToFile() {
-    // Export the config currently shown in the Config panel (respect mode + preset)
+// Exports the config currently shown in the Config panel as a CSV file.
+// Tries the native OS Save dialog first; falls back to an HTML filename dialog + download.
+async function _exportCustomConfigToFile() {
     const configMode = _getConfigMode();
     const _rawConfigSource = configMode === 'epic'
-        ? (CONFIG_PRESET === 'custom' ? EPIC_CUSTOM_CONFIG   : EPIC_UKENBURGER_CONFIG)
-        : (CONFIG_PRESET === 'custom' ? HEROIC_CUSTOM_CONFIG : HEROIC_UKENBURGER_CONFIG);
+        ? _getEpicConfigForPreset(CONFIG_PRESET)
+        : _getHeroicConfigForPreset(CONFIG_PRESET);
     const configSource = (_rawConfigSource && _rawConfigSource.length > 0)
         ? _rawConfigSource
         : (configMode === 'epic' ? EPIC_UKENBURGER_CONFIG : HEROIC_UKENBURGER_CONFIG);
 
     // Build CSV content with header
     let csvContent = 'Quest Name,Travel Time,Quest Time,Bonus XP,Optional XP\n';
-
-    // Sort by quest name
     configSource
         .slice()
         .sort((a, b) => a.name.localeCompare(b.name))
@@ -4158,18 +4552,41 @@ function _exportCustomConfigToFile() {
             const questName = `"${q.name}"`;
             const travel = q.travelTime != null ? q.travelTime : '';
             const qtime = q.qTime != null ? q.qTime : '';
-            const bonus = (q.xpmods !== null && q.xpmods !== undefined && q.xpmods !== '') 
+            const bonus = (q.xpmods !== null && q.xpmods !== undefined && q.xpmods !== '')
                 ? Math.round(Number(q.xpmods) * 100) : '';
-            const opt = (q.optionalXP !== null && q.optionalXP !== undefined && q.optionalXP !== '') 
+            const opt = (q.optionalXP !== null && q.optionalXP !== undefined && q.optionalXP !== '')
                 ? Math.round(Number(q.optionalXP) * 100) : '';
             csvContent += `${questName},${travel},${qtime},${bonus},${opt}\n`;
         });
-    
+
+    const defaultName = `${configMode}_config`;
+
+    // --- Native OS Save dialog ---
+    if (typeof window.showSaveFilePicker === 'function') {
+        try {
+            const handle = await window.showSaveFilePicker({
+                suggestedName: `${defaultName}.csv`,
+                types: [{ description: 'CSV file', accept: { 'text/csv': ['.csv'] } }]
+            });
+            const writable = await handle.createWritable();
+            await writable.write(csvContent);
+            await writable.close();
+            return;
+        } catch (err) {
+            if (err.name === 'AbortError') return;
+            console.warn('showSaveFilePicker failed, falling back to download:', err);
+        }
+    }
+
+    // --- Fallback: HTML filename dialog + browser download ---
+    const filename = await _showFilenameDialog(defaultName, '.csv');
+    if (!filename) return;
+
     const blob = new Blob([csvContent], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'custom_config.csv';
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
     a.remove();
