@@ -1563,6 +1563,145 @@ async function downloadFile(includeConfig = null) {
     URL.revokeObjectURL(url);
 }
 
+// Build a human-readable text representation of the leveling plan.
+// Shows quest names (no level/xp/xpmin), Take Level markers, Custom entries
+// with XP, XP Pot markers, and optionally favor/tokens amounts.
+// Returns a plain-text string.
+function _buildHumanReadableText() {
+    const multiplier = parseFloat(document.getElementById('xp-multiplier')?.value) || 1.15;
+    const patronView = document.getElementById('patron-view')?.value || 'None';
+    const favorActive = patronView && patronView !== 'None';
+    const tokensActive = isTwelveTokensActive();
+    const showAmounts = favorActive || tokensActive;
+
+    const lines = [];
+    let totalAmount = 0;
+
+    // Helper: process one mode's levelplan into lines and accumulate amounts
+    function processMode(mode, plan, showHeader) {
+        if (!plan || plan.length === 0) return;
+        if (showHeader) {
+            const modeLabel = mode === 'epic' ? 'EPIC' : 'HEROIC';
+            lines.push(modeLabel + ':');
+        }
+
+        // For epic mode, build heroic names set for duplicate detection
+        let heroicNamesSet = null;
+        if (mode === 'epic') {
+            const heroicPlan = data.levelplanByMode.heroic || [];
+            if (heroicPlan.length > 0) {
+                heroicNamesSet = new Set(
+                    heroicPlan
+                        .filter(h => h && !h.isTakeLevel && !h.isCustom && !h.isXpPot && !h.isXpPotStart && !h.isXpPotEnd && h.name !== undefined)
+                        .map(h => h.name)
+                        .filter(Boolean)
+                );
+            }
+        }
+
+        // Track Take Level numbering
+        const baseLevel = mode === 'epic' ? 20 : 1;
+        let levelupCount = baseLevel;
+        // Track active pot pct for XP Pot End display
+        let activePotPct = 0;
+
+        for (const item of plan) {
+            if (item.isTakeLevel) {
+                levelupCount++;
+                // Add a blank line before Take Level, but not if the previous
+                // line was also a Take Level (avoid stacking blank lines).
+                const prev = lines.length > 0 ? lines[lines.length - 1] : '';
+                if (prev !== '' && !prev.startsWith('== Take level')) {
+                    lines.push('');
+                }
+                lines.push(`== Take level ${levelupCount}`);
+            } else if (item.isXpPotStart) {
+                const pctLabel = item.pct != null ? item.pct + '%' : '';
+                activePotPct = item.pct != null ? item.pct : 0;
+                lines.push(`-- Take ${pctLabel ? pctLabel + ' ' : ''}XP Pot`);
+            } else if (item.isXpPotEnd) {
+                // Find the most recent preceding Start to get pct
+                const idx = plan.indexOf(item);
+                const precedingStart = [...plan].slice(0, idx).reverse().find(i => i.isXpPotStart);
+                const pctLabel = (precedingStart?.pct != null) ? precedingStart.pct + '%' : (activePotPct ? activePotPct + '%' : '');
+                lines.push(`-- ${pctLabel ? pctLabel + ' ' : ''}XP Pot probably ends around here`);
+                activePotPct = 0;
+            } else if (item.isCustom) {
+                // Custom entries: show name + XP (no time)
+                const cumMultiplier = multiplier + activePotPct / 100;
+                const xpVal = item.applyMultipliers ? Math.round((item.xp || 0) * cumMultiplier) : (item.xp || 0);
+                const xpStr = xpVal > 0 ? ` (${safeToLocaleString(xpVal)}xp)` : '';
+                lines.push('-- ' + (item.name || 'Custom') + xpStr);
+            } else if (item.isXpPot) {
+                // Legacy XP Pot marker — skip or show minimally
+                lines.push('== XP Pot');
+            } else {
+                // Regular quest or elite copy
+                let line = item.name || '';
+                if (showAmounts) {
+                    let amount = null;
+                    if (tokensActive) {
+                        if (item.tokens != null && item.tokens !== '' && item.tokens !== 0) {
+                            amount = item.tokens;
+                        }
+                    } else if (favorActive) {
+                        const patronMatches = (patronView === 'All')
+                            ? (item.patron !== undefined && item.patron !== null && item.patron !== '' && item.patron !== 'None')
+                            : (item.patron === patronView);
+                        if (patronMatches && item.favor != null && item.favor !== '' && item.favor !== 0) {
+                            // Skip favor from epic quests already in heroic plan
+                            let ignored = false;
+                            if (mode === 'epic' && hasHeroicDuplicateForItem(item, heroicNamesSet)) {
+                                ignored = true;
+                            }
+                            if (!ignored) {
+                                amount = item.favor;
+                            }
+                        }
+                    }
+                    if (amount != null) {
+                        line += ` [${amount}*]`;
+                        totalAmount += (typeof amount === 'number' ? amount : 0);
+                    }
+                }
+                lines.push(line);
+            }
+        }
+    }
+
+    const heroicPlan = data.levelplanByMode.heroic || [];
+    const epicPlan = data.levelplanByMode.epic || [];
+
+    const hasBoth = heroicPlan.length > 0 && epicPlan.length > 0;
+
+    if (heroicPlan.length > 0) {
+        processMode('heroic', heroicPlan, hasBoth);
+    }
+    if (epicPlan.length > 0) {
+        if (hasBoth) lines.push('\n--------------\n');
+        processMode('epic', epicPlan, hasBoth);
+    }
+
+    // If favor/tokens mode is active, append the total at the very bottom
+    if (showAmounts) {
+        // Include heroic base favor when viewing epic
+        if (favorActive && !tokensActive && epicPlan.length > 0) {
+            const heroicBase = getHeroicFavorForPatron(patronView);
+            // heroicBase favor was already counted in heroic processMode;
+            // no need to add again — totalAmount already includes heroic items.
+        }
+        lines.push('\n--------------\n');
+        if (tokensActive) {
+            lines.push(`*Total Tokens of the Twelve: ${totalAmount}`);
+        } else {
+            const patronLabel = (patronView === 'All') ? '' : (patronView + ' ');
+            lines.push(`*Total ${patronLabel}Favor: ${totalAmount}`);
+        }
+    }
+
+    return lines.join('\n');
+}
+
 // Show the Share dialog: Save to File, full link, base64, JSON.
 async function openShareDialog() {
     // Build initial payload without config (no confirm dialog)
@@ -1771,6 +1910,13 @@ async function openShareDialog() {
     box.appendChild(makeDivider());
     const { wrap: jsonWrap, ta: jsonTa } = makeSection('JSON', json, 8);
     box.appendChild(jsonWrap);
+
+    // Human-readable text section
+    box.appendChild(makeDivider());
+    const readableText = _buildHumanReadableText();
+    const readableRows = Math.min(16, Math.max(4, readableText.split('\n').length));
+    const { wrap: readableWrap, ta: readableTa } = makeSection('Human-readable (not importable)', readableText, readableRows);
+    box.appendChild(readableWrap);
 
     overlay.appendChild(box);
     overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
