@@ -1898,24 +1898,24 @@ async function openShareDialog() {
 
     // Full link section
     box.appendChild(makeDivider());
-    const { wrap: linkWrap, ta: linkTa } = makeSection('Full share link', fullLink, 3);
+    const { wrap: linkWrap, ta: linkTa } = makeSection('Full link', fullLink, 2);
     box.appendChild(linkWrap);
 
     // Base64 section
     box.appendChild(makeDivider());
-    const { wrap: encodedWrap, ta: encodedTa } = makeSection('Base64 payload', encoded, 3);
+    const { wrap: encodedWrap, ta: encodedTa } = makeSection('Compressed', encoded, 2);
     box.appendChild(encodedWrap);
 
     // JSON section
     box.appendChild(makeDivider());
-    const { wrap: jsonWrap, ta: jsonTa } = makeSection('JSON', json, 8);
+    const { wrap: jsonWrap, ta: jsonTa } = makeSection('JSON', json, 3);
     box.appendChild(jsonWrap);
 
     // Human-readable text section
     box.appendChild(makeDivider());
     const readableText = _buildHumanReadableText();
-    const readableRows = Math.min(16, Math.max(4, readableText.split('\n').length));
-    const { wrap: readableWrap, ta: readableTa } = makeSection('Human-readable (not importable)', readableText, readableRows);
+    const readableRows = Math.min(10, Math.max(4, readableText.split('\n').length));
+    const { wrap: readableWrap, ta: readableTa } = makeSection('Text export:', readableText, readableRows);
     box.appendChild(readableWrap);
 
     overlay.appendChild(box);
