@@ -1,4 +1,4 @@
-window.EPIC_UKENBURGER_CONFIG =
+window.EPIC_DEFAULT_CONFIG =
 [
   {
     "name": "A Small Problem",

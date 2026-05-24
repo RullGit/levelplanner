@@ -2231,6 +2231,30 @@ label,
     gap: 8px;
 }
 
+.config-info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    color: #c8d0dc;
+    font-size: 0.82em;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1;
+    cursor: default;
+    user-select: none;
+    flex-shrink: 0;
+    transition: background 0.15s, color 0.15s;
+}
+
+.config-info-icon:hover {
+    background: rgba(255,255,255,0.28);
+    color: #fff;
+}
+
 .config-preset {
     padding: 4px 8px;
     background: #fff;

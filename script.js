@@ -13,13 +13,13 @@ if (typeof EPIC_QUESTS_BASE === 'undefined') {
   window.EPIC_QUESTS_BASE = [];
   console.error('EPIC_QUESTS_BASE not found. Ensure epic.js is included before script.js');
 }
-if (typeof HEROIC_UKENBURGER_CONFIG === 'undefined') {
-  window.HEROIC_UKENBURGER_CONFIG = [];
-  console.warn('HEROIC_UKENBURGER_CONFIG not found. Ensure heroic_ukenburger_config.js is included before script.js');
+if (typeof HEROIC_DEFAULT_CONFIG === 'undefined') {
+  window.HEROIC_DEFAULT_CONFIG = [];
+  console.warn('HEROIC_DEFAULT_CONFIG not found. Ensure heroic_default_config.js is included before script.js');
 }
-if (typeof EPIC_UKENBURGER_CONFIG === 'undefined') {
-  window.EPIC_UKENBURGER_CONFIG = [];
-  console.warn('EPIC_UKENBURGER_CONFIG not found. Ensure epic_ukenburger_config.js is included before script.js');
+if (typeof EPIC_DEFAULT_CONFIG === 'undefined') {
+  window.EPIC_DEFAULT_CONFIG = [];
+  console.warn('EPIC_DEFAULT_CONFIG not found. Ensure epic_default_config.js is included before script.js');
 }
 
 // User-saved custom config slots — only written to when the user explicitly saves a Custom config.
@@ -27,25 +27,25 @@ window.HEROIC_CUSTOM_CONFIG = [];
 window.EPIC_CUSTOM_CONFIG   = [];
 
 // Imported config slots — populated whenever a levelplan file is loaded that includes config data.
-// Like the Ukenburger preset, these are not directly editable in the config panel.
+// Like the Default preset, these are not directly editable in the config panel.
 window.HEROIC_IMPORTED_CONFIG = [];
 window.EPIC_IMPORTED_CONFIG   = [];
 
 // Tracks which preset is currently applied to build HEROIC_QUESTS / EPIC_QUESTS.
-window.ACTIVE_QUESTS_PRESET = 'ukenburger';
+window.ACTIVE_QUESTS_PRESET = 'default';
 
 // Resolve a preset name to its underlying heroic config array.
 function _getHeroicConfigForPreset(preset) {
     if (preset === 'custom')   return HEROIC_CUSTOM_CONFIG;
     if (preset === 'imported') return HEROIC_IMPORTED_CONFIG;
-    return HEROIC_UKENBURGER_CONFIG;
+    return HEROIC_DEFAULT_CONFIG;
 }
 
 // Resolve a preset name to its underlying epic config array.
 function _getEpicConfigForPreset(preset) {
     if (preset === 'custom')   return EPIC_CUSTOM_CONFIG;
     if (preset === 'imported') return EPIC_IMPORTED_CONFIG;
-    return EPIC_UKENBURGER_CONFIG;
+    return EPIC_DEFAULT_CONFIG;
 }
 
 // Rebuild HEROIC_QUESTS from whichever config source is currently active.
@@ -79,7 +79,7 @@ function _computeQuestXP(mode) {
     }
 }
 
-// Initial build (default: Ukenburger)
+// Initial build (default: Default)
 _rebuildHeroicQuests();
 _rebuildEpicQuests();
 
@@ -89,8 +89,8 @@ const CONFIG_TEXTAREA_CACHE = {
   epic: null
 };
 
-// Current preset in the config dropdown: 'ukenburger' or 'custom'
-let CONFIG_PRESET = 'ukenburger';
+// Current preset in the config dropdown: 'default' or 'custom'
+let CONFIG_PRESET = 'default';
 // Whether the textarea content has been modified since the last preset load/save
 let CONFIG_DIRTY = false;
 // Whether the dirty state was caused by an automatic preset jump (used to highlight the UI)
@@ -145,7 +145,7 @@ function _markConfigDirty() {
         const prev = sel.value;
         sel.value = 'custom';
         // Only show the yellow highlight when the preset was auto-switched
-        // from something else (e.g. 'ukenburger') to 'custom'. If the user
+        // from something else (e.g. 'default') to 'custom'. If the user
         // was already editing a custom preset, don't highlight.
         // Use existing highlight logic but preserve an already-set highlight.
         CONFIG_DIRTY_HIGHLIGHT = CONFIG_DIRTY_HIGHLIGHT || (prev !== 'custom');
@@ -174,13 +174,13 @@ function _clearConfigDirty() {
 // Update the visual styling for the config preset select and its custom option.
 // - The `option[value="custom"]` is highlighted when `CONFIG_DIRTY` is true.
 // - The select itself displays the highlight only when `custom` is selected
-//   and `CONFIG_DIRTY` is true. This ensures `Ukenburger` keeps its default
+//   and `CONFIG_DIRTY` is true. This ensures `Default` keeps its default
 //   appearance unless `custom` is both highlighted and selected.
 function _updateConfigPresetVisual() {
     const sel = document.getElementById('config-preset');
     if (!sel) return;
     const customOpt = sel.querySelector('option[value="custom"]');
-    const ukenOpt = sel.querySelector('option[value="ukenburger"]');
+    const ukenOpt = sel.querySelector('option[value="default"]');
     const importedOpt = sel.querySelector('option[value="imported"]');
     if (customOpt) {
         if (CONFIG_DIRTY_HIGHLIGHT) {
@@ -678,29 +678,29 @@ function initializeApp() {
             renderConfigList();
         });
     }
-    // Config preset dropdown (Ukenburger / Custom)
+    // Config preset dropdown (Default / Custom)
     const configPresetSelect = document.getElementById('config-preset');
     if (configPresetSelect) {
         configPresetSelect.addEventListener('change', () => {
             const newPreset = configPresetSelect.value;
-            if (newPreset === 'ukenburger') {
-                CONFIG_TEXTAREA_CACHE.heroic = _configToTextareaLines(HEROIC_UKENBURGER_CONFIG);
-                CONFIG_TEXTAREA_CACHE.epic   = _configToTextareaLines(EPIC_UKENBURGER_CONFIG);
+            if (newPreset === 'default') {
+                CONFIG_TEXTAREA_CACHE.heroic = _configToTextareaLines(HEROIC_DEFAULT_CONFIG);
+                CONFIG_TEXTAREA_CACHE.epic   = _configToTextareaLines(EPIC_DEFAULT_CONFIG);
             } else if (newPreset === 'imported') {
-                // If no imported config available, fall back to ukenburger as a starting point
+                // If no imported config available, fall back to default as a starting point
                 CONFIG_TEXTAREA_CACHE.heroic = _configToTextareaLines(
-                    HEROIC_IMPORTED_CONFIG.length > 0 ? HEROIC_IMPORTED_CONFIG : HEROIC_UKENBURGER_CONFIG
+                    HEROIC_IMPORTED_CONFIG.length > 0 ? HEROIC_IMPORTED_CONFIG : HEROIC_DEFAULT_CONFIG
                 );
                 CONFIG_TEXTAREA_CACHE.epic   = _configToTextareaLines(
-                    EPIC_IMPORTED_CONFIG.length > 0 ? EPIC_IMPORTED_CONFIG : EPIC_UKENBURGER_CONFIG
+                    EPIC_IMPORTED_CONFIG.length > 0 ? EPIC_IMPORTED_CONFIG : EPIC_DEFAULT_CONFIG
                 );
             } else {
-                // If no custom config saved yet, fall back to ukenburger as a starting point
+                // If no custom config saved yet, fall back to default as a starting point
                 CONFIG_TEXTAREA_CACHE.heroic = _configToTextareaLines(
-                    HEROIC_CUSTOM_CONFIG.length > 0 ? HEROIC_CUSTOM_CONFIG : HEROIC_UKENBURGER_CONFIG
+                    HEROIC_CUSTOM_CONFIG.length > 0 ? HEROIC_CUSTOM_CONFIG : HEROIC_DEFAULT_CONFIG
                 );
                 CONFIG_TEXTAREA_CACHE.epic   = _configToTextareaLines(
-                    EPIC_CUSTOM_CONFIG.length > 0 ? EPIC_CUSTOM_CONFIG : EPIC_UKENBURGER_CONFIG
+                    EPIC_CUSTOM_CONFIG.length > 0 ? EPIC_CUSTOM_CONFIG : EPIC_DEFAULT_CONFIG
                 );
             }
             CONFIG_PRESET = newPreset;
@@ -1167,7 +1167,7 @@ function loadSettings() {
             if (Array.isArray(epicCustomConfig))   window.EPIC_CUSTOM_CONFIG   = epicCustomConfig;
             if (Array.isArray(heroicImportedConfig)) window.HEROIC_IMPORTED_CONFIG = heroicImportedConfig;
             if (Array.isArray(epicImportedConfig))   window.EPIC_IMPORTED_CONFIG   = epicImportedConfig;
-            if (activePreset === 'custom' || activePreset === 'ukenburger' || activePreset === 'imported') {
+            if (activePreset === 'custom' || activePreset === 'default' || activePreset === 'imported') {
                 window.ACTIVE_QUESTS_PRESET = activePreset;
             }
             _rebuildHeroicQuests();
@@ -1568,7 +1568,7 @@ async function _applyLoadedPayload(parsed) {
         throw new Error('Unrecognised file format');
     }
 
-    const filePreset = parsed.configPreset; // 'ukenburger', 'custom', 'imported', or undefined (old file)
+    const filePreset = parsed.configPreset; // 'default', 'custom', 'imported', or undefined (old file)
     const fileHasCustomConfig = Array.isArray(parsed.heroicCustomConfig) && parsed.heroicCustomConfig.length > 0;
 
     // Helper: persist config changes to localStorage
@@ -1601,7 +1601,7 @@ async function _applyLoadedPayload(parsed) {
         // Determine which active config the imported one would replace (for the prompt label)
         const currentLabel = ACTIVE_QUESTS_PRESET === 'custom'
             ? 'Custom'
-            : (ACTIVE_QUESTS_PRESET === 'imported' ? 'Imported' : 'Ukenburger');
+            : (ACTIVE_QUESTS_PRESET === 'imported' ? 'Imported' : 'Default');
 
         const choice = await _showChoiceDialog(
             'This leveling plan includes a config. Continue using your current config, or switch to the imported one?',
@@ -1619,10 +1619,10 @@ async function _applyLoadedPayload(parsed) {
         _computeQuestXP('epic');
         _persistConfig();
 
-    } else if (filePreset === 'ukenburger' && ACTIVE_QUESTS_PRESET !== 'ukenburger') {
-        // File used Ukenburger (no embedded config) but user currently has a different preset active
-        if (confirm('This plan was created with the Ukenburger config. Switch to Ukenburger?')) {
-            window.ACTIVE_QUESTS_PRESET = 'ukenburger';
+    } else if (filePreset === 'default' && ACTIVE_QUESTS_PRESET !== 'default') {
+        // File used Default (no embedded config) but user currently has a different preset active
+        if (confirm('This plan was created with the Default config. Switch to Default?')) {
+            window.ACTIVE_QUESTS_PRESET = 'default';
             _rebuildHeroicQuests();
             _rebuildEpicQuests();
             _computeQuestXP('heroic');
@@ -4400,9 +4400,9 @@ function renderConfigList() {
     const _rawConfigSource = configMode === 'epic'
         ? _getEpicConfigForPreset(CONFIG_PRESET)
         : _getHeroicConfigForPreset(CONFIG_PRESET);
-    // If the selected preset's config is empty (never saved/imported), fall back to ukenburger so the textarea isn't blank
+    // If the selected preset's config is empty (never saved/imported), fall back to default so the textarea isn't blank
     const configSource = _rawConfigSource.length === 0
-        ? (configMode === 'epic' ? EPIC_UKENBURGER_CONFIG : HEROIC_UKENBURGER_CONFIG)
+        ? (configMode === 'epic' ? EPIC_DEFAULT_CONFIG : HEROIC_DEFAULT_CONFIG)
         : _rawConfigSource;
 
     // Names column: from _BASE, excluding sagas, sorted by name
@@ -4690,8 +4690,8 @@ function saveConfig(textarea) {
         // Imported preset: leave config slots untouched, just switch active preset
         window.ACTIVE_QUESTS_PRESET = 'imported';
     } else {
-        // Ukenburger preset: leave HEROIC_CUSTOM_CONFIG / EPIC_CUSTOM_CONFIG untouched
-        window.ACTIVE_QUESTS_PRESET = 'ukenburger';
+        // Default preset: leave HEROIC_CUSTOM_CONFIG / EPIC_CUSTOM_CONFIG untouched
+        window.ACTIVE_QUESTS_PRESET = 'default';
     }
 
     _rebuildHeroicQuests();
@@ -4791,7 +4791,7 @@ async function _exportCustomConfigToFile() {
         : _getHeroicConfigForPreset(CONFIG_PRESET);
     const configSource = (_rawConfigSource && _rawConfigSource.length > 0)
         ? _rawConfigSource
-        : (configMode === 'epic' ? EPIC_UKENBURGER_CONFIG : HEROIC_UKENBURGER_CONFIG);
+        : (configMode === 'epic' ? EPIC_DEFAULT_CONFIG : HEROIC_DEFAULT_CONFIG);
 
     // Build CSV content with header
     let csvContent = 'Quest Name,Travel Time,Quest Time,Bonus XP,Optional XP\n';

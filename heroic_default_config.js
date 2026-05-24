@@ -1,4 +1,4 @@
-window.HEROIC_UKENBURGER_CONFIG =
+window.HEROIC_DEFAULT_CONFIG =
 [
   {
     "name": "The Grotto",
