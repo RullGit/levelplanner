@@ -406,12 +406,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Initialize the app with data from JSON
 function initializeApp() {
-    // Always set up special palette (not persisted).
-    data.special = [
-        { name: 'Take Level', xp: 0, level: '', source: 'special', isTakeLevel: true },
-        { name: 'Custom', xp: 0, qTime: 0, travelTime: 0, source: 'special', isCustom: true },
-        { name: 'XP Pot', xp: 0, source: 'special', isXpPot: true }
-    ];
+    // Special palette is rebuilt before every render via _rebuildSpecial().
+    // Set it up here too so it's available from the very first render.
 
     // loadSettings() must run before hydrating the level plan (and before setActiveMode())
     loadSettings();
@@ -887,11 +883,6 @@ function loadInitialData() {
     data.levelplanByMode[mode] = [];
     data.levelplan = data.levelplanByMode[mode];
     rebuildQuestsFromLevelplan();
-    data.special = [
-        { name: 'Take Level', xp: 0, level: '', source: 'special', isTakeLevel: true },
-        { name: 'Custom', xp: 0, qTime: 0, travelTime: 0, source: 'special', isCustom: true },
-        { name: 'XP Pot', xp: 0, source: 'special', isXpPot: true }
-    ];
     saveToStorage();
 }
 
@@ -2296,8 +2287,19 @@ function collectItemsForXpMin(item, levelplanNameSet, allItemsByName) {
     return collected;
 }
 
+// The special palette items are stateless constants — always rebuild fresh before rendering
+// so no code path can ever accidentally leave data.special in a stale/incomplete state.
+function _rebuildSpecial() {
+    data.special = [
+        { name: 'Take Level', xp: 0, level: '', source: 'special', isTakeLevel: true },
+        { name: 'Custom', xp: 0, qTime: 0, travelTime: 0, source: 'special', isCustom: true },
+        { name: 'XP Pot', xp: 0, source: 'special', isXpPot: true }
+    ];
+}
+
 // Render all lists
 function renderLists() {
+    _rebuildSpecial();
     renderList('levelplan');
     renderList('quests');
     renderList('special');
@@ -4666,11 +4668,6 @@ function resetData() {
         data.levelplanByMode.epic = [];
         data.levelplan = data.levelplanByMode[mode];
         rebuildQuestsFromLevelplan();
-        data.special = [
-            { name: 'Take Level', xp: 0, level: '', source: 'special', isTakeLevel: true },
-            { name: 'Custom', xp: 0, qTime: 0, travelTime: 0, source: 'special', isCustom: true },
-            { name: 'XP Pot', xp: 0, source: 'special', isXpPot: true }
-        ];
         saveToStorage();
         renderLists();
     }
