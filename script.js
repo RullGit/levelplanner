@@ -1439,9 +1439,13 @@ function _showFilenameDialog(defaultName, extension) {
             'font-family:inherit', 'width:100%', 'box-sizing:border-box'
         ].join(';');
 
+        // Row to hold the input and extension hint on the same line
+        const inputRow = document.createElement('div');
+        inputRow.style.cssText = 'display:flex;align-items:center;gap:8px;width:100%;';
+
         const extHint = document.createElement('span');
         extHint.textContent = extension;
-        extHint.style.cssText = 'color:#888;font-size:0.85em;margin-top:-6px;';
+        extHint.style.cssText = 'color:#888;font-size:0.95em;flex:0 0 auto;';
 
         const btnRow = document.createElement('div');
         btnRow.style.cssText = 'display:flex;gap:10px;justify-content:flex-end;';
@@ -1479,8 +1483,9 @@ function _showFilenameDialog(defaultName, extension) {
         btnRow.appendChild(cancelBtn);
         btnRow.appendChild(saveBtn);
         box.appendChild(label);
-        box.appendChild(inp);
-        box.appendChild(extHint);
+        inputRow.appendChild(inp);
+        inputRow.appendChild(extHint);
+        box.appendChild(inputRow);
         box.appendChild(btnRow);
         overlay.appendChild(box);
         document.body.appendChild(overlay);
@@ -1492,7 +1497,7 @@ function _showFilenameDialog(defaultName, extension) {
 // Prompts the user (via _showConfirmDialog) about embedding a custom/imported
 // config — pass `includeConfigPromptLabel` as either 'file' or 'link' to vary
 // the wording slightly.
-async function _buildSavePayload(target) {
+async function _buildSavePayload(target, includeConfig = null) {
     // Snapshot the in-memory store, then override the active mode with the
     // live dropdown value as a belt-and-suspenders measure.
     const learningTomeByMode = { ..._learningTomeByMode };
@@ -1509,12 +1514,18 @@ async function _buildSavePayload(target) {
 
     const where = target === 'link' ? 'link' : 'file';
     if (ACTIVE_QUESTS_PRESET === 'custom') {
-        if (await _showConfirmDialog(`Store your custom config in this ${where}?`)) {
+        const doInclude = includeConfig !== null
+            ? includeConfig
+            : await _showConfirmDialog(`Store your custom config in this ${where}?`);
+        if (doInclude) {
             output.heroicCustomConfig = HEROIC_CUSTOM_CONFIG;
             output.epicCustomConfig   = EPIC_CUSTOM_CONFIG;
         }
     } else if (ACTIVE_QUESTS_PRESET === 'imported') {
-        if (await _showConfirmDialog(`Store the imported config in this ${where}?`)) {
+        const doInclude = includeConfig !== null
+            ? includeConfig
+            : await _showConfirmDialog(`Store the imported config in this ${where}?`);
+        if (doInclude) {
             output.heroicCustomConfig = HEROIC_IMPORTED_CONFIG;
             output.epicCustomConfig   = EPIC_IMPORTED_CONFIG;
         }
@@ -1523,30 +1534,30 @@ async function _buildSavePayload(target) {
     return output;
 }
 
-// Save both minimal levelplans (heroic + epic) to a downloadable JSON file.
-// Tries the native OS Save dialog first; falls back to an HTML filename dialog + download.
-async function saveToFile() {
-    const output = await _buildSavePayload('file');
+// Save both minimal levelplans (heroic + epic) via the native OS Save dialog.
+// Throws if the native dialog is unavailable or fails (caller should catch and show an error).
+async function saveToFile(includeConfig = null) {
+    const output = await _buildSavePayload('file', includeConfig);
     const json = JSON.stringify(output, null, 2);
 
-    // --- Native OS Save dialog (Chrome / Edge desktop) ---
-    if (typeof window.showSaveFilePicker === 'function') {
-        try {
-            const handle = await window.showSaveFilePicker({
-                suggestedName: 'levelingplan.json',
-                types: [{ description: 'JSON file', accept: { 'application/json': ['.json'] } }]
-            });
-            const writable = await handle.createWritable();
-            await writable.write(json);
-            await writable.close();
-            return;
-        } catch (err) {
-            if (err.name === 'AbortError') return;
-            console.warn('showSaveFilePicker failed, falling back to download:', err);
-        }
+    if (typeof window.showSaveFilePicker !== 'function') {
+        throw new Error('Native save dialog not supported in this browser.');
     }
 
-    // --- Fallback: HTML filename dialog + browser download ---
+    const handle = await window.showSaveFilePicker({
+        suggestedName: 'levelingplan.json',
+        types: [{ description: 'JSON file', accept: { 'application/json': ['.json'] } }]
+    });
+    const writable = await handle.createWritable();
+    await writable.write(json);
+    await writable.close();
+}
+
+// Download both minimal levelplans (heroic + epic) via an HTML filename dialog + browser download.
+async function downloadFile(includeConfig = null) {
+    const output = await _buildSavePayload('file', includeConfig);
+    const json = JSON.stringify(output, null, 2);
+
     const filename = await _showFilenameDialog('levelingplan', '.json');
     if (!filename) return;
 
@@ -1559,6 +1570,398 @@ async function saveToFile() {
     a.click();
     a.remove();
     URL.revokeObjectURL(url);
+}
+
+// Show the Share dialog: Save to File, full link, base64, JSON.
+async function openShareDialog() {
+    // Build initial payload without config (no confirm dialog)
+    let linkPayload, encoded, json;
+    try {
+        linkPayload = await _buildSavePayload('link', false);
+        encoded = await _encodePayloadToHash(linkPayload);
+        json = JSON.stringify(linkPayload, null, 2);
+    } catch (err) {
+        alert('Error building share data: ' + (err && err.message ? err.message : err));
+        return;
+    }
+
+    const fullLink = SHARE_LINK_BASE + '#' + encoded;
+    const hasNonDefaultConfig = ACTIVE_QUESTS_PRESET === 'custom' || ACTIVE_QUESTS_PRESET === 'imported';
+
+    const overlay = document.createElement('div');
+    overlay.style.cssText = [
+        'position:fixed', 'inset:0', 'z-index:99999',
+        'background:rgba(0,0,0,0.55)', 'display:flex',
+        'align-items:center', 'justify-content:center'
+    ].join(';');
+
+    const box = document.createElement('div');
+    box.style.cssText = [
+        'background:#2c2c2c', 'color:#e0e0e0', 'border-radius:10px',
+        'padding:28px 34px', 'max-width:760px', 'width:92%',
+        'box-shadow:0 8px 32px rgba(0,0,0,0.6)', 'font-family:inherit',
+        'display:flex', 'flex-direction:column', 'gap:18px',
+        'max-height:92vh', 'overflow-y:auto'
+    ].join(';');
+
+    const titleRow = document.createElement('div');
+    titleRow.style.cssText = 'display:flex;justify-content:space-between;align-items:center;';
+    const title = document.createElement('h3');
+    title.textContent = 'Share';
+    title.style.cssText = 'margin:0;font-size:1.1em;';
+    const closeX = document.createElement('button');
+    closeX.textContent = '×';
+    closeX.style.cssText = [
+        'background:none', 'border:none', 'color:#e0e0e0',
+        'font-size:1.4em', 'cursor:pointer', 'line-height:1', 'padding:0 4px'
+    ].join(';');
+    titleRow.appendChild(title);
+    titleRow.appendChild(closeX);
+    box.appendChild(titleRow);
+
+    const btnStyle = [
+        'padding:10px 14px', 'border-radius:6px',
+        'border:1px solid rgba(255,255,255,0.15)',
+        'background:#3a3a3a', 'color:#e0e0e0', 'cursor:pointer',
+        'font-size:0.95em', 'transition:background 0.15s'
+    ].join(';');
+    const copyBtnStyle = [
+        'padding:5px 12px', 'border-radius:5px',
+        'border:1px solid rgba(255,255,255,0.15)',
+        'background:#3a3a3a', 'color:#e0e0e0', 'cursor:pointer',
+        'font-size:0.82em', 'white-space:nowrap', 'transition:background 0.15s'
+    ].join(';');
+    const taStyle = [
+        'background:#1a1a1a', 'color:#e0e0e0',
+        'border:1px solid #555', 'border-radius:5px',
+        'padding:7px 10px', 'font-size:0.8em',
+        'font-family:monospace', 'width:100%', 'box-sizing:border-box',
+        'resize:vertical'
+    ].join(';');
+
+    const hover = (b, on, off) => {
+        b.addEventListener('mouseenter', () => { b.style.background = on; });
+        b.addEventListener('mouseleave', () => { b.style.background = off; });
+    };
+
+    const makeCopyBtn = (getText) => {
+        const btn = document.createElement('button');
+        btn.textContent = 'Copy';
+        btn.style.cssText = copyBtnStyle;
+        hover(btn, '#4a4a4a', '#3a3a3a');
+        btn.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(getText());
+                const prev = btn.textContent;
+                btn.textContent = 'Copied!';
+                setTimeout(() => { btn.textContent = prev; }, 1200);
+            } catch (e) {
+                // fallback: select textarea content
+                const ta = btn.closest('div').querySelector('textarea');
+                if (ta) { ta.select(); document.execCommand('copy'); }
+            }
+        });
+        return btn;
+    };
+
+    const makeSection = (labelText, value, rows) => {
+        const wrap = document.createElement('div');
+        wrap.style.cssText = 'display:flex;flex-direction:column;gap:6px;';
+        const lbl = document.createElement('label');
+        lbl.textContent = labelText;
+        lbl.style.cssText = 'font-size:0.88em;color:#bbb;';
+        const taRow = document.createElement('div');
+        taRow.style.cssText = 'display:flex;gap:8px;align-items:flex-start;';
+        const ta = document.createElement('textarea');
+        ta.readOnly = true;
+        ta.rows = rows;
+        ta.value = value;
+        ta.style.cssText = taStyle + ';flex:1;min-width:0;';
+        const copyBtn = makeCopyBtn(() => ta.value);
+        copyBtn.style.cssText = copyBtnStyle + ';align-self:stretch;';
+        taRow.appendChild(ta);
+        taRow.appendChild(copyBtn);
+        wrap.appendChild(lbl);
+        wrap.appendChild(taRow);
+        return { wrap, ta };
+    };
+
+    const makeDivider = () => {
+        const hr = document.createElement('hr');
+        hr.style.cssText = 'border:none;border-top:1px solid #444;margin:0;';
+        return hr;
+    };
+
+    const close = () => { if (overlay.parentNode) overlay.parentNode.removeChild(overlay); };
+    closeX.addEventListener('click', close);
+
+    // Declare cfgChk early so the Save to File button can reference it
+    let cfgChk = null;
+
+    // Include config checkbox (only shown when a non-default config is active)
+    if (hasNonDefaultConfig) {
+        const cfgRow = document.createElement('label');
+        cfgRow.style.cssText = 'display:flex;align-items:center;gap:10px;cursor:pointer;font-size:0.92em;color:#e0e0e0;user-select:none;';
+        cfgChk = document.createElement('input');
+        cfgChk.type = 'checkbox';
+        cfgChk.style.cssText = 'width:15px;height:15px;cursor:pointer;accent-color:#6a9fd8;';
+        cfgRow.appendChild(cfgChk);
+        cfgRow.appendChild(document.createTextNode('Include config'));
+        box.appendChild(cfgRow);
+        box.appendChild(makeDivider());
+
+        cfgChk.addEventListener('change', async () => {
+            try {
+                const newPayload = await _buildSavePayload('link', cfgChk.checked);
+                const newEncoded = await _encodePayloadToHash(newPayload);
+                linkTa.value = SHARE_LINK_BASE + '#' + newEncoded;
+                encodedTa.value = newEncoded;
+                jsonTa.value = JSON.stringify(newPayload, null, 2);
+            } catch (err) {
+                alert('Error updating share data: ' + (err && err.message ? err.message : err));
+            }
+        });
+    }
+
+        // Save to File + Download buttons row
+    const fileBtnRow = document.createElement('div');
+    fileBtnRow.style.cssText = 'display:flex;flex-direction:column;gap:6px;';
+
+    const fileBtnInnerRow = document.createElement('div');
+    fileBtnInnerRow.style.cssText = 'display:flex;gap:10px;';
+
+    const saveErrMsg = document.createElement('span');
+    saveErrMsg.style.cssText = 'color:#f07070;font-size:0.85em;display:none;';
+
+    const saveBtn = document.createElement('button');
+    saveBtn.textContent = 'Save to File';
+    saveBtn.style.cssText = btnStyle + ';flex:1;';
+    hover(saveBtn, '#4a4a4a', '#3a3a3a');
+    saveBtn.addEventListener('click', async () => {
+        saveErrMsg.style.display = 'none';
+        try {
+            await saveToFile(hasNonDefaultConfig ? cfgChk.checked : null);
+            close();
+        } catch (err) {
+            if (err.name === 'AbortError') return;
+            saveErrMsg.textContent = 'Save failed. Use Download instead.';
+            saveErrMsg.style.display = '';
+        }
+    });
+
+    const dlBtn = document.createElement('button');
+    dlBtn.textContent = 'Download';
+    dlBtn.style.cssText = btnStyle + ';flex:1;';
+    hover(dlBtn, '#4a4a4a', '#3a3a3a');
+    dlBtn.addEventListener('click', async () => {
+        close();
+        try {
+            await downloadFile(hasNonDefaultConfig ? cfgChk.checked : null);
+        } catch (err) { alert('Download failed: ' + err.message); }
+    });
+
+    fileBtnInnerRow.appendChild(saveBtn);
+    fileBtnInnerRow.appendChild(dlBtn);
+    fileBtnRow.appendChild(fileBtnInnerRow);
+    fileBtnRow.appendChild(saveErrMsg);
+    box.appendChild(fileBtnRow);
+
+    // Full link section
+    box.appendChild(makeDivider());
+    const { wrap: linkWrap, ta: linkTa } = makeSection('Full share link', fullLink, 3);
+    box.appendChild(linkWrap);
+
+    // Base64 section
+    box.appendChild(makeDivider());
+    const { wrap: encodedWrap, ta: encodedTa } = makeSection('Base64 payload', encoded, 3);
+    box.appendChild(encodedWrap);
+
+    // JSON section
+    box.appendChild(makeDivider());
+    const { wrap: jsonWrap, ta: jsonTa } = makeSection('JSON', json, 8);
+    box.appendChild(jsonWrap);
+
+    overlay.appendChild(box);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+    document.addEventListener('keydown', function onKey(e) {
+        if (e.key === 'Escape') { document.removeEventListener('keydown', onKey); close(); }
+    });
+
+    document.body.appendChild(overlay);
+}
+
+// Parse arbitrary text as one of: JSON leveling plan, raw base64url-gzip payload,
+// or a full share link containing the base64url-gzip payload after '#'.
+// Throws on invalid input.
+async function _parseImportText(text) {
+    const raw = (text || '').trim();
+    if (!raw) throw new Error('Input is empty');
+
+    // 1) JSON?
+    if (raw.startsWith('{') || raw.startsWith('[')) {
+        return JSON.parse(raw);
+    }
+
+    // 2) Full URL with hash payload?
+    let candidate = raw;
+    const hashIdx = raw.indexOf('#');
+    if (hashIdx >= 0 && /^https?:\/\//i.test(raw)) {
+        candidate = raw.slice(hashIdx + 1);
+    }
+    // Strip any whitespace/newlines that may have been introduced by copy-paste
+    candidate = candidate.replace(/\s+/g, '');
+    if (!candidate) throw new Error('No payload found after #');
+
+    // 3) Treat as base64url-encoded gzip payload (same encoding generateLink uses)
+    return await _decodeHashToPayload(candidate);
+}
+
+// Show the Import dialog with three options:
+//   - Load from File
+//   - Paste from Clipboard (auto-detect JSON / base64 / full link)
+//   - Manual paste textarea + Parse button
+function openImportDialog() {
+    const overlay = document.createElement('div');
+    overlay.style.cssText = [
+        'position:fixed', 'inset:0', 'z-index:99999',
+        'background:rgba(0,0,0,0.55)', 'display:flex',
+        'align-items:center', 'justify-content:center'
+    ].join(';');
+
+    const box = document.createElement('div');
+    box.style.cssText = [
+        'background:#2c2c2c', 'color:#e0e0e0', 'border-radius:10px',
+        'padding:28px 34px', 'max-width:760px', 'width:92%',
+        'box-shadow:0 8px 32px rgba(0,0,0,0.6)', 'font-family:inherit',
+        'display:flex', 'flex-direction:column', 'gap:18px',
+        'max-height:92vh', 'overflow-y:auto'
+    ].join(';');
+
+    const titleRow = document.createElement('div');
+    titleRow.style.cssText = 'display:flex;justify-content:space-between;align-items:center;';
+    const title = document.createElement('h3');
+    title.textContent = 'Import';
+    title.style.cssText = 'margin:0;font-size:1.1em;';
+    const closeX = document.createElement('button');
+    closeX.textContent = '×';
+    closeX.style.cssText = [
+        'background:none', 'border:none', 'color:#e0e0e0',
+        'font-size:1.4em', 'cursor:pointer', 'line-height:1', 'padding:0 4px'
+    ].join(';');
+    titleRow.appendChild(title);
+    titleRow.appendChild(closeX);
+    box.appendChild(titleRow);
+
+    const btnStyle = [
+        'padding:10px 14px', 'border-radius:6px',
+        'border:1px solid rgba(255,255,255,0.15)',
+        'background:#3a3a3a', 'color:#e0e0e0', 'cursor:pointer',
+        'font-size:0.95em', 'text-align:left', 'transition:background 0.15s'
+    ].join(';');
+    const actionBtnStyle = [
+        'padding:5px 12px', 'border-radius:5px',
+        'border:1px solid rgba(255,255,255,0.15)',
+        'background:#3a3a3a', 'color:#e0e0e0', 'cursor:pointer',
+        'font-size:0.82em', 'white-space:nowrap', 'transition:background 0.15s',
+        'align-self:stretch'
+    ].join(';');
+    const hover = (b) => {
+        b.addEventListener('mouseenter', () => { b.style.background = '#4a4a4a'; });
+        b.addEventListener('mouseleave', () => { b.style.background = '#3a3a3a'; });
+    };
+    const makeDivider = () => {
+        const hr = document.createElement('hr');
+        hr.style.cssText = 'border:none;border-top:1px solid #444;margin:0;';
+        return hr;
+    };
+
+    const close = () => { if (overlay.parentNode) overlay.parentNode.removeChild(overlay); };
+    closeX.addEventListener('click', close);
+
+    const status = document.createElement('div');
+    status.style.cssText = 'min-height:1.2em;font-size:0.85em;color:#bbb;';
+
+    const setStatus = (msg, isError) => {
+        status.textContent = msg || '';
+        status.style.color = isError ? '#ff8080' : '#9bd29b';
+    };
+
+    const importFromText = async (text) => {
+        try {
+            const parsed = await _parseImportText(text);
+            await _applyLoadedPayload(parsed);
+            setStatus('Import successful.', false);
+            setTimeout(close, 600);
+        } catch (err) {
+            setStatus('Import failed: ' + (err && err.message ? err.message : err), true);
+        }
+    };
+
+    // --- Load from File ---
+    const loadBtn = document.createElement('button');
+    loadBtn.textContent = 'Load from File';
+    loadBtn.style.cssText = btnStyle;
+    hover(loadBtn);
+    loadBtn.addEventListener('click', () => { close(); loadFromFile(); });
+    box.appendChild(loadBtn);
+
+    // --- Paste from Clipboard ---
+    box.appendChild(makeDivider());
+    const clipBtn = document.createElement('button');
+    clipBtn.textContent = 'Paste from Clipboard';
+    clipBtn.style.cssText = btnStyle;
+    hover(clipBtn);
+    clipBtn.addEventListener('click', async () => {
+        setStatus('Reading clipboard…', false);
+        try {
+            if (!navigator.clipboard || !navigator.clipboard.readText) {
+                throw new Error('Clipboard API not available — use the text field below');
+            }
+            const text = await navigator.clipboard.readText();
+            await importFromText(text);
+        } catch (err) {
+            setStatus('Clipboard read failed: ' + (err && err.message ? err.message : err), true);
+        }
+    });
+    box.appendChild(clipBtn);
+
+    // --- Manual paste textarea + Parse button ---
+    box.appendChild(makeDivider());
+    const taLabel = document.createElement('label');
+    taLabel.textContent = 'Or paste manually:';
+    taLabel.style.cssText = 'font-size:0.88em;color:#bbb;';
+    box.appendChild(taLabel);
+
+    const taRow = document.createElement('div');
+    taRow.style.cssText = 'display:flex;gap:8px;align-items:flex-start;';
+    const ta = document.createElement('textarea');
+    ta.rows = 6;
+    ta.placeholder = 'Paste JSON, base64 payload, or full share link…';
+    ta.style.cssText = [
+        'background:#1a1a1a', 'color:#e0e0e0',
+        'border:1px solid #555', 'border-radius:5px',
+        'padding:8px 10px', 'font-size:0.85em',
+        'font-family:monospace', 'flex:1', 'min-width:0',
+        'box-sizing:border-box', 'resize:vertical'
+    ].join(';');
+    const parseBtn = document.createElement('button');
+    parseBtn.textContent = 'Parse';
+    parseBtn.style.cssText = actionBtnStyle;
+    hover(parseBtn);
+    parseBtn.addEventListener('click', () => importFromText(ta.value));
+    taRow.appendChild(ta);
+    taRow.appendChild(parseBtn);
+    box.appendChild(taRow);
+
+    box.appendChild(status);
+
+    overlay.appendChild(box);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+    document.addEventListener('keydown', function onKey(e) {
+        if (e.key === 'Escape') { document.removeEventListener('keydown', onKey); close(); }
+    });
+
+    document.body.appendChild(overlay);
 }
 
 // Apply an already-parsed save payload (from a file load or a shared link).
@@ -1598,20 +2001,23 @@ async function _applyLoadedPayload(parsed) {
         window.HEROIC_IMPORTED_CONFIG = parsed.heroicCustomConfig;
         window.EPIC_IMPORTED_CONFIG   = Array.isArray(parsed.epicCustomConfig) ? parsed.epicCustomConfig : [];
 
-        // Determine which active config the imported one would replace (for the prompt label)
-        const currentLabel = ACTIVE_QUESTS_PRESET === 'custom'
-            ? 'Custom'
-            : (ACTIVE_QUESTS_PRESET === 'imported' ? 'Imported' : 'Default');
-
-        const choice = await _showChoiceDialog(
-            'This leveling plan includes a config. Continue using your current config, or switch to the imported one?',
-            [
-                { label: `Keep current (${currentLabel}) config`, value: 'keep' },
-                { label: 'Switch to Imported config', value: 'switch' }
-            ]
-        );
-        if (choice === 'switch') {
+        if (ACTIVE_QUESTS_PRESET === 'imported') {
+            // Already using the imported config — silently overwrite it
             window.ACTIVE_QUESTS_PRESET = 'imported';
+        } else {
+            // Determine which active config the imported one would replace (for the prompt label)
+            const currentLabel = ACTIVE_QUESTS_PRESET === 'custom' ? 'Custom' : 'Default';
+
+            const choice = await _showChoiceDialog(
+                'This leveling plan includes a config. Continue using your current config, or switch to the imported one?',
+                [
+                    { label: `Keep current (${currentLabel}) config`, value: 'keep' },
+                    { label: 'Switch to Imported config', value: 'switch' }
+                ]
+            );
+            if (choice === 'switch') {
+                window.ACTIVE_QUESTS_PRESET = 'imported';
+            }
         }
         _rebuildHeroicQuests();
         _rebuildEpicQuests();
@@ -1655,6 +2061,35 @@ async function _applyLoadedPayload(parsed) {
         Array.isArray(parsed.epic) ? parsed.epic : [],
         EPIC_QUESTS, 'epic'
     );
+
+    // Auto-switch mode when the import contains data for only one mode.
+    const _importHasHeroic = Array.isArray(parsed.heroic) && parsed.heroic.length > 0;
+    const _importHasEpic   = Array.isArray(parsed.epic)   && parsed.epic.length   > 0;
+    if (_importHasHeroic !== _importHasEpic) {
+        const modeSwitch = document.getElementById('mode-switch');
+        if (modeSwitch) {
+            modeSwitch.checked = _importHasEpic;
+            const newMode = _importHasEpic ? 'epic' : 'heroic';
+            // Mirror what applyModeClass() / loadSettings() do when the mode changes.
+            const modeGroup = modeSwitch.closest('.mode-switch');
+            if (modeGroup) {
+                modeGroup.classList.toggle('is-epic', _importHasEpic);
+                modeGroup.classList.toggle('is-heroic', !_importHasEpic);
+            }
+            const tokensLabel = document.getElementById('twelve-tokens-label');
+            if (tokensLabel) tokensLabel.style.display = _importHasEpic ? '' : 'none';
+            if (!_importHasEpic) {
+                const tokensCb = document.getElementById('twelve-tokens');
+                if (tokensCb) tokensCb.checked = false;
+            }
+            // Re-populate the dropdown for the new mode with its correct saved value.
+            // _learningTomeByMode was already updated from parsed.learningTomeByMode above.
+            populateLearningTomeSelect(_learningTomeByMode[newMode] || '0');
+        }
+    }
+    // Persist the (possibly updated) mode so a page refresh restores it correctly.
+    saveSettings();
+
     setActiveMode(getCurrentMode());
     saveToStorage();
     renderLists();
