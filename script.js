@@ -4668,7 +4668,8 @@ function resetData() {
         rebuildQuestsFromLevelplan();
         data.special = [
             { name: 'Take Level', xp: 0, level: '', source: 'special', isTakeLevel: true },
-            { name: 'Custom', xp: 0, qTime: 0, travelTime: 0, source: 'special', isCustom: true }
+            { name: 'Custom', xp: 0, qTime: 0, travelTime: 0, source: 'special', isCustom: true },
+            { name: 'XP Pot', xp: 0, source: 'special', isXpPot: true }
         ];
         saveToStorage();
         renderLists();
