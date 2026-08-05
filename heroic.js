@@ -3059,6 +3059,25 @@ window.HEROIC_QUESTS_BASE =
     "baseXP": 6700,
   },
   {
+    "name": "Demogorgon Saga",
+    "isSaga": true,
+    "requirements": [
+      "If it Wasn't for Bad Luck",
+      "A Blood Pact",
+      "A Long Way to Mushrooms",
+      "Flocked Together",
+      "For Want of a Heart",
+      "The Price of an Egg",
+      "Hideous to Behold",
+      "Tower of Vengeance",
+      "Demon in the Rough",
+      "Stealing from Sorcere",
+      "Back to the Abyss",
+      "The Fetid Wedding"
+    ],
+    "xp": 46000
+  },
+  {
     "name": "The Spawn of Whisperdoom",
     "requirements": [],
     "lvl": 11,
