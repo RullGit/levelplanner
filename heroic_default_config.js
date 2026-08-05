@@ -2066,6 +2066,90 @@ window.HEROIC_DEFAULT_CONFIG =
     "xpmods": 0.53
   },
   {
+    "name": "If it Wasn't for Bad Luck",
+    "travelTime": 0.63,
+    "qTime": 4.40,
+    "optionalXP": 0.0,
+    "xpmods": 0.45
+  },
+  {
+    "name": "A Blood Pact",
+    "travelTime": 0.78,
+    "qTime": 5.30,
+    "optionalXP": 0.0,
+    "xpmods": 0.45
+  },
+  {
+    "name": "A Long Way to Mushrooms",
+    "travelTime": 0.55,
+    "qTime": 7.22,
+    "optionalXP": 0.2,
+    "xpmods": 0.61
+  },
+  {
+    "name": "Flocked Together",
+    "travelTime": 0.37,
+    "qTime": 5.38,
+    "optionalXP": 0.1,
+    "xpmods": 0.45
+  },
+  {
+    "name": "For Want of a Heart",
+    "travelTime": 0.17,
+    "qTime": 4.00,
+    "optionalXP": 0.1,
+    "xpmods": 0.30
+  },
+  {
+    "name": "The Price of an Egg",
+    "travelTime": 0.30,
+    "qTime": 6.13,
+    "optionalXP": 0.0,
+    "xpmods": 0.45
+  },
+  {
+    "name": "Hideous to Behold",
+    "travelTime": 0.25,
+    "qTime": 5.18,
+    "optionalXP": 0.0,
+    "xpmods": 0.53
+  },
+  {
+    "name": "Tower of Vengeance",
+    "travelTime": 0.55,
+    "qTime": 3.00,
+    "optionalXP": 0.0,
+    "xpmods": 0.43
+  },
+  {
+    "name": "Demon in the Rough",
+    "travelTime": 0.33,
+    "qTime": 5.00,
+    "optionalXP": 0.1,
+    "xpmods": 0.45
+  },
+  {
+    "name": "Stealing from Sorcere",
+    "travelTime": 0.38,
+    "qTime": 6.98,
+    "optionalXP": 0.0,
+    "xpmods": 0.3
+  },
+  {
+    "name": "Back to the Abyss",
+    "travelTime": 0.57,
+    "qTime": 4.65,
+    "optionalXP": 0.0,
+    "xpmods": 0.45
+  },
+  {
+    "name": "The Fetid Wedding",
+    "travelTime": 0.37,
+    "qTime": 9.25,
+    "optionalXP": 0.0,
+    "xpmods": 0.35
+  },
+  {
     "name": "The Twilight Forge",
     "travelTime": 5,
     "qTime": 20.0,
